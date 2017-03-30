@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{65789AA2-DA9B-4BB0-8A28-BD4C6EEA7DBB}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Projet_Agile</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ApplicationInsights.config" />
+    <None Include="app\debug.log" />
+    <None Include="app\lib\fonts\ionicons.eot" />
+    <None Include="app\lib\fonts\ionicons.ttf" />
+    <None Include="app\lib\fonts\ionicons.woff" />
+    <None Include="app\lib\ionic\fonts\ionicons.eot" />
+    <None Include="app\lib\ionic\fonts\ionicons.ttf" />
+    <None Include="app\lib\ionic\fonts\ionicons.woff" />
+    <None Include="app\lib\ionic\scss\ionic.scss" />
+    <None Include="app\lib\ionic\scss\ionicons\ionicons.scss" />
+    <None Include="app\lib\ionic\scss\ionicons\_ionicons-font.scss" />
+    <None Include="app\lib\ionic\scss\ionicons\_ionicons-icons.scss" />
+    <None Include="app\lib\ionic\scss\ionicons\_ionicons-variables.scss" />
+    <None Include="app\lib\ionic\scss\_action-sheet.scss" />
+    <None Include="app\lib\ionic\scss\_animations.scss" />
+    <None Include="app\lib\ionic\scss\_backdrop.scss" />
+    <None Include="app\lib\ionic\scss\_badge.scss" />
+    <None Include="app\lib\ionic\scss\_bar.scss" />
+    <None Include="app\lib\ionic\scss\_button-bar.scss" />
+    <None Include="app\lib\ionic\scss\_button.scss" />
+    <None Include="app\lib\ionic\scss\_checkbox.scss" />
+    <None Include="app\lib\ionic\scss\_form.scss" />
+    <None Include="app\lib\ionic\scss\_grid.scss" />
+    <None Include="app\lib\ionic\scss\_items.scss" />
+    <None Include="app\lib\ionic\scss\_list.scss" />
+    <None Include="app\lib\ionic\scss\_loading.scss" />
+    <None Include="app\lib\ionic\scss\_menu.scss" />
+    <None Include="app\lib\ionic\scss\_mixins.scss" />
+    <None Include="app\lib\ionic\scss\_modal.scss" />
+    <None Include="app\lib\ionic\scss\_platform.scss" />
+    <None Include="app\lib\ionic\scss\_popover.scss" />
+    <None Include="app\lib\ionic\scss\_popup.scss" />
+    <None Include="app\lib\ionic\scss\_progress.scss" />
+    <None Include="app\lib\ionic\scss\_radio.scss" />
+    <None Include="app\lib\ionic\scss\_range.scss" />
+    <None Include="app\lib\ionic\scss\_refresher.scss" />
+    <None Include="app\lib\ionic\scss\_reset.scss" />
+    <None Include="app\lib\ionic\scss\_scaffolding.scss" />
+    <None Include="app\lib\ionic\scss\_select.scss" />
+    <None Include="app\lib\ionic\scss\_slide-box.scss" />
+    <None Include="app\lib\ionic\scss\_slides.scss" />
+    <None Include="app\lib\ionic\scss\_spinner.scss" />
+    <None Include="app\lib\ionic\scss\_tabs.scss" />
+    <None Include="app\lib\ionic\scss\_toggle.scss" />
+    <None Include="app\lib\ionic\scss\_transitions.scss" />
+    <None Include="app\lib\ionic\scss\_type.scss" />
+    <None Include="app\lib\ionic\scss\_util.scss" />
+    <None Include="app\lib\ionic\scss\_variables.scss" />
+    <None Include="app\lib\ionic\version.json" />
+    <None Include="app\lib\js\angular\angular-animate.min.js.map" />
+    <None Include="app\lib\js\angular\angular-cookies.min.js.map" />
+    <None Include="app\lib\js\angular\angular-loader.min.js.map" />
+    <None Include="app\lib\js\angular\angular-resource.min.js.map" />
+    <None Include="app\lib\js\angular\angular-route.min.js.map" />
+    <None Include="app\lib\js\angular\angular-sanitize.min.js.map" />
+    <None Include="app\lib\js\angular\angular-touch.min.js.map" />
+    <None Include="app\lib\js\angular\angular.min.js.map" />
+    <None Include="app\lib\js\angular\errors.json" />
+    <None Include="app\lib\js\angular\version.json" />
+    <None Include="app\manifest.json" />
+    <None Include="app\res\screen\tizen\README.md" />
+    <None Include="packages.config" />
+    <None Include="Web.config" />
+    <None Include="Web.Debug.config" />
+    <None Include="Web.Release.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\config.xml" />
+    <Content Include="app\css\app.css" />
+    <Content Include="app\css\style.css" />
+    <Content Include="app\img\adam.jpg" />
+    <Content Include="app\img\ben.png" />
+    <Content Include="app\img\ionic.png" />
+    <Content Include="app\img\max.png" />
+    <Content Include="app\img\mike.png" />
+    <Content Include="app\img\perry.png" />
+    <Content Include="app\index.html" />
+    <Content Include="app\js\app.js" />
+    <Content Include="app\js\controllers.js" />
+    <Content Include="app\js\services.js" />
+    <Content Include="app\lib\css\ionic.css" />
+    <Content Include="app\lib\css\ionic.min.css" />
+    <Content Include="app\lib\fonts\ionicons.svg" />
+    <Content Include="app\lib\ionic\css\ionic.css" />
+    <Content Include="app\lib\ionic\css\ionic.min.css" />
+    <Content Include="app\lib\ionic\fonts\ionicons.svg" />
+    <Content Include="app\lib\ionic\js\angular-ui\angular-ui-router.js" />
+    <Content Include="app\lib\ionic\js\angular-ui\angular-ui-router.min.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-animate.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-animate.min.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-resource.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-resource.min.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-sanitize.js" />
+    <Content Include="app\lib\ionic\js\angular\angular-sanitize.min.js" />
+    <Content Include="app\lib\ionic\js\angular\angular.js" />
+    <Content Include="app\lib\ionic\js\angular\angular.min.js" />
+    <Content Include="app\lib\ionic\js\ionic-angular.js" />
+    <Content Include="app\lib\ionic\js\ionic-angular.min.js" />
+    <Content Include="app\lib\ionic\js\ionic.bundle.js" />
+    <Content Include="app\lib\ionic\js\ionic.bundle.min.js" />
+    <Content Include="app\lib\ionic\js\ionic.js" />
+    <Content Include="app\lib\ionic\js\ionic.min.js" />
+    <Content Include="app\lib\js\angular-ui\angular-ui-router.js" />
+    <Content Include="app\lib\js\angular-ui\angular-ui-router.min.js" />
+    <Content Include="app\lib\js\angular\angular-animate.js" />
+    <Content Include="app\lib\js\angular\angular-animate.min.js" />
+    <Content Include="app\lib\js\angular\angular-cookies.js" />
+    <Content Include="app\lib\js\angular\angular-cookies.min.js" />
+    <Content Include="app\lib\js\angular\angular-csp.css" />
+    <Content Include="app\lib\js\angular\angular-loader.js" />
+    <Content Include="app\lib\js\angular\angular-loader.min.js" />
+    <Content Include="app\lib\js\angular\angular-mocks.js" />
+    <Content Include="app\lib\js\angular\angular-resource.js" />
+    <Content Include="app\lib\js\angular\angular-resource.min.js" />
+    <Content Include="app\lib\js\angular\angular-route.js" />
+    <Content Include="app\lib\js\angular\angular-route.min.js" />
+    <Content Include="app\lib\js\angular\angular-sanitize.js" />
+    <Content Include="app\lib\js\angular\angular-sanitize.min.js" />
+    <Content Include="app\lib\js\angular\angular-scenario.js" />
+    <Content Include="app\lib\js\angular\angular-touch.js" />
+    <Content Include="app\lib\js\angular\angular-touch.min.js" />
+    <Content Include="app\lib\js\angular\angular.js" />
+    <Content Include="app\lib\js\angular\angular.min.js" />
+    <Content Include="app\lib\js\angular\version.txt" />
+    <Content Include="app\lib\js\ionic-angular.js" />
+    <Content Include="app\lib\js\ionic-angular.min.js" />
+    <Content Include="app\lib\js\ionic.js" />
+    <Content Include="app\lib\js\ionic.min.js" />
+    <Content Include="app\pics\Amy_Jones.jpg" />
+    <Content Include="app\pics\Eugene_Lee.jpg" />
+    <Content Include="app\pics\Gary_Donovan.jpg" />
+    <Content Include="app\pics\James_King.jpg" />
+    <Content Include="app\pics\John_Williams.jpg" />
+    <Content Include="app\pics\Julie_Taylor.jpg" />
+    <Content Include="app\pics\Kathleen_Byrne.jpg" />
+    <Content Include="app\pics\Lisa_Wong.jpg" />
+    <Content Include="app\pics\Paula_Gates.jpg" />
+    <Content Include="app\pics\Paul_Jones.jpg" />
+    <Content Include="app\pics\Ray_Moore.jpg" />
+    <Content Include="app\pics\Steven_Wells.jpg" />
+    <Content Include="app\res\icon\android\icon-36-ldpi.png" />
+    <Content Include="app\res\icon\android\icon-48-mdpi.png" />
+    <Content Include="app\res\icon\android\icon-72-hdpi.png" />
+    <Content Include="app\res\icon\android\icon-96-xhdpi.png" />
+    <Content Include="app\res\icon\bada-wac\icon-48-type5.png" />
+    <Content Include="app\res\icon\bada-wac\icon-50-type3.png" />
+    <Content Include="app\res\icon\bada-wac\icon-80-type4.png" />
+    <Content Include="app\res\icon\bada\icon-128.png" />
+    <Content Include="app\res\icon\blackberry\icon-80.png" />
+    <Content Include="app\res\icon\ios\icon-57-2x.png" />
+    <Content Include="app\res\icon\ios\icon-57.png" />
+    <Content Include="app\res\icon\ios\icon-72-2x.png" />
+    <Content Include="app\res\icon\ios\icon-72.png" />
+    <Content Include="app\res\icon\tizen\icon-128.png" />
+    <Content Include="app\res\icon\webos\icon-64.png" />
+    <Content Include="app\res\icon\windows-phone\icon-173-tile.png" />
+    <Content Include="app\res\icon\windows-phone\icon-48.png" />
+    <Content Include="app\res\icon\windows-phone\icon-62-tile.png" />
+    <Content Include="app\res\screen\android\screen-hdpi-landscape.png" />
+    <Content Include="app\res\screen\android\screen-hdpi-portrait.png" />
+    <Content Include="app\res\screen\android\screen-ldpi-landscape.png" />
+    <Content Include="app\res\screen\android\screen-ldpi-portrait.png" />
+    <Content Include="app\res\screen\android\screen-mdpi-landscape.png" />
+    <Content Include="app\res\screen\android\screen-mdpi-portrait.png" />
+    <Content Include="app\res\screen\android\screen-xhdpi-landscape.png" />
+    <Content Include="app\res\screen\android\screen-xhdpi-portrait.png" />
+    <Content Include="app\res\screen\bada-wac\screen-type3.png" />
+    <Content Include="app\res\screen\bada-wac\screen-type4.png" />
+    <Content Include="app\res\screen\bada-wac\screen-type5.png" />
+    <Content Include="app\res\screen\bada\screen-portrait.png" />
+    <Content Include="app\res\screen\blackberry\screen-225.png" />
+    <Content Include="app\res\screen\ios\screen-ipad-landscape-2x.png" />
+    <Content Include="app\res\screen\ios\screen-ipad-landscape.png" />
+    <Content Include="app\res\screen\ios\screen-ipad-portrait-2x.png" />
+    <Content Include="app\res\screen\ios\screen-ipad-portrait.png" />
+    <Content Include="app\res\screen\ios\screen-iphone-landscape-2x.png" />
+    <Content Include="app\res\screen\ios\screen-iphone-landscape.png" />
+    <Content Include="app\res\screen\ios\screen-iphone-portrait-2x.png" />
+    <Content Include="app\res\screen\ios\screen-iphone-portrait-568h-2x.png" />
+    <Content Include="app\res\screen\ios\screen-iphone-portrait.png" />
+    <Content Include="app\res\screen\webos\screen-64.png" />
+    <Content Include="app\res\screen\windows-phone\screen-portrait.jpg" />
+    <Content Include="app\service-worker.js" />
+    <Content Include="app\templates\chat-detail.html" />
+    <Content Include="app\templates\employee-detail.html" />
+    <Content Include="app\templates\employee-index.html" />
+    <Content Include="app\templates\employee-reports.html" />
+    <Content Include="app\templates\tab-account.html" />
+    <Content Include="app\templates\tab-chats.html" />
+    <Content Include="app\templates\tab-dash.html" />
+    <Content Include="app\templates\tabs.html" />
+    <Content Include="App_Data\Database.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Database_log.ldf">
+      <DependentUpon>Database.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Global.asax" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
