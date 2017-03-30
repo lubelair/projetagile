@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ApplicationInsights.config" />
-    <None Include="app\debug.log" />
     <None Include="app\lib\fonts\ionicons.eot" />
     <None Include="app\lib\fonts\ionicons.ttf" />
     <None Include="app\lib\fonts\ionicons.woff" />
