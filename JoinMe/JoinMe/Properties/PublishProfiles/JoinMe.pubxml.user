@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ce fichier est utilisé par le processus de publication/package de votre projet Web. Vous pouvez personnaliser le comportement de ce processus
+en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la page http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAhtaTtKvvXEe+gRFxiu+5UQAAAAACAAAAAAAQZgAAAAEAACAAAABBmkX4ragdb9OKcIGcjtGdh+kHcl3J+NVr4JqyEVxC7QAAAAAOgAAAAAIAACAAAACXMdiTSx1uuTOULHc55Xn7/Wzc+4VMBOfY9kmGX6bKvCAAAACxnbb5H4k0m6807pr+2iLIHcciyddjku1pB4U7BoVYh0AAAAA+yeylj0H7HUYJv8dR9LLu9OwCAjrr9i80JW44/+4asi7jcV0Ue+RAouUaGMvPsLxqxzVeAr3WZ6iNsIilODt2</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp-eu.Smarterasp.net/projetagile</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="app/config.xml">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/css/app.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/css/style.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/adam.jpg">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/ben.png">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/ionic.png">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/max.png">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/mike.png">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/img/perry.png">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/index.html">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/js/app.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/js/controllers.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/js/services.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/css/ionic.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/css/ionic.min.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/fonts/ionicons.eot">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/fonts/ionicons.svg">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/fonts/ionicons.ttf">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/fonts/ionicons.woff">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/css/ionic.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/css/ionic.min.css">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/fonts/ionicons.eot">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/fonts/ionicons.svg">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/fonts/ionicons.ttf">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/fonts/ionicons.woff">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular-ui/angular-ui-router.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular-ui/angular-ui-router.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-animate.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-animate.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-resource.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-resource.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-sanitize.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular-sanitize.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/angular/angular.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic-angular.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic-angular.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic.bundle.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic.bundle.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/js/ionic.min.js">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/ionic.scss">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/ionicons/ionicons.scss">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/ionicons/_ionicons-font.scss">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/ionicons/_ionicons-icons.scss">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/ionicons/_ionicons-variables.scss">
+      <publishTime>03/31/2017 09:37:24</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_action-sheet.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_animations.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_backdrop.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_badge.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_bar.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_button-bar.scss">
+      <publishTime>03/31/2017 09:37:25</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_button.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_checkbox.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_form.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_grid.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_items.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_list.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_loading.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_menu.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_mixins.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_modal.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_platform.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_popover.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_popup.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_progress.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_radio.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_range.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_refresher.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_reset.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_scaffolding.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_select.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_slide-box.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_slides.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_spinner.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_tabs.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_toggle.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_transitions.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_type.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_util.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/scss/_variables.scss">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/ionic/version.json">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular-ui/angular-ui-router.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular-ui/angular-ui-router.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-animate.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-animate.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-animate.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-cookies.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-cookies.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-cookies.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-csp.css">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-loader.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-loader.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-loader.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-mocks.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-resource.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-resource.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-resource.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-route.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-route.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-route.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-sanitize.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-sanitize.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-sanitize.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-scenario.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-touch.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-touch.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular-touch.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/angular.min.js.map">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/errors.json">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/version.json">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/angular/version.txt">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/ionic-angular.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/ionic-angular.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/ionic.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/lib/js/ionic.min.js">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/manifest.json">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/Amy_Jones.jpg">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/Eugene_Lee.jpg">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/Gary_Donovan.jpg">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/James_King.jpg">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/John_Williams.jpg">
+      <publishTime>03/31/2017 09:37:26</publishTime>
+    </File>
+    <File Include="app/pics/Julie_Taylor.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Kathleen_Byrne.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Lisa_Wong.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Paula_Gates.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Paul_Jones.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Ray_Moore.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/pics/Steven_Wells.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/android/icon-36-ldpi.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/android/icon-48-mdpi.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/android/icon-72-hdpi.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/android/icon-96-xhdpi.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/bada-wac/icon-48-type5.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/bada-wac/icon-50-type3.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/bada-wac/icon-80-type4.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/bada/icon-128.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/blackberry/icon-80.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/ios/icon-57-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/ios/icon-57.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/ios/icon-72-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/ios/icon-72.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/tizen/icon-128.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/webos/icon-64.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/windows-phone/icon-173-tile.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/windows-phone/icon-48.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/icon/windows-phone/icon-62-tile.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-hdpi-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-hdpi-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-ldpi-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-ldpi-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-mdpi-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-mdpi-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-xhdpi-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/android/screen-xhdpi-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/bada-wac/screen-type3.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/bada-wac/screen-type4.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/bada-wac/screen-type5.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/bada/screen-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/blackberry/screen-225.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-ipad-landscape-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-ipad-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-ipad-portrait-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-ipad-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-iphone-landscape-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-iphone-landscape.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-iphone-portrait-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-iphone-portrait-568h-2x.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/ios/screen-iphone-portrait.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/tizen/README.md">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/webos/screen-64.png">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/res/screen/windows-phone/screen-portrait.jpg">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/service-worker.js">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/chat-detail.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/employee-detail.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/employee-index.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/employee-reports.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/tab-account.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/tab-chats.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/tab-dash.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="app/templates/tabs.html">
+      <publishTime>03/31/2017 09:37:27</publishTime>
+    </File>
+    <File Include="ApplicationInsights.config">
+      <publishTime>03/31/2017 09:33:24</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>03/31/2017 09:33:24</publishTime>
+    </File>
+    <File Include="bin/fr/System.Net.Http.Formatting.resources.dll">
+      <publishTime>01/28/2015 04:02:48</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Http.resources.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Http.WebHost.resources.dll">
+      <publishTime>01/28/2015 04:03:52</publishTime>
+    </File>
+    <File Include="bin/JoinMe.dll">
+      <publishTime>03/31/2017 15:05:35</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>11/30/2016 16:07:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>07/12/2016 11:45:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>07/12/2016 11:50:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>06/12/2016 15:15:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>07/12/2016 11:49:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>07/12/2016 11:50:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>06/12/2016 15:09:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 03:06:24</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2014 21:33:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 21:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 21:19:46</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>01/28/2015 04:02:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>01/28/2015 04:02:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>01/28/2015 04:03:46</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>03/31/2017 09:33:09</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>03/31/2017 09:33:24</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/31/2017 14:43:53</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

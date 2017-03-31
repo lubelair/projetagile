@@ -1,4 +1,3 @@
-D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMe.csprojResolveAssemblyReference.cache
 D:\workspace\projetagile\JoinMe\JoinMe\bin\ApplicationInsights.config
 D:\workspace\projetagile\JoinMe\JoinMe\bin\roslyn\csc.exe
 D:\workspace\projetagile\JoinMe\JoinMe\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -40,5 +39,6 @@ D:\workspace\projetagile\JoinMe\JoinMe\bin\System.Web.Http.WebHost.xml
 D:\workspace\projetagile\JoinMe\JoinMe\bin\fr\System.Net.Http.Formatting.resources.dll
 D:\workspace\projetagile\JoinMe\JoinMe\bin\fr\System.Web.Http.resources.dll
 D:\workspace\projetagile\JoinMe\JoinMe\bin\fr\System.Web.Http.WebHost.resources.dll
+D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMe.csprojResolveAssemblyReference.cache
 D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMe.dll
 D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMe.pdb
