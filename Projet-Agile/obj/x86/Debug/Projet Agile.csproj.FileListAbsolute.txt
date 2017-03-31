@@ -1,2 +1,0 @@
-D:\workspace\Projet-Agile\Projet-Agile\obj\x86\Debug\Projet Agile.csprojResolveAssemblyReference.cache
-D:\workspace\projetagile\Projet-Agile\obj\x86\Debug\Projet Agile.csprojResolveAssemblyReference.cache
