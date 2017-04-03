@@ -17,5 +17,11 @@ angular.module('directory', ['ionic', 'directory.services', 'directory.controlle
             controller: 'connexionCtrl'
         })
 
+        $stateProvider.state('inscription', {
+            url: '/subscribe',
+            templateUrl: 'templates/inscription.html',
+            controller: 'inscriptionCtrl'
+        })
+
         $urlRouterProvider.otherwise('/login')
     });
