@@ -4,8 +4,8 @@
 
 /projetagile/.vs/
 /projetagile/JoinMe/JoinMe.Tests/
-/projetagile/JoinMe/JoinMe/bin
-/projetagile/JoinMe/JoinMe/obj
+/projetagile/JoinMe/JoinMe/bin/
+/projetagile/JoinMe/JoinMe/obj/
 
 *.obj
 *.exe
