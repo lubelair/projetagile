@@ -110,14 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\config.xml" />
-    <Content Include="app\css\app.css" />
-    <Content Include="app\css\style.css" />
-    <Content Include="app\img\adam.jpg" />
-    <Content Include="app\img\ben.png" />
-    <Content Include="app\img\ionic.png" />
-    <Content Include="app\img\max.png" />
-    <Content Include="app\img\mike.png" />
-    <Content Include="app\img\perry.png" />
     <Content Include="app\index.html" />
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers.js" />
@@ -170,18 +162,6 @@
     <Content Include="app\lib\js\ionic-angular.min.js" />
     <Content Include="app\lib\js\ionic.js" />
     <Content Include="app\lib\js\ionic.min.js" />
-    <Content Include="app\pics\Amy_Jones.jpg" />
-    <Content Include="app\pics\Eugene_Lee.jpg" />
-    <Content Include="app\pics\Gary_Donovan.jpg" />
-    <Content Include="app\pics\James_King.jpg" />
-    <Content Include="app\pics\John_Williams.jpg" />
-    <Content Include="app\pics\Julie_Taylor.jpg" />
-    <Content Include="app\pics\Kathleen_Byrne.jpg" />
-    <Content Include="app\pics\Lisa_Wong.jpg" />
-    <Content Include="app\pics\Paula_Gates.jpg" />
-    <Content Include="app\pics\Paul_Jones.jpg" />
-    <Content Include="app\pics\Ray_Moore.jpg" />
-    <Content Include="app\pics\Steven_Wells.jpg" />
     <Content Include="app\res\icon\android\icon-36-ldpi.png" />
     <Content Include="app\res\icon\android\icon-48-mdpi.png" />
     <Content Include="app\res\icon\android\icon-72-hdpi.png" />
@@ -225,14 +205,7 @@
     <Content Include="app\res\screen\webos\screen-64.png" />
     <Content Include="app\res\screen\windows-phone\screen-portrait.jpg" />
     <Content Include="app\service-worker.js" />
-    <Content Include="app\templates\chat-detail.html" />
-    <Content Include="app\templates\employee-detail.html" />
-    <Content Include="app\templates\employee-index.html" />
-    <Content Include="app\templates\employee-reports.html" />
-    <Content Include="app\templates\tab-account.html" />
-    <Content Include="app\templates\tab-chats.html" />
-    <Content Include="app\templates\tab-dash.html" />
-    <Content Include="app\templates\tabs.html" />
+    <Content Include="app\templates\connexion.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -316,6 +289,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\css\" />
+    <Folder Include="app\img\" />
+    <Folder Include="app\pics\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
