@@ -47,4 +47,3 @@ D:\workspace\projetagile\JoinMe\JoinMe\bin\fr\System.Web.Http.resources.dll
 D:\workspace\projetagile\JoinMe\JoinMe\bin\fr\System.Web.Http.WebHost.resources.dll
 D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMeServices.dll
 D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMeServices.pdb
-D:\workspace\projetagile\JoinMe\JoinMe\obj\Debug\JoinMeServices.csprojResolveAssemblyReference.cache

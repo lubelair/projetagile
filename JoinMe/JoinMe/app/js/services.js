@@ -1,6 +1,6 @@
 angular.module('directory.services', [])
 
-    .factory('EmployeeService', function ($q, $http) {
+    .factory('AppService', function ($q, $http) {
         /* var postUrl = function (action, params, functionCallBack) {
              var url = "/JoinMeServices/app/";
 
