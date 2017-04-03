@@ -217,6 +217,8 @@
     <Content Include="app\res\screen\webos\screen-64.png" />
     <Content Include="app\res\screen\windows-phone\screen-portrait.jpg" />
     <Content Include="app\service-worker.js" />
+    <Content Include="app\templates\connexion.html" />
+    <Content Include="app\templates\inscription.html" />
     <Content Include="Global.asax" />
     <Content Include="Sql\db.sql" />
     <Content Include="Web.config" />
@@ -308,7 +310,6 @@
   <ItemGroup>
     <Folder Include="app\css\" />
     <Folder Include="app\img\" />
-    <Folder Include="app\templates\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
