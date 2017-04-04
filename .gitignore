@@ -2,10 +2,11 @@
 # Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
 ################################################################################
 
-/projetagile/.vs/
-/projetagile/JoinMe/JoinMe.Tests/
-/projetagile/JoinMe/JoinMe/bin/
-/projetagile/JoinMe/JoinMe/obj/
+/projetagile/.vs/*
+/projetagile/JoinMe/.vs/*
+/projetagile/JoinMe/JoinMe.Tests/*
+/projetagile/JoinMe/JoinMe/bin/*
+/projetagile/JoinMe/JoinMe/obj/*
 
 *.obj
 *.exe
