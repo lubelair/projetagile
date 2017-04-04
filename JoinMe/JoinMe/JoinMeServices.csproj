@@ -217,6 +217,7 @@
     <Content Include="app\res\screen\webos\screen-64.png" />
     <Content Include="app\res\screen\windows-phone\screen-portrait.jpg" />
     <Content Include="app\service-worker.js" />
+    <Content Include="app\templates\authentification.html" />
     <Content Include="app\templates\inscription.html" />
     <Content Include="Global.asax" />
     <Content Include="Sql\db.sql" />
@@ -225,13 +226,35 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\EventFriendsController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704031510511_Initial.cs" />
+    <Compile Include="Migrations\201704031510511_Initial.Designer.cs">
+      <DependentUpon>201704031510511_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704041002406_addNewObjects.cs" />
+    <Compile Include="Migrations\201704041002406_addNewObjects.Designer.cs">
+      <DependentUpon>201704041002406_addNewObjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704041029311_createRelationBetweenObject.cs" />
+    <Compile Include="Migrations\201704041029311_createRelationBetweenObject.Designer.cs">
+      <DependentUpon>201704041029311_createRelationBetweenObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704041405553_createUserFriendRelation.cs" />
+    <Compile Include="Migrations\201704041405553_createUserFriendRelation.Designer.cs">
+      <DependentUpon>201704041405553_createUserFriendRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventFriend.cs" />
+    <Compile Include="Models\Friends.cs" />
+    <Compile Include="Models\JoinMeServicesContext.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserFriend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +333,20 @@
     <Folder Include="app\css\" />
     <Folder Include="app\img\" />
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704031510511_Initial.resx">
+      <DependentUpon>201704031510511_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704041002406_addNewObjects.resx">
+      <DependentUpon>201704041002406_addNewObjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704041029311_createRelationBetweenObject.resx">
+      <DependentUpon>201704041029311_createRelationBetweenObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704041405553_createUserFriendRelation.resx">
+      <DependentUpon>201704041405553_createUserFriendRelation.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
