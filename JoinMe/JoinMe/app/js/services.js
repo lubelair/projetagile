@@ -47,4 +47,15 @@ angular.module('directory.services', [])
         var indexCallBack = function (data) {
             console.log(data);
         }
+
+        var _User = [{ id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" }]
+
+        return {
+            getUser:function(_User){}
+        }
+
+        var createUser = function (_User) { }
+        
+        var deleteUser = function (_User) { }
+
     });

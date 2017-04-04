@@ -1,25 +1,64 @@
 <ion-view title="Inscription" id="page1">
-  <ion-content padding="true" class="has-header">
+<<<<<<< HEAD
+  <ion-content padding="true" class="has-header" ng-controller="subscribeCtrl">
     <form id="inscription-form2" class="list">
-      <label class="item item-input" id="inscription-input6" name="prenom">
-        <input type="text" placeholder="Prénom">
+      <label class="item item-input" id="prenom" name="prenom">
+        <input type="text" placeholder="Prénom" ng-model="newUser.firstname">
       </label>
-      <label class="item item-input" id="inscription-input5" name="nom">
-        <input type="text" placeholder="Nom">
+      <label class="item item-input" id="nom" name="nom">
+        <input type="text" placeholder="Nom" ng-model="newUser.lastname">
       </label>
-      <label class="item item-input" id="inscription-input1" name="mail">
-        <input type="email" placeholder="E-mail">
+      <label class="item item-input" id="mail" name="mail">
+        <input type="email" placeholder="E-mail" ng-model="newUser.mail">
       </label>
-      <label class="item item-input" id="inscription-input2" name="numerotel">
-        <input type="tel" placeholder="Numéro">
+      <label class="item item-input" id="numerotel" name="numerotel">
+        <input type="tel" placeholder="Numéro" ng-model="newUser.phonenumber">
       </label>
-      <label class="item item-input" id="inscription-input3" name="pseudo">
-        <input type="text" placeholder="Pseudonyme">
+      <label class="item item-input" id="pseudo" name="pseudo">
+        <input type="text" placeholder="Pseudonyme" ng-model="newUser.login">
       </label>
-      <label class="item item-input" id="inscription-input4" name="mdp">
-        <input type="password" placeholder="Mot de passe">
+      <label class="item item-input" id="mdp" name="mdp">
+        <input type="password" placeholder="Mot de passe" ng-model="newUser.password">
       </label>
     </form>
-    <button id="inscription-button1" class="button button-positive  button-block">S'inscrire</button>
+    <button id="inscription-button1" class="button button-positive  button-block" ng-click="createUser(newUser)">S'inscrire</button>
   </ion-content>
+=======
+    <ion-content padding="true" class="has-header">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+        <form id="inscription-form2" class="list">
+            <label class="item item-input" id="inscription-input6" name="prenom">
+                <input type="text" placeholder="Prénom">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input5" name="nom">
+                <input type="text" placeholder="Nom">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input1" name="mail">
+                <input type="email" placeholder="E-mail">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input2" name="numerotel">
+                <input type="tel" placeholder="Numéro">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input3" name="pseudo">
+                <input type="text" placeholder="Pseudonyme">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input4" name="mdp">
+                <input type="password" placeholder="Mot de passe">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="inscription-input4" name="mdpvalidation">
+                <input type="password" placeholder="Mot de passe validation">
+            </label>
+        </form>
+        <button id="inscription-button1" class="button button-positive  button-block">S'inscrire</button>
+        <div style="text-align: center">
+            <a ui-sref="authentification">Se connecter</a>
+        </div>
+    </ion-content>
+>>>>>>> 7d4d07c4811a9e63de6387c08b8b77532972d33a
 </ion-view>
