@@ -1,10 +1,9 @@
-$scangular.module('directory.controllers', [])
+angular.module('directory.controllers', [])
 
     .controller('subscribeCtrl', function ($scope, AppService) {
         $scope.createUser = function (_User) {
             AppService.createUser(_User);
             alert(_User);
-
         }
 
         $scope.connect = function (_Login, _Password) {
