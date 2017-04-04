@@ -6,4 +6,7 @@ angular.module('directory.controllers', [])
             AppService.createUser(_User);
         }
 
+        $scope.connect = function (_Login, _Password) {
+            AppService.connect(_Login, _Password)
+        }
     });
