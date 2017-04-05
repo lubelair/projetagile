@@ -31,7 +31,10 @@ angular.module('directory.services', [])
             getUser: function (user) { },
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
-            }
+            },
+            createUser: function (user) {
+                console.log(user);}
+
         }
 
         // Variables 
@@ -63,7 +66,6 @@ angular.module('directory.services', [])
             return ($q.reject(response.data.message));
         }
 
-        var createUser = function (_User) { }
 
         var deleteUser = function (_User) { }
     });
