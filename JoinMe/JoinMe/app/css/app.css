@@ -1,10 +1,13 @@
 ﻿body {
 }
 
-.css-form input.ng-invalid.ng-touched,input.ng-invalid.ng-invalid{
+/*
+    Style for validate form
+*/
+.css-form input.ng-invalid.ng-touched, input.ng-invalid.ng-invalid {
     background-color: #FA787E;
-  }
+}
 
-  .css-form input.ng-valid.ng-touched ,input.ng-valid.ng-valid{
+.css-form input.ng-valid.ng-touched, input.ng-valid.ng-valid {
     background-color: #78FA89;
-  }
+}
