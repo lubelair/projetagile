@@ -13,8 +13,8 @@ angular.module('directory.controllers', [])
         $scope.user = { username: '', password: '' };
 
         $scope.connect = function (_user) {
-            // AppService.connect(_Login, _Password);
             console.log(_user);
+            AppService.login(_user);
         }
         $scope.inscription = function () {
             //change state to inscription state

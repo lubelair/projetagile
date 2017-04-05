@@ -31,6 +31,9 @@ angular.module('directory.services', [])
             getUser: function (user) { },
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
+            },
+            login: function (_user) {
+                alert(_user.username + " " + _user.password);
             }
         }
 
@@ -66,4 +69,7 @@ angular.module('directory.services', [])
         var createUser = function (_User) { }
 
         var deleteUser = function (_User) { }
+        
+       
+
     });
