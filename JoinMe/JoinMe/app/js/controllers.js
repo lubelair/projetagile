@@ -9,12 +9,17 @@ angular.module('directory.controllers', [])
         }
     })
     .controller('AuthentificationCtrl', function ($scope, $state, AppService) {
-        $scope.connect = function (login, password) {
+
+        $scope.user = { username: '', password: '' };
+
+        $scope.connect = function (_user) {
             // AppService.connect(_Login, _Password);
+            console.log(_user);
         }
         $scope.inscription = function () {
-            //change state to inscription state 
-            $state.go('inscription');
+            //change state to inscription state
+            // $state.go('inscription');
+            AppService.getUsers();
         }
         $scope.forgetPassword = function () {
             //$state.go('forgetPassword');

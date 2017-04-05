@@ -13,19 +13,38 @@ angular.module('directory.services', [])
                  console.log(response.data);
              });
          }*/
-        var postUrl = function () {
+        var postUrl = function (action, params, functionCallBack) {
             $http({
                 method: "post",
-                url: "/JoinMeServices/app/index",
+                url: "/JoinMeServices/Users/" + action,
                 /* params: {
                      action: "index"
                  },*/
                 data: {
-                    name: "toto"
+                    name: params
                 }
-            }).then(handleSuccess, handleError);
+            }).then(functionCallBack, handleError);
         }
 
+       
+        return {
+            getUser: function (user) { },
+            getUsers: function () {
+                postUrl('GetUsers', "toto", GetUsersCallBack);
+            }
+        }
+
+        // Variables 
+
+         var _User = { id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" };
+
+        // CallBack functions 
+        var indexCallBack = function (data) {
+            console.log(data);
+        }
+        function GetUsersCallBack(data) {
+            console.log(data);
+        }
         var handleSuccess = function (response) {
             console.log(response.data);
         }
@@ -42,16 +61,6 @@ angular.module('directory.services', [])
             }
             // Otherwise, use expected error message.
             return ($q.reject(response.data.message));
-        }
-
-        var indexCallBack = function (data) {
-            console.log(data);
-        }
-
-        var _User = [{ id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" }]
-
-        return {
-            getUser: function (_User) { }
         }
 
         var createUser = function (_User) { }
