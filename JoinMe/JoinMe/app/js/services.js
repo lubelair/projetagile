@@ -26,22 +26,24 @@ angular.module('directory.services', [])
             }).then(functionCallBack, handleError);
         }
 
-       
         return {
             getUser: function (user) { },
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
+            login: function (_user) {
+                alert(_user.username + " " + _user.password);
+            },
             createUser: function (user) {
-                console.log(user);}
-
+                console.log(user);
+            }
         }
 
-        // Variables 
+        // Variables
 
-         var _User = { id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" };
+        var _User = { id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" };
 
-        // CallBack functions 
+        // CallBack functions
         var indexCallBack = function (data) {
             console.log(data);
         }
@@ -65,7 +67,6 @@ angular.module('directory.services', [])
             // Otherwise, use expected error message.
             return ($q.reject(response.data.message));
         }
-
 
         var deleteUser = function (_User) { }
     });
