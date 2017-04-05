@@ -4,12 +4,12 @@ angular.module('directory.controllers', [])
     .controller('SubscribeCtrl', function ($scope, AppService) {
         $scope.createUser = function (user) {
             // call createUser method of appService
-         //   AppService.createUser(user);
+            //   AppService.createUser(user);
             alert("toto");
         }
-
+    })
+    .controller('AuthentificationCtrl', function ($scope, AppService) {
         $scope.connect = function (login, password) {
-           // AppService.connect(_Login, _Password);
+            // AppService.connect(_Login, _Password);
         }
-    }).controller('AuthentificationCtrl', function ($scope, AppService) {
     });
