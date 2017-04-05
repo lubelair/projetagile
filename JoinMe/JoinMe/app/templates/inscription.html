@@ -1,7 +1,7 @@
 <view title="'Inscription'" id="page1">
     <content padding="true" class="has-header">
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
         <form id="inscription-form2" class="list">
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input6" name="prenom">
                 <input type="text" placeholder="Prénom" ng-model="newUser.firstname">
             </label>
@@ -11,28 +11,28 @@
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input1" name="mail">
-                <input type="email" placeholder="E-mail" ng-model="newUser.mail">
+                <input type="email" placeholder="E-mail" ng-model="newUser.mail" ng-required="required">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input2" name="numerotel">
-                <input type="tel" placeholder="Numéro" ng-model="newUser.phonenumber">
+                <input type="tel" placeholder="Numéro" ng-model="newUser.phonenumber" ng-required="required" ng-minlength="10" ng-maxlength="10">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input3" name="pseudo">
-                <input type="text" placeholder="Pseudonyme" ng-model="newUser.login">
+                <input type="text" placeholder="Pseudonyme" ng-model="newUser.login" ng-required="required" ng-minlength="4" ng-maxlength="20">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input4" name="mdp">
-                <input type="password" placeholder="Mot de passe" ng-model="newUser.password">
+                <input type="password" placeholder="Mot de passe" ng-model="newUser.password" ng-required="required" ng-minlength="6">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input4" name="mdpvalidation">
-                <input type="password" placeholder="Mot de passe validation" ng-model="newUser.passwordvalid">
+                <input type="password" placeholder="Mot de passe validation" ng-required="required" ng-model="newUser.passwordvalid">
             </label>
         </form>
         <button id="inscription-button1" class="button button-positive  button-block" ng-click="createUser(newUser)">S'inscrire</button>
         <div style="text-align: center">
-            <a ui-sref="authentification">Se connecter</a>
+            <a ng-click="authentification()">Se connecter</a>
         </div>
     </content>
 </view>
