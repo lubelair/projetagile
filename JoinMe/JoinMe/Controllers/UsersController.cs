@@ -15,12 +15,28 @@ namespace JoinMeServices.Controllers
 {
     public class UsersController : ApiController
     {
+        #region Private Fields
+
         private JoinMeServicesContext db = new JoinMeServicesContext();
 
-        // GET: api/Users
-        public IQueryable<User> GetUsers()
+        #endregion Private Fields
+
+        #region Public Methods
+
+        // DELETE: api/Users/5
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> DeleteUser(int id)
         {
-            return db.Users;
+            User user = await db.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            db.Users.Remove(user);
+            await db.SaveChangesAsync();
+
+            return Ok(user);
         }
 
         // GET: api/Users/5
@@ -34,6 +50,28 @@ namespace JoinMeServices.Controllers
             }
 
             return Ok(user);
+        }
+
+        // GET: api/Users
+        [HttpGet, HttpPost]
+        public IQueryable<User> GetUsers()
+        {
+            return db.Users;
+        }
+
+        // POST: api/Users
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> PostUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // PUT: api/Users/5
@@ -71,36 +109,9 @@ namespace JoinMeServices.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        #endregion Public Methods
 
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> DeleteUser(int id)
-        {
-            User user = await db.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            db.Users.Remove(user);
-            await db.SaveChangesAsync();
-
-            return Ok(user);
-        }
+        #region Protected Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -111,9 +122,15 @@ namespace JoinMeServices.Controllers
             base.Dispose(disposing);
         }
 
+        #endregion Protected Methods
+
+        #region Private Methods
+
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
+
+        #endregion Private Methods
     }
 }

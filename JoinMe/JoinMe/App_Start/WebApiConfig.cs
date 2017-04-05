@@ -7,6 +7,8 @@ namespace JoinMe
 {
     public static class WebApiConfig
     {
+        #region Public Methods
+
         public static void Register(HttpConfiguration config)
         {
             // Configuration et services API Web
@@ -16,9 +18,11 @@ namespace JoinMe
 
             config.Routes.MapHttpRoute(
                 name: "JoinMe",
-                routeTemplate: "JoinMe/{controller}/{id}",
+                routeTemplate: "JoinMeService/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+
+        #endregion Public Methods
     }
 }
