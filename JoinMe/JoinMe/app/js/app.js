@@ -26,12 +26,14 @@ angular.module('directory', ['ionic', 'directory.services', 'directory.controlle
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
         url: '/inscription',
-        templateUrl: 'templates/inscription.html'
+        templateUrl: 'templates/inscription.html',
+        controller: 'SubscribeCtrl'
     })
 
     $stateProvider.state('authentification', {
         url: '/authentification',
-        templateUrl: 'templates/authentification.html'
+        templateUrl: 'templates/authentification.html',
+        controller: 'AuthentificationCtrl'
     })
 
     $urlRouterProvider.otherwise('/authentification')
