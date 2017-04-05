@@ -1,5 +1,5 @@
-<ion-view title="Authentification" id="page1">
-    <ion-content padding="true" scroll="false" class="has-header">
+<view title="'Authentification'">
+    <content has-header="true" has-subheader="true">
         <form id="connexion-form9" class="list">
             <label class="item item-input myclass" id="connexion-input3" name="login" ng-model="login">
                 <input type="text" placeholder="Email/Username">
@@ -10,8 +10,8 @@
             </label>
         </form>
         <button id="connexion-button2" class="button button-positive  button-block btnDefault" ng-click="connect(login,password)">S'identifier</button>
-        <div style = "text-align: center">
+        <div style="text-align: center">
             <a ui-sref="home">Mot de passe oublié</a>/<a ui-sref="inscription">S'inscrire</a>
         </div>
-    </ion-content>
-</ion-view>
+    </content>
+</view>
