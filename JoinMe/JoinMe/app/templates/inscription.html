@@ -1,7 +1,7 @@
 <view title="'Inscription'" id="page1">
     <content padding="true" class="has-header">
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
         <form id="inscription-form2" class="list">
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input6" name="prenom">
                 <input type="text" placeholder="Prénom" ng-model="newUser.firstname">
             </label>
@@ -32,7 +32,7 @@
         </form>
         <button id="inscription-button1" class="button button-positive  button-block" ng-click="createUser(newUser)">S'inscrire</button>
         <div style="text-align: center">
-            <a ui-sref="authentification">Se connecter</a>
+            <a ng-click="authentification()">Se connecter</a>
         </div>
     </content>
 </view>
