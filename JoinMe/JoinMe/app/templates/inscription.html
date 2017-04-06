@@ -40,8 +40,8 @@
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input4">
                 <input type="password" name="passwordValid" id="passwordValid" placeholder="Mot de passe validation" ng-model="newUser.passwordvalid" required onkeyup="checkPwd()">
-                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.passwordValid.$valid"></i>
-                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.passwordValid.$valid"></i>
+                <i id="valid" class="icon ion-checkmark placeholder-icon balanced hidden"> <!--ng-show="subscribeForm.passwordValid.$valid"--></i>
+                <i id="false" class="icon ion-close placeholder-icon assertive"> <!--ng-hide="subscribeForm.passwordValid.$valid"--></i>
             </label>
         </form>
         <button id="inscription-button1" class="button button-positive button-block" ng-click="createUser(newUser, subscribeForm)">S'inscrire</button>
