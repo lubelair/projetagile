@@ -11,3 +11,12 @@
 .css-form input.ng-valid.ng-touched, input.ng-valid.ng-valid {
     /*background-color: #78FA89;*/
 }
+
+.fake_link {
+            color: #1F75CC;
+            cursor: pointer;
+        }
+.fake_link:hover {
+            text-decoration: underline;
+            color: #b200ff;
+        }
