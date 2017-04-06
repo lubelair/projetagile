@@ -13,9 +13,9 @@
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="authentification.password.$valid"></i>
             </label>
         </form>
-        <button id="connexion-button2" class="button button-positive  button-block btnDefault" ng-click="connect(user)">S'identifier</button>
+        <button id="connexion-button2" class="button button-positive  button-block btnDefault" ng-click="connect(user, authentification)">S'identifier</button>
         <div style="text-align: center">
-            <a ng-click="forgetPassword()">Mot de passe oublié</a>/<a ng-click="inscription()">S'inscrire</a>
+            <a class="fake_link" ng-click= "forgetPassword()">Mot de passe oublié</a> / <a class="fake_link" ng-click="inscription()">S'inscrire</a>
         </div>
     </content>
 </view>
