@@ -6,8 +6,10 @@ angular.module('directory.controllers', [])
         //   AppService.createUser(user);
         // Vérifier validité du password
         $scope.newUser = { firstname: '', lastname: '', mail: '', phonenumber: '', login: '', password: '' };
-        $scope.createUser = function (user) {
-            AppService.createUser(user);
+
+        $scope.createUser = function (user, myForm) {
+            console.log(myForm.$valid);
+            myForm.$valid == true ? AppService.createUser(user) : alert("Erreur dans la saisie du formulaire");
         }
 
         $scope.authentification = function () {
