@@ -40,7 +40,7 @@ angular.module('directory.controllers', [])
             console.log(myForm.$valid);
             AppService.saveSettings(user);
         }
-        $scope.deleteCount = function (user) {
+        $scope.deleteAccount = function (user) {
             console.log("suppression du compte");
         }
     })
