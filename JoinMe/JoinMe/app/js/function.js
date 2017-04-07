@@ -9,12 +9,15 @@ function checkPwd() {
     return true;
 }
 
-function checkPhone(event) {
-    var accept = '0123456789';
-    var ch = event.key;
-    if (accept.indexOf(ch) >= 0) {
+function checkPhone() {
+    var str = document.getElementById("phoneNumber").value;
+    var patt = new RegExp("[0-9]{10}");
+    if (patt.test(str)) {
+        document.getElementById("falsePhone").style.display = 'none';
+        document.getElementById("validPhone").style.display = 'block';
         return true;
-    } else {
-        return false;
     }
+    document.getElementById("falsePhone").style.display = 'block';
+    document.getElementById("validPhone").style.display = 'none';
+    return false;
 }
