@@ -11,7 +11,7 @@ angular.module('directory.controllers', [])
             AppService.createUser(user);
             $state.go('accueil')
         }
- //---------------------checkpwd-----------------------------------------------
+        //---------------------checkpwd-----------------------------------------------
         $scope.checkPwd = function (subscribeForm) {
             //console.log(myForm.$valid);
             subscribeForm.confirmpwd.$valid = false;
@@ -19,8 +19,7 @@ angular.module('directory.controllers', [])
                 subscribeForm.confirmpwd.$valid = false;
             }
         }
--------------------------------------------------------------------------------
-
+        //-------------------------------------------------------------------------------
 
         $scope.authentification = function () {
             //change state to authentification state
@@ -57,6 +56,5 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
-
     })
 ;
