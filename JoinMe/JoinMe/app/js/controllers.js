@@ -9,7 +9,7 @@ angular.module('directory.controllers', [])
 
         $scope.createUser = function (user) {
             AppService.createUser(user);
-            state.go('accueil')
+            $state.go('accueil')
         }
 
         $scope.authentification = function () {
