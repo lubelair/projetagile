@@ -2,37 +2,37 @@
     <content padding="true" class="has-header">
         <form id="subscribeForm" class="list" name="subscribeForm">
             <label class="item item-input" id="inscription-input3">
-                <input type="text" name="pseudo" placeholder="Pseudonyme" ng-model="newUser.login" required ng-minlength="4" ng-maxlength="20">
+                <input type="text" name="pseudo" placeholder="Pseudonyme" ng-model="newUser.UserName" required ng-minlength="4" ng-maxlength="20">
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.pseudo.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.pseudo.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input6">
-                <input type="text" name="prenom" placeholder="Prénom" ng-model="newUser.firstname" required>
+                <input type="text" name="prenom" placeholder="Prénom" ng-model="newUser.FirstName" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.prenom.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.prenom.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input5" name="nom">
-                <input type="text" name="nom" placeholder="Nom" ng-model="newUser.lastname" required>
+                <input type="text" name="nom" placeholder="Nom" ng-model="newUser.LastName" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.nom.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.nom.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input1" name="mail">
-                <input type="email" name="mail" placeholder="E-mail" ng-model="newUser.mail" required>
+                <input type="email" name="mail" placeholder="E-mail" ng-model="newUser.Email" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.mail.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.mail.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input2">
-                <input type="number" name="numeroTel" placeholder="Numéro" ng-model="newUser.phonenumber" required ng-minlength="10" ng-maxlength="10">
+                <input type="number" name="numeroTel" placeholder="Numéro" ng-model="newUser.PhoneNumber" required ng-minlength="10" ng-maxlength="10">
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.numeroTel.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.numeroTel.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input4">
-                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="newUser.password" required ng-minlength="6">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="newUser.Password" required ng-minlength="6">
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.password.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.password.$valid"></i>
             </label>
@@ -43,9 +43,17 @@
                 <i id="false" class="icon ion-close placeholder-icon assertive"> <!--ng-hide="subscribeForm.passwordValid.$valid"--></i>
             </label>
         </form>
-        <button id="inscription-button1" class="button button-positive button-block" ng-click="createUser(newUser, subscribeForm)">S'inscrire</button>
+        <button id="inscription-button1" class="button button-positive button-block" ng-click="createUser(newUser)">S'inscrire</button>
         <div style="text-align: center">
             <a class="fake_link" ng-click="authentification()">Se connecter</a>
         </div>
+
+        <table>
+            <tr ng-repeat="user in __User">
+                <td>
+                    {{ user.FirstName }} : {{ user.LastName }}
+                </td>
+            </tr>
+        </table>
     </content>
 </view>
