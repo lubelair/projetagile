@@ -11,6 +11,16 @@ angular.module('directory.controllers', [])
             AppService.createUser(user);
             $state.go('accueil')
         }
+ //---------------------checkpwd-----------------------------------------------
+        $scope.checkPwd = function (subscribeForm) {
+            //console.log(myForm.$valid);
+            subscribeForm.confirmpwd.$valid = false;
+            if (document.getElementById("confirmpwd").value != document.getElementById("password").value) {
+                subscribeForm.confirmpwd.$valid = false;
+            }
+        }
+-------------------------------------------------------------------------------
+
 
         $scope.authentification = function () {
             //change state to authentification state
@@ -40,7 +50,7 @@ angular.module('directory.controllers', [])
             console.log(myForm.$valid);
             AppService.saveSettings(user);
         }
-        $scope.deleteCount = function (user) {
+        $scope.deleteAccount = function (user) {
             console.log("suppression du compte");
         }
     })
