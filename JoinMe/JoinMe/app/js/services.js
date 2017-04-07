@@ -41,7 +41,18 @@ angular.module('directory.services', [])
 
         // Variables
 
-        var _User = { id: -1, fistname: "", lastname: "", mail: "", phonenumber: -1, login: "", password: "" };
+        var __User = {
+            CreationTime: "",
+            Email: "",
+            FirstName: "",
+            Id: -1,
+            IsDeleted: false,
+            LastName: "",
+            ModificationTime: "",
+            Password: "",
+            PhoneNumber: -1,
+            UserName: ""
+        }
 
         // CallBack functions
         var indexCallBack = function (data) {
