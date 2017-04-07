@@ -36,6 +36,9 @@ angular.module('directory.services', [])
             },
             createUser: function (user) {
                 console.log(user);
+            },
+            saveSettings: function(user){
+                console.log(user);
             }
         }
 

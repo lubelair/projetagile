@@ -1,31 +1,49 @@
-<view title="'Settings'">
-    <content padding="true" class="has-header">
-        <form id="settings-form2" class="list">
+ï»¿<view title="'ParamÃ¨tres'">
+    <content padding="true" class="has-header" overflow-scroll="true">
+        <form id="settings-form2" class="list" name="settingsForm">
             <label class="item item-input" id="settings-input10">
-                <input type="text" placeholder="Pseudonyme">
+                <input type="text" name="pseudo" placeholder="Pseudonyme" ng-model="user.login" required ng-minlength="4" ng-maxlength="20">
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.pseudo.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.pseudo.$valid"></i>
             </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input9">
-                <input type="text" placeholder="Nom">
+                <input type="text" name="nom" placeholder="Nom" ng-model="user.lastname" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.nom.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.nom.$valid"></i>
             </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input12">
-                <input type="text" placeholder="Prénom ">
+                <input type="text" name="prenom" placeholder="PrÃ©nom" ng-model="user.firstname" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.prenom.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.prenom.$valid"></i>
             </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input6">
-                <input type="email" placeholder="Adresse e-mail">
+                <input type="email" name="mail" placeholder="E-mail" ng-model="user.mail" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.mail.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.mail.$valid"></i>
             </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input4">
-                <input type="number" placeholder="Numéro de téléphone">
+                <input type="number" name="numeroTel" placeholder="NumÃ©ro" ng-model="user.phonenumber" required ng-minlength="10" ng-maxlength="10">
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.numeroTel.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.numeroTel.$valid"></i>
             </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input7">
-                <input type="text" placeholder="Mot de passe">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="user.password" required ng-minlength="6">
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.password.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.password.$valid"></i>
             </label>
-            <toggle toggle-class="toggle-positive" id="settings-toggle1">Désactiver compte </toggle>
-            <toggle toggle-class="toggle-positive" id="settings-toggle2">Désactiver les notifications</toggle>
-            <label class="item item-input" id="settings-input8">
-                <span class="input-label">Supprimer compte </span>
-                <input type="text" placeholder="">
-            </label>
-            <button id="settings-button2" style="font-weight:500;" class="button button-positive  button-block">Déconnexion </button>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <toggle toggle-class="toggle-positive" id="settings-toggle1" ng-model="user.IsActive">DÃ©sactiver compte </toggle>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <toggle toggle-class="toggle-positive" id="settings-toggle2">DÃ©sactiver les notifications</toggle>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <button id="settings-button4" class="button button-calm  button-block" ng-click="deleteCount(user)">Supprimer compte</button>
+            <button id="settings-button2" style="font-weight:500;" class="button button-calm  button-block">DÃ©connexion </button>
         </form>
+        <button id="settings-button3" class="button button-positive  button-block btnDefault" ng-click="saveSettings(user, settingsForm)">Enregistrer</button>
     </content>
 </view>

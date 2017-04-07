@@ -36,7 +36,13 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService) {
-
+        $scope.saveSettings = function (user, myForm) {
+            console.log(myForm.$valid);
+            AppService.saveSettings(user);
+        }
+        $scope.deleteCount = function (user) {
+            console.log("suppression du compte");
+        }
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
