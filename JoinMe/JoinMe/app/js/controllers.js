@@ -32,4 +32,13 @@ angular.module('directory.controllers', [])
         $scope.forgetPassword = function () {
             //$state.go('forgetPassword');
         }
-    });
+    })
+
+    .controller('SettingsCtrl', function ($scope, $state, AppService) {
+
+    })
+
+    .controller('AccueilCtrl', function ($scope, $state, AppService) {
+
+    })
+;
