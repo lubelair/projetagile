@@ -14,16 +14,10 @@ angular.module('directory.services', [])
              });
          }*/
         var postUrl = function (action, params, functionCallBack) {
-            $http({
-                method: "post",
-                url: "/JoinMeServices/Users/" + action,
-                /* params: {
-                     action: "index"
-                 },*/
-                data: {
-                    name: params
-                }
-            }).then(functionCallBack, handleError);
+            angular.toJson(params);
+            var parameter = JSON.stringify(params);
+            $http.post("/JoinMeService/Users/" + action, parameter).then(functionCallBack, handleError);
+        
         }
 
         return {
@@ -35,6 +29,15 @@ angular.module('directory.services', [])
                 alert(_user.username + " " + _user.password);
             },
             createUser: function (user) {
+              /*  user.CreationTime = "2012-04-23T18:25:43.511Z";
+                user.ModificationTime = "2012-04-23T18:25:43.511Z";
+*/
+                user.CreationTime = new Date();
+                user.ModificationTime = user.CreationTime;
+                postUrl('PostUser',user,createUserCallBack);
+                console.log(user);
+            },
+            saveSettings: function(user){
                 console.log(user);
             }
         }
@@ -80,4 +83,9 @@ angular.module('directory.services', [])
         }
 
         var deleteUser = function (_User) { }
+
+
+        function createUserCallBack(response) {
+            console.log(response.data);
+        }
     });
