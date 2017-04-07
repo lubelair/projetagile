@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('directory', ['ionic','ngTouch', 'directory.services', 'directory.controllers'])
+angular.module('directory', ['ionic', 'ngTouch', 'directory.services', 'directory.controllers'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -34,6 +34,18 @@ angular.module('directory', ['ionic','ngTouch', 'directory.services', 'directory
         url: '/authentification',
         templateUrl: 'templates/authentification.html',
         controller: 'AuthentificationCtrl'
+    })
+
+    $stateProvider.state('accueil', {
+        url: '/accueil',
+        templateUrl: 'templates/accueil.html',
+        controller: 'AccueilCtrl'
+    })
+
+    $stateProvider.state('settings', {
+        url: '/settings',
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingsCtrl'
     })
 
     $urlRouterProvider.otherwise('/authentification')
