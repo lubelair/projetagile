@@ -26,7 +26,7 @@ angular.module('directory', ['ionic', 'ngTouch', 'directory.services', 'director
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
         url: '/inscription',
-        templateUrl: 'templates/inscription.html',
+        templateUrl: 'templates/map.html',
         controller: 'SubscribeCtrl'
     })
 
