@@ -56,7 +56,7 @@ namespace JoinMeServices.Models
 
         [DataType(DataType.PhoneNumber)]
         [Required]
-        public int PhoneNumber { get; set; }
+        public decimal PhoneNumber { get; set; }
 
         [Required]
         public string UserName { get; set; }

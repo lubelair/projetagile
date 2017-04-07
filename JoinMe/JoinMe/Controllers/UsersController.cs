@@ -61,7 +61,8 @@ namespace JoinMeServices.Controllers
 
         // POST: api/Users
         [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUser(User user)
+        [HttpGet, HttpPost]
+        public async Task<Object> PostUser(User user)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +72,7 @@ namespace JoinMeServices.Controllers
             db.Users.Add(user);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+            return user;
         }
 
         // PUT: api/Users/5
