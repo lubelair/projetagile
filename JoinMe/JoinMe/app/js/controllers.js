@@ -9,8 +9,9 @@ angular.module('directory.controllers', [])
 
         $scope.createUser = function (user) {
             AppService.createUser(user);
-          //  $state.go('accueil')        }
-        //---------------------checkpwd-----------------------------------------------
+            //  $state.go('accueil')
+        }
+        //---------------------checkpwd-----------------------------------------------//
         $scope.checkPwd = function (subscribeForm) {
             //console.log(myForm.$valid);
             subscribeForm.confirmpwd.$valid = false;
@@ -18,7 +19,6 @@ angular.module('directory.controllers', [])
                 subscribeForm.confirmpwd.$valid = false;
             }
         }
-        //-------------------------------------------------------------------------------
 
         $scope.authentification = function () {
             //change state to authentification state
@@ -56,4 +56,18 @@ angular.module('directory.controllers', [])
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
     })
+ .controller('MapCtrl', function ($scope, $state, NgMap) {
+     $scope.message = 'You can not hide. :)';
+     var vm =this;
+     vm.message = 'You can not hide. :)';
+     NgMap.getMap("map").then(function (map) {
+         console.log('get map');
+
+         vm.map = map;
+     });
+     $scope.callbackFunc = function (param) {
+         console.log('I know where ' + param + ' are. ' + vm.message);
+         console.log('You are at' + vm.map.getCenter());
+     };
+ })
 ;
