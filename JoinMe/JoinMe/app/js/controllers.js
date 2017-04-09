@@ -8,10 +8,18 @@ angular.module('directory.controllers', [])
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user) {
-
             AppService.createUser(user);
           //  $state.go('accueil')
         }
+        //---------------------checkpwd-----------------------------------------------
+        $scope.checkPwd = function (subscribeForm) {
+            //console.log(myForm.$valid);
+            subscribeForm.confirmpwd.$valid = false;
+            if (document.getElementById("confirmpwd").value != document.getElementById("password").value) {
+                subscribeForm.confirmpwd.$valid = false;
+            }
+        }
+        //-------------------------------------------------------------------------------
 
         $scope.authentification = function () {
             //change state to authentification state
@@ -37,16 +45,16 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService) {
+        $scope.regex = '[0-9]{10}';
         $scope.saveSettings = function (user, myForm) {
             console.log(myForm.$valid);
             AppService.saveSettings(user);
         }
-        $scope.deleteCount = function (user) {
+        $scope.deleteAccount = function (user) {
             console.log("suppression du compte");
         }
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
-
     })
 ;
