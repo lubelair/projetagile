@@ -9,8 +9,7 @@ angular.module('directory.controllers', [])
 
         $scope.createUser = function (user) {
             AppService.createUser(user);
-          //  $state.go('accueil')
-        }
+          //  $state.go('accueil')        }
         //---------------------checkpwd-----------------------------------------------
         $scope.checkPwd = function (subscribeForm) {
             //console.log(myForm.$valid);

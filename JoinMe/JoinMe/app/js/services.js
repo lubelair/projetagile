@@ -35,6 +35,9 @@ angular.module('directory.services', [])
             },
             saveSettings: function (user) {
                 console.log(user);
+            },
+            saveSettings: function(user){
+                console.log(user);
             }
         }
 
