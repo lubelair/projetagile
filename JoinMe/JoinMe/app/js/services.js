@@ -20,7 +20,9 @@ angular.module('directory.services', [])
         }
 
         return {
-            getUser: function (user) { },
+            getUser: function () {
+                return __User
+            },
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
@@ -34,10 +36,14 @@ angular.module('directory.services', [])
                 console.log(user);
             },
             saveSettings: function (user) {
-                console.log(user);
-            },
-            saveSettings: function(user){
-                console.log(user);
+                user.ModificationTime = new Date();
+                //Enregistrement en base
+                //postUrl('PutUser', user, updateUserCallBack);
+                // Si ok
+                __User = user;
+                //Sinon
+                alert("L'enregistrement a échoué !")
+                console.log(__User);
             }
         }
 
@@ -45,15 +51,15 @@ angular.module('directory.services', [])
 
         var __User = {
             CreationTime: "",
-            Email: "",
-            FirstName: "",
+            Email: "sarah@mail.fr",
+            FirstName: "Sarah",
             Id: -1,
             IsDeleted: false,
-            LastName: "",
+            LastName: "AG",
             ModificationTime: "",
-            Password: "",
+            Password: "azerty",
             PhoneNumber: -1,
-            UserName: ""
+            UserName: "sarah36"
         }
 
         // CallBack functions
@@ -84,6 +90,10 @@ angular.module('directory.services', [])
         var deleteUser = function (_User) { }
 
         function createUserCallBack(response) {
+            console.log(response.data);
+        }
+
+        function updateUserCallBack(response) {
             console.log(response.data);
         }
     });

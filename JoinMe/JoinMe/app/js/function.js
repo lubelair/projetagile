@@ -11,13 +11,13 @@ function checkPwd() {
 
 function checkPhone() {
     var str = document.getElementById("phoneNumber").value;
-    var patt = new RegExp("[0-9]{10}");
+    var patt = new RegExp("^(06|07)[0-9]{8}$");
     if (patt.test(str)) {
         document.getElementById("falsePhone").style.display = 'none';
         document.getElementById("validPhone").style.display = 'block';
         return true;
     }
-    document.getElementById("falsePhone").style.display = 'block';
     document.getElementById("validPhone").style.display = 'none';
+    document.getElementById("falsePhone").style.display = 'block';
     return false;
 }

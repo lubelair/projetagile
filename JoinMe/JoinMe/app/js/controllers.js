@@ -45,6 +45,8 @@ angular.module('directory.controllers', [])
 
     .controller('SettingsCtrl', function ($scope, $state, AppService) {
         $scope.regex = '[0-9]{10}';
+        $scope.user = AppService.getUser;
+
         $scope.saveSettings = function (user, myForm) {
             console.log(myForm.$valid);
             AppService.saveSettings(user);
@@ -58,7 +60,7 @@ angular.module('directory.controllers', [])
     })
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
-     var vm =this;
+     var vm = this;
      vm.message = 'You can not hide. :)';
      NgMap.getMap("map").then(function (map) {
          console.log('get map');
