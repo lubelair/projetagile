@@ -90,22 +90,11 @@ namespace JoinMe.Controllers
             return null;
         }
 
-        private bool CheckExistUser(User user)
-        {
-            return db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase) &&
-                                  e.PhoneNumber.Equals(user.PhoneNumber) &&
-                                  e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) > 0;
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
 
-        #endregion Private Methods
+        #endregion Public Methods
     }
 }
