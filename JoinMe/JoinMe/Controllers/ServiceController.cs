@@ -1,5 +1,6 @@
 ﻿using JoinMeServices.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -38,5 +39,18 @@ namespace JoinMe.Controllers
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private bool CheckExistUser(User user)
+        {
+            return db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase)) > 0;
+        }
+
+        #endregion Private Methods
     }
 }
