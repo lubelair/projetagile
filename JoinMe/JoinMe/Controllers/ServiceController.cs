@@ -1,5 +1,6 @@
 ﻿using JoinMeServices.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -35,6 +36,26 @@ namespace JoinMe.Controllers
             await db.SaveChangesAsync();
 
             return user;
+        }
+
+        private Object Authenticate(User user)
+        {
+            if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                               e.Password.Equals(user.Password)) > 0)
+            {
+                return db.Users.Single(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                                e.Password.Equals(user.Password));
+                //Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                /// e.Password.Equals(user.Password)).Single();
+            }
+            return null;
+        }
+
+        private bool CheckExistUser(User user)
+        {
+            return db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase) &&
+                                  e.PhoneNumber.Equals(user.PhoneNumber) &&
+                                  e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) > 0;
         }
 
         #endregion Public Methods
