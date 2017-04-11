@@ -16,6 +16,13 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
             // from snapping when text inputs are focused. Ionic handles this internally for
             // a much nicer keyboard experience.
             cordova.plugins.Keyboard.disableScroll(true);
+
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+
+                console.log("lat" + lat);
+            });
         }
         if (window.StatusBar) {
             StatusBar.styleDefault();
@@ -53,5 +60,5 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         controller: 'MapCtrl'
     })
 
-    $urlRouterProvider.otherwise('/authentification')
+    $urlRouterProvider.otherwise('/inscription')
 })
