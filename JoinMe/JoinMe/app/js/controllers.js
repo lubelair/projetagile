@@ -7,8 +7,13 @@ angular.module('directory.controllers', [])
         // Vérifier validité du password
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
-        $scope.createUser = function (user) {
-            AppService.createUser(user);
+        $scope.createUser = function (user, subscribeForm) {
+            if (subscribeForm.$valid) {
+                AppService.createUser(user);
+            } else {
+                alert('form not valid');
+            }
+          
             //  $state.go('accueil')
         }
         //---------------------checkpwd-----------------------------------------------//
@@ -27,12 +32,11 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, AppService) {
-        $scope.user = { username: '', password: '' };
-
-        $scope.connect = function (_user) {
-            console.log(_user);
-            AppService.login(_user);
-            $state.go('accueil');
+        $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
+        $scope.connect = function (user) {
+            console.log(user);
+            AppService.login(user);
+            // $state.go('accueil');
         }
         $scope.inscription = function () {
             //change state to inscription state
@@ -57,7 +61,31 @@ angular.module('directory.controllers', [])
         }
 
         $scope.selectPhoto = function (user) {
-            AppService.selectPhoto();
+            //AppService.selectPhoto($ionicActionSheet);
+            var showActionSheet = $ionicActionSheet.show({
+                buttons: [
+                   { text: 'Modifier la photo' }
+                ],
+
+                destructiveText: 'Supprimer la photo',
+                cancelText: 'Fermer',
+
+                cancel: function () {
+                },
+
+                buttonClicked: function (index) {
+                    if (index === 0) {
+                        // Modification de la photo
+                        var edit_save = document.getElementById("photoUser");
+                        edit_save.src = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQfbzUlHzE133HxXyjo2zHB86i33k1F4tpbu18QSR8fNS_Kc-y4";
+                        cancel;
+                    }
+                },
+
+                destructiveButtonClicked: function () {
+                    // Suppression de la photo
+                }
+            });
         }
     })
 

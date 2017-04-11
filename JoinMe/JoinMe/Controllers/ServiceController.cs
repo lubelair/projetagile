@@ -22,6 +22,38 @@ namespace JoinMe.Controllers
 
         #region Public Methods
 
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> Authenticate(User user)
+        {
+            try
+            {
+                return await db.Users.Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                               e.Password.Equals(user.Password)).SingleAsync();
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
+        [ResponseType(typeof(object))]
+        [HttpGet, HttpPost]
+        public async Task<object> GetUser(User usr)
+        {
+            User user = await db.Users.FindAsync(3);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
         [HttpGet, HttpPost]
         public IHttpActionResult Index()
         {
@@ -75,14 +107,6 @@ namespace JoinMe.Controllers
             }
 
             return user;
-        }
-
-        [ResponseType(typeof(User))]
-        [HttpGet, HttpPost]
-        private async Task<User> Authenticate(User user)
-        {
-            return await db.Users.Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                                e.Password.Equals(user.Password)).SingleAsync();
         }
 
         private bool UserExists(int id)

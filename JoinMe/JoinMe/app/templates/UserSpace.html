@@ -1,0 +1,20 @@
+<ion-view title="WhereYou" hide-nav-bar="true" can-swipe-back="false">
+    <ion-slide-box show-pager="false" id="slidBox" active-slide="myActiveSlide" on-slide-changed="onSlideChanged(index)">
+
+        <ion-slide class="slide-container">
+            <div class="div-slide-container" events-view data-ng-controller="Events"></div>
+        </ion-slide>
+
+        <ion-slide class="slide-container">
+            <div class="div-slide-container" calendar-view data-ng-controller="Accueil"></div>
+        </ion-slide>
+
+        <ion-slide class="slide-container">
+            <div class="div-slide-container" friends-view data-ng-controller="Friends"></div>
+        </ion-slide>
+
+        <ion-slide class="slide-container">
+            <div class="div-slide-container" add-friends-view data-ng-controller="AddFriends"></div>
+        </ion-slide>
+    </ion-slide-box>
+</ion-view>

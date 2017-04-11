@@ -27,8 +27,8 @@ angular.module('directory.services', [])
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
-            login: function (_user) {
-                alert(_user.username + " " + _user.password);
+            login: function (user) {
+                postUrl('authenticate', user, loginCallBack);
             },
             createUser: function (user) {
                 user.CreationTime = new Date();
@@ -46,32 +46,6 @@ angular.module('directory.services', [])
             },
             selectPhoto: function () {
                 showActionSheet();
-                var showActionSheet = $ionicActionSheet.show({
-                    buttons: [
-                       { text: 'Modifier la photo' }
-                    ],
-
-                    destructiveText: 'Supprimer la photo',
-                    cancelText: 'Fermer',
-
-                    cancel: function () {
-                    },
-
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            // Modification de la photo
-                            var edit_save = document.getElementById("photoUser");
-                            //edit_save.onclick = function () {
-                            edit_save.src = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQfbzUlHzE133HxXyjo2zHB86i33k1F4tpbu18QSR8fNS_Kc-y4";
-                            //}
-                        }
-                    },
-
-                    destructiveButtonClicked: function () {
-                        // Suppression de la photo
-                    }
-                });
             }
         }
-
     });
