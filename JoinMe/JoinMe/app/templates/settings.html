@@ -2,31 +2,31 @@
     <content padding="true" class="has-header" overflow-scroll="true">
         <form id="settings-form2" class="list" name="settingsForm">
             <label class="item item-input" id="settings-input9">
-                <input type="text" name="nom" placeholder="Nom" ng-model="user.lastname" required>
+                <input type="text" name="nom" placeholder="Nom" ng-model="user.LastName" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.nom.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.nom.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input12">
-                <input type="text" name="prenom" placeholder="Prénom" ng-model="user.firstname" required>
+                <input type="text" name="prenom" placeholder="Prénom" ng-model="user.FirstName" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.prenom.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.prenom.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input6">
-                <input type="email" name="mail" placeholder="E-mail" ng-model="user.mail" required>
+                <input type="email" name="mail" placeholder="E-mail" ng-model="user.Email" required>
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.mail.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.mail.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input4">
-                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="user.phonenumber" required onkeyup="checkPhone()">
-                <i id="validPhone" class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.numeroTel.$valid"></i>
-                <i id="falsePhone" class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.numeroTel.$valid"></i>
+                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="user.PhoneNumber" required ng-minlength="10" ng-maxlength="10" onkeyup="checkPhone()">
+                <i id="validPhone" class="icon ion-checkmark placeholder-icon balanced hidden"> <!-- ng-show="settingsForm.numeroTel.$valid">--></i>
+                <i id="falsePhone" class="icon ion-close placeholder-icon assertive" > <!--ng-hide="settingsForm.numeroTel.$valid">--></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input7">
-                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="user.password" required ng-minlength="6">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="user.Password" required ng-minlength="6">
                 <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.password.$valid"></i>
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.password.$valid"></i>
             </label>
