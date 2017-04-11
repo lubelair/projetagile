@@ -53,5 +53,5 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         controller: 'MapCtrl'
     })
 
-    $urlRouterProvider.otherwise('/inscription')
+    $urlRouterProvider.otherwise('/authentification')
 })

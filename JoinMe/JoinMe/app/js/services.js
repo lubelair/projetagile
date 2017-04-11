@@ -1,6 +1,6 @@
 angular.module('directory.services', [])
 
-    .factory('AppService', function ($q, $http) {
+    .factory('AppService', function ($q, $http, $ionicPopup, $state) {
         /* var postUrl = function (action, params, functionCallBack) {
              var url = "/JoinMeServices/app/";
 
@@ -20,6 +20,9 @@ angular.module('directory.services', [])
             $http.post("/JoinMeService/Service/" + action, parameter).then(functionCallBack, handleError);
         }
 
+        initState($state);
+        initIoniPopup($ionicPopup);
+      
         return {
             getUser: function () {
                 return __User;

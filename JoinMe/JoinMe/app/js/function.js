@@ -14,6 +14,9 @@ var __User = {
     Photo:""
 }
 
+var _State;
+var _IonicPopup;
+
 // ###########################  Functions
 
 function checkPwd() {
@@ -67,6 +70,22 @@ function showActionSheet($ionicActionSheet) {
     });
 }
 
+// Get state 
+function getState() {
+    return _State;
+}
+//Init state
+function initState($state) {
+    _State = $state;
+}
+// init IonicPopup
+function initIoniPopup($ionicPopup) {
+    _IonicPopup = $ionicPopup;
+}
+// get IonicPopup
+function getIonicPopup() {
+    return _IonicPopup;
+}
 // ###########################  CallBack functions
 var indexCallBack = function (data) {
     console.log(data);
@@ -105,5 +124,9 @@ function updateUserCallBack(response) {
 }
 
 function loginCallBack(response) {
+    getIonicPopup().alert({
+        title: 'Error',
+        template: 'form not valid'
+    });
     console.log(response.data);
 }

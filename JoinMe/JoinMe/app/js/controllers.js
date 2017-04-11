@@ -1,17 +1,22 @@
 angular.module('directory.controllers', [])
 
 //AppService => name of service in service.js
-    .controller('SubscribeCtrl', function ($scope, $state, AppService) {
+    .controller('SubscribeCtrl', function ($scope, $state,$ionicPopup, AppService) {
         // call createUser method of appService
         //   AppService.createUser(user);
         // Vérifier validité du password
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
+
+
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             } else {
-                alert('form not valid');
+                $ionicPopup.alert({
+                    title: 'Error',
+                    template: 'form not valid'
+                });
             }
           
             //  $state.go('accueil')
