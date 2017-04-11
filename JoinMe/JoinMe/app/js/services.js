@@ -36,6 +36,10 @@ angular.module('directory.services', [])
                 console.log(user);
             },
             saveSettings: function (user) {
+                console.log(user);
+            },
+            saveSettings: function (user) {
+                console.log(user);
                 user.ModificationTime = new Date();
                 //Enregistrement en base
                 //postUrl('PutUser', user, updateUserCallBack);
