@@ -20,3 +20,21 @@
             text-decoration: underline;
             color: #b200ff;
         }
+
+.image-thumbnail {
+  position: relative;
+  float:left;
+  display: inline-block;
+  margin-right:10px;
+}
+.image-thumbnail img {
+    float:left;
+    height:100px;
+    width:100px;
+}
+.image-thumbnail i {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size:25px;
+}

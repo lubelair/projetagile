@@ -10,7 +10,8 @@ var __User = {
     ModificationTime: "",
     Password: "azerty",
     PhoneNumber: 612345789,
-    UserName: "sarah36"
+    UserName: "sarah36",
+    Photo:""
 }
 
 // ###########################  Functions
@@ -39,6 +40,33 @@ function checkPhone() {
     return false;
 }
 
+function showActionSheet($ionicActionSheet) {
+    var showActionSheet = $ionicActionSheet.show({
+        buttons: [
+           { text: 'Modifier la photo' }
+        ],
+
+        destructiveText: 'Supprimer la photo',
+        cancelText: 'Fermer',
+
+        cancel: function () {
+        },
+
+        buttonClicked: function (index) {
+            if (index === 0) {
+                // Modification de la photo
+                var edit_save = document.getElementById("photoUser");
+                edit_save.src = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQfbzUlHzE133HxXyjo2zHB86i33k1F4tpbu18QSR8fNS_Kc-y4";
+                cancel;
+            }
+        },
+
+        destructiveButtonClicked: function () {
+            // Suppression de la photo
+        }
+    });
+}
+
 // ###########################  CallBack functions
 var indexCallBack = function (data) {
     console.log(data);
@@ -58,12 +86,11 @@ var handleError = function (response) {
         !angular.isObject(response.data) ||
         !response.data.message
         ) {
-        console.log($q.reject("An unknown error occurred."));
-        return ($q.reject("An unknown error occurred."));
+        console.log(("An unknown error occurred."));
+     
     }
     // Otherwise, use expected error message.
-    console.log($q.reject(response.data.message));
-    return ($q.reject(response.data.message));
+    console.log(response.data.message);
 }
 
 var deleteUser = function (_User) { }
@@ -75,4 +102,8 @@ function createUserCallBack(response) {
 function updateUserCallBack(response) {
     __User = response.data;
     console.log(__User);
+}
+
+function loginCallBack(response) {
+    console.log(response.data);
 }
