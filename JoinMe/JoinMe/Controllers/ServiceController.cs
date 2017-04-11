@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Net;
+
+using System.Linq;
 
 namespace JoinMe.Controllers
 {
@@ -23,6 +28,9 @@ namespace JoinMe.Controllers
             return Ok("joinMe web api");
         }
 
+        //##################  Fonctions classe User
+
+        // Ajout du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
         public async Task<Object> PostUser(User user)
@@ -38,19 +46,59 @@ namespace JoinMe.Controllers
             return user;
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        /// <summary>
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        private bool CheckExistUser(User user)
+        //Modification du user
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutUser(int id, User user)
         {
-            return db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase)) > 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        #endregion Private Methods
+        private Object Authenticate(User user)
+        {
+            if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                               e.Password.Equals(user.Password)) > 0)
+            {
+                return db.Users.Single(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                                e.Password.Equals(user.Password));
+                //Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                /// e.Password.Equals(user.Password)).Single();
+            }
+            return null;
+        }
+
+        private bool UserExists(int id)
+        {
+            return db.Users.Count(e => e.Id == id) > 0;
+        }
+
+        #endregion Public Methods
     }
 }

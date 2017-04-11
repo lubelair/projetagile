@@ -26,9 +26,9 @@
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input2">
-                <input type="tel" name="numeroTel" placeholder="Numéro" ng-model="newUser.PhoneNumber" required ng-minlength="10" ng-maxlength="10">
-                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="subscribeForm.numeroTel.$valid"></i>
-                <i class="icon ion-close placeholder-icon assertive" ng-hide="subscribeForm.numeroTel.$valid"></i>
+                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="newUser.PhoneNumber" required ng-minlength="10" ng-maxlength="10" onkeyup="checkPhone()">
+                <i id="validPhone" class="icon ion-checkmark placeholder-icon balanced hidden"> <!-- ng-show="settingsForm.numeroTel.$valid">--></i>
+                <i id="falsePhone" class="icon ion-close placeholder-icon assertive" > <!--ng-hide="settingsForm.numeroTel.$valid">--></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="inscription-input4">
