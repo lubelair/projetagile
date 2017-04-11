@@ -41,8 +41,6 @@ angular.module('directory.services', [])
                 user.CreationTime = user.ModificationTime;
                 user.Id = 1;
                 user.UserName = "Loustic";
-
             }
         }
-
     });
