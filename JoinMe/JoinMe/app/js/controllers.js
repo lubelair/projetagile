@@ -7,8 +7,13 @@ angular.module('directory.controllers', [])
         // Vérifier validité du password
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
-        $scope.createUser = function (user) {
-            AppService.createUser(user);
+        $scope.createUser = function (user, subscribeForm) {
+            if (subscribeForm.$valid) {
+                AppService.createUser(user);
+            } else {
+                alert('form not valid');
+            }
+          
             //  $state.go('accueil')
         }
         //---------------------checkpwd-----------------------------------------------//
