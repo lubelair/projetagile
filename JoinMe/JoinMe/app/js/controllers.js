@@ -27,12 +27,11 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, AppService) {
-        $scope.user = { username: '', password: '' };
-
-        $scope.connect = function (_user) {
-            console.log(_user);
-            AppService.login(_user);
-            $state.go('accueil');
+        $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
+        $scope.connect = function (user) {
+            console.log(user);
+            AppService.login(user);
+            // $state.go('accueil');
         }
         $scope.inscription = function () {
             //change state to inscription state

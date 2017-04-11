@@ -27,8 +27,8 @@ angular.module('directory.services', [])
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
-            login: function (_user) {
-                alert(_user.username + " " + _user.password);
+            login: function (user) {
+                postUrl('authenticate', user, loginCallBack);
             },
             createUser: function (user) {
                 user.CreationTime = new Date();
@@ -45,5 +45,4 @@ angular.module('directory.services', [])
                 postUrl('PutUser', user, updateUserCallBack);
             }
         }
-
     });

@@ -58,12 +58,11 @@ var handleError = function (response) {
         !angular.isObject(response.data) ||
         !response.data.message
         ) {
-        console.log($q.reject("An unknown error occurred."));
-        return ($q.reject("An unknown error occurred."));
+        console.log(("An unknown error occurred."));
+     
     }
     // Otherwise, use expected error message.
-    console.log($q.reject(response.data.message));
-    return ($q.reject(response.data.message));
+    console.log(response.data.message);
 }
 
 var deleteUser = function (_User) { }
@@ -75,4 +74,8 @@ function createUserCallBack(response) {
 function updateUserCallBack(response) {
     __User = response.data;
     console.log(__User);
+}
+
+function loginCallBack(response) {
+    console.log(response.data);
 }
