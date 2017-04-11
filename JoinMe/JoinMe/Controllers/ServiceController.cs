@@ -47,17 +47,13 @@ namespace JoinMe.Controllers
         }
 
         //Modification du user
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUser(int id, User user)
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PutUser(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != user.Id)
-            {
-                return BadRequest();
             }
 
             db.Entry(user).State = EntityState.Modified;
@@ -68,7 +64,7 @@ namespace JoinMe.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(user.Id))
                 {
                     return NotFound();
                 }
@@ -78,7 +74,7 @@ namespace JoinMe.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return user;
         }
 
         [ResponseType(typeof(User))]
