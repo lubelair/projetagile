@@ -32,6 +32,7 @@ angular.module('directory.controllers', [])
         $scope.connect = function (_user) {
             console.log(_user);
             AppService.login(_user);
+            $state.go('accueil');
         }
         $scope.inscription = function () {
             //change state to inscription state
