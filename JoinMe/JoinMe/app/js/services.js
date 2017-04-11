@@ -42,7 +42,6 @@ angular.module('directory.services', [])
                 user.Id = 1;
                 user.UserName = "Loustic";
 
-                postUrl('PutUser', user, updateUserCallBack);
             }
         }
 
