@@ -45,7 +45,7 @@ angular.module('directory.controllers', [])
 
     .controller('SettingsCtrl', function ($scope, $state, AppService) {
         $scope.regex = '[0-9]{10}';
-        $scope.user = AppService.getUser;
+        $scope.user = AppService.getUser();
 
         $scope.saveSettings = function (user, myForm) {
             console.log(myForm.$valid);
