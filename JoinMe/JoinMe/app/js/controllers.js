@@ -44,7 +44,7 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('SettingsCtrl', function ($scope, $state, AppService) {
+    .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
 
@@ -54,6 +54,10 @@ angular.module('directory.controllers', [])
         }
         $scope.deleteAccount = function (user) {
             console.log("suppression du compte");
+        }
+
+        $scope.selectPhoto = function (user) {
+            AppService.selectPhoto();
         }
     })
 

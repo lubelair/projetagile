@@ -10,7 +10,8 @@ var __User = {
     ModificationTime: "",
     Password: "azerty",
     PhoneNumber: 612345789,
-    UserName: "sarah36"
+    UserName: "sarah36",
+    Photo:""
 }
 
 // ###########################  Functions
@@ -37,6 +38,33 @@ function checkPhone() {
     document.getElementById("validPhone").style.display = 'none';
     document.getElementById("falsePhone").style.display = 'block';
     return false;
+}
+
+function showActionSheet() {
+    var showActionSheet = $ionicActionSheet.show({
+        buttons: [
+           { text: 'Modifier la photo' }
+        ],
+
+        destructiveText: 'Supprimer la photo',
+        cancelText: 'Fermer',
+
+        cancel: function () {
+        },
+
+        buttonClicked: function (index) {
+            if (index === 0) {
+                // Modification de la photo
+                var edit_save = document.getElementById("photoUser");
+                edit_save.src = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQfbzUlHzE133HxXyjo2zHB86i33k1F4tpbu18QSR8fNS_Kc-y4";
+                cancel;
+            }
+        },
+
+        destructiveButtonClicked: function () {
+            // Suppression de la photo
+        }
+    });
 }
 
 // ###########################  CallBack functions
