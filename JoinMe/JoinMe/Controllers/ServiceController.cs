@@ -81,17 +81,12 @@ namespace JoinMe.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        private Object Authenticate(User user)
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        private async Task<User> Authenticate(User user)
         {
-            if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                               e.Password.Equals(user.Password)) > 0)
-            {
-                return db.Users.Single(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                                e.Password.Equals(user.Password));
-                //Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                /// e.Password.Equals(user.Password)).Single();
-            }
-            return null;
+            return await db.Users.Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                                e.Password.Equals(user.Password)).SingleAsync();
         }
 
         private bool UserExists(int id)
