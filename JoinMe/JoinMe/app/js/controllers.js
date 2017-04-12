@@ -1,24 +1,19 @@
 angular.module('directory.controllers', [])
 
 //AppService => name of service in service.js
-    .controller('SubscribeCtrl', function ($scope, $state,$ionicPopup, AppService) {
+    .controller('SubscribeCtrl', function ($scope, $state, AppService) {
         // call createUser method of appService
         //   AppService.createUser(user);
         // Vérifier validité du password
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
-
-
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             } else {
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: 'form not valid'
-                });
+                showAlert('Attention !', 'Un des champs saisi est inccorect.');
             }
-          
+
             //  $state.go('accueil')
         }
         //---------------------checkpwd-----------------------------------------------//
@@ -36,20 +31,50 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('AuthentificationCtrl', function ($scope, $state, AppService) {
+    .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
         $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
         $scope.connect = function (user) {
-            console.log(user);
-            AppService.login(user);
-            // $state.go('accueil');
+            if (authentification.$valid) {
+                console.log(user);
+                AppService.login(user);
+                // $state.go('accueil');
+            }
+            else {
+                showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
+            }
         }
         $scope.inscription = function () {
             //change state to inscription state
             $state.go('inscription');
             // AppService.getUsers();
         }
+
         $scope.forgetPassword = function () {
-            //$state.go('forgetPassword');
+                $scope.data = {};
+                $ionicPopup.show({
+                template: '<input type="email" ng-model="data.mail">',
+                title: '<p>Recuperation du mot de passe</p>',
+                subTitle: '<p>Quelle est votre adresse mail ?</p>',
+                scope: $scope,
+                buttons: [
+                  { text: 'Annuler' },
+                  {
+                      text: '<b>Envoyer</b>',
+                      type: 'button-positive',
+                      onTap: function (e) {
+                          if (!$scope.data.mail)
+                          {
+                              e.preventDefault();
+                          }
+                          else
+                          {
+                              return console.log($scope.data.mail);
+                              sendPwd($scope.data.mail);
+                          }
+                      }
+                  }
+                ]
+            });
         }
     })
 
@@ -93,31 +118,63 @@ angular.module('directory.controllers', [])
             });
         }
     })
+     .controller('InnerFriends', function ($scope, $state, AppService) {
+         $scope.friends = [
+             { nom: 'Zayd', prenom: 'BEN GARA' },
+             { nom: 'Lucas', prenom: 'BELAIR' },
+             { nom: 'Sarah', prenom: 'ANTIGNY' },
+             { nom: 'Amine', prenom: 'ALILOU' },
+             { nom: 'Ismail', prenom: 'BAIH' },
+             { nom: 'Joel', prenom: 'AKON' }
+         ];
+     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
-    /*    $ionicSlideBoxDelegate.enableSlide(false);
+    .controller('UserSpaceCtrl', function ($scope, $state) {
 
-        $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
-        $scope.myActiveSlide = 2;
+        $scope.options = {
+            loop: false,
+            effect: 'slide',
+            speed: 500,
+            pagination: false,
+            initialSlide: 1
+
+        }
+
+
         $scope.onSlideChanged = function (index) {
-        }*/
+        }
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            console.log('Slide init');
+            $scope.slider = data.slider;
+        });
+
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        });
+
+
+        /*    $ionicSlideBoxDelegate.enableSlide(false);
+    
+            $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
+            $scope.myActiveSlide = 2;
+            $scope.onSlideChanged = function (index) {
+            }*/
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
+        $scope.Title = "Accueil"
     })
-	
-	
-	    .controller('InnerFriends', function ($scope, $state, AppService) {
-        $scope.friends = [
-            { nom: 'Zayd', prenom: 'BEN GARA' },
-            { nom: 'Lucas', prenom: 'BELAIR' },
-            { nom: 'Sarah', prenom: 'ANTIGNY' },
-            { nom: 'Amine', prenom: 'ALILOU' },
-            { nom: 'Ismail', prenom: 'BAIH' },
-            { nom: 'Joel', prenom: 'AKON' }
-        ];
-    })
-	
+     .controller('EventsCtrl', function ($scope, $state, AppService) {
+         $scope.Title = "Events"
+     })
+
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
      var vm = this;
@@ -132,4 +189,3 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-;

@@ -11,7 +11,7 @@ var __User = {
     Password: "azerty",
     PhoneNumber: 612345789,
     UserName: "sarah36",
-    Photo:""
+    Photo: ""
 }
 
 var _State;
@@ -70,7 +70,7 @@ function showActionSheet($ionicActionSheet) {
     });
 }
 
-// Get state 
+// Get state
 function getState() {
     return _State;
 }
@@ -106,7 +106,6 @@ var handleError = function (response) {
         !response.data.message
         ) {
         console.log(("An unknown error occurred."));
-     
     }
     // Otherwise, use expected error message.
     console.log(response.data.message);
@@ -129,4 +128,11 @@ function loginCallBack(response) {
         template: 'form not valid'
     });
     console.log(response.data);
+}
+
+function showAlert(titre, message) {
+    getIonicPopup().alert({
+        title: titre,
+        template: message
+    });
 }
