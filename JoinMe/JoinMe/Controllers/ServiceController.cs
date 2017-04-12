@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Net.Mail;
 using System.Net;
 
 using System.Linq;
@@ -60,8 +61,6 @@ namespace JoinMe.Controllers
             return Ok("joinMe web api");
         }
 
-        //##################  Fonctions classe User
-
         // Ajout du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -78,6 +77,7 @@ namespace JoinMe.Controllers
             return user;
         }
 
+        //##################  Fonctions classe User
         //Modification du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -107,6 +107,15 @@ namespace JoinMe.Controllers
             }
 
             return user;
+        }
+
+        /*public Object SendPwd(string mail)
+        {
+        }*/
+
+        private bool ChkExistEmail(string email)
+        {
+            return db.Users.Count(e => e.Email == email) > 0;
         }
 
         private bool UserExists(int id)

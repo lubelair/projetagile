@@ -50,8 +50,8 @@ angular.module('directory.controllers', [])
         }
 
         $scope.forgetPassword = function () {
-                $scope.data = {};
-                $ionicPopup.show({
+            $scope.data = {};
+            $ionicPopup.show({
                 template: '<input type="email" ng-model="data.mail">',
                 title: '<p>Recuperation du mot de passe</p>',
                 subTitle: '<p>Quelle est votre adresse mail ?</p>',
@@ -62,14 +62,12 @@ angular.module('directory.controllers', [])
                       text: '<b>Envoyer</b>',
                       type: 'button-positive',
                       onTap: function (e) {
-                          if (!$scope.data.mail)
-                          {
+                          if (!$scope.data.mail) {
                               e.preventDefault();
                           }
-                          else
-                          {
+                          else {
                               return console.log($scope.data.mail);
-                              sendPwd($scope.data.mail);
+                              //AppService.sendPwd($scope.data.mail);
                           }
                       }
                   }
@@ -118,50 +116,10 @@ angular.module('directory.controllers', [])
             });
         }
     })
-     .controller('InnerFriends', function ($scope, $state, AppService) {
-         $scope.friends = [
-             { nom: 'Zayd', prenom: 'BEN GARA' },
-             { nom: 'Lucas', prenom: 'BELAIR' },
-             { nom: 'Sarah', prenom: 'ANTIGNY' },
-             { nom: 'Amine', prenom: 'ALILOU' },
-             { nom: 'Ismail', prenom: 'BAIH' },
-             { nom: 'Joel', prenom: 'AKON' }
-         ];
-     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state) {
-
-        $scope.options = {
-            loop: false,
-            effect: 'slide',
-            speed: 500,
-            pagination: false,
-            initialSlide: 1
-
-        }
-
-
-        $scope.onSlideChanged = function (index) {
-        }
-        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
-            // data.slider is the instance of Swiper
-            console.log('Slide init');
-            $scope.slider = data.slider;
-        });
-
-        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
-            console.log('Slide change is beginning');
-        });
-
-        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
-            // note: the indexes are 0-based
-            $scope.activeIndex = data.slider.activeIndex;
-            $scope.previousIndex = data.slider.previousIndex;
-        });
-
-
+    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
         /*    $ionicSlideBoxDelegate.enableSlide(false);
-    
+
             $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
             $scope.myActiveSlide = 2;
             $scope.onSlideChanged = function (index) {
@@ -169,11 +127,18 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
-        $scope.Title = "Accueil"
     })
-     .controller('EventsCtrl', function ($scope, $state, AppService) {
-         $scope.Title = "Events"
-     })
+
+	    .controller('InnerFriends', function ($scope, $state, AppService) {
+	        $scope.friends = [
+                { nom: 'Zayd', prenom: 'BEN GARA' },
+                { nom: 'Lucas', prenom: 'BELAIR' },
+                { nom: 'Sarah', prenom: 'ANTIGNY' },
+                { nom: 'Amine', prenom: 'ALILOU' },
+                { nom: 'Ismail', prenom: 'BAIH' },
+                { nom: 'Joel', prenom: 'AKON' }
+	        ];
+	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
@@ -189,3 +154,4 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
+;
