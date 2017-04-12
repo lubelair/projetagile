@@ -12,6 +12,10 @@
     /*background-color: #78FA89;*/
 }
 
+.balanced, .assertive {
+    padding-right: 5px;
+}
+
 .fake_link {
     color: #1F75CC;
     cursor: pointer;
@@ -21,6 +25,10 @@
         text-decoration: underline;
         color: #b200ff;
     }
+
+#valid,#validPhone {
+    display : none;
+}
 
 .image-thumbnail {
     position: relative;
