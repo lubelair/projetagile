@@ -48,8 +48,33 @@ angular.module('directory.controllers', [])
             $state.go('inscription');
             // AppService.getUsers();
         }
+
         $scope.forgetPassword = function () {
-            //$state.go('forgetPassword');
+                $scope.data = {};
+                $ionicPopup.show({
+                template: '<input type="email" ng-model="data.mail">',
+                title: '<p>Recuperation du mot de passe</p>',
+                subTitle: '<p>Quelle est votre adresse mail ?</p>',
+                scope: $scope,
+                buttons: [
+                  { text: 'Annuler' },
+                  {
+                      text: '<b>Envoyer</b>',
+                      type: 'button-positive',
+                      onTap: function (e) {
+                          if (!$scope.data.mail)
+                          {
+                              e.preventDefault();
+                          }
+                          else
+                          {
+                              return console.log($scope.data.mail);
+                              sendPwd($scope.data.mail);
+                          }
+                      }
+                  }
+                ]
+            });
         }
     })
 
