@@ -1,24 +1,19 @@
 angular.module('directory.controllers', [])
 
 //AppService => name of service in service.js
-    .controller('SubscribeCtrl', function ($scope, $state,$ionicPopup, AppService) {
+    .controller('SubscribeCtrl', function ($scope, $state, AppService) {
         // call createUser method of appService
         //   AppService.createUser(user);
         // Vérifier validité du password
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
-
-
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             } else {
-                $ionicPopup.alert({
-                    title: 'Error',
-                    template: 'form not valid'
-                });
+                showAlert('Attention !', 'Un des champs saisi est inccorect.');
             }
-          
+
             //  $state.go('accueil')
         }
         //---------------------checkpwd-----------------------------------------------//
@@ -36,12 +31,17 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('AuthentificationCtrl', function ($scope, $state, AppService) {
+    .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
         $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
         $scope.connect = function (user) {
-            console.log(user);
-            AppService.login(user);
-            // $state.go('accueil');
+            if (authentification.$valid) {
+                console.log(user);
+                AppService.login(user);
+                // $state.go('accueil');
+            }
+            else {
+                showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
+            }
         }
         $scope.inscription = function () {
             //change state to inscription state
@@ -95,29 +95,28 @@ angular.module('directory.controllers', [])
     })
 
     .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
-    /*    $ionicSlideBoxDelegate.enableSlide(false);
+        /*    $ionicSlideBoxDelegate.enableSlide(false);
 
-        $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
-        $scope.myActiveSlide = 2;
-        $scope.onSlideChanged = function (index) {
-        }*/
+            $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
+            $scope.myActiveSlide = 2;
+            $scope.onSlideChanged = function (index) {
+            }*/
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
     })
-	
-	
+
 	    .controller('InnerFriends', function ($scope, $state, AppService) {
-        $scope.friends = [
-            { nom: 'Zayd', prenom: 'BEN GARA' },
-            { nom: 'Lucas', prenom: 'BELAIR' },
-            { nom: 'Sarah', prenom: 'ANTIGNY' },
-            { nom: 'Amine', prenom: 'ALILOU' },
-            { nom: 'Ismail', prenom: 'BAIH' },
-            { nom: 'Joel', prenom: 'AKON' }
-        ];
-    })
-	
+	        $scope.friends = [
+                { nom: 'Zayd', prenom: 'BEN GARA' },
+                { nom: 'Lucas', prenom: 'BELAIR' },
+                { nom: 'Sarah', prenom: 'ANTIGNY' },
+                { nom: 'Amine', prenom: 'ALILOU' },
+                { nom: 'Ismail', prenom: 'BAIH' },
+                { nom: 'Joel', prenom: 'AKON' }
+	        ];
+	    })
+
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
      var vm = this;
