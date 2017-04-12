@@ -105,6 +105,19 @@ angular.module('directory.controllers', [])
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
     })
+	
+	
+	    .controller('InnerFriends', function ($scope, $state, AppService) {
+        $scope.friends = [
+            { nom: 'Zayd', prenom: 'BEN GARA' },
+            { nom: 'Lucas', prenom: 'BELAIR' },
+            { nom: 'Sarah', prenom: 'ANTIGNY' },
+            { nom: 'Amine', prenom: 'ALILOU' },
+            { nom: 'Ismail', prenom: 'BAIH' },
+            { nom: 'Joel', prenom: 'AKON' }
+        ];
+    })
+	
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
      var vm = this;
