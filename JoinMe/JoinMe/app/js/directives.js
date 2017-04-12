@@ -10,13 +10,13 @@
           }
       };
   }])
- .directive('calendarView', [function () {
+ .directive('Accueil', [function () {
      var dtr = new Date().getTime();
      return {
          restrict: 'A',
          replace: true,
          scope: true,
-         templateUrl: 'templates/Calendar.html?' + dtr,
+         templateUrl: 'templates/accueil.html?' + dtr,
          link: function (scope, element, attrs) { }
      }
  }])

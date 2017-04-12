@@ -94,6 +94,15 @@ angular.module('directory.controllers', [])
         }
     })
 
+    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
+    /*    $ionicSlideBoxDelegate.enableSlide(false);
+
+        $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
+        $scope.myActiveSlide = 2;
+        $scope.onSlideChanged = function (index) {
+        }*/
+    })
+
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
     })
  .controller('MapCtrl', function ($scope, $state, NgMap) {
