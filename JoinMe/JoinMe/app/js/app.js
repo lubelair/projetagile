@@ -68,5 +68,11 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         controller: 'RootCtrl'
     })
 
+    $stateProvider.state('InnerFriend', {
+        url: '/InnerFriend',
+        templateUrl: 'templates/InnerFriend.html',
+        controller: 'InnerFriends'
+    })
+
     $urlRouterProvider.otherwise('/root')
 })
