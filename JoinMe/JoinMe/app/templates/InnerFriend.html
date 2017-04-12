@@ -2,15 +2,15 @@
     <ion-header-bar class="bar bar-subheader item-input-inset">
         <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>
-            <input id="searchKey" type="text" placeholder="Search" ng-model="query" >
+            <input id="searchKey" type="text" placeholder="Search" ng-model="query">
         </label>
     </ion-header-bar>
-        <ion-content padding="true" class="has-subheader">
-            <ion-list id="innerFriends-list4">
-                <ion-item class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in friends | filter: query">
-                    <img src="img/9Dlls3CrTLGcBNiQq5XM_facebook-default-no-profile-pic.jpg">
-                    <h2>{{f.nom+' '+f.prenom}}</h2>
-                </ion-item>
-            </ion-list>
-        </ion-content>
+    <ion-content padding="false" class="has-subheader">
+        <ion-list id="innerFriends-list4">
+            <ion-item class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in friends | filter: query">
+                <img id="imgAvatar" src="img/9Dlls3CrTLGcBNiQq5XM_facebook-default-no-profile-pic.jpg">
+                <div class="item-text-center item-text-wrap"><h2>{{f.nom+' '+f.prenom}}</h2></div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

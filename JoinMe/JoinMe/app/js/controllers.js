@@ -127,6 +127,16 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
+
+        $scope.Title = "Accueil";
+        $scope.friends = [
+            { nom: 'Zayd', prenom: 'BEN GARA' },
+            { nom: 'Lucas', prenom: 'BELAIR' },
+            { nom: 'Sarah', prenom: 'ANTIGNY' },
+            { nom: 'Amine', prenom: 'ALILOU' },
+            { nom: 'Ismail', prenom: 'BAIH' },
+            { nom: 'Joel', prenom: 'AKOUN' }
+        ];
     })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService) {

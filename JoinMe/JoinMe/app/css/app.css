@@ -26,8 +26,8 @@
         color: #b200ff;
     }
 
-#valid,#validPhone {
-    display : none;
+#valid, #validPhone {
+    display: none;
 }
 
 .image-thumbnail {
@@ -49,3 +49,35 @@
         left: 5px;
         font-size: 25px;
     }
+
+#btn-footer {
+    margin: auto;
+}
+
+#btn {
+    margin: 0 10px;
+    min-width: 50px;
+}
+
+.item-text-center {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+#imgAvatar {
+    top: 5px;
+}
+
+#innerFriends-list-item2 {
+    min-height: 50px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
