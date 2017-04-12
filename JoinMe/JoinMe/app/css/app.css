@@ -26,6 +26,10 @@
         color: #b200ff;
     }
 
+#valid,#validPhone {
+    display : none;
+}
+
 .image-thumbnail {
     position: relative;
     float: left;

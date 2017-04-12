@@ -52,6 +52,12 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         templateUrl: 'templates/map.html',
         controller: 'MapCtrl'
     })
+	
+	$stateProvider.state('innerFriend', {
+        url: '/InnerFriend',
+        templateUrl: 'templates/InnerFriend.html',
+        controller: 'InnerFriends'
+    })
 
     $urlRouterProvider.otherwise('/authentification')
 })
