@@ -118,10 +118,50 @@ angular.module('directory.controllers', [])
             });
         }
     })
+     .controller('InnerFriends', function ($scope, $state, AppService) {
+         $scope.friends = [
+             { nom: 'Zayd', prenom: 'BEN GARA' },
+             { nom: 'Lucas', prenom: 'BELAIR' },
+             { nom: 'Sarah', prenom: 'ANTIGNY' },
+             { nom: 'Amine', prenom: 'ALILOU' },
+             { nom: 'Ismail', prenom: 'BAIH' },
+             { nom: 'Joel', prenom: 'AKON' }
+         ];
+     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
+    .controller('UserSpaceCtrl', function ($scope, $state) {
+
+        $scope.options = {
+            loop: false,
+            effect: 'slide',
+            speed: 500,
+            pagination: false,
+            initialSlide: 1
+
+        }
+
+
+        $scope.onSlideChanged = function (index) {
+        }
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            console.log('Slide init');
+            $scope.slider = data.slider;
+        });
+
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        });
+
+
         /*    $ionicSlideBoxDelegate.enableSlide(false);
-
+    
             $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
             $scope.myActiveSlide = 2;
             $scope.onSlideChanged = function (index) {
@@ -129,18 +169,11 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
+        $scope.Title = "Accueil"
     })
-
-	    .controller('InnerFriends', function ($scope, $state, AppService) {
-	        $scope.friends = [
-                { nom: 'Zayd', prenom: 'BEN GARA' },
-                { nom: 'Lucas', prenom: 'BELAIR' },
-                { nom: 'Sarah', prenom: 'ANTIGNY' },
-                { nom: 'Amine', prenom: 'ALILOU' },
-                { nom: 'Ismail', prenom: 'BAIH' },
-                { nom: 'Joel', prenom: 'AKON' }
-	        ];
-	    })
+     .controller('EventsCtrl', function ($scope, $state, AppService) {
+         $scope.Title = "Events"
+     })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
@@ -156,4 +189,3 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-;
