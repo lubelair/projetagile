@@ -94,7 +94,37 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
+    .controller('UserSpaceCtrl', function ($scope, $state) {
+
+        $scope.options = {
+            loop: false,
+            effect: 'slide',
+            speed: 500,
+            pagination: false,
+            initialSlide:1
+
+        }
+
+       
+        $scope.onSlideChanged = function (index) {
+        }
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            console.log('Slide init');
+            $scope.slider = data.slider;
+        });
+
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        });
+
+
     /*    $ionicSlideBoxDelegate.enableSlide(false);
 
         $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
@@ -104,7 +134,12 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
+        $scope.Title = "Accueil"
     })
+     .controller('EventsCtrl', function ($scope, $state, AppService) {
+         $scope.Title = "Events"
+     })
+      
  .controller('MapCtrl', function ($scope, $state, NgMap) {
      $scope.message = 'You can not hide. :)';
      var vm = this;
