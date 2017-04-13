@@ -30,6 +30,9 @@ angular.module('directory.services', [])
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
+            getFriends: function (id) {
+                postUrl('GetFriends', "Users.id", GetFriendsCallBack);
+            },
             login: function (user) {
                 postUrl('authenticate', user, loginCallBack);
             },

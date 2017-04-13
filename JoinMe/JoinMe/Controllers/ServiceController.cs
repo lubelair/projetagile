@@ -59,7 +59,34 @@ namespace JoinMe.Controllers
         {
             return Ok("joinMe web api");
         }
-
+        //##################  Fonctions classe Friends
+        // Récupere friends
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        
+        public async Task<Object> GetFriends(Friends friends)
+        {
+            try
+            {
+                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
+                return (from a in db.Friends
+                        join b in db.Users on a.FriendId equals b.Id
+                        where a.UserId == 1 && a.IsApproved
+                        select new
+                        {
+                            b.FirstName,
+                            b.LastName
+                        }).ToListAsync();
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
         //##################  Fonctions classe User
 
         // Ajout du user

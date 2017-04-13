@@ -170,6 +170,9 @@ angular.module('directory.controllers', [])
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
         $scope.Title = "Accueil"
+        $scope.getFriends = function (id) {
+            AppService.getFriends(id);
+        }
     })
      .controller('EventsCtrl', function ($scope, $state, AppService) {
          $scope.Title = "Events"

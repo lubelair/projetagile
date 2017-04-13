@@ -93,6 +93,9 @@ var indexCallBack = function (data) {
 function GetUsersCallBack(data) {
     console.log(data);
 }
+function GetFriendsCallBack(data) {
+    console.log(data);
+}
 var handleSuccess = function (response) {
     console.log(response.data);
 }
