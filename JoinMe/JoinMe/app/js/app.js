@@ -1,29 +1,22 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 'directory.directives', 'directory.controllers'])
-
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-            // Don't remove this line unless you know what you are doing. It stops the viewport
-            // from snapping when text inputs are focused. Ionic handles this internally for
-            // a much nicer keyboard experience.
-            cordova.plugins.Keyboard.disableScroll(true);
+angular.element(document).ready(function () {
+    window.ionic.Platform.ready(function () {
+        console.log("ionic is ready");
+        if (window.cordova) {
+            // alert("Running in Cordova, will bootstrap AngularJS once 'deviceready' event fires.");
+            document.addEventListener('deviceready', function () {
+                console.log("Deviceready event has fired, bootstrapping AngularJS.");
+                angular.bootstrap(document.body, ['app']);
+            }, false);
+        } else {
+            console.log("Running in browser, bootstrapping AngularJS now.");
+            angular.bootstrap(document.body, ['app']);
         }
-        if (window.StatusBar) {
-            StatusBar.styleDefault();
-        }
-    });
-})
+    })
+});
 
-.config(function ($stateProvider, $urlRouterProvider) {
+var app = angular.module('app', ['ionic', 'ngCordova', 'ngTouch', 'ngMap', 'directory.services', 'directory.directives', 'directory.controllers']);
+
+app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
         url: '/inscription',
         templateUrl: 'templates/inscription.html',
@@ -57,18 +50,18 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         templateUrl: 'templates/UserSpace.html',
         controller: 'UserSpaceCtrl'
     })
-/*    $stateProvider.state('events', {
-        url: '/events',
-        templateUrl: 'templates/events.html',
-        controller: 'EventsCtrl'
-    })
+    /*    $stateProvider.state('events', {
+            url: '/events',
+            templateUrl: 'templates/events.html',
+            controller: 'EventsCtrl'
+        })
 
-      $stateProvider.state('root', {
-        url: '/root',
-        templateUrl: 'templates/UserSpace.html',
-        controller: 'RootCtrl'
-    })
-*/
+          $stateProvider.state('root', {
+            url: '/root',
+            templateUrl: 'templates/root.html',
+            controller: 'RootCtrl'
+        })
+    */
     $stateProvider.state('InnerFriend', {
         url: '/InnerFriend',
         templateUrl: 'templates/InnerFriend.html',
