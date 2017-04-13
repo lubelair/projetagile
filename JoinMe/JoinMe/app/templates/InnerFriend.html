@@ -6,6 +6,9 @@
         </label>
     </ion-header-bar>
     <ion-content padding="false" class="has-subheader">
+        <ion-refresher on-refresh="doRefresh()">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
         <ion-list id="innerFriends-list4">
             <ion-item class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in friends | filter: query">
                 <img id="imgAvatar" src="img/9Dlls3CrTLGcBNiQq5XM_facebook-default-no-profile-pic.jpg">

@@ -86,6 +86,14 @@ function initIoniPopup($ionicPopup) {
 function getIonicPopup() {
     return _IonicPopup;
 }
+
+function showAlert(titre, message) {
+    getIonicPopup().alert({
+        title: titre,
+        template: message
+    });
+}
+
 // ###########################  CallBack functions
 var indexCallBack = function (data) {
     console.log(data);
@@ -131,11 +139,4 @@ function loginCallBack(response) {
         template: 'form not valid'
     });
     console.log(response.data);
-}
-
-function showAlert(titre, message) {
-    getIonicPopup().alert({
-        title: titre,
-        template: message
-    });
 }

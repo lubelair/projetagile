@@ -52,3 +52,13 @@
           link: function (scope, element, attrs) { }
       }
   }])
+
+  .directive('friendView', [function () {
+      return {
+          restrict: 'A',
+          replace: true,
+          scope: true,
+          templateUrl: 'templates/InnerFriend.html',
+          link: function (scope, element, attrs) { }
+      }
+  }])

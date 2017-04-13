@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Net.Mail;
 using System.Net;
 
 using System.Linq;
@@ -41,29 +42,10 @@ namespace JoinMe.Controllers
             }
         }
 
-        [ResponseType(typeof(object))]
-        [HttpGet, HttpPost]
-        public async Task<object> GetUser(User usr)
-        {
-            User user = await db.Users.FindAsync(3);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
-
-        [HttpGet, HttpPost]
-        public IHttpActionResult Index()
-        {
-            return Ok("joinMe web api");
-        }
         //##################  Fonctions classe Friends
         // Récupere friends
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        
         public async Task<Object> GetFriends(Friends friends)
         {
             try
@@ -87,8 +69,27 @@ namespace JoinMe.Controllers
                 return null;
             }
         }
-        //##################  Fonctions classe User
 
+        [ResponseType(typeof(object))]
+        [HttpGet, HttpPost]
+        public async Task<object> GetUser(User usr)
+        {
+            User user = await db.Users.FindAsync(3);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        [HttpGet, HttpPost]
+        public IHttpActionResult Index()
+        {
+            return Ok("joinMe web api");
+        }
+
+        //##################  Fonctions classe User
         // Ajout du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -105,6 +106,7 @@ namespace JoinMe.Controllers
             return user;
         }
 
+        //##################  Fonctions classe User
         //Modification du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -134,6 +136,15 @@ namespace JoinMe.Controllers
             }
 
             return user;
+        }
+
+        /*public Object SendPwd(string mail)
+        {
+        }*/
+
+        private bool ChkExistEmail(string email)
+        {
+            return db.Users.Count(e => e.Email == email) > 0;
         }
 
         private bool UserExists(int id)

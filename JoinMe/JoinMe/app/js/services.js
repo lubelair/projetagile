@@ -22,7 +22,7 @@ angular.module('directory.services', [])
 
         initState($state);
         initIoniPopup($ionicPopup);
-      
+
         return {
             getUser: function () {
                 return __User;
@@ -52,6 +52,11 @@ angular.module('directory.services', [])
             },
             selectPhoto: function () {
                 showActionSheet();
+            },
+            SendPwd: function (mail) {
+                {
+                    // Envoi par mail du MDP
+                }
             }
         }
     });
