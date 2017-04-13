@@ -134,9 +134,5 @@ function updateUserCallBack(response) {
 }
 
 function loginCallBack(response) {
-    getIonicPopup().alert({
-        title: 'Error',
-        template: 'form not valid'
-    });
     console.log(response.data);
 }

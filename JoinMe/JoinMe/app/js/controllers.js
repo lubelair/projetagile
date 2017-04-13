@@ -10,6 +10,7 @@ angular.module('directory.controllers', [])
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
+                AppService.login(user);
             } else {
                 showAlert('Attention !', 'Un des champs saisi est inccorect.');
             }
@@ -32,11 +33,11 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
-        $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
-        $scope.connect = function (user) {
+        $scope.credentials = { Email: '', Password: '' };
+        $scope.connect = function (credentials) {
             if (authentification.$valid) {
-                console.log(user);
-                AppService.login(user);
+                console.log(credentials);
+                AppService.login(credentials);
                 // $state.go('accueil');
             }
             else {

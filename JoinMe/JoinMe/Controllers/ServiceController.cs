@@ -25,9 +25,9 @@ namespace JoinMe.Controllers
 
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        public async Task<Object> Authenticate(User user)
+        public async Task<Object> Authenticate(Object credentials)
         {
-            try
+            /*try
             {
                 return await db.Users.Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
                                e.Password.Equals(user.Password)).SingleAsync();
@@ -39,7 +39,8 @@ namespace JoinMe.Controllers
             catch (InvalidOperationException)
             {
                 return null;
-            }
+            }*/
+            return null;
         }
 
         //##################  Fonctions classe Friends
