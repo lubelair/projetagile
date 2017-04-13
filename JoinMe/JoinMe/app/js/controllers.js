@@ -127,27 +127,22 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, AppService) {
-
-        $scope.Title = "Accueil";
-        $scope.friends = [
-            { nom: 'Zayd', prenom: 'BEN GARA' },
-            { nom: 'Lucas', prenom: 'BELAIR' },
-            { nom: 'Sarah', prenom: 'ANTIGNY' },
-            { nom: 'Amine', prenom: 'ALILOU' },
-            { nom: 'Ismail', prenom: 'BAIH' },
-            { nom: 'Joel', prenom: 'AKOUN' }
-        ];
+        $scope.Title = "Accueil"
     })
 
-	    .controller('InnerFriends', function ($scope, $state, AppService) {
+	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.friends = [
-                { nom: 'Zayd', prenom: 'BEN GARA' },
-                { nom: 'Lucas', prenom: 'BELAIR' },
-                { nom: 'Sarah', prenom: 'ANTIGNY' },
-                { nom: 'Amine', prenom: 'ALILOU' },
-                { nom: 'Ismail', prenom: 'BAIH' },
-                { nom: 'Joel', prenom: 'AKON' }
+
 	        ];
+
+	        $scope.doRefresh = function () {
+	            console.log('Refreshing!');
+	            AppService.getFriends(1);
+	            $timeout(function () {
+	                //Stop the ion-refresher from spinning
+	                $scope.$broadcast('scroll.refreshComplete');
+	            }, 1000);
+	        };
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {

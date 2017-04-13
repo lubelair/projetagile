@@ -62,12 +62,13 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
         templateUrl: 'templates/events.html',
         controller: 'EventsCtrl'
     })
-    /*    $stateProvider.state('root', {
-            url: '/root',
-            templateUrl: 'templates/UserSpace.html',
-            controller: 'RootCtrl'
-        })
-    */
+
+    $stateProvider.state('root', {
+        url: '/root',
+        templateUrl: 'templates/UserSpace.html',
+        //  controller: 'RootCtrl'
+    })
+
     $stateProvider.state('InnerFriend', {
         url: '/InnerFriend',
         templateUrl: 'templates/InnerFriend.html',
