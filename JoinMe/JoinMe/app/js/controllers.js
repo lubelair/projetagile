@@ -149,8 +149,33 @@ angular.module('directory.controllers', [])
         });
     })
 
-    .controller('AccueilCtrl', function ($scope, $state, AppService, NgMap) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
         $scope.Title = "JoinMe";
+        $scope.Initposition = [40.74, -74.18];
+        var posOptions = {
+            enableHighAccuracy: true,
+            timeout: 50000,
+            maximumAge: 0
+        };
+
+        $scope.getCurrentLocation = function () {
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var myLatlng = new google.maps.LatLng(lat, long);
+                $scope.myMap.setCenter(myLatlng);
+                $scope.myPosition = myLatlng;
+            }, function (err) {
+                $ionicLoading.hide();
+                alert("pleaz activate your GPS");
+            });
+            $scope.$apply();
+        }
+        $scope.mycallback = function (map) {
+            $scope.myMap = map;
+            $scope.$apply();
+            $scope.getCurrentLocation();
+        }
     })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
