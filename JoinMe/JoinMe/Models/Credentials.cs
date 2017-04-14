@@ -10,10 +10,8 @@ namespace JoinMeServices.Models
     {
         #region Public Properties
 
-        [Required]
         public string Email { get; set; }
 
-        [Required]
         public string Password { get; set; }
 
         #endregion Public Properties
