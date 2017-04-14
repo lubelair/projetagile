@@ -1,11 +1,11 @@
 <ion-view hide-nav-bar="true">
     <ion-content  scroll="false">
-        <ion-slides options="options" slider="data.slider"  id="slidBox" >
+        <ion-slides options="options" show-pager="false" slider="data.slider"  id="slidBox" >
             <ion-slide-page>
-                <div class="box blue"><h1>BLUE</h1></div>
+                <div friends-view data-ng-controller="FriendsCtrl"></div>
             </ion-slide-page>
-            <ion-slide-page   >
-                <div  accueil-view data-ng-controller="AccueilCtrl"></div>
+            <ion-slide-page>
+                <div accueil-view data-ng-controller="AccueilCtrl"></div>
             </ion-slide-page>
             <ion-slide-page>
                 <div events-view data-ng-controller="EventsCtrl"></div>

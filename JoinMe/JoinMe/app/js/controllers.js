@@ -153,15 +153,57 @@ angular.module('directory.controllers', [])
         });
     })
 
-    .controller('AccueilCtrl', function ($scope, $state, AppService, NgMap) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
         $scope.Title = "JoinMe";
+        $scope.Initposition = [40.74, -74.18];
+        var posOptions = {
+            enableHighAccuracy: true,
+            timeout: 50000,
+            maximumAge: 0
+        };
+
+        $scope.getCurrentLocation = function () {
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var myLatlng = new google.maps.LatLng(lat, long);
+                $scope.myMap.setCenter(myLatlng);
+                $scope.myPosition = myLatlng;
+            }, function (err) {
+                $ionicLoading.hide();
+                alert("pleaz activate your GPS");
+            });
+            $scope.$apply();
+        }
+        $scope.mycallback = function (map) {
+            $scope.myMap = map;
+            $scope.$apply();
+            $scope.getCurrentLocation();
+        }
     })
 
+ .controller('EventsCtrl', function ($scope, $state, AppService) {
+     $scope.Title = "Evenements"
+ })
+ .controller('FriendsCtrl', function ($scope, $state, AppService) {
+     $scope.Title = "Amis";
+    // $scope.patern = '';
+     $scope.search = function () {
+       //  console.log(val);
+         console.log(patern);
+       //  $scope.query = val;
+         $scope.$apply();
+     };
+     $scope.friends = [
+                { nom: 'tata 1 ', prenom: 'toto 1' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+     ];
+ })
+
+
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
-	        $scope.friends = [
-
-	        ];
-
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);

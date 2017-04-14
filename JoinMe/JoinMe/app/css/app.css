@@ -81,3 +81,27 @@
     padding-top: 4px;
     padding-bottom: 4px;
 }
+
+#search{
+    top: 50px;
+}
+
+#ctn{
+    top: 50px;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+}
+
+.swiper-pagination-bullet{
+   background:white!important;
+   border-radius: 100%;
+   height: 17px;   
+   width: 17px;
+   display: none;
+}
+
+.scroll {
+    height: 100%;
+}

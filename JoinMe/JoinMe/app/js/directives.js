@@ -43,6 +43,18 @@
     }
 }])
 
+    .directive('friendsView', [function () {
+        var dtr = new Date().getTime();
+        return {
+            restrict: 'A',
+            replace: true,
+            scope: true,
+            templateUrl: 'templates/Friends.html?' + dtr,
+            link: function (scope, element, attrs) { }
+        }
+    }])
+
+
   .directive('footerView', [function () {
       return {
           restrict: 'A',
@@ -53,7 +65,18 @@
       }
   }])
 
-  .directive('friendView', [function () {
+    .directive('rechercheView', [function () {
+        return {
+            restrict: 'A',
+            replace: true,
+            //scope: {query:'=ngModel'},
+            scope: true,
+            templateUrl: 'templates/recherchebarre.html',
+            link: function (scope, element, attrs) { }
+        }
+    }])
+
+  .directive('innerView', [function () {
       return {
           restrict: 'A',
           replace: true,

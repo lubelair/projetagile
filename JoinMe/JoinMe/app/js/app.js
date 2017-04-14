@@ -14,7 +14,7 @@ angular.element(document).ready(function () {
     })
 });
 
-var app = angular.module('app', ['ionic', 'ngTouch', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
+var app = angular.module('app', ['ionic', 'ngTouch', 'ngCordova', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
@@ -54,6 +54,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: '/events',
         templateUrl: 'templates/events.html',
         controller: 'EventsCtrl'
+    })
+
+    $stateProvider.state('friends', {
+        url: '/friends',
+        templateUrl: 'templates/Friends.html',
+        controller: 'friendsCtrl'
     })
 
     $stateProvider.state('root', {
