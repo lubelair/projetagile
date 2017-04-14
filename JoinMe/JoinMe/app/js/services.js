@@ -1,6 +1,6 @@
 angular.module('directory.services', [])
 
-    .factory('AppService', function ($q, $http, $ionicPopup, $state) {
+    .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state) {
         /* var postUrl = function (action, params, functionCallBack) {
              var url = "/JoinMeServices/app/";
 
@@ -22,6 +22,7 @@ angular.module('directory.services', [])
 
         initState($state);
         initIoniPopup($ionicPopup);
+        initCookies($cookieStore);
 
         return {
             getUser: function () {
@@ -41,7 +42,6 @@ angular.module('directory.services', [])
                 user.CreationTime = new Date();
                 user.ModificationTime = user.CreationTime;
                 postUrl('PostUser', user, createUserCallBack);
-                console.log("createUser = " + user);
             },
             saveSettings: function (user) {
                 user.ModificationTime = new Date();

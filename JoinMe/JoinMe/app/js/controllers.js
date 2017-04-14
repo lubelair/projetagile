@@ -1,22 +1,26 @@
 angular.module('directory.controllers', [])
 
 //AppService => name of service in service.js
-      .controller('RootCtrl', function ($scope, $state) {
-          $state.go('userSpace');
+      .controller('RootCtrl', function ($scope, $state, $cookieStore) {
+          if ($cookieStore.get('user') != null) {
+              $state.go('userSpace');
+          }
+          else {
+              $state.go('authentification');
+          }
       })
-    .controller('SubscribeCtrl', function ($scope, $state, AppService) {
-        // call createUser method of appService
-        //   AppService.createUser(user);
-        // Vérifier validité du password
+    .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
-            } else {
+            }
+            else
+            {
                 showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
-
             //  $state.go('accueil')
         }
         //---------------------checkpwd-----------------------------------------------//

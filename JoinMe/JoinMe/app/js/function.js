@@ -16,6 +16,8 @@ var __User = {
 
 var _State;
 var _IonicPopup;
+var _Cookies;
+
 
 // ###########################  Functions
 
@@ -86,6 +88,15 @@ function initIoniPopup($ionicPopup) {
 function getIonicPopup() {
     return _IonicPopup;
 }
+// init Cookies
+function initCookies($cookieStore) {
+
+    _Cookies = $cookieStore;
+}
+// get Cookies
+function getCookieStore() {
+    return _Cookies;
+}
 
 function showAlert(titre, message) {
     getIonicPopup().alert({
@@ -108,27 +119,23 @@ var handleSuccess = function (response) {
     console.log(response.data);
 }
 var handleError = function (response) {
-    // The API response from the server should be returned in a
-    // nomralized format. However, if the request was not handled by the
-    // server (or what not handles properly - ex. server error), then we
-    // may have to normalize it on our end, as best we can.
     if (
         !angular.isObject(response.data) ||
         !response.data.message
         ) {
         console.log(("An unknown error occurred."));
     }
-    // Otherwise, use expected error message.
     console.log(response.data.message);
 }
 
 var deleteUser = function (_User) { }
 
 function createUserCallBack(response) {
-    console.log(response.data);
     if (response.data === null) {
         showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
     } else {
+        saveCookies('user', response.data);
+        console.log(getCookie('user'));
         getState().go("userSpace");
     }
 }
@@ -145,4 +152,14 @@ function loginCallBack(response) {
     } else {
         getState().go("userSpace");
     }
+}
+
+// ###########################  Cookies functions
+
+function saveCookies(key, value) {
+    getCookieStore().put(key, value);
+}
+
+function getCookie(key) {
+    return getCookieStore().get(key);
 }
