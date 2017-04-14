@@ -126,6 +126,11 @@ var deleteUser = function (_User) { }
 
 function createUserCallBack(response) {
     console.log(response.data);
+    if (response.data === null) {
+        showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
+    } else {
+        getState().go("userSpace");
+    }
 }
 
 function updateUserCallBack(response) {
@@ -135,24 +140,9 @@ function updateUserCallBack(response) {
 
 function loginCallBack(response) {
     console.log(response.data);
-}
-
-
-function initMap(id) {
-    var map = null;
-    alert("init map");
-
-    var mapOptions = {
-        center: new google.maps.LatLng("40.74", "-74.18"),
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    if (document.getElementById(id) != null) {
-        alert('map');
-        map = new google.maps.Map(document.getElementById(id), mapOptions);
+    if (response.data === null) {
+        showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
-        alert(" undefined");
+        getState().go("userSpace");
     }
-
-    return map;
 }

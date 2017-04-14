@@ -13,9 +13,8 @@ angular.module('directory.controllers', [])
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
-                AppService.login(user);
             } else {
-                showAlert('Attention !', 'Un des champs saisi est inccorect.');
+                showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
 
             //  $state.go('accueil')
@@ -37,16 +36,17 @@ angular.module('directory.controllers', [])
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
         $scope.credentials = { Email: '', Password: '' };
-        $scope.connect = function (credentials) {
-            if (authentification.$valid) {
-                console.log(credentials);
+
+        $scope.connect = function (credentials, authentificationForm) {
+            if (authentificationForm.$valid) {
                 AppService.login(credentials);
-                // $state.go('accueil');
             }
+
             else {
-                showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
+                showAlert('Attention !', 'Un des champs n\'a pas ou est mal saisi.');
             }
         }
+
         $scope.inscription = function () {
             //change state to inscription state
             $state.go('inscription');
@@ -134,7 +134,6 @@ angular.module('directory.controllers', [])
         }
         $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
             // data.slider is the instance of Swiper
-            //   $scope.map = initMap("map");
             console.log('Slide init');
             $scope.slider = data.slider;
         });
@@ -150,34 +149,8 @@ angular.module('directory.controllers', [])
         });
     })
 
-    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform, NgMap) {
+    .controller('AccueilCtrl', function ($scope, $state, AppService, NgMap) {
         $scope.Title = "JoinMe";
-        $scope.Initposition = [40.74, -74.18];
-        var posOptions = {
-            enableHighAccuracy: true,
-            timeout: 50000,
-            maximumAge: 0
-        };
-
-        $scope.getCurrentLocation = function () {
-            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-          
-                var lat = position.coords.latitude;
-                var long = position.coords.longitude;
-                var myLatlng = new google.maps.LatLng(lat, long);
-                $scope.myMap.setCenter(myLatlng);
-               $scope.myPosition = myLatlng;
-            }, function (err) {
-                $ionicLoading.hide();
-                alert("pleaz activate your GPS");
-            });
-            $scope.$apply();
-        }
-        $scope.mycallback = function (map) {
-            $scope.myMap = map;
-            $scope.$apply();
-             $scope.getCurrentLocation();
-        }
     })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
