@@ -40,7 +40,7 @@ namespace JoinMe.Controllers
             {
                 return null;
             }*/
-            return null;
+            return "Passage dans la fonction d'authentification";
         }
 
         //##################  Fonctions classe Friends

@@ -48,20 +48,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('userSpace', {
         url: '/userSpace',
         templateUrl: 'templates/UserSpace.html',
-       controller: 'UserSpaceCtrl'
+        controller: 'UserSpaceCtrl'
     })
-    $stateProvider.state('events', {
-        url: '/events',
-        templateUrl: 'templates/events.html',
-       controller: 'EventsCtrl'
-    })
+    /*    $stateProvider.state('events', {
+            url: '/events',
+            templateUrl: 'templates/events.html',
+            controller: 'EventsCtrl'
+        })
 
-    $stateProvider.state('root', {
-        url: '/root',
-        templateUrl: 'templates/root.html',
-        controller: 'RootCtrl'
-    })
-
+          $stateProvider.state('root', {
+            url: '/root',
+            templateUrl: 'templates/root.html',
+            controller: 'RootCtrl'
+        })
+    */
     $stateProvider.state('InnerFriend', {
         url: '/InnerFriend',
         templateUrl: 'templates/InnerFriend.html',
