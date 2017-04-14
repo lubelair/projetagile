@@ -14,7 +14,7 @@ angular.element(document).ready(function () {
     })
 });
 
-var app = angular.module('app', ['ionic', 'ngCordova', 'ngTouch', 'ngMap', 'directory.services', 'directory.directives', 'directory.controllers']);
+var app = angular.module('app', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 'directory.directives', 'directory.controllers']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
