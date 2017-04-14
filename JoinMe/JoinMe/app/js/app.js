@@ -14,7 +14,7 @@ angular.element(document).ready(function () {
     })
 });
 
-var app = angular.module('app', ['ionic', 'ngCordova', 'ngTouch', 'ngMap', 'directory.services', 'directory.directives', 'directory.controllers']);
+var app = angular.module('app', ['ionic','ngMap', 'ngCordova', 'ngTouch', 'directory.services', 'directory.directives', 'directory.controllers']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('inscription', {
@@ -48,12 +48,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('userSpace', {
         url: '/userSpace',
         templateUrl: 'templates/UserSpace.html',
-       controller: 'UserSpaceCtrl'
+        controller: 'UserSpaceCtrl'
     })
     $stateProvider.state('events', {
         url: '/events',
         templateUrl: 'templates/events.html',
-       controller: 'EventsCtrl'
+        controller: 'EventsCtrl'
     })
 
     $stateProvider.state('root', {

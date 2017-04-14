@@ -136,3 +136,23 @@ function updateUserCallBack(response) {
 function loginCallBack(response) {
     console.log(response.data);
 }
+
+
+function initMap(id) {
+    var map = null;
+    alert("init map");
+
+    var mapOptions = {
+        center: new google.maps.LatLng("40.74", "-74.18"),
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    if (document.getElementById(id) != null) {
+        alert('map');
+        map = new google.maps.Map(document.getElementById(id), mapOptions);
+    } else {
+        alert(" undefined");
+    }
+
+    return map;
+}
