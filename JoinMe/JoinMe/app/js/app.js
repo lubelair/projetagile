@@ -50,7 +50,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/UserSpace.html',
         controller: 'UserSpaceCtrl'
     })
-    /*    $stateProvider.state('events', {
+        $stateProvider.state('events', {
             url: '/events',
             templateUrl: 'templates/events.html',
             controller: 'EventsCtrl'
@@ -61,7 +61,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/root.html',
             controller: 'RootCtrl'
         })
-    */
+    
     $stateProvider.state('InnerFriend', {
         url: '/InnerFriend',
         templateUrl: 'templates/InnerFriend.html',
