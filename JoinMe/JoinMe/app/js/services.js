@@ -35,7 +35,7 @@ angular.module('directory.services', [])
             },
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);
-                console.log("loggedUser = " + user);
+                console.log("loggedUser = " + credentials);
             },
             createUser: function (user) {
                 user.CreationTime = new Date();

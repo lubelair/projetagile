@@ -37,11 +37,11 @@ angular.module('directory.controllers', [])
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
         $scope.credentials = { Email: '', Password: '' };
-        $scope.connect = function (credentials) {
-            if (authentification.$valid) {
+        $scope.connect = function (credentials, authentificationForm) {
+            if (authentificationForm.$valid) {
                 console.log(credentials);
                 AppService.login(credentials);
-                // $state.go('accueil');
+                $state.go('accueil');
             }
             else {
                 showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
