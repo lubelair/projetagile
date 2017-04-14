@@ -60,7 +60,12 @@ angular.module('directory', ['ionic', 'ngTouch', 'ngMap', 'directory.services', 
     $stateProvider.state('events', {
         url: '/events',
         templateUrl: 'templates/events.html',
-        //controller: 'EventsCtrl'
+        controller: 'EventsCtrl'
+    })
+    $stateProvider.state('friends', {
+        url: '/friends',
+        templateUrl: 'templates/Friends.html',
+        controller: 'friendsCtrl'
     })
 
     $stateProvider.state('root', {

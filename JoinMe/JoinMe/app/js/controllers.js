@@ -130,11 +130,28 @@ angular.module('directory.controllers', [])
         $scope.Title = "Accueil"
     })
 
+ .controller('EventsCtrl', function ($scope, $state, AppService) {
+     $scope.Title = "Evenements"
+ })
+ .controller('FriendsCtrl', function ($scope, $state, AppService) {
+     $scope.Title = "Amis";
+    // $scope.patern = '';
+     $scope.search = function () {
+       //  console.log(val);
+         console.log(patern);
+       //  $scope.query = val;
+         $scope.$apply();
+     };
+     $scope.friends = [
+                { nom: 'tata 1 ', prenom: 'toto 1' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+     ];
+ })
+
+
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
-	        $scope.friends = [
-
-	        ];
-
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);

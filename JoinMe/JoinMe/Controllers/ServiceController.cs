@@ -9,8 +9,6 @@ using System.Data.Entity.Infrastructure;
 using System.Net.Mail;
 using System.Net;
 
-using System.Linq;
-
 namespace JoinMe.Controllers
 {
     public class ServiceController : ApiController

@@ -1,10 +1,20 @@
-<view title="'Accueil'">
-    <nav-buttons side="left" class="has-header">
-        <button class="button button-icon icon ion-android-settings"></button>
-    </nav-buttons>
-    <nav-buttons side="right" class="has-header">
-        <button class="button button-icon icon android-menu"></button>
-    </nav-buttons>
-    <content padding="true" class="has-header">
-    </content>
-</view>
+<ion-view>
+    <div header-view></div>
+    <div class="tabs-striped tabs-top tabs-background-light tabs-color-positive tabs-icon-left bar-subheader">
+        <div class="tabs">
+            <a class="tab-item " href="#" onclick="swich">
+                <i class="icon ion-ios-person"></i>
+                Amis
+            </a>
+            <a class="tab-item" href="#" onclick="swich">
+                <i class="icon ion-ios-personadd"></i>
+                Invitations d'amis
+            </a>
+        </div>
+    </div>
+    <div id="search" recherche-view></div>
+    <ion-content id="ctn" class="has-subheader">
+        <div inner-view></div>
+    </ion-content>
+    <div footer-view></div>
+</ion-view>
