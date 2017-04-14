@@ -23,12 +23,12 @@ namespace JoinMe.Controllers
 
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        public async Task<Object> Authenticate(User user)
+        public async Task<Object> Authenticate(Credentials credentials)
         {
             try
             {
-                return await db.Users.Where(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                               e.Password.Equals(user.Password)).SingleAsync();
+                return await db.Users.Where(e => e.Email.Equals(credentials.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                                e.Password.Equals(credentials.Password)).SingleAsync();
             }
             catch (ArgumentNullException)
             {
@@ -97,11 +97,18 @@ namespace JoinMe.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-
-            return user;
+            if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
+                db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
+                db.Users.Count(e => e.PhoneNumber.Equals(user.PhoneNumber)) == 0)
+            {
+                db.Users.Add(user);
+                await db.SaveChangesAsync();
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         //##################  Fonctions classe User

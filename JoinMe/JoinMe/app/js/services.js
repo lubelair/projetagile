@@ -33,8 +33,9 @@ angular.module('directory.services', [])
             getFriends: function (id) {
                 postUrl('GetFriends', "Users.id", GetFriendsCallBack);
             },
-            login: function (user) {
-                postUrl('authenticate', user, loginCallBack);
+            login: function (credentials) {
+                postUrl('Authenticate', credentials, loginCallBack);
+                console.log("loggedUser = " + credentials);
             },
             createUser: function (user) {
                 user.CreationTime = new Date();

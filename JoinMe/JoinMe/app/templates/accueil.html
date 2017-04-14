@@ -1,12 +1,20 @@
-<view>
+<ion-view>
     <div header-view></div>
-    <content padding="true" class="has-header">
-        <h1 id="accueil-heading3" style="color:#318CE7;font-weight:400;text-align:center;">Localisation </h1>
-        <div class="spacer" style="width: 500px; height: 12px;"></div>
-    </content>
-
-    <ion-content padding="true" class="has-header">
+    <ion-content class="has-header" scroll="false">
+        <div map-lazy-load="https://maps.google.com/maps/api/js"
+             map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0FAFOja642wIfpLq0k_OeMJFtzR_tu0Q" style="height:100%;display:block">
+            <ng-map map-initialized="mycallback(map)" scrollwheel="false" center="{{Initposition}}" default-style="false" style="height:100%;width:100%;display:block"
+                    disable-default-u-i="true"
+                    disable-double-click-zoom="true"
+                    draggable="false"
+                    draggable-cursor="help"
+                    dragging-cursor="move"
+                    keyboard-shortcuts="false"
+                    zoom="14"
+                    tilt="45">
+                <marker position="{{myPosition}}" optimized="true"></marker>
+            </ng-map>
+        </div>
     </ion-content>
-
     <div footer-view></div>
-</view>
+</ion-view>

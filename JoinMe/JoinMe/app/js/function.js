@@ -126,6 +126,11 @@ var deleteUser = function (_User) { }
 
 function createUserCallBack(response) {
     console.log(response.data);
+    if (response.data === null) {
+        showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
+    } else {
+        getState().go("userSpace");
+    }
 }
 
 function updateUserCallBack(response) {
@@ -134,9 +139,10 @@ function updateUserCallBack(response) {
 }
 
 function loginCallBack(response) {
-    getIonicPopup().alert({
-        title: 'Error',
-        template: 'form not valid'
-    });
     console.log(response.data);
+    if (response.data === null) {
+        showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
+    } else {
+        getState().go("userSpace");
+    }
 }

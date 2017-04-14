@@ -1,6 +1,9 @@
 angular.module('directory.controllers', [])
 
 //AppService => name of service in service.js
+      .controller('RootCtrl', function ($scope, $state) {
+          $state.go('userSpace');
+      })
     .controller('SubscribeCtrl', function ($scope, $state, AppService) {
         // call createUser method of appService
         //   AppService.createUser(user);
@@ -11,7 +14,7 @@ angular.module('directory.controllers', [])
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             } else {
-                showAlert('Attention !', 'Un des champs saisi est inccorect.');
+                showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
 
             //  $state.go('accueil')
@@ -32,17 +35,18 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
-        $scope.user = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
-        $scope.connect = function (user) {
-            if (authentification.$valid) {
-                console.log(user);
-                AppService.login(user);
-                // $state.go('accueil');
+        $scope.credentials = { Email: '', Password: '' };
+
+        $scope.connect = function (credentials, authentificationForm) {
+            if (authentificationForm.$valid) {
+                AppService.login(credentials);
             }
+
             else {
-                showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
+                showAlert('Attention !', 'Un des champs n\'a pas ou est mal saisi.');
             }
         }
+
         $scope.inscription = function () {
             //change state to inscription state
             $state.go('inscription');
@@ -117,17 +121,61 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
-        /*    $ionicSlideBoxDelegate.enableSlide(false);
+    .controller('UserSpaceCtrl', function ($scope, $state) {
+        $scope.options = {
+            loop: false,
+            effect: 'slide',
+            speed: 500,
+            pagination: false,
+            initialSlide: 1
+        }
 
-            $scope.disableSwipe = function () { $ionicSlideBoxDelegate.enableSlide(false); };
-            $scope.myActiveSlide = 2;
-            $scope.onSlideChanged = function (index) {
-            }*/
+        $scope.onSlideChanged = function (index) {
+        }
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            console.log('Slide init');
+            $scope.slider = data.slider;
+        });
+
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        });
     })
 
-    .controller('AccueilCtrl', function ($scope, $state, AppService) {
-        $scope.Title = "Accueil"
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+        $scope.Title = "JoinMe";
+        $scope.Initposition = [40.74, -74.18];
+        var posOptions = {
+            enableHighAccuracy: true,
+            timeout: 50000,
+            maximumAge: 0
+        };
+
+        $scope.getCurrentLocation = function () {
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var myLatlng = new google.maps.LatLng(lat, long);
+                $scope.myMap.setCenter(myLatlng);
+                $scope.myPosition = myLatlng;
+            }, function (err) {
+                $ionicLoading.hide();
+                alert("pleaz activate your GPS");
+            });
+            $scope.$apply();
+        }
+        $scope.mycallback = function (map) {
+            $scope.myMap = map;
+            $scope.$apply();
+            $scope.getCurrentLocation();
+        }
     })
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
@@ -176,4 +224,5 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-;
+.controller('EventsCtrl', function ($scope, $state) {
+})

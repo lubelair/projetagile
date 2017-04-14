@@ -101,3 +101,7 @@
    width: 17px;
    display: none;
 }
+
+.scroll {
+    height: 100%;
+}
