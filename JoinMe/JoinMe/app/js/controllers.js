@@ -13,9 +13,8 @@ angular.module('directory.controllers', [])
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
-                AppService.login(user);
             } else {
-                showAlert('Attention !', 'Un des champs saisi est inccorect.');
+                showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
 
             //  $state.go('accueil')
@@ -37,16 +36,17 @@ angular.module('directory.controllers', [])
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
         $scope.credentials = { Email: '', Password: '' };
+
         $scope.connect = function (credentials, authentificationForm) {
             if (authentificationForm.$valid) {
-                console.log(credentials);
                 AppService.login(credentials);
-                $state.go('accueil');
             }
+
             else {
-                showAlert('Attention !', 'Adresse mail ou mot de passe incorrects.');
+                showAlert('Attention !', 'Un des champs n\'a pas ou est mal saisi.');
             }
         }
+
         $scope.inscription = function () {
             //change state to inscription state
             $state.go('inscription');
@@ -184,4 +184,3 @@ angular.module('directory.controllers', [])
  })
 .controller('EventsCtrl', function ($scope, $state) {
 })
-
