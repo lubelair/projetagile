@@ -10,15 +10,13 @@ angular.module('directory.controllers', [])
           }
       })
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
-
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             }
-            else
-            {
+            else {
                 showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
             //  $state.go('accueil')
@@ -154,6 +152,41 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+        var slideOptionsHM = {
+            loop: true,
+            direction: 'vertical',
+            centeredSlides: true,
+            slidesPerView: 3,
+            //  spaceBetween: 5,
+            //   autoHeight: true,
+            calculateHeight: false
+        }
+        var slideOptionsTA = {
+            direction: 'vertical',
+            centeredSlides: true,
+            slidesPerView: 3,
+            //   spaceBetween: 2,
+            //   autoHeight: true,
+            calculateHeight: false
+        }
+
+        var swiperG = new Swiper('.swiper-container.global', {
+            simulateTouch : true, allowSwipeToNext: false, allowSwipeToPrev: false,
+            centeredSlides: true,
+         //   slidesPerView: 3,
+            spaceBetween: 0,
+            //   autoHeight: true,
+            calculateHeight: false,
+            setWrapperSize: true,
+            touchEventsTarget: 'container'
+        });
+        var swiperH = new Swiper('.swiper-container.hours', slideOptionsHM);
+
+        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsHM);
+
+        var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTA);
+        var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTA);
+      
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -187,11 +220,11 @@ angular.module('directory.controllers', [])
  })
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
-    // $scope.patern = '';
+     // $scope.patern = '';
      $scope.search = function () {
-       //  console.log(val);
+         //  console.log(val);
          console.log(patern);
-       //  $scope.query = val;
+         //  $scope.query = val;
          $scope.$apply();
      };
      $scope.friends = [
@@ -201,7 +234,6 @@ angular.module('directory.controllers', [])
                 { nom: 'tata 4 ', prenom: 'toto 4' }
      ];
  })
-
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.doRefresh = function () {

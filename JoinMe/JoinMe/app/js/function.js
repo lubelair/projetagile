@@ -18,6 +18,8 @@ var _State;
 var _IonicPopup;
 var _Cookies;
 
+// default ajax url set to localhost
+var _AjaxUrl = "/JoinMeService/Service/";
 
 // ###########################  Functions
 
@@ -90,7 +92,6 @@ function getIonicPopup() {
 }
 // init Cookies
 function initCookies($cookieStore) {
-
     _Cookies = $cookieStore;
 }
 // get Cookies
@@ -162,4 +163,10 @@ function saveCookies(key, value) {
 
 function getCookie(key) {
     return getCookieStore().get(key);
+}
+/* init ajax Url*/
+function initAjax(isProd) {
+    if (isProd) {
+        _AjaxUrl = "http://lubelair-001-site1.gtempurl.com/JoinMeService/service/";
+    }
 }
