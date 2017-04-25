@@ -136,7 +136,7 @@ angular.module('directory.controllers', [])
             loop: false,
             effect: 'slide',
             speed: 500,
-            pagination: false,
+            pagination: true,
             initialSlide: 1
         }
 
@@ -157,14 +157,18 @@ angular.module('directory.controllers', [])
             $scope.activeIndex = data.slider.activeIndex;
             $scope.previousIndex = data.slider.previousIndex;
         });
+
+        $scope.goEvents = function () {
+            alert('titi');
+            $ionicSlides.slideTo(2);
+        };
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        $scope.showSettings = true
+        $scope.showSettings = true;
         $scope.Title = "JoinMe";
-
+        
         var communOptions = {
-          
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
@@ -175,11 +179,10 @@ angular.module('directory.controllers', [])
         var slideOptionsH = {
             communOptions,
             loop: true,
-          /*  onSlideChangeEnd: function (swiper) {
-                console.log("Console hours");
-                console.log(swiper);
-            }*/
-
+            /*  onSlideChangeEnd: function (swiper) {
+                  console.log("Console hours");
+                  console.log(swiper);
+              }*/
         };
         var slideOptionsM = {
             communOptions,
@@ -189,7 +192,7 @@ angular.module('directory.controllers', [])
                 console.log(swiper);
             }
         };
-        var slideOptionsTod= {
+        var slideOptionsTod = {
             communOptions,
             onSlideChangeEnd: function (swiper) {
                 console.log("Console today");
@@ -198,9 +201,9 @@ angular.module('directory.controllers', [])
         }
 
         var swiperG = new Swiper('.swiper-container.global', {
-            simulateTouch : true, allowSwipeToNext: false, allowSwipeToPrev: false,
+            simulateTouch: true, allowSwipeToNext: false, allowSwipeToPrev: false,
             centeredSlides: true,
-         //   slidesPerView: 3,
+            //   slidesPerView: 3,
             spaceBetween: 0,
             //   autoHeight: true,
             calculateHeight: false,
@@ -220,10 +223,9 @@ angular.module('directory.controllers', [])
         var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTod);
         var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTod);
 
-
-     /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
-            console.log(swiper.realIndex);
-        });*/
+        /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
+               console.log(swiper.realIndex);
+           });*/
 
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -244,7 +246,7 @@ angular.module('directory.controllers', [])
                 alert("pleaz activate your GPS");
             });
             $scope.$apply();
-        }
+        };
         $scope.mycallback = function (map) {
             $scope.myMap = map;
             $scope.$apply();
@@ -254,7 +256,7 @@ angular.module('directory.controllers', [])
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
      $scope.showSettings = true;
-     $scope.Title = "Evenements"
+     $scope.Title = "Evenements";
  })
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
