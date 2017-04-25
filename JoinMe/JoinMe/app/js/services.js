@@ -34,6 +34,9 @@ angular.module('directory.services', [])
             getFriends: function (id) {
                 postUrl('GetFriends', "Users.id", GetFriendsCallBack);
             },
+            getInvitation: function (id) {
+                postUrl('GetInvitation', "Users.id", GetInvitationCallBack);
+            },
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);
                 console.log("loggedUser = " + credentials);

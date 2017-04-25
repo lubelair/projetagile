@@ -122,6 +122,9 @@ function GetUsersCallBack(data) {
 function GetFriendsCallBack(data) {
     console.log(data);
 }
+function GetInvitationCallBack(data) {
+    console.log(data);
+}
 var handleSuccess = function (response) {
     console.log(response.data);
 }
