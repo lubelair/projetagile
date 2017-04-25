@@ -1,5 +1,10 @@
 ﻿<ion-header-bar class="bar-positive"
-                 align-title="center">
+                align-title="center">
     <h1 class="title">{{Title}}</h1>
-   
+    <div class="buttons">
+        <button class="button button-icon icon ion-android-settings right" ng-show="showSettings" ng-click="openSettings()"></button>
+    </div>
+    <div class="buttons">
+        <button class="button button-icon icon ion-ios-arrow-back left" ng-show="showBack"></button>
+    </div>
 </ion-header-bar>

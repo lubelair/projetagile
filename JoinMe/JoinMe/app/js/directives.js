@@ -6,7 +6,10 @@
             replace: true,
             scope: true,
             templateUrl: 'templates/header.html',
-            link: function (scope, element, attrs) { }
+            link: function (scope, element, attrs) {
+                scope.openSettings = function () { alert('toto'); getState().go('settings'); }
+
+            },
             }
     }])
 
