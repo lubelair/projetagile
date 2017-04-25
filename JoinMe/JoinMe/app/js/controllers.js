@@ -11,7 +11,9 @@ angular.module('directory.controllers', [])
       })
 
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+        $scope.Title = "Inscription";
         $scope.showSettings = false;
+        $scope.showBack = true;
 
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
@@ -40,7 +42,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
+        $scope.Title = "Authentification";
         $scope.showSettings = false;
+        $scope.showBack = false;
 
         $scope.credentials = { Email: '', Password: '' };
 
@@ -88,7 +92,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
+        $scope.Title = "Parametres";
         $scope.showSettings = false;
+        $scope.showBack = true ;
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
 
@@ -131,6 +137,7 @@ angular.module('directory.controllers', [])
 
     .controller('UserSpaceCtrl', function ($scope, $state) {
         $scope.showSettings = true;
+        $scope.showBack = false;
 
         $scope.options = {
             loop: false,
@@ -165,7 +172,6 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        $scope.showSettings = true;
         $scope.Title = "JoinMe";
         
         var communOptions = {
@@ -255,11 +261,19 @@ angular.module('directory.controllers', [])
     })
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
-     $scope.showSettings = true;
      $scope.Title = "Evenements";
  })
+
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
+     $scope.champs = 1;
+         $scope.friends = [
+                  { nom: 'tata 1 ', prenom: 'toto 1' },
+                  { nom: 'tata 2 ', prenom: 'toto 2' },
+                  { nom: 'tata 3 ', prenom: 'toto 3' },
+                  { nom: 'tata 4 ', prenom: 'toto 4' }
+         ];
+
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -267,16 +281,11 @@ angular.module('directory.controllers', [])
          //  $scope.query = val;
          $scope.$apply();
      };
-     $scope.friends = [
-                { nom: 'tata 1 ', prenom: 'toto 1' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
-     ];
  })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.showSettings = true;
+	        $scope.showBack = true;
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);
@@ -284,8 +293,9 @@ angular.module('directory.controllers', [])
 	            $timeout(function () {
 	                //Stop the ion-refresher from spinning
 	                $scope.$broadcast('scroll.refreshComplete');
-	            }, 1000);
+	            }, 100);
 	        };
+	    
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
@@ -302,5 +312,3 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-.controller('EventsCtrl', function ($scope, $state) {
-})

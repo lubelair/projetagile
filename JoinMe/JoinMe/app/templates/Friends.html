@@ -1,19 +1,18 @@
 <ion-view>
     <div header-view></div>
-    <div class="tabs-striped tabs-top tabs-background-light tabs-color-positive tabs-icon-left bar-subheader">
-        <div class="tabs">
-            <a class="tab-item " href="#" onclick="swich">
-                <i class="icon ion-ios-person"></i>
-                Amis
-            </a>
-            <a class="tab-item" href="#" onclick="swich">
-                <i class="icon ion-ios-personadd"></i>
-                Invitations d'amis
-            </a>
-        </div>
+    <div id="ctn1" class="has-header">
+        <ion-tabs>
+            <ion-tab title="Amis">
+                <ion-content>
+                    <div inner-view></div>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Invitations d'amis">
+                <ion-content>
+                    <div inner-view></div>
+                </ion-content>
+            </ion-tab>
+        </ion-tabs>
     </div>
-    <div id="search" recherche-view></div>
-    <ion-content id="ctn" class="has-subheader">
-        <div inner-view></div>
-    </ion-content>
 </ion-view>
