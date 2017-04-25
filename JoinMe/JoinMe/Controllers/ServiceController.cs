@@ -13,13 +13,7 @@ namespace JoinMe.Controllers
 {
     public class ServiceController : ApiController
     {
-        #region Private Fields
-
         private JoinMeServicesContext db = new JoinMeServicesContext();
-
-        #endregion Private Fields
-
-        #region Public Methods
 
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
@@ -97,17 +91,24 @@ namespace JoinMe.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
+            try
+            {
+                if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
                 db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
                 db.Users.Count(e => e.PhoneNumber.Equals(user.PhoneNumber)) == 0)
-            {
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
-                return user;
+                {
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return null;
+                throw e;
             }
         }
 
@@ -156,7 +157,5 @@ namespace JoinMe.Controllers
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
-
-        #endregion Public Methods
     }
 }

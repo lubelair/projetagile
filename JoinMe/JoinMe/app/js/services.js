@@ -17,7 +17,7 @@ angular.module('directory.services', [])
         var postUrl = function (action, params, functionCallBack) {
             angular.toJson(params);
             var parameter = JSON.stringify(params);
-            $http.post("/JoinMeService/Service/" + action, parameter).then(functionCallBack, handleError);
+            $http.post(_AjaxUrl + action, parameter).then(functionCallBack, handleError);
         }
 
         initState($state);

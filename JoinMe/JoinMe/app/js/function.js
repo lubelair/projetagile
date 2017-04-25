@@ -17,6 +17,11 @@ var __User = {
 var _State;
 var _IonicPopup;
 var _Cookies;
+// associative array for time
+var _TimeObject = {};
+
+// default ajax url set to localhost
+var _AjaxUrl = "/JoinMeService/Service/";
 
 /*** Functions ***/
 
@@ -170,4 +175,31 @@ function saveCookies(key, value) {
 
 function getCookie(key) {
     return getCookieStore().get(key);
+}
+/* init ajax Url*/
+function initAjax(isProd) {
+    if (isProd) {
+        _AjaxUrl = "http://lubelair-001-site1.gtempurl.com/JoinMeService/service/";
+    }
+}
+/*Get time now*/
+function timeNow() {
+    var now = new Date(),
+    ampm = 'am',
+    h = now.getHours(),
+    m = now.getMinutes(),
+    s = now.getSeconds();
+    if (h >= 12) {
+        if (h > 12) h -= 12;
+        ampm = 'pm';
+    }
+
+    if (m < 10) m = '0' + m;
+    if (s < 10) s = '0' + s;
+    _TimeObject["hours"] = h;
+    _TimeObject["min"] = m;
+    _TimeObject["seconds"] = s;
+    _TimeObject["ampm"] = ampm;
+    console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
+    return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
 }

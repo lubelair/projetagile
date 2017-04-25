@@ -10,15 +10,13 @@ angular.module('directory.controllers', [])
           }
       })
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
-
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
                 AppService.createUser(user);
             }
-            else
-            {
+            else {
                 showAlert('Attention !', 'Un des champs saisis est inccorect.');
             }
             //  $state.go('accueil')
@@ -154,6 +152,71 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+
+        var communOptions = {
+          
+            direction: 'vertical',
+            centeredSlides: true,
+            slidesPerView: 3,
+            //  spaceBetween: 5,
+            //   autoHeight: true,
+            calculateHeight: false
+        };
+        var slideOptionsH = {
+            communOptions,
+            loop: true,
+          /*  onSlideChangeEnd: function (swiper) {
+                console.log("Console hours");
+                console.log(swiper);
+            }*/
+
+        };
+        var slideOptionsM = {
+            communOptions,
+            loop: true,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console min");
+                console.log(swiper);
+            }
+        };
+        var slideOptionsTod= {
+            communOptions,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console today");
+                console.log(swiper);
+            }
+        }
+
+        var swiperG = new Swiper('.swiper-container.global', {
+            simulateTouch : true, allowSwipeToNext: false, allowSwipeToPrev: false,
+            centeredSlides: true,
+         //   slidesPerView: 3,
+            spaceBetween: 0,
+            //   autoHeight: true,
+            calculateHeight: false,
+            setWrapperSize: true,
+            touchEventsTarget: 'container'
+        });
+        var swiperH = new Swiper('.swiper-container.hours', {
+            slideOptionsH,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console hours");
+                console.log(swiper);
+            }
+        });
+
+        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsHM);
+
+        var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTA);
+        var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTA);
+
+
+     /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
+            console.log(swiper.realIndex);
+        });*/
+      
+       
+      
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -187,11 +250,11 @@ angular.module('directory.controllers', [])
  })
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
-    // $scope.patern = '';
+     // $scope.patern = '';
      $scope.search = function () {
-       //  console.log(val);
+         //  console.log(val);
          console.log(patern);
-       //  $scope.query = val;
+         //  $scope.query = val;
          $scope.$apply();
      };
      $scope.friends = [
@@ -201,7 +264,6 @@ angular.module('directory.controllers', [])
                 { nom: 'tata 4 ', prenom: 'toto 4' }
      ];
  })
-
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.doRefresh = function () {
