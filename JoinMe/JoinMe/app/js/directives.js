@@ -7,21 +7,21 @@
             scope: true,
             templateUrl: 'templates/header.html',
             link: function (scope, element, attrs) {
-                scope.openSettings = function () { alert('toto'); getState().go('settings'); }
-
-            },
+                scope.openSettings = function () { getState().go('settings'); }
+                scope.openLastPage = function () { window.history.back(); }
             }
+        }
     }])
 
     .directive('userSpaceView', [function () {
-      var dtr = new Date().getTime();
-      return {
-          restrict: 'A',
-          replace: true,
-          scope: true,
-          templateUrl: 'templates/UserSpace.html?' + dtr,
-          link: function (scope, element, attrs) { }
-      };
+        var dtr = new Date().getTime();
+        return {
+            restrict: 'A',
+            replace: true,
+            scope: true,
+            templateUrl: 'templates/UserSpace.html?' + dtr,
+            link: function (scope, element, attrs) { }
+        };
     }])
 
  .directive('accueilView', [function () {
@@ -56,7 +56,6 @@
             link: function (scope, element, attrs) { }
         }
     }])
-
 
   .directive('footerView', [function () {
       return {

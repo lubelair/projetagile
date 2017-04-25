@@ -11,7 +11,9 @@ angular.module('directory.controllers', [])
       })
 
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+        $scope.Title = "Inscription";
         $scope.showSettings = false;
+        $scope.showBack = true;
 
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
@@ -40,7 +42,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
+        $scope.Title = "Authentification";
         $scope.showSettings = false;
+        $scope.showBack = false;
 
         $scope.credentials = { Email: '', Password: '' };
 
@@ -88,7 +92,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
+        $scope.Title = "Parametres";
         $scope.showSettings = false;
+        $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
 
@@ -131,6 +137,7 @@ angular.module('directory.controllers', [])
 
     .controller('UserSpaceCtrl', function ($scope, $state) {
         $scope.showSettings = true;
+        $scope.showBack = false;
 
         $scope.options = {
             loop: false,
@@ -160,7 +167,6 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        $scope.showSettings = true
         $scope.Title = "JoinMe";
 
         var communOptions = {
@@ -241,7 +247,7 @@ angular.module('directory.controllers', [])
                 alert("pleaz activate your GPS");
             });
             $scope.$apply();
-        }
+        };
         $scope.mycallback = function (map) {
             $scope.myMap = map;
             $scope.$apply();
@@ -250,7 +256,6 @@ angular.module('directory.controllers', [])
     })
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
-     $scope.showSettings = true;
      $scope.Title = "Evenements"
      $scope.events = [
               { nom: 'tata 1X ' },
@@ -287,6 +292,7 @@ angular.module('directory.controllers', [])
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.showSettings = true;
+	        $scope.showBack = true;
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);
