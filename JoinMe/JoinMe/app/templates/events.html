@@ -1,19 +1,18 @@
-﻿<ion-view>
+﻿<ion-view hide-nav-bar="true">
     <div header-view></div>
-     <div class="tabs-striped tabs-top tabs-background-light tabs-color-positive tabs-icon-left">
-        <div class="tabs">
-            <a class="tab-item active" href="#">
-                <i class="icon ion-ios-download-outline"></i>
-                Evènements reçus 
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-ios-upload-outline"></i>
-                Evènements envoyés
-            </a>
-        </div>
-    </div>
+    <div id="ctn1" class="has-header">
+        <ion-tabs>
+            <ion-tab title="Evènements reçus">
+                <ion-content>
+                    <div event-view></div>
+                </ion-content>
+            </ion-tab>
 
-    <ion-content padding="true" class="has-header">
-    </ion-content>
-    <div footer-view></div>
+            <ion-tab title="Evènements envoyés">
+                <ion-content>
+                    <div event-view></div>
+                </ion-content>
+            </ion-tab>
+        </ion-tabs>
+    </div>
 </ion-view>

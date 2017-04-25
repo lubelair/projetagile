@@ -7,22 +7,21 @@
             scope: true,
             templateUrl: 'templates/header.html',
             link: function (scope, element, attrs) {
-                scope.showA = function () {
-                    alert("titi");
-                }
-            }
-            }
+				scope.openSettings = function () { getState().go('settings'); }
+                scope.openLastPage = function () { window.history.back(); }
+
+ }
     }])
 
     .directive('userSpaceView', [function () {
-      var dtr = new Date().getTime();
-      return {
-          restrict: 'A',
-          replace: true,
-          scope: true,
-          templateUrl: 'templates/UserSpace.html?' + dtr,
-          link: function (scope, element, attrs) { }
-      };
+        var dtr = new Date().getTime();
+        return {
+            restrict: 'A',
+            replace: true,
+            scope: true,
+            templateUrl: 'templates/UserSpace.html?' + dtr,
+            link: function (scope, element, attrs) { }
+        };
     }])
 
  .directive('accueilView', [function () {
@@ -58,7 +57,6 @@
         }
     }])
 
-
   .directive('footerView', [function () {
       return {
           restrict: 'A',
@@ -69,17 +67,6 @@
       }
   }])
 
-    .directive('rechercheView', [function () {
-        return {
-            restrict: 'A',
-            replace: true,
-            //scope: {query:'=ngModel'},
-            scope: true,
-            templateUrl: 'templates/recherchebarre.html',
-            link: function (scope, element, attrs) { }
-        }
-    }])
-
   .directive('innerView', [function () {
       return {
           restrict: 'A',
@@ -89,3 +76,13 @@
           link: function (scope, element, attrs) { }
       }
   }])
+
+ .directive('eventView', [function () {
+     return {
+         restrict: 'A',
+         replace: true,
+         scope: true,
+         templateUrl: 'templates/InnerEvent.html',
+         link: function (scope, element, attrs) { }
+     }
+ }])

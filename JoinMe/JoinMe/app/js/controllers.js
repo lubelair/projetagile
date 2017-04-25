@@ -9,7 +9,12 @@ angular.module('directory.controllers', [])
               $state.go('authentification');
           }
       })
+
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+        $scope.Title = "Inscription";
+        $scope.showSettings = false;
+        $scope.showBack = true;
+
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user, subscribeForm) {
@@ -37,6 +42,10 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
+        $scope.Title = "Authentification";
+        $scope.showSettings = false;
+        $scope.showBack = false;
+
         $scope.credentials = { Email: '', Password: '' };
 
         $scope.connect = function (credentials, authentificationForm) {
@@ -83,6 +92,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
+        $scope.Title = "Parametres";
+        $scope.showSettings = false;
+        $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
 
@@ -124,6 +136,9 @@ angular.module('directory.controllers', [])
     })
 
     .controller('UserSpaceCtrl', function ($scope, $state) {
+        $scope.showSettings = true;
+        $scope.showBack = false;
+
         $scope.options = {
             loop: false,
             effect: 'slide',
@@ -152,7 +167,7 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        var communOptions = {
+        $scope.Title = "JoinMe";        var communOptions = {
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
@@ -160,15 +175,22 @@ angular.module('directory.controllers', [])
             //   autoHeight: true,
             calculateHeight: false
         };
-
-        // init swiper hours options
+ // init swiper hours options
        var  slideOptionsH = angular.copy(communOptions);
        slideOptionsH.loop = true;
        slideOptionsH.initialSlide = _TimeObject["hours"]-1;
         slideOptionsH.onSlideChangeEnd=function (swiper) {
             console.log("Console hours");
             console.log(swiper);
-        }
+
+
+
+
+
+
+
+
+        }        
         // init swiper min options
         var slideOptionsM = angular.copy(communOptions);
         slideOptionsM.loop = true;
@@ -202,9 +224,9 @@ angular.module('directory.controllers', [])
         }
 
         var swiperG = new Swiper('.swiper-container.global', {
-            simulateTouch : true, allowSwipeToNext: false, allowSwipeToPrev: false,
+            simulateTouch: true, allowSwipeToNext: false, allowSwipeToPrev: false,
             centeredSlides: true,
-         //   slidesPerView: 3,
+            //   slidesPerView: 3,
             spaceBetween: 0,
             //   autoHeight: true,
             calculateHeight: false,
@@ -217,11 +239,10 @@ angular.module('directory.controllers', [])
         var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
         var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
-        swiperH.activeIndex = _TimeObject["hours"];
+ swiperH.activeIndex = _TimeObject["hours"];
         swiperM.activeIndex = _TimeObject["min"];
         
-        $scope.Title = "JoinMe";
-        $scope.Initposition = [40.74, -74.18];
+        $scope.Title = "JoinMe";        $scope.Initposition = [40.74, -74.18];
         var posOptions = {
             enableHighAccuracy: true,
             timeout: 50000,
@@ -240,7 +261,7 @@ angular.module('directory.controllers', [])
                 alert("pleaz activate your GPS");
             });
             $scope.$apply();
-        }
+        };
         $scope.mycallback = function (map) {
             $scope.myMap = map;
             $scope.$apply();
@@ -250,9 +271,12 @@ angular.module('directory.controllers', [])
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Evenements"
- })
- .controller('FriendsCtrl', function ($scope, $state, AppService) {
-     $scope.Title = "Amis";
+     $scope.events = [
+              { nom: 'tata 1X ' },
+              { nom: 'tata 2X ' },
+              { nom: 'tata 3X ' },
+              { nom: 'tata 4X ' }
+     ];
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -260,22 +284,37 @@ angular.module('directory.controllers', [])
          //  $scope.query = val;
          $scope.$apply();
      };
+ })
+
+ .controller('FriendsCtrl', function ($scope, $state, AppService) {
+     $scope.Title = "Amis";
      $scope.friends = [
-                { nom: 'tata 1 ', prenom: 'toto 1' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
+              { nom: 'tata 1 ', prenom: 'toto 1' },
+              { nom: 'tata 2 ', prenom: 'toto 2' },
+              { nom: 'tata 3 ', prenom: 'toto 3' },
+              { nom: 'tata 4 ', prenom: 'toto 4' }
      ];
+
+     // $scope.patern = '';
+     $scope.search = function () {
+         //  console.log(val);
+         console.log(patern);
+         //  $scope.query = val;
+         $scope.$apply();
+     };
  })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
+	        $scope.showSettings = true;
+	        $scope.showBack = true;
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);
+	            AppService.getInvitation(1);
 	            $timeout(function () {
 	                //Stop the ion-refresher from spinning
 	                $scope.$broadcast('scroll.refreshComplete');
-	            }, 1000);
+	            }, 100);
 	        };
 	    })
 
@@ -293,5 +332,3 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-.controller('EventsCtrl', function ($scope, $state) {
-})
