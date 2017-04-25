@@ -24,13 +24,9 @@ namespace JoinMe.Controllers
                 return await db.Users.Where(e => e.Email.Equals(credentials.Email, StringComparison.CurrentCultureIgnoreCase) &&
                                 e.Password.Equals(credentials.Password)).SingleAsync();
             }
-            catch (ArgumentNullException)
+            catch (Exception e)
             {
-                return null;
-            }
-            catch (InvalidOperationException)
-            {
-                return null;
+                throw e;
             }
         }
 
@@ -62,6 +58,34 @@ namespace JoinMe.Controllers
             }
         }
 
+        // Récupere invitation
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetInvitation(Friends friends)
+        {
+            try
+            {
+                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
+                return (from a in db.Friends
+                        join b in db.Users on a.FriendId equals b.Id
+                        where a.UserId == 1 && !a.IsApproved
+                        select new
+                        {
+                            b.FirstName,
+                            b.LastName
+                        }).ToListAsync();
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
+        //##################
         [ResponseType(typeof(object))]
         [HttpGet, HttpPost]
         public async Task<object> GetUser(User usr)

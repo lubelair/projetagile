@@ -9,7 +9,10 @@ angular.module('directory.controllers', [])
               $state.go('authentification');
           }
       })
+
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+        $scope.showSettings = false;
+
         $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
 
         $scope.createUser = function (user, subscribeForm) {
@@ -37,6 +40,8 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
+        $scope.showSettings = false;
+
         $scope.credentials = { Email: '', Password: '' };
 
         $scope.connect = function (credentials, authentificationForm) {
@@ -83,6 +88,7 @@ angular.module('directory.controllers', [])
     })
 
     .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
+        $scope.showSettings = false;
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
 
@@ -124,6 +130,8 @@ angular.module('directory.controllers', [])
     })
 
     .controller('UserSpaceCtrl', function ($scope, $state) {
+        $scope.showSettings = true;
+
         $scope.options = {
             loop: false,
             effect: 'slide',
@@ -152,6 +160,8 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+        $scope.showSettings = true
+        $scope.Title = "JoinMe";
 
         var communOptions = {
           
@@ -214,10 +224,7 @@ angular.module('directory.controllers', [])
      /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
             console.log(swiper.realIndex);
         });*/
-      
-    
-      
-        $scope.Title = "JoinMe";
+
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
             enableHighAccuracy: true,
@@ -246,6 +253,7 @@ angular.module('directory.controllers', [])
     })
 
  .controller('EventsCtrl', function ($scope, $state, AppService) {
+     $scope.showSettings = true;
      $scope.Title = "Evenements"
  })
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
@@ -268,9 +276,11 @@ angular.module('directory.controllers', [])
  })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
+	        $scope.showSettings = true;
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);
+	            AppService.getInvitation(1);
 	            $timeout(function () {
 	                //Stop the ion-refresher from spinning
 	                $scope.$broadcast('scroll.refreshComplete');
