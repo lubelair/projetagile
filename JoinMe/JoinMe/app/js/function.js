@@ -1,4 +1,4 @@
-// ###########################  Variables
+/***  Variables de test ***/
 
 var __User = {
     CreationTime: "",
@@ -18,8 +18,11 @@ var _State;
 var _IonicPopup;
 var _Cookies;
 
+/*** Functions ***/
 
-// ###########################  Functions
+//************************************************************
+// Vérification du mot de passe depuis la page d'inscription *
+//************************************************************
 
 function checkPwd() {
     if (document.getElementById("passwordValid").value != document.getElementById("password").value) {
@@ -72,28 +75,26 @@ function showActionSheet($ionicActionSheet) {
     });
 }
 
-// Get state
 function getState() {
     return _State;
 }
-//Init state
+
 function initState($state) {
     _State = $state;
 }
-// init IonicPopup
+
 function initIoniPopup($ionicPopup) {
     _IonicPopup = $ionicPopup;
 }
-// get IonicPopup
+
 function getIonicPopup() {
     return _IonicPopup;
 }
-// init Cookies
-function initCookies($cookieStore) {
 
+function initCookies($cookieStore) {
     _Cookies = $cookieStore;
 }
-// get Cookies
+
 function getCookieStore() {
     return _Cookies;
 }
@@ -105,7 +106,8 @@ function showAlert(titre, message) {
     });
 }
 
-// ###########################  CallBack functions
+/***  CallBack functions ***/
+
 var indexCallBack = function (data) {
     console.log(data);
 }
@@ -154,7 +156,13 @@ function loginCallBack(response) {
     }
 }
 
-// ###########################  Cookies functions
+/***  Cookies functions ***/
+
+//*********************************************************
+// Fonction générique de sauvegarde des cookies           *
+// La key représente l'identifiant du cookie, et la value *
+// l'élément auquel il est lié                            *
+//*********************************************************
 
 function saveCookies(key, value) {
     getCookieStore().put(key, value);
