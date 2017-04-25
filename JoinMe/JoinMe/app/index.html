@@ -77,10 +77,8 @@
     <script src="js/controllers.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function (event) {
-            window.parent.postMessage({ height: document.body.getBoundingClientRect().height }, "*");
-        });
-        initAjax(true);
+        initAjax(false);
+        timeNow();
     </script>
 </head>
 

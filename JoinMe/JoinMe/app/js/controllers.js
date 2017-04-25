@@ -152,22 +152,39 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        var slideOptionsHM = {
-            loop: true,
+
+        var communOptions = {
+          
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
             //  spaceBetween: 5,
             //   autoHeight: true,
             calculateHeight: false
-        }
-        var slideOptionsTA = {
-            direction: 'vertical',
-            centeredSlides: true,
-            slidesPerView: 3,
-            //   spaceBetween: 2,
-            //   autoHeight: true,
-            calculateHeight: false
+        };
+        var slideOptionsH = {
+            communOptions,
+            loop: true,
+          /*  onSlideChangeEnd: function (swiper) {
+                console.log("Console hours");
+                console.log(swiper);
+            }*/
+
+        };
+        var slideOptionsM = {
+            communOptions,
+            loop: true,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console min");
+                console.log(swiper);
+            }
+        };
+        var slideOptionsTod= {
+            communOptions,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console today");
+                console.log(swiper);
+            }
         }
 
         var swiperG = new Swiper('.swiper-container.global', {
@@ -180,12 +197,25 @@ angular.module('directory.controllers', [])
             setWrapperSize: true,
             touchEventsTarget: 'container'
         });
-        var swiperH = new Swiper('.swiper-container.hours', slideOptionsHM);
+        var swiperH = new Swiper('.swiper-container.hours', {
+            slideOptionsH,
+            onSlideChangeEnd: function (swiper) {
+                console.log("Console hours");
+                console.log(swiper);
+            }
+        });
 
         var swiperM = new Swiper('.swiper-container.minutes', slideOptionsHM);
 
         var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTA);
         var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTA);
+
+
+     /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
+            console.log(swiper.realIndex);
+        });*/
+      
+       
       
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
