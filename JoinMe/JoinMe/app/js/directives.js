@@ -67,17 +67,6 @@
       }
   }])
 
-    .directive('rechercheView', [function () {
-        return {
-            restrict: 'A',
-            replace: true,
-            //scope: {query:'=ngModel'},
-            scope: true,
-            templateUrl: 'templates/recherchebarre.html',
-            link: function (scope, element, attrs) { }
-        }
-    }])
-
   .directive('innerView', [function () {
       return {
           restrict: 'A',

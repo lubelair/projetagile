@@ -1,5 +1,12 @@
 ﻿<ion-view title="innerFriends" id="page2">
-    <ion-content padding="false" class="has-subheader">
+    <ion-header-bar class="bar item-input-inset has-subheader">
+        <label class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="searchKey" type="text" placeholder="Search" ng-model="query">
+        </label>
+    </ion-header-bar> 
+    <ion-content padding="false" >
+        
         <ion-refresher on-refresh="doRefresh()">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
