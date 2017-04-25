@@ -269,6 +269,7 @@ angular.module('directory.controllers', [])
 	        $scope.doRefresh = function () {
 	            console.log('Refreshing!');
 	            AppService.getFriends(1);
+	            AppService.getInvitation(1);
 	            $timeout(function () {
 	                //Stop the ion-refresher from spinning
 	                $scope.$broadcast('scroll.refreshComplete');
