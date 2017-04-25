@@ -250,6 +250,14 @@ angular.module('directory.controllers', [])
  })
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
+     $scope.champs = 1;
+         $scope.friends = [
+                  { nom: 'tata 1 ', prenom: 'toto 1' },
+                  { nom: 'tata 2 ', prenom: 'toto 2' },
+                  { nom: 'tata 3 ', prenom: 'toto 3' },
+                  { nom: 'tata 4 ', prenom: 'toto 4' }
+         ];
+
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -257,12 +265,6 @@ angular.module('directory.controllers', [])
          //  $scope.query = val;
          $scope.$apply();
      };
-     $scope.friends = [
-                { nom: 'tata 1 ', prenom: 'toto 1' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
-     ];
  })
 
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
@@ -272,8 +274,9 @@ angular.module('directory.controllers', [])
 	            $timeout(function () {
 	                //Stop the ion-refresher from spinning
 	                $scope.$broadcast('scroll.refreshComplete');
-	            }, 1000);
+	            }, 100);
 	        };
+	    
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
