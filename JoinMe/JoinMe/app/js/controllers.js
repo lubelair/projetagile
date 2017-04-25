@@ -205,17 +205,17 @@ angular.module('directory.controllers', [])
             }
         });
 
-        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsHM);
+        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsH);
 
-        var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTA);
-        var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTA);
+        var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTod);
+        var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTod);
 
 
      /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
             console.log(swiper.realIndex);
         });*/
       
-       
+    
       
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
