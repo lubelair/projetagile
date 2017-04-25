@@ -14,9 +14,23 @@ angular.element(document).ready(function () {
     })
 });
 
-var app = angular.module('app', ['ionic', 'ngTouch', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
+var app = angular.module('app', ['ionic', 'ngTouch','ngCordova', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.factory('Scopes', function ($rootScope) {
+    var mem = {};
+    return {
+        store: function (key, value) {
+            mem[key] = value;
+        },
+        get: function (key) {
+            return mem[key];
+        }
+    };
+})
+
+app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+    $ionicConfigProvider.tabs.position('top');
     $stateProvider.state('inscription', {
         url: '/inscription',
         templateUrl: 'templates/inscription.html',

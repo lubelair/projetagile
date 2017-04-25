@@ -6,7 +6,11 @@
             replace: true,
             scope: true,
             templateUrl: 'templates/header.html',
-            link: function (scope, element, attrs) { }
+            link: function (scope, element, attrs) {
+                scope.showA = function () {
+                    alert("titi");
+                }
+            }
             }
     }])
 

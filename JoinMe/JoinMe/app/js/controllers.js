@@ -152,9 +152,7 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-
         var communOptions = {
-          
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
@@ -162,29 +160,45 @@ angular.module('directory.controllers', [])
             //   autoHeight: true,
             calculateHeight: false
         };
-        var slideOptionsH = {
-            communOptions,
-            loop: true,
-          /*  onSlideChangeEnd: function (swiper) {
-                console.log("Console hours");
-                console.log(swiper);
-            }*/
 
-        };
-        var slideOptionsM = {
-            communOptions,
-            loop: true,
-            onSlideChangeEnd: function (swiper) {
-                console.log("Console min");
-                console.log(swiper);
-            }
-        };
-        var slideOptionsTod= {
-            communOptions,
-            onSlideChangeEnd: function (swiper) {
-                console.log("Console today");
-                console.log(swiper);
-            }
+        // init swiper hours options
+       var  slideOptionsH = angular.copy(communOptions);
+       slideOptionsH.loop = true;
+       slideOptionsH.initialSlide = _TimeObject["hours"]-1;
+        slideOptionsH.onSlideChangeEnd=function (swiper) {
+            console.log("Console hours");
+            console.log(swiper);
+        }
+        // init swiper min options
+        var slideOptionsM = angular.copy(communOptions);
+        slideOptionsM.loop = true;
+        var min = (((_TimeObject["min"]) % 12) - 5);
+        console.log(min);
+        slideOptionsM.initialSlide = min;
+        slideOptionsM.onSlideChangeEnd = function (swiper) {
+            console.log("Console min");
+            console.log(swiper);
+        }
+        // init swiper AmPm options
+        $scope.initialSlideAmPm = 1;
+        if (_TimeObject["ampm"] === "pm") {
+            $scope.initialSlideAmPm = 2;
+        }
+        var slideOptionsAmPm = angular.copy(communOptions);
+        slideOptionsAmPm.loop = false;
+        slideOptionsAmPm.initialSlide = $scope.initialSlideAmPm;
+        slideOptionsAmPm.onSlideChangeEnd = function (swiper) {
+            console.log("Console tod");
+            console.log(swiper);
+        }
+        slideOptionsAmPm.runCallbacksOnInit = true;
+       
+        // init swiper TodayTomorrow options
+        var swiperTodTom = angular.copy(communOptions);
+        swiperTodTom.loop = false;
+        swiperTodTom.onSlideChangeEnd = function (swiper) {
+            console.log("Console tod");
+            console.log(swiper);
         }
 
         var swiperG = new Swiper('.swiper-container.global', {
@@ -197,26 +211,15 @@ angular.module('directory.controllers', [])
             setWrapperSize: true,
             touchEventsTarget: 'container'
         });
-        var swiperH = new Swiper('.swiper-container.hours', {
-            slideOptionsH,
-            onSlideChangeEnd: function (swiper) {
-                console.log("Console hours");
-                console.log(swiper);
-            }
-        });
 
-        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsH);
+        var swiperH = new Swiper('.swiper-container.hours', slideOptionsH);
+        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsM);
+        var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
+        var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
-        var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTod);
-        var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTod);
-
-
-     /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
-            console.log(swiper.realIndex);
-        });*/
-      
-    
-      
+        swiperH.activeIndex = _TimeObject["hours"];
+        swiperM.activeIndex = _TimeObject["min"];
+        
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
