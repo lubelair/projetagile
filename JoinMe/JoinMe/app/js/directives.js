@@ -77,3 +77,13 @@
           link: function (scope, element, attrs) { }
       }
   }])
+
+ .directive('eventView', [function () {
+     return {
+         restrict: 'A',
+         replace: true,
+         scope: true,
+         templateUrl: 'templates/InnerEvent.html',
+         link: function (scope, element, attrs) { }
+     }
+ }])

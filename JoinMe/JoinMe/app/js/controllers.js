@@ -164,7 +164,6 @@ angular.module('directory.controllers', [])
         $scope.Title = "JoinMe";
 
         var communOptions = {
-          
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
@@ -175,11 +174,10 @@ angular.module('directory.controllers', [])
         var slideOptionsH = {
             communOptions,
             loop: true,
-          /*  onSlideChangeEnd: function (swiper) {
-                console.log("Console hours");
-                console.log(swiper);
-            }*/
-
+            /*  onSlideChangeEnd: function (swiper) {
+                  console.log("Console hours");
+                  console.log(swiper);
+              }*/
         };
         var slideOptionsM = {
             communOptions,
@@ -189,7 +187,7 @@ angular.module('directory.controllers', [])
                 console.log(swiper);
             }
         };
-        var slideOptionsTod= {
+        var slideOptionsTod = {
             communOptions,
             onSlideChangeEnd: function (swiper) {
                 console.log("Console today");
@@ -198,9 +196,9 @@ angular.module('directory.controllers', [])
         }
 
         var swiperG = new Swiper('.swiper-container.global', {
-            simulateTouch : true, allowSwipeToNext: false, allowSwipeToPrev: false,
+            simulateTouch: true, allowSwipeToNext: false, allowSwipeToPrev: false,
             centeredSlides: true,
-         //   slidesPerView: 3,
+            //   slidesPerView: 3,
             spaceBetween: 0,
             //   autoHeight: true,
             calculateHeight: false,
@@ -220,10 +218,9 @@ angular.module('directory.controllers', [])
         var swiperA = new Swiper('.swiper-container.AmPm', slideOptionsTod);
         var swiperT = new Swiper('.swiper-container.TodayTomorrow', slideOptionsTod);
 
-
-     /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
-            console.log(swiper.realIndex);
-        });*/
+        /*   swiperH.$on("$ionicSlides.slideChangeEnd", function (swiper) {
+               console.log(swiper.realIndex);
+           });*/
 
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -255,16 +252,29 @@ angular.module('directory.controllers', [])
  .controller('EventsCtrl', function ($scope, $state, AppService) {
      $scope.showSettings = true;
      $scope.Title = "Evenements"
+     $scope.events = [
+              { nom: 'tata 1X ' },
+              { nom: 'tata 2X ' },
+              { nom: 'tata 3X ' },
+              { nom: 'tata 4X ' }
+     ];
+     // $scope.patern = '';
+     $scope.search = function () {
+         //  console.log(val);
+         console.log(patern);
+         //  $scope.query = val;
+         $scope.$apply();
+     };
  })
+
  .controller('FriendsCtrl', function ($scope, $state, AppService) {
      $scope.Title = "Amis";
-     $scope.champs = 1;
-         $scope.friends = [
-                  { nom: 'tata 1 ', prenom: 'toto 1' },
-                  { nom: 'tata 2 ', prenom: 'toto 2' },
-                  { nom: 'tata 3 ', prenom: 'toto 3' },
-                  { nom: 'tata 4 ', prenom: 'toto 4' }
-         ];
+     $scope.friends = [
+              { nom: 'tata 1 ', prenom: 'toto 1' },
+              { nom: 'tata 2 ', prenom: 'toto 2' },
+              { nom: 'tata 3 ', prenom: 'toto 3' },
+              { nom: 'tata 4 ', prenom: 'toto 4' }
+     ];
 
      // $scope.patern = '';
      $scope.search = function () {
@@ -286,7 +296,6 @@ angular.module('directory.controllers', [])
 	                $scope.$broadcast('scroll.refreshComplete');
 	            }, 100);
 	        };
-	    
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
@@ -303,5 +312,3 @@ angular.module('directory.controllers', [])
          console.log('You are at' + vm.map.getCenter());
      };
  })
-.controller('EventsCtrl', function ($scope, $state) {
-})
