@@ -31,8 +31,14 @@ angular.module('directory.services', [])
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
-            getFriends: function (id) {
-                postUrl('GetFriends', "Users.id", GetFriendsCallBack);
+            getFriends: function () {
+                // test if friends is not empty
+                if (getScopes('FriendsCtrl').friends.length>0) {
+                    console.log("friends already exists");
+                    return;
+                }
+                // if friends is empty we call database server
+                postUrl('GetFriends', __User.id, GetFriendsCallBack);
             },
             getInvitation: function (id) {
                 postUrl('GetInvitation', "Users.id", GetInvitationCallBack);
