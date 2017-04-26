@@ -215,7 +215,16 @@ function timeNow() {
     console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
     return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
 }
+
+//init scopes
+function initScopes(scopes) {
+    _Scopes = scopes;
+}
 // get current scopes
-function getScopes() {
-    return _Scopes;
+function getScopes(key) {
+    return _Scopes[key];
+}
+
+function goToEvent() {
+    getScopes('UserSpace').slider.slideTo(0);
 }

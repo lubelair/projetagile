@@ -139,7 +139,7 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, $ionicSlideBoxDelegate,Scopes) {
+    .controller('UserSpaceCtrl', function ($scope, $state,Scopes) {
         Scopes.store('UserSpace', $scope);
       
         $scope.showSettings = true;
@@ -173,7 +173,8 @@ angular.module('directory.controllers', [])
         
         $scope.goEvents = function () {
           
-           $scope.slider.slideTo(0);
+            goToEvent();
+         //  $scope.slider.slideTo(0);
         }
         
         console.log(Scopes.get('UserSpace'));

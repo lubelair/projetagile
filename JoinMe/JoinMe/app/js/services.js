@@ -65,14 +65,16 @@ angular.module('directory.services', [])
         }
     })
 .factory('Scopes', function ($rootScope) {
-    var mem = {};
+   
+    _Scopes = {};
     return {
         store: function (key, value) {
-            mem[key] = value;
+            _Scopes[key] = value;
+        
         },
         get: function (key) {
-            return mem[key];
+            return _Scopes[key];
         }
     };
-    _Scopes = mem;
+   // _Scopes = mem;
 })
