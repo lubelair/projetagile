@@ -58,12 +58,21 @@
     }])
 
   .directive('footerView', [function () {
+      var dtr = new Date().getTime();
       return {
           restrict: 'A',
-          replace: true,
+        //  replace: true,
           scope: true,
-          templateUrl: 'templates/footer.html',
-          link: function (scope, element, attrs) { }
+          templateUrl: 'templates/footer.html?' + dtr,
+          controller: 'UserSpaceCtrl',
+          link: function (scope, element, attrs,Scopes) {
+             /* scope.goEvents = function () {
+                  alert("toto");
+                  console.log("toto");
+                 // scope.get('UserSpace').activeIndex = 0;
+              }*/
+          }
+         
       }
   }])
 

@@ -91,12 +91,16 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet) {
+    .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet, $cookieStore) {
         $scope.Title = "Parametres";
         $scope.showSettings = false;
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
         $scope.user = AppService.getUser();
+
+        if ($cookieStore.get('user') != null) {
+            console.log($cookieStore.get('user'));
+        }
 
         $scope.saveSettings = function (user, myForm) {
             console.log(myForm.$valid);
@@ -135,10 +139,9 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
+    .controller('UserSpaceCtrl', function ($scope, $state, $ionicSlideBoxDelegate,Scopes) {
         Scopes.store('UserSpace', $scope);
-        Scopes.get('UserSpace');
-        console.log(Scopes);
+      
         $scope.showSettings = true;
         $scope.showBack = false;
 
@@ -167,6 +170,13 @@ angular.module('directory.controllers', [])
             $scope.activeIndex = data.slider.activeIndex;
             $scope.previousIndex = data.slider.previousIndex;
         });
+        
+        $scope.goEvents = function () {
+          
+           $scope.slider.slideTo(0);
+        }
+        
+        console.log(Scopes.get('UserSpace'));
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {

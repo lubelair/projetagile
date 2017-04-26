@@ -74,4 +74,5 @@ angular.module('directory.services', [])
             return mem[key];
         }
     };
+    _Scopes = mem;
 })

@@ -22,6 +22,8 @@ var _TimeObject = {};
 
 // default ajax url set to localhost
 var _AjaxUrl = "/JoinMeService/Service/";
+//variable to store controllers scopes
+var _Scopes = {};
 
 /*** Functions ***/
 
@@ -160,6 +162,7 @@ function loginCallBack(response) {
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
+        saveCookies('user', response.data);
         getState().go("userSpace");
     }
 }
@@ -173,7 +176,13 @@ function loginCallBack(response) {
 //*********************************************************
 
 function saveCookies(key, value) {
-    getCookieStore().put(key, value);
+    var now = new Date(),
+    // this will set the expiration to 12 months
+    exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+    getCookieStore().put(key, value,{
+        expires: exp
+    });
 }
 
 function getCookie(key) {
@@ -205,4 +214,8 @@ function timeNow() {
     _TimeObject["ampm"] = ampm;
     console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
     return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
+}
+// get current scopes
+function getScopes() {
+    return _Scopes;
 }
