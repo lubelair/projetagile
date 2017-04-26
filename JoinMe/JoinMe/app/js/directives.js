@@ -7,10 +7,10 @@
             scope: true,
             templateUrl: 'templates/header.html',
             link: function (scope, element, attrs) {
-				scope.openSettings = function () { getState().go('settings'); }
+                scope.openSettings = function () { getState().go('settings'); }
                 scope.openLastPage = function () { window.history.back(); }
-
- }
+            }
+        }
     }])
 
     .directive('userSpaceView', [function () {

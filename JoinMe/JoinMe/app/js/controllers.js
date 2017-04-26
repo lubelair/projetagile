@@ -135,7 +135,10 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state) {
+    .controller('UserSpaceCtrl', function ($scope, $state, Scopes) {
+        Scopes.store('UserSpace', $scope);
+        Scopes.get('UserSpace');
+        console.log(Scopes);
         $scope.showSettings = true;
         $scope.showBack = false;
 
@@ -167,7 +170,7 @@ angular.module('directory.controllers', [])
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        $scope.Title = "JoinMe";        var communOptions = {
+        $scope.Title = "JoinMe"; var communOptions = {
             direction: 'vertical',
             centeredSlides: true,
             slidesPerView: 3,
@@ -175,22 +178,14 @@ angular.module('directory.controllers', [])
             //   autoHeight: true,
             calculateHeight: false
         };
- // init swiper hours options
-       var  slideOptionsH = angular.copy(communOptions);
-       slideOptionsH.loop = true;
-       slideOptionsH.initialSlide = _TimeObject["hours"]-1;
-        slideOptionsH.onSlideChangeEnd=function (swiper) {
+        // init swiper hours options
+        var slideOptionsH = angular.copy(communOptions);
+        slideOptionsH.loop = true;
+        slideOptionsH.initialSlide = _TimeObject["hours"] - 1;
+        slideOptionsH.onSlideChangeEnd = function (swiper) {
             console.log("Console hours");
             console.log(swiper);
-
-
-
-
-
-
-
-
-        }        
+        }
         // init swiper min options
         var slideOptionsM = angular.copy(communOptions);
         slideOptionsM.loop = true;
@@ -214,7 +209,7 @@ angular.module('directory.controllers', [])
             console.log(swiper);
         }
         slideOptionsAmPm.runCallbacksOnInit = true;
-       
+
         // init swiper TodayTomorrow options
         var swiperTodTom = angular.copy(communOptions);
         swiperTodTom.loop = false;
@@ -239,10 +234,10 @@ angular.module('directory.controllers', [])
         var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
         var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
- swiperH.activeIndex = _TimeObject["hours"];
+        swiperH.activeIndex = _TimeObject["hours"];
         swiperM.activeIndex = _TimeObject["min"];
-        
-        $scope.Title = "JoinMe";        $scope.Initposition = [40.74, -74.18];
+
+        $scope.Title = "JoinMe"; $scope.Initposition = [40.74, -74.18];
         var posOptions = {
             enableHighAccuracy: true,
             timeout: 50000,
