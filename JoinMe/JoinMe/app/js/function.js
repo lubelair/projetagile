@@ -2,15 +2,15 @@
 
 var __User = {
     CreationTime: "",
-    Email: "sarah@mail.fr",
-    FirstName: "Sarah",
+    Email: "",
+    FirstName: "",
     Id: -1,
     IsDeleted: false,
-    LastName: "AG",
+    LastName: "",
     ModificationTime: "",
-    Password: "azerty",
-    PhoneNumber: 612345789,
-    UserName: "sarah36",
+    Password: "",
+    PhoneNumber: 0,
+    UserName: "",
     Photo: ""
 }
 
@@ -153,8 +153,7 @@ function createUserCallBack(response) {
 }
 
 function updateUserCallBack(response) {
-    __User = response.data;
-    console.log(__User);
+    saveCookies('user', response.data);
 }
 
 function loginCallBack(response) {
@@ -180,7 +179,7 @@ function saveCookies(key, value) {
     // this will set the expiration to 12 months
     exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
 
-    getCookieStore().put(key, value,{
+    getCookieStore().put(key, value, {
         expires: exp
     });
 }

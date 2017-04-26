@@ -42,6 +42,9 @@ namespace JoinMeServices.Models
 
         public virtual ICollection<EventFriend> InvitedEvents { get; set; }
 
+        [DefaultValue("true")]
+        public bool IsActive { get; set; }
+
         [DefaultValue("false")]
         public bool IsDeleted { get; set; }
 
@@ -54,9 +57,8 @@ namespace JoinMeServices.Models
         [Required]
         public string Password { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
         [Required]
-        public decimal PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public string UserName { get; set; }

@@ -96,14 +96,13 @@ angular.module('directory.controllers', [])
         $scope.showSettings = false;
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
-        $scope.user = AppService.getUser();
+        //$scope.user = AppService.getUser();
 
         if ($cookieStore.get('user') != null) {
-            console.log($cookieStore.get('user'));
+            $scope.user = $cookieStore.get('user');
         }
 
         $scope.saveSettings = function (user, myForm) {
-            console.log(myForm.$valid);
             AppService.saveSettings(user);
         }
         $scope.deleteAccount = function (user) {
