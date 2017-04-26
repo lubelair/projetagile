@@ -15,7 +15,8 @@ angular.element(document).ready(function () {
 });
 
 var app = angular.module('app', ['ionic', 'ngTouch', 'ngCordova', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
-app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)  {
+app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('top');
     $stateProvider.state('inscription', {
         url: '/inscription',
         templateUrl: 'templates/inscription.html',
