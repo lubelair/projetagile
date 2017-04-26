@@ -39,14 +39,21 @@ namespace JoinMe.Controllers
             try
             {
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
-                return (from a in db.Friends
-                        join b in db.Users on a.FriendId equals b.Id
-                        where a.UserId == 1 && a.IsApproved
-                        select new
-                        {
-                            b.FirstName,
-                            b.LastName
-                        }).ToListAsync();
+                return await (from a in db.Friends
+                              join b in db.Users on a.FriendId equals b.Id
+                              where a.UserId == 1 && a.IsApproved
+                              select new
+                              {
+                                  b.FirstName,
+                                  b.LastName
+                              }).Union(from a in db.Friends
+                                       join b in db.Users on a.UserId equals b.Id
+                                       where a.FriendId == 1 && a.IsApproved
+                                       select new
+                                       {
+                                           b.FirstName,
+                                           b.LastName
+                                       }).ToListAsync();
             }
             catch (ArgumentNullException)
             {
@@ -67,8 +74,8 @@ namespace JoinMe.Controllers
             {
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return (from a in db.Friends
-                        join b in db.Users on a.FriendId equals b.Id
-                        where a.UserId == 1 && !a.IsApproved
+                        join b in db.Users on a.UserId equals b.Id
+                        where a.FriendId == 1 && !a.IsApproved
                         select new
                         {
                             b.FirstName,
