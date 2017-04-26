@@ -76,7 +76,7 @@
       }
   }])
 
-  .directive('innerView', [function () {
+  .directive('innerFriendsView', [function () {
       return {
           restrict: 'A',
           replace: true,
@@ -95,3 +95,80 @@
          link: function (scope, element, attrs) { }
      }
  }])
+.directive('calendarView', [function () {
+    var dtr = new Date().getTime();
+    return {
+        restrict: 'A',
+        replace: true,
+        scope: true,
+        templateUrl: 'templates/Calendar.html?' + dtr,
+        link: function ($scope, element, attrs) {
+            var communOptions = {
+                direction: 'vertical',
+                centeredSlides: true,
+                slidesPerView: 3,
+                //  spaceBetween: 5,
+                //   autoHeight: true,
+                calculateHeight: false
+            };
+            // init swiper hours options
+            var slideOptionsH = angular.copy(communOptions);
+            slideOptionsH.loop = false;
+            slideOptionsH.initialSlide = (((_TimeObject["hours"] - 1) % 12) + 12);
+            slideOptionsH.onSlideChangeEnd = function (swiper) {
+                console.log("Console hours");
+                console.log(swiper);
+            }
+            // init swiper min options
+            var slideOptionsM = angular.copy(communOptions);
+            slideOptionsM.loop = false;
+            var min = (((_TimeObject["min"]-1) % 12) + 12);
+            console.log(min);
+            slideOptionsM.initialSlide = min;
+            slideOptionsM.onSlideChangeEnd = function (swiper) {
+                console.log("Console min");
+                console.log(swiper);
+            }
+            // init swiper AmPm options
+            $scope.initialSlideAmPm = 1;
+            if (_TimeObject["ampm"] === "pm") {
+                $scope.initialSlideAmPm = 2;
+            }
+            var slideOptionsAmPm = angular.copy(communOptions);
+            slideOptionsAmPm.loop = false;
+            slideOptionsAmPm.initialSlide = $scope.initialSlideAmPm;
+            slideOptionsAmPm.onSlideChangeEnd = function (swiper) {
+                console.log("Console  ampm");
+                console.log(swiper);
+            }
+            slideOptionsAmPm.runCallbacksOnInit = true;
+
+            // init swiper TodayTomorrow options
+            var swiperTodTom = angular.copy(communOptions);
+            swiperTodTom.loop = false;
+            swiperTodTom.onSlideChangeEnd = function (swiper) {
+                console.log("Console tod");
+                console.log(swiper);
+            }
+
+            var swiperG = new Swiper('.swiper-container.global', {
+                simulateTouch: true, allowSwipeToNext: false, allowSwipeToPrev: false,
+                centeredSlides: true,
+                //   slidesPerView: 3,
+                spaceBetween: 0,
+                //   autoHeight: true,
+                calculateHeight: false,
+                setWrapperSize: true,
+                touchEventsTarget: 'container'
+            });
+
+            var swiperH = new Swiper('.swiper-container.hours', slideOptionsH);
+            var swiperM = new Swiper('.swiper-container.minutes', slideOptionsM);
+            var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
+            var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
+
+            swiperH.activeIndex = _TimeObject["hours"];
+            swiperM.activeIndex = _TimeObject["min"];
+        }
+    }
+}])

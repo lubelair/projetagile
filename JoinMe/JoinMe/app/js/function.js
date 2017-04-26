@@ -25,6 +25,10 @@ var _AjaxUrl = "/JoinMeService/Service/";
 //variable to store controllers scopes
 var _Scopes = {};
 
+//List friends
+
+var _ListFriends = [];
+
 /*** Functions ***/
 
 //************************************************************
@@ -121,9 +125,30 @@ var indexCallBack = function (data) {
 function GetUsersCallBack(data) {
     console.log(data);
 }
-function GetFriendsCallBack(data) {
-    console.log(data);
+function GetFriendsCallBack(response) {
+    var Listfriends = [
+               { nom: 'tata 1 ', prenom: 'toto 1' },
+               { nom: 'tata 2 ', prenom: 'toto 2' },
+               { nom: 'tata 3 ', prenom: 'toto 3' },
+               { nom: 'tata 4 ', prenom: 'toto 4' }
+    ];
+
+    /* _ListFriends = response.data;
+     getScopes('FriendsCtrl').friends = Listfriends;
+
+     console.log("list friends");
+     console.log("result = " + response.data);
+          console.log(response.data);*/
+    console.log(Listfriends);
+    setTimeout(function () {
+        getScopes('FriendsCtrl').$apply(function () {
+            getScopes('FriendsCtrl').friends = Listfriends;
+        });
+    }, 10);
+    // getScopes('FriendsCtrl').$Apply();
+    // console.log(data);
 }
+
 function GetInvitationCallBack(data) {
     console.log(data);
 }
@@ -161,6 +186,7 @@ function loginCallBack(response) {
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
+        __User = response.data;
         saveCookies('user', response.data);
         getState().go("userSpace");
     }
@@ -214,7 +240,33 @@ function timeNow() {
     console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
     return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
 }
+
+//init scopes
+function initScopes(scopes) {
+    _Scopes = scopes;
+}
 // get current scopes
-function getScopes() {
-    return _Scopes;
+function getScopes(key) {
+    return _Scopes[key];
+}
+
+function goToEvent() {
+    getScopes('UserSpace').slider.slideTo(0);
+}
+
+function getListFriends() {
+    var Listfriends = [
+             { nom: 'tata 1 ', prenom: 'toto 1' },
+             { nom: 'tata 2 ', prenom: 'toto 2' },
+             { nom: 'tata 3 ', prenom: 'toto 3' },
+             { nom: 'tata 4 ', prenom: 'toto 4' }
+    ];
+
+    setTimeout(function () {
+        getScopes('FriendsCtrl').$apply(function () {
+            getScopes('FriendsCtrl').friends = Listfriends;
+        });
+    }, 10);
+    // getScopes('FriendsCtrl').$apply();
+    // getScopes('UserSpace').slider.slideTo(0);
 }

@@ -1,156 +1,111 @@
-<ion-view title="Calendar" hide-nav-bar="true" can-swipe-back="false">
-             <div header-view right-btn="back" left-bnt="left"></div>
-
-    
-     <div class="wrapper">
-         
-        <ion-content scroll="false" class="has-header" has-header="true" ng-style="stylecontent()" style="bottom:10%;">
-            <div class="sub-header">
-                <div class="usenameTitle">
-                    {{username}}
+<div class="calendarWraper">
+    <div class="now">Now</div>
+    <div class="swiper-container global">
+        <div class="swiper-wrapper">
+            <div class="swiper-container TodayTomorrow">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">Today</div>
+                    <div class="swiper-slide">Tomorrow</div>
                 </div>
-            </div> 
-            
-            <img  class="mapCanvas" id="mapstatic">
-                  
-                  
-             
-            <div  class="calendar-wrapper" >
-                    <div id="TapeNowCercleContent" style="display:block;width:100%;height:100%">
-                        <div id="TapeNowCercle">
-                            <div class="tapeNow"  ng-click="tapenow();$event.stopPropagation()"></div>
-                            <div class="calendar" id="calendar">
-                               
-                                <div class="time-wrapper">
-                                     <div class="active-slide-wrapper" id="active-slide-wrapper"></div>
-                                     <div id="minute">
-                                         <div class="swiper-container" id="minute-swiper">
-                                            <div class="swiper-wrapper" id="minute-swiper-wrapper"> 
-                                              
-                                           
-                                                <div class="swiper-slide">00</div>
-                                                <div class="swiper-slide">05</div>
-                                                 <div class="swiper-slide">10</div>
-                                                 <div class="swiper-slide">15</div>
-                                                 <div class="swiper-slide">20</div>
-                                                <div class="swiper-slide">25</div> 
-                                                <div class="swiper-slide">30</div>
-                                                <div class="swiper-slide">35</div>
-                                                 <div class="swiper-slide">40</div>
-                                                <div class="swiper-slide">45</div>
-                                                <div class="swiper-slide">50</div>
-                                                  <div class="swiper-slide">55</div>
-
-                                               <div class="swiper-slide">00</div>
-                                                <div class="swiper-slide">05</div>
-                                                 <div class="swiper-slide">10</div>
-                                                 <div class="swiper-slide">15</div>
-                                                 <div class="swiper-slide">20</div>
-                                                <div class="swiper-slide">25</div> 
-                                                <div class="swiper-slide">30</div>
-                                                <div class="swiper-slide">35</div>
-                                                 <div class="swiper-slide">40</div>
-                                                <div class="swiper-slide">45</div>
-                                                <div class="swiper-slide">50</div>
-                                                  <div class="swiper-slide">55</div>
-
-                                                  <div class="swiper-slide">00</div>
-                                                <div class="swiper-slide">05</div>
-                                                 <div class="swiper-slide">10</div>
-                                                 <div class="swiper-slide">15</div>
-                                                 <div class="swiper-slide">20</div>
-                                                <div class="swiper-slide">25</div> 
-                                                <div class="swiper-slide">30</div>
-                                                <div class="swiper-slide">35</div>
-                                                 <div class="swiper-slide">40</div>
-                                                <div class="swiper-slide">45</div>
-                                                <div class="swiper-slide">50</div>
-                                                  <div class="swiper-slide">55</div>
-
-                                            </div>
-                                        </div>
-                                    </div>    
-                                    <div id="ampm">
-                                        <div class="swiper-ampm">
-                                            <div class="swiper-wrapper"> 
-                                                <div class="swiper-slide">AM</div>
-                                                <div class="swiper-slide">PM</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="hours">
-                                        <div class="swiper-hours" id="swiper-hours">
-                                            <div class="swiper-wrapper" id="swiper-hours-wrapper"> 
-
-                                                <div class="swiper-slide">1</div>
-                                                <div class="swiper-slide">2</div>
-                                                <div class="swiper-slide">3</div>
-                                                <div class="swiper-slide">4</div>
-                                                <div class="swiper-slide">5</div>
-                                                <div class="swiper-slide">6</div>
-                                                <div class="swiper-slide">7</div>
-                                                <div class="swiper-slide">8</div>
-                                                <div class="swiper-slide">9</div>
-                                                <div class="swiper-slide">10</div>
-                                                <div class="swiper-slide">11</div>
-                                                <div class="swiper-slide">12</div>
-
-                                                 <div class="swiper-slide">1</div>
-                                                <div class="swiper-slide">2</div>
-                                                <div class="swiper-slide">3</div>
-                                                <div class="swiper-slide">4</div>
-                                                <div class="swiper-slide">5</div>
-                                                <div class="swiper-slide">6</div>
-                                                <div class="swiper-slide">7</div>
-                                                <div class="swiper-slide">8</div>
-                                                <div class="swiper-slide">9</div>
-                                                <div class="swiper-slide">10</div>
-                                                <div class="swiper-slide">11</div>
-                                                <div class="swiper-slide">12</div>
-
-                                                 <div class="swiper-slide">1</div>
-                                                <div class="swiper-slide">2</div>
-                                                <div class="swiper-slide">3</div>
-                                                <div class="swiper-slide">4</div>
-                                                <div class="swiper-slide">5</div>
-                                                <div class="swiper-slide">6</div>
-                                                <div class="swiper-slide">7</div>
-                                                <div class="swiper-slide">8</div>
-                                                <div class="swiper-slide">9</div>
-                                                <div class="swiper-slide">10</div>
-                                                <div class="swiper-slide">11</div>
-                                                <div class="swiper-slide">12</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <div id="TodTom">
-                                        <div class="today">
-                                            <div class="swiper-wrapper"> 
-                                                <div class="swiper-slide" style="text-align:right;">Today</div>
-                                                <div class="swiper-slide">Tommorow</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                
-                              
-                                  <div class="next-wrapper">
-                                    <div class="next" ng-click="next()">
-
-                                    </div>
-                                </div>   
-                                
-                            </div>
-
-                            
-                        </div> 
-                       
-                    </div>
             </div>
-              </img >
-           
-         </ion-content>
+            <div class="swiper-container hours">
+                <div class="swiper-wrapper hours">
+                    <div class="swiper-slide">1</div>
+                    <div class="swiper-slide">2</div>
+                    <div class="swiper-slide">3</div>
+                    <div class="swiper-slide">4</div>
+                    <div class="swiper-slide">5</div>
+                    <div class="swiper-slide">6</div>
+                    <div class="swiper-slide">7</div>
+                    <div class="swiper-slide">8</div>
+                    <div class="swiper-slide">9</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">11</div>
+                    <div class="swiper-slide">12</div>
+
+                    <div class="swiper-slide">1</div>
+                    <div class="swiper-slide">2</div>
+                    <div class="swiper-slide">3</div>
+                    <div class="swiper-slide">4</div>
+                    <div class="swiper-slide">5</div>
+                    <div class="swiper-slide">6</div>
+                    <div class="swiper-slide">7</div>
+                    <div class="swiper-slide">8</div>
+                    <div class="swiper-slide">9</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">11</div>
+                    <div class="swiper-slide">12</div>
+
+                    <div class="swiper-slide">1</div>
+                    <div class="swiper-slide">2</div>
+                    <div class="swiper-slide">3</div>
+                    <div class="swiper-slide">4</div>
+                    <div class="swiper-slide">5</div>
+                    <div class="swiper-slide">6</div>
+                    <div class="swiper-slide">7</div>
+                    <div class="swiper-slide">8</div>
+                    <div class="swiper-slide">9</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">11</div>
+                    <div class="swiper-slide">12</div>
+                </div>
+            </div>
+            <div class="swiper-container minutes">
+                <div class="swiper-wrapper" id="minute-swiper-wrapper">
+                    <div class="swiper-slide">00</div>
+                    <div class="swiper-slide">05</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">15</div>
+                    <div class="swiper-slide">20</div>
+                    <div class="swiper-slide">25</div>
+                    <div class="swiper-slide">30</div>
+                    <div class="swiper-slide">35</div>
+                    <div class="swiper-slide">40</div>
+                    <div class="swiper-slide">45</div>
+                    <div class="swiper-slide">50</div>
+                    <div class="swiper-slide">55</div>
+
+                    <div class="swiper-slide">00</div>
+                    <div class="swiper-slide">05</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">15</div>
+                    <div class="swiper-slide">20</div>
+                    <div class="swiper-slide">25</div>
+                    <div class="swiper-slide">30</div>
+                    <div class="swiper-slide">35</div>
+                    <div class="swiper-slide">40</div>
+                    <div class="swiper-slide">45</div>
+                    <div class="swiper-slide">50</div>
+                    <div class="swiper-slide">55</div>
+
+                    <div class="swiper-slide">00</div>
+                    <div class="swiper-slide">05</div>
+                    <div class="swiper-slide">10</div>
+                    <div class="swiper-slide">15</div>
+                    <div class="swiper-slide">20</div>
+                    <div class="swiper-slide">25</div>
+                    <div class="swiper-slide">30</div>
+                    <div class="swiper-slide">35</div>
+                    <div class="swiper-slide">40</div>
+                    <div class="swiper-slide">45</div>
+                    <div class="swiper-slide">50</div>
+                    <div class="swiper-slide">55</div>
+                </div>
+            </div>
+            <div class="swiper-container AmPm">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">Am</div>
+                    <div class="swiper-slide">Pm</div>
+                </div>
+            </div>
+        </div>
     </div>
-     <div footer></div>
-</ion-view>
+
+    <div class="next">
+        <div class="table">
+            <div class="cell">
+                Next
+            </div>
+        </div>
+    </div>
+</div>

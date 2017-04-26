@@ -138,7 +138,7 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state, $ionicSlideBoxDelegate,Scopes) {
+    .controller('UserSpaceCtrl', function ($scope, $state,Scopes,AppService) {
         Scopes.store('UserSpace', $scope);
       
         $scope.showSettings = true;
@@ -162,91 +162,33 @@ angular.module('directory.controllers', [])
 
         $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
             console.log('Slide change is beginning');
+
         });
 
         $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
             // note: the indexes are 0-based
+
+            console.log('Slide change is end' + data.slider.activeIndex);
             $scope.activeIndex = data.slider.activeIndex;
             $scope.previousIndex = data.slider.previousIndex;
+            if (data.slider.activeIndex == 0) {
+                AppService.getFriends();
+            }
         });
         
         $scope.goEvents = function () {
           
-           $scope.slider.slideTo(0);
+            // goToEvent();
+            getListFriends();
+         //  $scope.slider.slideTo(0);
         }
         
         console.log(Scopes.get('UserSpace'));
     })
 
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
-        $scope.Title = "JoinMe"; var communOptions = {
-            direction: 'vertical',
-            centeredSlides: true,
-            slidesPerView: 3,
-            //  spaceBetween: 5,
-            //   autoHeight: true,
-            calculateHeight: false
-        };
-        // init swiper hours options
-        var slideOptionsH = angular.copy(communOptions);
-        slideOptionsH.loop = true;
-        slideOptionsH.initialSlide = _TimeObject["hours"] - 1;
-        slideOptionsH.onSlideChangeEnd = function (swiper) {
-            console.log("Console hours");
-            console.log(swiper);
-        }
-        // init swiper min options
-        var slideOptionsM = angular.copy(communOptions);
-        slideOptionsM.loop = true;
-        var min = (((_TimeObject["min"]) % 12) - 5);
-        console.log(min);
-        slideOptionsM.initialSlide = min;
-        slideOptionsM.onSlideChangeEnd = function (swiper) {
-            console.log("Console min");
-            console.log(swiper);
-        }
-        // init swiper AmPm options
-        $scope.initialSlideAmPm = 1;
-        if (_TimeObject["ampm"] === "pm") {
-            $scope.initialSlideAmPm = 2;
-        }
-        var slideOptionsAmPm = angular.copy(communOptions);
-        slideOptionsAmPm.loop = false;
-        slideOptionsAmPm.initialSlide = $scope.initialSlideAmPm;
-        slideOptionsAmPm.onSlideChangeEnd = function (swiper) {
-            console.log("Console tod");
-            console.log(swiper);
-        }
-        slideOptionsAmPm.runCallbacksOnInit = true;
-
-        // init swiper TodayTomorrow options
-        var swiperTodTom = angular.copy(communOptions);
-        swiperTodTom.loop = false;
-        swiperTodTom.onSlideChangeEnd = function (swiper) {
-            console.log("Console tod");
-            console.log(swiper);
-        }
-
-        var swiperG = new Swiper('.swiper-container.global', {
-            simulateTouch: true, allowSwipeToNext: false, allowSwipeToPrev: false,
-            centeredSlides: true,
-            //   slidesPerView: 3,
-            spaceBetween: 0,
-            //   autoHeight: true,
-            calculateHeight: false,
-            setWrapperSize: true,
-            touchEventsTarget: 'container'
-        });
-
-        var swiperH = new Swiper('.swiper-container.hours', slideOptionsH);
-        var swiperM = new Swiper('.swiper-container.minutes', slideOptionsM);
-        var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
-        var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
-
-        swiperH.activeIndex = _TimeObject["hours"];
-        swiperM.activeIndex = _TimeObject["min"];
-
-        $scope.Title = "JoinMe"; $scope.Initposition = [40.74, -74.18];
+        $scope.Title = "JoinMe";
+        $scope.Initposition = [40.74, -74.18];
         var posOptions = {
             enableHighAccuracy: true,
             timeout: 50000,
@@ -273,7 +215,8 @@ angular.module('directory.controllers', [])
         }
     })
 
- .controller('EventsCtrl', function ($scope, $state, AppService) {
+ .controller('EventsCtrl', function ($scope, $state, AppService,Scopes) {
+     Scopes.store("'Events", $scope);
      $scope.Title = "Evenements"
      $scope.events = [
               { nom: 'tata 1X ' },
@@ -290,15 +233,35 @@ angular.module('directory.controllers', [])
      };
  })
 
- .controller('FriendsCtrl', function ($scope, $state, AppService) {
+ .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
+     Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
-     $scope.friends = [
+     $scope.friends = [];
+     $scope.getFriends = function () {
+         getListFriends();
+     }
+     $scope.getWhoInvitedMe = function () {
+
+     }
+
+     $scope.doRefresh = function () {
+         console.log('Refreshing!');
+         $scope.friends = [];
+         // appelle à la base de données 
+         AppService.getFriends();
+       
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     };
+   /*  $scope.friends = [
               { nom: 'tata 1 ', prenom: 'toto 1' },
               { nom: 'tata 2 ', prenom: 'toto 2' },
               { nom: 'tata 3 ', prenom: 'toto 3' },
               { nom: 'tata 4 ', prenom: 'toto 4' }
      ];
-
+     */
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -311,15 +274,7 @@ angular.module('directory.controllers', [])
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.showSettings = true;
 	        $scope.showBack = true;
-	        $scope.doRefresh = function () {
-	            console.log('Refreshing!');
-	            AppService.getFriends(1);
-	            AppService.getInvitation(1);
-	            $timeout(function () {
-	                //Stop the ion-refresher from spinning
-	                $scope.$broadcast('scroll.refreshComplete');
-	            }, 100);
-	        };
+	       
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
