@@ -249,6 +249,7 @@ angular.module('directory.controllers', [])
          console.log('Refreshing!');
          $scope.friends = [];
          // appelle à la base de données 
+          
          AppService.getFriends();
        
          $timeout(function () {
