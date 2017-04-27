@@ -117,6 +117,21 @@ function showAlert(titre, message) {
     });
 }
 
+function showConfirm(titre, message, btnLeft, btnRight) {
+    getIonicPopup().confirm({
+        title: titre,
+        template: message,
+        buttons: [
+            {
+                text:btnLeft
+            },
+            {
+                text:btnRight
+            }
+        ]
+    });
+}
+
 /***  CallBack functions ***/
 
 var indexCallBack = function (data) {
