@@ -2,15 +2,15 @@
 
 var __User = {
     CreationTime: "",
-    Email: "sarah@mail.fr",
-    FirstName: "Sarah",
+    Email: "",
+    FirstName: "",
     Id: -1,
     IsDeleted: false,
-    LastName: "AG",
+    LastName: "",
     ModificationTime: "",
-    Password: "azerty",
-    PhoneNumber: 612345789,
-    UserName: "sarah36",
+    Password: "",
+    PhoneNumber: 0,
+    UserName: "",
     Photo: ""
 }
 
@@ -25,7 +25,7 @@ var _AjaxUrl = "/JoinMeService/Service/";
 //variable to store controllers scopes
 var _Scopes = {};
 
-//List friends 
+//List friends
 
 var _ListFriends = [];
 
@@ -126,33 +126,30 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
+    var Listfriends = [
+               { nom: 'tata 1 ', prenom: 'toto 1' },
+               { nom: 'tata 2 ', prenom: 'toto 2' },
+               { nom: 'tata 3 ', prenom: 'toto 3' },
+               { nom: 'tata 4 ', prenom: 'toto 4' }
+    ];
 
-   var  Listfriends = [
-              { nom: 'tata 1 ', prenom: 'toto 1' },
-              { nom: 'tata 2 ', prenom: 'toto 2' },
-              { nom: 'tata 3 ', prenom: 'toto 3' },
-              { nom: 'tata 4 ', prenom: 'toto 4' }
-   ];
+    /* _ListFriends = response.data;
+     getScopes('FriendsCtrl').friends = Listfriends;
 
-
-   /* _ListFriends = response.data;
-    getScopes('FriendsCtrl').friends = Listfriends;
-    
-    console.log("list friends");
-    console.log("result = " + response.data);
-         console.log(response.data);*/
-   console.log(Listfriends);
+     console.log("list friends");
+     console.log("result = " + response.data);
+          console.log(response.data);*/
+    console.log(Listfriends);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = Listfriends;
         });
     }, 10);
-  // getScopes('FriendsCtrl').$Apply();
-   // console.log(data);
+    // getScopes('FriendsCtrl').$Apply();
+    // console.log(data);
 }
 
 function GetInvitationCallBack(data) {
-    
     console.log(data);
 }
 var handleSuccess = function (response) {
@@ -181,8 +178,7 @@ function createUserCallBack(response) {
 }
 
 function updateUserCallBack(response) {
-    __User = response.data;
-    console.log(__User);
+    saveCookies('user', response.data);
 }
 
 function loginCallBack(response) {
@@ -209,7 +205,7 @@ function saveCookies(key, value) {
     // this will set the expiration to 12 months
     exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
 
-    getCookieStore().put(key, value,{
+    getCookieStore().put(key, value, {
         expires: exp
     });
 }
@@ -266,12 +262,11 @@ function getListFriends() {
              { nom: 'tata 4 ', prenom: 'toto 4' }
     ];
 
- 
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = Listfriends;
         });
     }, 10);
-   // getScopes('FriendsCtrl').$apply();
-   // getScopes('UserSpace').slider.slideTo(0);
+    // getScopes('FriendsCtrl').$apply();
+    // getScopes('UserSpace').slider.slideTo(0);
 }

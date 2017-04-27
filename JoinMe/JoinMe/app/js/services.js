@@ -53,10 +53,10 @@ angular.module('directory.services', [])
                 postUrl('PostUser', user, createUserCallBack);
             },
             saveSettings: function (user) {
-                user.ModificationTime = new Date();
-                user.CreationTime = user.ModificationTime;
-                user.Id = 1;
-                user.UserName = "Loustic";
+                //user.ModificationTime = new Date();
+                //user.CreationTime = user.ModificationTime;
+                //user.Id = 1;
+                //user.UserName = "Loustic";
 
                 postUrl('PutUser', user, updateUserCallBack);
             },
