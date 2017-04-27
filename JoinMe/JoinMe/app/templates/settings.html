@@ -1,6 +1,6 @@
 ﻿<ion-view>
     <div header-view></div>
-    <ion-content padding="true" class="has-header" overflow-scroll="true">
+    <ion-content padding="true" overflow-scroll="true">
         <form id="settings-form2" class="list" name="settingsForm">
             <div class="image-thumbnail">
                 <img id="photoUser" src="https://3.bp.blogspot.com/-W__wiaHUjwI/Vt3Grd8df0I/AAAAAAAAA78/7xqUNj8ujtY/s1600/image02.png" ng-click="selectPhoto(user)" ng-model="user.Photo" />
@@ -18,16 +18,12 @@
                 <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.prenom.$valid"></i>
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
-            <label class="item item-input" id="settings-input6">
-                <input type="email" name="mail" placeholder="E-mail" ng-model="user.Email" required>
-                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.mail.$valid"></i>
-                <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.mail.$valid"></i>
+            <label class="item item-input disabled" id="settings-input6" >
+                <input type="email" name="mail" placeholder="E-mail" ng-model="user.Email" disabled="disabled">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
-            <label class="item item-input" id="settings-input4">
-                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="user.PhoneNumber" required ng-minlength="10" ng-maxlength="10" onkeyup="checkPhone()">
-                <i id="validPhone" class="icon ion-checkmark placeholder-icon balanced hidden"> <!-- ng-show="settingsForm.numeroTel.$valid">--></i>
-                <i id="falsePhone" class="icon ion-close placeholder-icon assertive"> <!--ng-hide="settingsForm.numeroTel.$valid">--></i>
+            <label class="item item-input disabled" id="settings-input4">
+                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="user.PhoneNumber" disabled="disabled">
             </label>
             <div class="spacer" style="width: 300px; height: 12px;"></div>
             <label class="item item-input" id="settings-input7">
