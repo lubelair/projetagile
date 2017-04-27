@@ -45,19 +45,13 @@ angular.module('directory.services', [])
             },
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);
-                console.log("loggedUser = " + credentials);
             },
             createUser: function (user) {
                 user.CreationTime = new Date();
                 user.ModificationTime = user.CreationTime;
                 postUrl('PostUser', user, createUserCallBack);
             },
-            saveSettings: function (user) {
-                //user.ModificationTime = new Date();
-                //user.CreationTime = user.ModificationTime;
-                //user.Id = 1;
-                //user.UserName = "Loustic";
-
+            updateUser: function (user) {
                 postUrl('PutUser', user, updateUserCallBack);
             },
             selectPhoto: function () {
