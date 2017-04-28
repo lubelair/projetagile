@@ -74,8 +74,8 @@ namespace JoinMe.Controllers
                 var id = int.Parse(userId.ToString());
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Friends
-                              join b in db.Users on a.UserId equals b.Id
-                              where a.FriendId == id && !a.IsApproved
+                              join b in db.Users on a.FriendId equals b.Id
+                              where a.UserId == id && !a.IsApproved
                               select new
                               {
                                   b.Id,

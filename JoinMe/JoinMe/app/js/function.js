@@ -117,7 +117,7 @@ function showAlert(titre, message) {
     });
 }
 
-function showConfirm(titre, message, btnLeft, btnRight,procBtnLeft,procBtnRight) {
+function showConfirm(titre, message, btnLeft, btnRight, procBtnLeft, procBtnRight) {
     var confirmPopup = getIonicPopup().confirm({
         title: titre,
         template: message,
@@ -150,7 +150,6 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-
     /*var Listfriends = [
                { LastName: 'Zabi', FirstName: 'Zabi' },
                { nom: 'tata 2 ', prenom: 'toto 2' },
@@ -175,8 +174,8 @@ function GetFriendsCallBack(response) {
 }
 
 function GetInvitationsCallBack(response) {
-    //response est vide 
-    console.log(" totototot   "+response.data);
+    //response est vide
+    console.log(response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friendsInvitation = response.data;
