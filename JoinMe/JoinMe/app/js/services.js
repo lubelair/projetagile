@@ -20,7 +20,7 @@ angular.module('directory.services', [])
             },
             getFriends: function () {
                 // test if friends is not empty
-                if (getScopes('FriendsCtrl').myfriends.length > 0) {
+                if (getScopes('FriendsCtrl').friends.length > 0) {
                     console.log("friends already exists");
                     return;
                 }

@@ -80,7 +80,7 @@
           restrict: 'A',
           replace: true,
           scope: {
-              listfriends: '=',
+              listfriend: '=',
               doRefresh: '&'
           },
           templateUrl: 'templates/InnerFriend.html',

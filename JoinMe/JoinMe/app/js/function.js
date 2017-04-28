@@ -150,14 +150,14 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-    /*var Listfriends = [
+   var Listfriends = [
                { LastName: 'Zabi', FirstName: 'Zabi' },
                { nom: 'tata 2 ', prenom: 'toto 2' },
                { nom: 'tata 3 ', prenom: 'toto 3' },
                { nom: 'tata 4 ', prenom: 'toto 4' }
     ];
 
-         _ListFriends = response.data;
+    /*      _ListFriends = response.data;
      getScopes('FriendsCtrl').friends = Listfriends;
 
      console.log("list friends");
@@ -166,7 +166,7 @@ function GetFriendsCallBack(response) {
     console.log(response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = response.data;
+            getScopes('FriendsCtrl').friends = Listfriends;
         });
     }, 10);
     // getScopes('FriendsCtrl').$Apply();
