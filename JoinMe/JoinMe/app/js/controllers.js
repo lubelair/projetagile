@@ -160,12 +160,11 @@ angular.module('directory.controllers', [])
                 }
             });
         }
-
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state,Scopes,AppService) {
+    .controller('UserSpaceCtrl', function ($scope, $state, Scopes, AppService) {
         Scopes.store('UserSpace', $scope);
-      
+
         $scope.showSettings = true;
         $scope.showBack = false;
 
@@ -187,7 +186,6 @@ angular.module('directory.controllers', [])
 
         $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
             console.log('Slide change is beginning');
-
         });
 
         $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
@@ -198,16 +196,16 @@ angular.module('directory.controllers', [])
             $scope.previousIndex = data.slider.previousIndex;
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
+                AppService.getInvitations();
             }
         });
-        
+
         $scope.goEvents = function () {
-          
             // goToEvent();
             getListFriends();
-         //  $scope.slider.slideTo(0);
+            //  $scope.slider.slideTo(0);
         }
-        
+
         console.log(Scopes.get('UserSpace'));
     })
 
@@ -240,7 +238,7 @@ angular.module('directory.controllers', [])
         }
     })
 
- .controller('EventsCtrl', function ($scope, $state, AppService,Scopes) {
+ .controller('EventsCtrl', function ($scope, $state, AppService, Scopes) {
      Scopes.store("'Events", $scope);
      $scope.Title = "Evenements"
      $scope.events = [
@@ -262,31 +260,38 @@ angular.module('directory.controllers', [])
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
      $scope.friends = [];
+     $scope.friendsInvitation = [];
      $scope.getFriends = function () {
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
 
      }
-
-     $scope.doRefresh = function () {
-         console.log('Refreshing!');
-         $scope.friends = [];
-         // appelle Ã  la base de donnÃ©es 
-         AppService.getFriends();
-       
+     $scope.refreshFriend = function () {
+         alert("toto");
          $timeout(function () {
              //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
-     };
-   /*  $scope.friends = [
-              { nom: 'tata 1 ', prenom: 'toto 1' },
-              { nom: 'tata 2 ', prenom: 'toto 2' },
-              { nom: 'tata 3 ', prenom: 'toto 3' },
-              { nom: 'tata 4 ', prenom: 'toto 4' }
-     ];
-     */
+     }
+     /*  $scope.doRefresh = function () {
+           console.log('Refreshing!');
+           $scope.myfriends = [];
+           // appelle à la base de données
+           AppService.getFriends();
+
+           $timeout(function () {
+               //Stop the ion-refresher from spinning
+               $scope.$broadcast('scroll.refreshComplete');
+           }, 100);
+       };*/
+     /*  $scope.friends = [
+                { nom: 'tata 1 ', prenom: 'toto 1' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+       ];
+       */
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -299,7 +304,6 @@ angular.module('directory.controllers', [])
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.showSettings = true;
 	        $scope.showBack = true;
-	       
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {

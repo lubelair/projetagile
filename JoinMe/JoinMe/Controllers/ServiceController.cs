@@ -34,53 +34,54 @@ namespace JoinMe.Controllers
         // Récupere friends
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        public async Task<Object> GetFriends(Friends friends)
+        public async Task<Object> GetFriends(Object userId)
         {
             try
             {
+                var id = int.Parse(userId.ToString());
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Friends
                               join b in db.Users on a.FriendId equals b.Id
-                              where a.UserId == 1 && a.IsApproved
+                              where a.UserId == id && a.IsApproved
                               select new
                               {
                                   b.FirstName,
-                                  b.LastName
+                                  b.LastName,
+                                  b.Id
                               }).Union(from a in db.Friends
                                        join b in db.Users on a.UserId equals b.Id
-                                       where a.FriendId == 1 && a.IsApproved
+                                       where a.FriendId == id && a.IsApproved
                                        select new
                                        {
                                            b.FirstName,
-                                           b.LastName
+                                           b.LastName,
+                                           b.Id
                                        }).ToListAsync();
             }
-            catch (ArgumentNullException)
+            catch (Exception e)
             {
-                return null;
-            }
-            catch (InvalidOperationException)
-            {
-                return null;
+                throw e;
             }
         }
 
         // Récupere invitation
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        public async Task<Object> GetInvitation(Friends friends)
+        public async Task<Object> GetInvitations(Object userId)
         {
             try
             {
+                var id = int.Parse(userId.ToString());
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
-                return (from a in db.Friends
-                        join b in db.Users on a.UserId equals b.Id
-                        where a.FriendId == 1 && !a.IsApproved
-                        select new
-                        {
-                            b.FirstName,
-                            b.LastName
-                        }).ToListAsync();
+                return await (from a in db.Friends
+                              join b in db.Users on a.FriendId equals b.Id
+                              where a.UserId == id && !a.IsApproved
+                              select new
+                              {
+                                  b.Id,
+                                  b.FirstName,
+                                  b.LastName
+                              }).ToListAsync();
             }
             catch (ArgumentNullException)
             {
