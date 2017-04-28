@@ -37,18 +37,18 @@
     margin-right: 10px;
 }
 
-    .image-thumbnail img {
-        float: left;
-        height: 100px;
-        width: 100px;
-    }
+.image-thumbnail img {
+    float: left;
+    height: 100px;
+    width: 100px;
+}
 
-    .image-thumbnail i {
-        position: absolute;
-        top: 0;
-        left: 5px;
-        font-size: 25px;
-    }
+.image-thumbnail i {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 25px;
+}
 
 #btn-footer {
     margin: auto;
@@ -187,4 +187,8 @@
 
 .list {
     margin-top: 50px;
+}
+
+.disabled, input[disabled] {
+   background-color: #ddd;
 }
