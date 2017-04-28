@@ -258,27 +258,37 @@ angular.module('directory.controllers', [])
      $scope.Title = "Amis";
      $scope.friends = [];
      $scope.friendsInvitation = [];
-     /*$scope.getFriends = function () {
+     $scope.getFriends = function () {
          getListFriends();
      }
-     $scope.getInvitations = function () {
-         getInvitations();
-     }*/
+     $scope.getWhoInvitedMe = function () {
 
-     $scope.doRefresh = function () {
-         console.log('Refreshing!');
-         $scope.friends = [];
-
-         // appelle à la base de données
-
-         AppService.getFriends();
-         AppService.getInvitations();
-
+     }
+     $scope.refreshFriend = function () {
+         alert("toto");
          $timeout(function () {
              //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
-     };
+     }
+     /*  $scope.doRefresh = function () {
+           console.log('Refreshing!');
+           $scope.myfriends = [];
+           // appelle à la base de données
+           AppService.getFriends();
+
+           $timeout(function () {
+               //Stop the ion-refresher from spinning
+               $scope.$broadcast('scroll.refreshComplete');
+           }, 100);
+       };*/
+     /*  $scope.friends = [
+                { nom: 'tata 1 ', prenom: 'toto 1' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+       ];
+       */
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);

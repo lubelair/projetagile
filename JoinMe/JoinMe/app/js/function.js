@@ -300,7 +300,7 @@ function getListFriends() {
 
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = Listfriends;
+            getScopes('FriendsCtrl').myfriends = Listfriends;
         });
     }, 10);
     // getScopes('FriendsCtrl').$apply();
