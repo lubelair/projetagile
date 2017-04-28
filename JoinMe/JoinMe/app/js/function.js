@@ -11,7 +11,8 @@ var __User = {
     Password: "",
     PhoneNumber: 0,
     UserName: "",
-    Photo: ""
+    Photo: "",
+    IsActive: true
 }
 
 var _State;
@@ -221,11 +222,15 @@ function updateUserCallBack(response) {
     console.log(response.data);
     if (response.data.IsActive) {
         saveCookies('user', response.data);
+        getState().go("userSpace");
     }
     else {
         getScopes('Settings').disconnect();
     }
-    isConnected() ? getState().go('userSpace') : getState().go('authentification');
+}
+
+function deleteUserCallBack(response) {
+    getScopes('Settings').disconnect();
 }
 
 function loginCallBack(response) {
@@ -243,6 +248,11 @@ function loginCallBack(response) {
             showConfirm("Attention !", "Votre compte est désactivé, voulez-le réactiver ?", "Oui", "Non", activeAccount);
         }
     }
+}
+
+function deleteUserCallBack(response) {
+    console.log(response.data);
+    getScopes('Settings').disconnect();
 }
 
 /***  Cookies functions ***/
