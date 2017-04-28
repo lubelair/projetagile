@@ -124,7 +124,7 @@
             // init swiper min options
             var slideOptionsM = angular.copy(communOptions);
             slideOptionsM.loop = false;
-            var min = (((_TimeObject["min"]) % 11));
+            var min = Math.trunc(_TimeObject["min"] / 5)+12;
             console.log(_TimeObject["min"] + " index min :" + min);
             slideOptionsM.initialSlide = min;
             slideOptionsM.onSlideChangeEnd = function (swiper) {
