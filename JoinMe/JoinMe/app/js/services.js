@@ -35,6 +35,22 @@ angular.module('directory.services', [])
                 }
                 postUrl('GetInvitations', $cookieStore.get('user').Id, GetInvitationsCallBack);
             },
+
+            getEventssend: function () {
+                if (getScopes('EventsCtrl').eventssend.length > 0) {
+                    console.log("events send invite already exists");
+                    return;
+                }
+                postUrl('GetEventssend', $cookieStore.get('user').Id, GetEventssendCallBack);
+            },
+            getEventsrecived: function () {
+                if (getScopes('EventsCtrl').eventsrecived.length > 0) {
+                    console.log("events recived invite already exists");
+                    return;
+                }
+                postUrl('GetEventsrecived', $cookieStore.get('user').Id, GetEventsrecivedCallBack);
+            },
+
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);
             },

@@ -92,7 +92,10 @@
      return {
          restrict: 'A',
          replace: true,
-         scope: true,
+        scope: {
+             listevents: '=',
+             doRefresh: '&'
+         }, 
          templateUrl: 'templates/InnerEvent.html',
          link: function (scope, element, attrs) { }
      }

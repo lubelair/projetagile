@@ -99,19 +99,19 @@ angular.module('directory.controllers', [])
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
 
-       // if ($cookieStore.get('user') != null) {
-            $scope.user = $cookieStore.get('user');
-      //  }
+        // if ($cookieStore.get('user') != null) {
+        $scope.user = $cookieStore.get('user');
+        //  }
 
-            $scope.$on('$ionicView.loaded', function () {
-                //Here your view content is fully loaded !!
-               setTimeout(function () {
+        $scope.$on('$ionicView.loaded', function () {
+            //Here your view content is fully loaded !!
+            setTimeout(function () {
                 $scope.$apply(function () {
                     $scope.user = $cookieStore.get('user');
                 });
             }, 0);
-            });
-            
+        });
+
         //Procédure exécutée au clic sur le bouton enregistrer de la page Paramètres
         $scope.saveSettings = function () {
             if (!$scope.user.IsActive) {
@@ -238,15 +238,29 @@ angular.module('directory.controllers', [])
         }
     })
 
- .controller('EventsCtrl', function ($scope, $state, AppService, Scopes) {
-     Scopes.store("'Events", $scope);
+ .controller('EventsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
+     Scopes.store("EventsCtrl", $scope);
      $scope.Title = "Evenements"
-     $scope.events = [
-              { nom: 'tata 1X ' },
-              { nom: 'tata 2X ' },
-              { nom: 'tata 3X ' },
-              { nom: 'tata 4X ' }
-     ];
+     $scope.eventssend = [];
+     $scope.eventsrecived = [];
+
+     $scope.refreshEventsend = function () {
+         $scope.eventssend = [];
+         AppService.getEventssend();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
+     $scope.refreshEventrecived = function () {
+         $scope.eventsrecived = [];
+         AppService.getEventsrecived();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
+
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -261,37 +275,29 @@ angular.module('directory.controllers', [])
      $scope.Title = "Amis";
      $scope.friends = [];
      $scope.friendsInvitation = [];
+     /*
      $scope.getFriends = function () {
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
-
      }
+     */
      $scope.refreshFriend = function () {
-         alert("toto");
+         $scope.friends = [];
+         AppService.getFriends();
          $timeout(function () {
              //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
-     /*  $scope.doRefresh = function () {
-           console.log('Refreshing!');
-           $scope.myfriends = [];
-           // appelle � la base de donn�es
-           AppService.getFriends();
-
-           $timeout(function () {
-               //Stop the ion-refresher from spinning
-               $scope.$broadcast('scroll.refreshComplete');
-           }, 100);
-       };*/
-     /*  $scope.friends = [
-                { nom: 'tata 1 ', prenom: 'toto 1' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
-       ];
-       */
+     $scope.refreshInvitation = function () {
+         $scope.friendsInvitation = [];
+         AppService.getInvitations();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);

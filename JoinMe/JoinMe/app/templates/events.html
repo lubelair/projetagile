@@ -4,13 +4,13 @@
         <ion-tabs>
             <ion-tab title="Evènements reçus">
                 <ion-content>
-                    <div event-view></div>
+                    <div event-view  listevents="eventsrecived" do-refresh="refreshEventrecived()"></div>
                 </ion-content>
             </ion-tab>
 
             <ion-tab title="Evènements envoyés">
-                <ion-content>
-                    <div event-view></div>
+                <ion-content>                   
+                    <div event-view listevents="eventssend" do-refresh="refreshEventsend()"></div>
                 </ion-content>
             </ion-tab>
         </ion-tabs>
