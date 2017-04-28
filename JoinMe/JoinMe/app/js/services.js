@@ -38,10 +38,15 @@ angular.module('directory.services', [])
                     return;
                 }
                 // if friends is empty we call database server
-                postUrl('GetFriends', __User.id, GetFriendsCallBack);
+                
+                postUrl('GetFriends', $cookieStore.get('user').Id, GetFriendsCallBack);
             },
-            getInvitation: function (id) {
-                postUrl('GetInvitation', "Users.id", GetInvitationCallBack);
+            getInvitations: function () {
+                if (getScopes('FriendsCtrl').friendsInvitation.length > 0) {
+                    console.log("friends invite already exists");
+                    return;
+                }
+                postUrl('GetInvitations', $cookieStore.get('user').Id, GetInvitationsCallBack);
             },
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);

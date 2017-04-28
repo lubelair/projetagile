@@ -61,18 +61,17 @@
       var dtr = new Date().getTime();
       return {
           restrict: 'A',
-        //  replace: true,
+          //  replace: true,
           scope: true,
           templateUrl: 'templates/footer.html?' + dtr,
           controller: 'UserSpaceCtrl',
-          link: function (scope, element, attrs,Scopes) {
-             /* scope.goEvents = function () {
-                  alert("toto");
-                  console.log("toto");
-                 // scope.get('UserSpace').activeIndex = 0;
-              }*/
+          link: function (scope, element, attrs, Scopes) {
+              /* scope.goEvents = function () {
+                   alert("toto");
+                   console.log("toto");
+                  // scope.get('UserSpace').activeIndex = 0;
+               }*/
           }
-         
       }
   }])
 
@@ -80,7 +79,10 @@
       return {
           restrict: 'A',
           replace: true,
-          scope: true,
+          scope: {
+              listFriend: '=',
+              doRefresh: '&'
+          },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) { }
       }
@@ -122,7 +124,7 @@
             // init swiper min options
             var slideOptionsM = angular.copy(communOptions);
             slideOptionsM.loop = false;
-            var min = (((_TimeObject["min"]-1) % 12) + 12);
+            var min = (((_TimeObject["min"] - 1) % 12) + 12);
             console.log(min);
             slideOptionsM.initialSlide = min;
             slideOptionsM.onSlideChangeEnd = function (swiper) {
