@@ -236,7 +236,7 @@ angular.module('directory.controllers', [])
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
-     $scope.friends = [];
+     $scope.myfriends = [];
      $scope.getFriends = function () {
          getListFriends();
      }
@@ -244,9 +244,16 @@ angular.module('directory.controllers', [])
 
      }
 
-     $scope.doRefresh = function () {
+     $scope.refreshFriend = function () {
+         alert("toto");
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
+   /*  $scope.doRefresh = function () {
          console.log('Refreshing!');
-         $scope.friends = [];
+         $scope.myfriends = [];
          // appelle à la base de données 
          AppService.getFriends();
        
@@ -254,7 +261,7 @@ angular.module('directory.controllers', [])
              //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
-     };
+     };*/
    /*  $scope.friends = [
               { nom: 'tata 1 ', prenom: 'toto 1' },
               { nom: 'tata 2 ', prenom: 'toto 2' },

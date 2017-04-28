@@ -2,15 +2,15 @@
     <div header-view></div>
     <div id="ctn1" class="has-header">
         <ion-tabs>
-            <ion-tab title="Amis" ng-click="getFriends();$event.stopPropagation();">
+            <ion-tab title="Amis">
                 <ion-content>
-                    <div inner-friends-view></div>
+                    <div inner-friends-view listfriends="myfriends" do-refresh="refreshFriend()"></div>
                 </ion-content>
             </ion-tab>
 
-            <ion-tab title="Invitations d'amis" ng-click="getWhoInvitedMe()">
+            <ion-tab title="Invitations d'amis" >
                 <ion-content>
-                    <div inner-friends-view></div>
+                    <div inner-friends-view listfriends="whoInvitedMefriends" ></div>
                 </ion-content>
             </ion-tab>
         </ion-tabs>

@@ -142,7 +142,7 @@ function GetFriendsCallBack(response) {
     console.log(Listfriends);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = Listfriends;
+            getScopes('FriendsCtrl').myfriends = Listfriends;
         });
     }, 10);
     // getScopes('FriendsCtrl').$Apply();
@@ -264,7 +264,7 @@ function getListFriends() {
 
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = Listfriends;
+            getScopes('FriendsCtrl').myfriends = Listfriends;
         });
     }, 10);
     // getScopes('FriendsCtrl').$apply();

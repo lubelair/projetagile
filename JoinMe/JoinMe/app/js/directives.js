@@ -80,7 +80,10 @@
       return {
           restrict: 'A',
           replace: true,
-          scope: true,
+          scope: {
+              listfriends: '=',
+              doRefresh: '&'
+          },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) { }
       }
@@ -122,17 +125,17 @@
             // init swiper min options
             var slideOptionsM = angular.copy(communOptions);
             slideOptionsM.loop = false;
-            var min = (((_TimeObject["min"]-1) % 12) + 12);
-            console.log(min);
+            var min = (((_TimeObject["min"]) % 11) );
+            console.log(_TimeObject["min"]+ " index min :"+min);
             slideOptionsM.initialSlide = min;
             slideOptionsM.onSlideChangeEnd = function (swiper) {
                 console.log("Console min");
                 console.log(swiper);
             }
             // init swiper AmPm options
-            $scope.initialSlideAmPm = 1;
+            $scope.initialSlideAmPm =0;
             if (_TimeObject["ampm"] === "pm") {
-                $scope.initialSlideAmPm = 2;
+                $scope.initialSlideAmPm = 1;
             }
             var slideOptionsAmPm = angular.copy(communOptions);
             slideOptionsAmPm.loop = false;

@@ -1,21 +1,8 @@
 angular.module('directory.services', [])
 
     .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state) {
-        /* var postUrl = function (action, params, functionCallBack) {
-             var url = "/JoinMeServices/app/";
-
-             $http.post("http://lubelair-001-site1.gtempurl.com/JoinMe/app/", params).then(function (response) {
-                 //First function handles success
-                 console.log(response.data);
-                 functionCallBack(response.data);
-             }, function (response) {
-                 //Second function handles error
-                 console.log(response.data);
-             });
-         }*/
-
         var postUrl = function (action, params, functionCallBack) {
-            angular.toJson(params);
+            //angular.toJson(params)
             var parameter = JSON.stringify(params);
             $http.post(_AjaxUrl + action, parameter).then(functionCallBack, handleError);
         }
@@ -33,12 +20,12 @@ angular.module('directory.services', [])
             },
             getFriends: function () {
                 // test if friends is not empty
-                if (getScopes('FriendsCtrl').friends.length>0) {
+                if (getScopes('FriendsCtrl').myfriends.length > 0) {
                     console.log("friends already exists");
                     return;
                 }
                 // if friends is empty we call database server
-                postUrl('GetFriends', __User.id, GetFriendsCallBack);
+                postUrl('GetFriends', parseInt(1, 10), GetFriendsCallBack);
             },
             getInvitation: function (id) {
                 postUrl('GetInvitation', "Users.id", GetInvitationCallBack);
@@ -71,16 +58,14 @@ angular.module('directory.services', [])
         }
     })
 .factory('Scopes', function ($rootScope) {
-   
     _Scopes = {};
     return {
         store: function (key, value) {
             _Scopes[key] = value;
-        
         },
         get: function (key) {
             return _Scopes[key];
         }
     };
-   // _Scopes = mem;
+    // _Scopes = mem;
 })
