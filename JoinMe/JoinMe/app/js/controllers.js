@@ -99,30 +99,31 @@ angular.module('directory.controllers', [])
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
 
-        if ($cookieStore.get('user') != null) {
+       // if ($cookieStore.get('user') != null) {
             $scope.user = $cookieStore.get('user');
-        }
+      //  }
 
+            $scope.$on('$ionicView.loaded', function () {
+                //Here your view content is fully loaded !!
+               setTimeout(function () {
+                $scope.$apply(function () {
+                    $scope.user = $cookieStore.get('user');
+                });
+            }, 0);
+            });
+            
         //Procédure exécutée au clic sur le bouton enregistrer de la page Paramètres
         $scope.saveSettings = function () {
             if (!$scope.user.IsActive) {
                 showConfirm("Attention !", "Vous êtes sur le point de désactiver votre compte, voulez-vous continuer ?", "Oui", "Non", $scope.disableAccount)
             } else {
-                $scope.updateUser($scope.user);
+                AppService.updateUser($scope.user);
             }
         }
         //Procédure exécutée si l'utilisateur souhaite désactiver son compte
         $scope.disableAccount = function () {
-            $scope.updateUser($scope.user);
-            $scope.disconnect();
-        }
-
-        //Procédure exécutée pour modifier les paramètres en base
-        $scope.updateUser = function () {
             AppService.updateUser($scope.user);
         }
-
-
 
         $scope.deleteAccount = function () {
             console.log("suppression du compte");

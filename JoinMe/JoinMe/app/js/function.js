@@ -117,7 +117,7 @@ function showAlert(titre, message) {
     });
 }
 
-function showConfirm(titre, message, btnLeft, btnRight,procBtnLeft,procBtnRight) {
+function showConfirm(titre, message, btnLeft, btnRight, procBtnLeft, procBtnRight) {
     var confirmPopup = getIonicPopup().confirm({
         title: titre,
         template: message,
@@ -138,7 +138,12 @@ function activeAccount() {
     var user = __User;
     user.IsActive = true;
     getScopes('Authentification').appService.updateUser(user);
-    getState().go("root");
+}
+
+function isConnected() {
+    if (getCookie('user') != null)
+        return true;
+    return false;
 }
 
 /***  CallBack functions ***/
@@ -202,7 +207,14 @@ function createUserCallBack(response) {
 }
 
 function updateUserCallBack(response) {
-    saveCookies('user', response.data);
+    console.log(response.data);
+    if (response.data.IsActive) {
+        saveCookies('user', response.data);
+    }
+    else {
+        getScopes('Settings').disconnect();
+    }
+    isConnected() ? getState().go('userSpace') : getState().go('authentification');
 }
 
 function loginCallBack(response) {
