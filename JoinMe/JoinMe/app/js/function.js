@@ -32,7 +32,7 @@ var _ListFriends = [];
 /*** Functions ***/
 
 //************************************************************
-// VÈrification du mot de passe depuis la page d'inscription *
+// V√©rification du mot de passe depuis la page d'inscription *
 //************************************************************
 
 function checkPwd() {
@@ -117,6 +117,30 @@ function showAlert(titre, message) {
     });
 }
 
+function showConfirm(titre, message, btnLeft, btnRight,procBtnLeft,procBtnRight) {
+    var confirmPopup = getIonicPopup().confirm({
+        title: titre,
+        template: message,
+        buttons: [
+            {
+                text: btnLeft,
+                onTap: procBtnLeft
+            },
+            {
+                text: btnRight,
+                onTap: procBtnRight
+            }
+        ]
+    });
+}
+
+function activeAccount() {
+    var user = __User;
+    user.IsActive = true;
+    getScopes('Authentification').appService.updateUser(user);
+    getState().go("root");
+}
+
 /***  CallBack functions ***/
 
 var indexCallBack = function (data) {
@@ -186,18 +210,24 @@ function loginCallBack(response) {
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
+        //Le user existe, on teste maintenant si le compte est actif
         __User = response.data;
-        saveCookies('user', response.data);
-        getState().go("userSpace");
+        if (__User.IsActive) {
+            console.log("loggedUser");
+            saveCookies('user', response.data);
+            getState().go("userSpace");
+        } else {
+            showConfirm("Attention !", "Votre compte est d√©sactiv√©, voulez-le r√©activer ?", "Oui", "Non", activeAccount);
+        }
     }
 }
 
 /***  Cookies functions ***/
 
 //*********************************************************
-// Fonction gÈnÈrique de sauvegarde des cookies           *
-// La key reprÈsente l'identifiant du cookie, et la value *
-// l'ÈlÈment auquel il est liÈ                            *
+// Fonction g√©n√©rique de sauvegarde des cookies           *
+// La key repr√©sente l'identifiant du cookie, et la value *
+// l'√©l√©ment auquel il est li√©                            *
 //*********************************************************
 
 function saveCookies(key, value) {

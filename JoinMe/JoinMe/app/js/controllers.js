@@ -22,7 +22,7 @@ angular.module('directory.controllers', [])
                 AppService.createUser(user);
             }
             else {
-                showAlert('Attention !', 'Un des champs saisis est inccorect.');
+                showAlert('Attention !', 'Un des champs saisis est incorrect.');
             }
             //  $state.go('accueil')
         }
@@ -41,7 +41,9 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService) {
+    .controller('AuthentificationCtrl', function ($scope, $state, $ionicPopup, AppService, Scopes) {
+        Scopes.store('Authentification', $scope);
+        $scope.appService = AppService;
         $scope.Title = "Authentification";
         $scope.showSettings = false;
         $scope.showBack = false;
@@ -61,7 +63,6 @@ angular.module('directory.controllers', [])
         $scope.inscription = function () {
             //change state to inscription state
             $state.go('inscription');
-            // AppService.getUsers();
         }
 
         $scope.forgetPassword = function () {
@@ -91,22 +92,42 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet, $cookieStore) {
+    .controller('SettingsCtrl', function ($scope, $state, AppService, $ionicActionSheet, $cookieStore, Scopes) {
+        Scopes.store('Settings', $scope);
         $scope.Title = "Parametres";
         $scope.showSettings = false;
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
-        //$scope.user = AppService.getUser();
 
         if ($cookieStore.get('user') != null) {
             $scope.user = $cookieStore.get('user');
         }
 
-        $scope.saveSettings = function (user, myForm) {
-            AppService.saveSettings(user);
+        //Procédure exécutée au clic sur le bouton enregistrer de la page Paramètres
+        $scope.saveSettings = function () {
+            if (!$scope.user.IsActive) {
+                showConfirm("Attention !", "Vous êtes sur le point de désactiver votre compte, voulez-vous continuer ?", "Oui", "Non", $scope.disableAccount)
+            } else {
+                $scope.updateUser($scope.user);
+            }
         }
-        $scope.deleteAccount = function (user) {
+        //Procédure exécutée si l'utilisateur souhaite désactiver son compte
+        $scope.disableAccount = function () {
+            $scope.updateUser($scope.user);
+            $scope.disconnect();
+        }
+
+        //Procédure exécutée pour modifier les paramètres en base
+        $scope.updateUser = function () {
+            AppService.updateUser($scope.user);
+        }
+
+        $scope.deleteAccount = function () {
             console.log("suppression du compte");
+        }
+        $scope.disconnect = function () {
+            $cookieStore.remove('user');
+            $state.go('authentification');
         }
 
         $scope.selectPhoto = function (user) {
@@ -138,9 +159,9 @@ angular.module('directory.controllers', [])
         }
     })
 
-    .controller('UserSpaceCtrl', function ($scope, $state,Scopes,AppService) {
+    .controller('UserSpaceCtrl', function ($scope, $state, Scopes, AppService) {
         Scopes.store('UserSpace', $scope);
-      
+
         $scope.showSettings = true;
         $scope.showBack = false;
 
@@ -162,7 +183,6 @@ angular.module('directory.controllers', [])
 
         $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
             console.log('Slide change is beginning');
-
         });
 
         $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
@@ -175,14 +195,13 @@ angular.module('directory.controllers', [])
                 AppService.getFriends();
             }
         });
-        
+
         $scope.goEvents = function () {
-          
             // goToEvent();
             getListFriends();
-         //  $scope.slider.slideTo(0);
+            //  $scope.slider.slideTo(0);
         }
-        
+
         console.log(Scopes.get('UserSpace'));
     })
 
@@ -215,7 +234,7 @@ angular.module('directory.controllers', [])
         }
     })
 
- .controller('EventsCtrl', function ($scope, $state, AppService,Scopes) {
+ .controller('EventsCtrl', function ($scope, $state, AppService, Scopes) {
      Scopes.store("'Events", $scope);
      $scope.Title = "Evenements"
      $scope.events = [
@@ -241,7 +260,6 @@ angular.module('directory.controllers', [])
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
-
      }
 
      $scope.refreshFriend = function () {
@@ -251,24 +269,24 @@ angular.module('directory.controllers', [])
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
-   /*  $scope.doRefresh = function () {
-         console.log('Refreshing!');
-         $scope.myfriends = [];
-         // appelle � la base de donn�es 
-         AppService.getFriends();
-       
-         $timeout(function () {
-             //Stop the ion-refresher from spinning
-             $scope.$broadcast('scroll.refreshComplete');
-         }, 100);
-     };*/
-   /*  $scope.friends = [
-              { nom: 'tata 1 ', prenom: 'toto 1' },
-              { nom: 'tata 2 ', prenom: 'toto 2' },
-              { nom: 'tata 3 ', prenom: 'toto 3' },
-              { nom: 'tata 4 ', prenom: 'toto 4' }
-     ];
-     */
+     /*  $scope.doRefresh = function () {
+           console.log('Refreshing!');
+           $scope.myfriends = [];
+           // appelle à la base de données
+           AppService.getFriends();
+
+           $timeout(function () {
+               //Stop the ion-refresher from spinning
+               $scope.$broadcast('scroll.refreshComplete');
+           }, 100);
+       };*/
+     /*  $scope.friends = [
+                { nom: 'tata 1 ', prenom: 'toto 1' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+       ];
+       */
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -281,7 +299,6 @@ angular.module('directory.controllers', [])
 	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
 	        $scope.showSettings = true;
 	        $scope.showBack = true;
-	       
 	    })
 
  .controller('MapCtrl', function ($scope, $state, NgMap) {
