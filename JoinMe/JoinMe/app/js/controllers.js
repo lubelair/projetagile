@@ -193,6 +193,7 @@ angular.module('directory.controllers', [])
             $scope.previousIndex = data.slider.previousIndex;
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
+                AppService.getInvitations();
             }
         });
 
@@ -255,13 +256,14 @@ angular.module('directory.controllers', [])
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
-     $scope.myfriends = [];
+     $scope.friends = [];
+     $scope.friendsInvitation = [];
      $scope.getFriends = function () {
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
-     }
 
+     }
      $scope.refreshFriend = function () {
          alert("toto");
          $timeout(function () {
@@ -272,7 +274,7 @@ angular.module('directory.controllers', [])
      /*  $scope.doRefresh = function () {
            console.log('Refreshing!');
            $scope.myfriends = [];
-           // appelle Ã  la base de donnÃ©es
+           // appelle à la base de données
            AppService.getFriends();
 
            $timeout(function () {

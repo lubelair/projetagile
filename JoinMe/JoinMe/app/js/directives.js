@@ -61,18 +61,17 @@
       var dtr = new Date().getTime();
       return {
           restrict: 'A',
-        //  replace: true,
+          //  replace: true,
           scope: true,
           templateUrl: 'templates/footer.html?' + dtr,
           controller: 'UserSpaceCtrl',
-          link: function (scope, element, attrs,Scopes) {
-             /* scope.goEvents = function () {
-                  alert("toto");
-                  console.log("toto");
-                 // scope.get('UserSpace').activeIndex = 0;
-              }*/
+          link: function (scope, element, attrs, Scopes) {
+              /* scope.goEvents = function () {
+                   alert("toto");
+                   console.log("toto");
+                  // scope.get('UserSpace').activeIndex = 0;
+               }*/
           }
-         
       }
   }])
 
@@ -125,15 +124,15 @@
             // init swiper min options
             var slideOptionsM = angular.copy(communOptions);
             slideOptionsM.loop = false;
-            var min = (((_TimeObject["min"]) % 11) );
-            console.log(_TimeObject["min"]+ " index min :"+min);
+            var min = (((_TimeObject["min"]) % 11));
+            console.log(_TimeObject["min"] + " index min :" + min);
             slideOptionsM.initialSlide = min;
             slideOptionsM.onSlideChangeEnd = function (swiper) {
                 console.log("Console min");
                 console.log(swiper);
             }
             // init swiper AmPm options
-            $scope.initialSlideAmPm =0;
+            $scope.initialSlideAmPm = 0;
             if (_TimeObject["ampm"] === "pm") {
                 $scope.initialSlideAmPm = 1;
             }

@@ -150,31 +150,37 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-    var Listfriends = [
-               { nom: 'tata 1 ', prenom: 'toto 1' },
+    /*var Listfriends = [
+               { LastName: 'Zabi', FirstName: 'Zabi' },
                { nom: 'tata 2 ', prenom: 'toto 2' },
                { nom: 'tata 3 ', prenom: 'toto 3' },
                { nom: 'tata 4 ', prenom: 'toto 4' }
     ];
 
-    /* _ListFriends = response.data;
+         _ListFriends = response.data;
      getScopes('FriendsCtrl').friends = Listfriends;
 
      console.log("list friends");
      console.log("result = " + response.data);
           console.log(response.data);*/
-    console.log(Listfriends);
+    console.log(response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').myfriends = Listfriends;
+            getScopes('FriendsCtrl').friends = response.data;
         });
     }, 10);
     // getScopes('FriendsCtrl').$Apply();
     // console.log(data);
 }
 
-function GetInvitationCallBack(data) {
-    console.log(data);
+function GetInvitationsCallBack(response) {
+    //response est vide
+    console.log(" totototot   "+response.data);
+    setTimeout(function () {
+        getScopes('FriendsCtrl').$apply(function () {
+            getScopes('FriendsCtrl').friendsInvitation = response.data;
+        });
+    }, 10);
 }
 var handleSuccess = function (response) {
     console.log(response.data);
@@ -186,7 +192,7 @@ var handleError = function (response) {
         ) {
         console.log(("An unknown error occurred."));
     }
-    console.log(response.data.message);
+    console.log(response);
 }
 
 var deleteUser = function (_User) { }
@@ -299,4 +305,18 @@ function getListFriends() {
     }, 10);
     // getScopes('FriendsCtrl').$apply();
     // getScopes('UserSpace').slider.slideTo(0);
+}
+
+function getListInvitaions() {
+    var Listfriends = [
+          { nom: 'tata 1 ', prenom: 'toto 1' },
+          { nom: 'tata 2 ', prenom: 'toto 2' },
+          { nom: 'tata 3 ', prenom: 'toto 3' },
+          { nom: 'tata 4 ', prenom: 'toto 4' }
+    ];
+    setTimeout(function () {
+        getScopes('FriendsCtrl').$apply(function () {
+            getScopes('FriendsCtrl').friendsInvitation = Listfriends;
+        });
+    }, 10);
 }
