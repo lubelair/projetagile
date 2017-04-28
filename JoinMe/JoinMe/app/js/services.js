@@ -18,6 +18,9 @@ angular.module('directory.services', [])
             getUsers: function () {
                 postUrl('GetUsers', "toto", GetUsersCallBack);
             },
+            deleteUser: function () {
+                postUrl('DeleteUser', $cookieStore.get('user').Id, deleteUserCallBack);
+            },
             getFriends: function () {
                 // test if friends is not empty
                 if (getScopes('FriendsCtrl').friends.length > 0) {

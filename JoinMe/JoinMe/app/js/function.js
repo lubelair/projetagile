@@ -11,7 +11,8 @@ var __User = {
     Password: "",
     PhoneNumber: 0,
     UserName: "",
-    Photo: ""
+    Photo: "",
+    IsActive: true
 }
 
 var _State;
@@ -155,19 +156,19 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-   /*var Listfriends = [
-               { LastName: 'Zabi', FirstName: 'Zabi' },
-               { nom: 'tata 2 ', prenom: 'toto 2' },
-               { nom: 'tata 3 ', prenom: 'toto 3' },
-               { nom: 'tata 4 ', prenom: 'toto 4' }
-    ];
+    /*var Listfriends = [
+                { LastName: 'Zabi', FirstName: 'Zabi' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+     ];
 
-          _ListFriends = response.data;
-     getScopes('FriendsCtrl').friends = Listfriends;
+           _ListFriends = response.data;
+      getScopes('FriendsCtrl').friends = Listfriends;
 
-     console.log("list friends");
-     console.log("result = " + response.data);
-          console.log(response.data);*/
+      console.log("list friends");
+      console.log("result = " + response.data);
+           console.log(response.data);*/
     console.log(response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
@@ -216,11 +217,15 @@ function updateUserCallBack(response) {
     console.log(response.data);
     if (response.data.IsActive) {
         saveCookies('user', response.data);
+        getState().go("userSpace");
     }
     else {
         getScopes('Settings').disconnect();
     }
-    isConnected() ? getState().go('userSpace') : getState().go('authentification');
+}
+
+function deleteUserCallBack(response) {
+    getScopes('Settings').disconnect();
 }
 
 function loginCallBack(response) {
@@ -238,6 +243,11 @@ function loginCallBack(response) {
             showConfirm("Attention !", "Votre compte est désactivé, voulez-le réactiver ?", "Oui", "Non", activeAccount);
         }
     }
+}
+
+function deleteUserCallBack(response) {
+    console.log(response.data);
+    getScopes('Settings').disconnect();
 }
 
 /***  Cookies functions ***/

@@ -15,7 +15,7 @@ angular.module('directory.controllers', [])
         $scope.showSettings = false;
         $scope.showBack = true;
 
-        $scope.newUser = { FirstName: '', LastName: '', Email: '', PhoneNumber: '', UserName: '', Password: '' };
+        $scope.newUser = __User;
 
         $scope.createUser = function (user, subscribeForm) {
             if (subscribeForm.$valid) {
@@ -99,23 +99,23 @@ angular.module('directory.controllers', [])
         $scope.showBack = true;
         $scope.regex = '[0-9]{10}';
 
-       // if ($cookieStore.get('user') != null) {
-            $scope.user = $cookieStore.get('user');
-      //  }
+        // if ($cookieStore.get('user') != null) {
+        $scope.user = $cookieStore.get('user');
+        //  }
 
-            $scope.$on('$ionicView.loaded', function () {
-                //Here your view content is fully loaded !!
-               setTimeout(function () {
+        $scope.$on('$ionicView.enter', function () {
+            //Here your view content is fully loaded !!
+            setTimeout(function () {
                 $scope.$apply(function () {
                     $scope.user = $cookieStore.get('user');
                 });
-            }, 0);
-            });
-            
+            }, 10);
+        });
+
         //Procédure exécutée au clic sur le bouton enregistrer de la page Paramètres
         $scope.saveSettings = function () {
             if (!$scope.user.IsActive) {
-                showConfirm("Attention !", "Vous êtes sur le point de désactiver votre compte, voulez-vous continuer ?", "Oui", "Non", $scope.disableAccount)
+                showConfirm("Attention !", "Vous êtes sur le point de désactiver votre compte, voulez-vous continuer ?", "Oui", "Non", $scope.disableAccount);
             } else {
                 AppService.updateUser($scope.user);
             }
@@ -125,8 +125,13 @@ angular.module('directory.controllers', [])
             AppService.updateUser($scope.user);
         }
 
+        $scope.clicDeleteAccount = function () {
+            console.log("Delete account");
+            showConfirm("Attention !", "Vous êtes sur le point de supprimer votre compte, voulez-vous continuer ?", "Oui", "Non", $scope.deleteAccount);
+        }
+
         $scope.deleteAccount = function () {
-            console.log("suppression du compte");
+            AppService.deleteUser();
         }
         $scope.disconnect = function () {
             $cookieStore.remove('user');
@@ -265,7 +270,6 @@ angular.module('directory.controllers', [])
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
-
      }
      $scope.refreshFriend = function () {
          alert("toto");
