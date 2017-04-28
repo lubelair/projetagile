@@ -277,7 +277,7 @@ angular.module('directory.controllers', [])
      /*  $scope.doRefresh = function () {
            console.log('Refreshing!');
            $scope.myfriends = [];
-           // appelle à la base de données
+           // appelle ï¿½ la base de donnï¿½es
            AppService.getFriends();
 
            $timeout(function () {
