@@ -11,7 +11,8 @@ var __User = {
     Password: "",
     PhoneNumber: 0,
     UserName: "",
-    Photo: ""
+    Photo: "",
+    IsActive: true
 }
 
 var _State;
@@ -138,7 +139,12 @@ function activeAccount() {
     var user = __User;
     user.IsActive = true;
     getScopes('Authentification').appService.updateUser(user);
-    getState().go("root");
+}
+
+function isConnected() {
+    if (getCookie('user') != null)
+        return true;
+    return false;
 }
 
 /***  CallBack functions ***/
@@ -150,23 +156,23 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-   var Listfriends = [
-               { LastName: 'Zabi', FirstName: 'Zabi' },
-               { nom: 'tata 2 ', prenom: 'toto 2' },
-               { nom: 'tata 3 ', prenom: 'toto 3' },
-               { nom: 'tata 4 ', prenom: 'toto 4' }
-    ];
+    /*var Listfriends = [
+                { LastName: 'Zabi', FirstName: 'Zabi' },
+                { nom: 'tata 2 ', prenom: 'toto 2' },
+                { nom: 'tata 3 ', prenom: 'toto 3' },
+                { nom: 'tata 4 ', prenom: 'toto 4' }
+     ];
 
-    /*      _ListFriends = response.data;
-     getScopes('FriendsCtrl').friends = Listfriends;
+           _ListFriends = response.data;
+      getScopes('FriendsCtrl').friends = Listfriends;
 
-     console.log("list friends");
-     console.log("result = " + response.data);
-          console.log(response.data);*/
+      console.log("list friends");
+      console.log("result = " + response.data);
+           console.log(response.data);*/
     console.log(response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = Listfriends;
+            getScopes('FriendsCtrl').friends = response.data;
         });
     }, 10);
     // getScopes('FriendsCtrl').$Apply();
@@ -208,7 +214,18 @@ function createUserCallBack(response) {
 }
 
 function updateUserCallBack(response) {
-    saveCookies('user', response.data);
+    console.log(response.data);
+    if (response.data.IsActive) {
+        saveCookies('user', response.data);
+        getState().go("userSpace");
+    }
+    else {
+        getScopes('Settings').disconnect();
+    }
+}
+
+function deleteUserCallBack(response) {
+    getScopes('Settings').disconnect();
 }
 
 function loginCallBack(response) {
@@ -226,6 +243,11 @@ function loginCallBack(response) {
             showConfirm("Attention !", "Votre compte est désactivé, voulez-le réactiver ?", "Oui", "Non", activeAccount);
         }
     }
+}
+
+function deleteUserCallBack(response) {
+    console.log(response.data);
+    getScopes('Settings').disconnect();
 }
 
 /***  Cookies functions ***/
