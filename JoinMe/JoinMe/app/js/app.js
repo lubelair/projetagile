@@ -73,6 +73,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         templateUrl: 'templates/InnerFriend.html',
         controller: 'InnerFriends'
     })
+    $stateProvider.state('LocalizeAt', {
+        url: '/localizeAt',
+        templateUrl: 'templates/LocalizeAt.html',
+        controller: 'LocalizeAtCtrl'
+    })
+    $stateProvider.state('EventFriends', {
+        url: '/eventFriends',
+        templateUrl: 'templates/EventFriends.html',
+        controller: 'EventFriendsCtrl'
+    })
 
     $urlRouterProvider.otherwise('/root')
 })

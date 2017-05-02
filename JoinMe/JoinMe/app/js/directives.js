@@ -81,7 +81,8 @@
           replace: true,
           scope: {
               listfriend: '=',
-              doRefresh: '&'
+              doRefresh: '&',
+              showAddBtn:'='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) { }
@@ -92,10 +93,10 @@
      return {
          restrict: 'A',
          replace: true,
-        scope: {
+         scope: {
              listevents: '=',
              doRefresh: '&'
-         }, 
+         },
          templateUrl: 'templates/InnerEvent.html',
          link: function (scope, element, attrs) { }
      }
@@ -107,7 +108,8 @@
         replace: true,
         scope: true,
         templateUrl: 'templates/Calendar.html?' + dtr,
-        link: function ($scope, element, attrs) {
+        link: function ($scope, element, attrs, Scopes) {
+           
             var communOptions = {
                 direction: 'vertical',
                 centeredSlides: true,
@@ -116,6 +118,8 @@
                 //   autoHeight: true,
                 calculateHeight: false
             };
+
+            $scope.selectedTime = { hours: "", min: "", isAm: "Am", todayTomorrow: "Today" };
             // init swiper hours options
             var slideOptionsH = angular.copy(communOptions);
             slideOptionsH.loop = false;
@@ -127,7 +131,7 @@
             // init swiper min options
             var slideOptionsM = angular.copy(communOptions);
             slideOptionsM.loop = false;
-            var min = Math.trunc(_TimeObject["min"] / 5)+12;
+            var min = Math.trunc(_TimeObject["min"] / 5) + 12;
             console.log(_TimeObject["min"] + " index min :" + min);
             slideOptionsM.initialSlide = min;
             slideOptionsM.onSlideChangeEnd = function (swiper) {
@@ -172,8 +176,25 @@
             var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
             var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
-            swiperH.activeIndex = _TimeObject["hours"];
-            swiperM.activeIndex = _TimeObject["min"];
+            $scope.createEvent = function () {
+                var hours = (swiperH.activeIndex + 1) % 12;
+
+                if (!isAm(swiperAmPm.activeIndex)) {
+                    hours = hours + 12;
+                    $scope.selectedTime.isAm = "Pm";
+                }
+
+                if (swiperTodTom.activeIndex == 1) {
+                    $scope.selectedTime.todayTomorrow = "Tomorrow";
+                }
+
+                $scope.selectedTime.hours = hours;
+                var min = $scope.selectedTime.min = (swiperM.activeIndex % 12) * 5;
+
+                console.log(" create event time " + $scope.selectedTime.hours + ":" + min);
+                initTimeFromCalendar($scope.selectedTime);
+                getState().go("LocalizeAt");
+            }
         }
     }
 }])

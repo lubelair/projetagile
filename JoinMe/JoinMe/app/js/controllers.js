@@ -215,8 +215,7 @@ angular.module('directory.controllers', [])
 
         console.log(Scopes.get('UserSpace'));
     })
-
-    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation) {
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -224,7 +223,6 @@ angular.module('directory.controllers', [])
             timeout: 50000,
             maximumAge: 0
         };
-
         $scope.getCurrentLocation = function () {
             $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                 var lat = position.coords.latitude;
@@ -232,6 +230,7 @@ angular.module('directory.controllers', [])
                 var myLatlng = new google.maps.LatLng(lat, long);
                 $scope.myMap.setCenter(myLatlng);
                 $scope.myPosition = myLatlng;
+                initCurrentPosition(myLatlng);
             }, function (err) {
                 $ionicLoading.hide();
                 alert("pleaz activate your GPS");
@@ -280,6 +279,7 @@ angular.module('directory.controllers', [])
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
+     $scope.showAddBtn = false;
      $scope.friends = [];
      $scope.friendsInvitation = [];
      /*
@@ -313,23 +313,37 @@ angular.module('directory.controllers', [])
          $scope.$apply();
      };
  })
+ .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
+     $scope.showSettings = true;
+     $scope.showBack = true;
 
-	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
-	        $scope.showSettings = true;
-	        $scope.showBack = true;
-	    })
+ })
 
- .controller('MapCtrl', function ($scope, $state, NgMap) {
-     $scope.message = 'You can not hide. :)';
-     var vm = this;
-     vm.message = 'You can not hide. :)';
-     NgMap.getMap("map").then(function (map) {
-         console.log('get map');
-
-         vm.map = map;
-     });
-     $scope.callbackFunc = function (param) {
-         console.log('I know where ' + param + ' are. ' + vm.message);
-         console.log('You are at' + vm.map.getCenter());
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
+     $scope.Title = "Je serais à";
+     $scope.types = "['geocode']";
+     $scope.Initposition = getCurrentPosition();
+     $scope.showBack = true;
+     $scope.eventTime = getTimeFromCalendar();
+     _EventOptions = { eventTime: getTimeFromCalendar(), location: "", friends: [] };
+     $scope.placeChanged = function () {
+         $scope.place = this.getPlace();
+         $scope.map.setCenter($scope.place.geometry.location);
+         _EventOptions.location = $scope.place.geometry;
+         $scope.showMarker = 'true';
+         $scope.map.showInfoWindow('adresse', 'marker');
+     }
+     $scope.selectFriends = function () {
+         $state.go("EventFriends");
+     }
+     $scope.mycallback = function (map) {
+         $scope.showMarker = 'false';
+         $scope.map = map;
      };
  })
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
+    $scope.showAddBtn = true;
+    $scope.Title = "Inviter des amis";
+    $scope.friends = [{ FirstName: "toto", LastName: "tata" }];
+
+})

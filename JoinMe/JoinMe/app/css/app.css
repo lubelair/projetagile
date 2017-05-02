@@ -193,3 +193,11 @@
 .disabled, input[disabled] {
     background-color: #ddd;
 }
+/*position element to right*/
+.right {
+    float:right;
+}
+/*position element to left*/
+.left {
+    float:left;
+}

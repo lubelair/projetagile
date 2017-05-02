@@ -30,6 +30,13 @@ var _Scopes = {};
 
 var _ListFriends = [];
 
+// Calendar time
+var _CalendarTime = {};
+// Event infos
+var _EventOptions = {};
+
+var _CurrentPosition = {};
+
 /*** Functions ***/
 
 //************************************************************
@@ -156,16 +163,19 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-    console.log(response.data);
+  
+    var listFriends = [{ FirstName: "toto", LastName: "tata" }
+    ];
+    console.log("GetFriendsCallBack", listFriends);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = response.data;
+            getScopes('FriendsCtrl').friends = listFriends;
         });
     }, 10);
 }
 
 function GetInvitationsCallBack(response) {
-    console.log(response.data);
+    console.log("GetInvitationsCallBack", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friendsInvitation = response.data;
@@ -316,11 +326,24 @@ function getScopes(key) {
 function goToEvent() {
     getScopes('UserSpace').slider.slideTo(0);
 }
-/*
-setTimeout(function () {
-    getScopes('FriendsCtrl').$apply(function () {
-        getScopes('FriendsCtrl').myfriends = Listfriends;
-    });
-}, 10); */
-// getScopes('FriendsCtrl').$apply();
-// getScopes('UserSpace').slider.slideTo(0);
+
+//check if time is am or pm
+function isAm(index) {
+return index ==0 ? true  :false;
+}
+
+// get time from calendar
+function getTimeFromCalendar() {
+   return  _CalendarTime ;
+}
+
+function initTimeFromCalendar(time) {
+    _CalendarTime = time;
+}
+
+function initCurrentPosition(position) {
+    _CurrentPosition = position;
+}
+function getCurrentPosition() {
+    return _CurrentPosition;
+}
