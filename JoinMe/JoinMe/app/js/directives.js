@@ -83,6 +83,7 @@
               listfriend: '=',
               doRefresh: '&',
               showAddBtn: '=',
+              friendView:'='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) {
@@ -126,8 +127,7 @@
                 centeredSlides: true,
                 slidesPerView: 3,
                 spaceBetween: 1,
-                //   autoHeight: true,
-                calculateHeight: false
+               calculateHeight: true
             };
 
             $scope.selectedTime = { hours: "", min: "", isAm: "Am", todayTomorrow: "Today" };

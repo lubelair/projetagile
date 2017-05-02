@@ -173,6 +173,30 @@ namespace JoinMe.Controllers
             return user;
         }
 
+        // Récupération des users
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetUsers(Object userName)
+        {
+            try
+            {
+                var name = userName.ToString();
+                return await (from a in db.Users
+                              where a.UserName.Equals(name) && a.IsActive && !a.IsDeleted
+                              select new
+                              {
+                                  a.Id,
+                                  a.FirstName,
+                                  a.LastName,
+                                  a.UserName
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpGet, HttpPost]
         public IHttpActionResult Index()
         {

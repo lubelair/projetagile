@@ -16,7 +16,8 @@ angular.module('directory.services', [])
                 return __User;
             },
             getUsers: function () {
-                postUrl('GetUsers', "toto", GetUsersCallBack);
+                console.log('OK');
+                postUrl('GetUsers', $cookieStore.get('user').UserName, GetUsersCallBack);
             },
             deleteUser: function () {
                 postUrl('DeleteUser', $cookieStore.get('user').Id, deleteUserCallBack);

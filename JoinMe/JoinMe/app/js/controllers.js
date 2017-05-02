@@ -204,6 +204,7 @@ angular.module('directory.controllers', [])
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
                 AppService.getInvitations();
+                AppService.getUsers();
             }
             if (data.slider.activeIndex == 2) {
                 AppService.getEventsrecived();
@@ -211,15 +212,19 @@ angular.module('directory.controllers', [])
             }
         });
 
+        $scope.goFriends = function () {
+            $scope.slider.slideTo(0);
+        }
+        $scope.goAccueil = function () {
+            $scope.slider.slideTo(1);
+        }
         $scope.goEvents = function () {
-            // goToEvent();
-            getListFriends();
-            //  $scope.slider.slideTo(0);
+            $scope.slider.slideTo(2);
         }
 
         console.log(Scopes.get('UserSpace'));
     })
-    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading) {
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -309,14 +314,24 @@ angular.module('directory.controllers', [])
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
-     // $scope.patern = '';
-     $scope.search = function () {
-         //  console.log(val);
-         console.log(patern);
-         //  $scope.query = val;
-         $scope.$apply();
-     };
- })
+
+     $scope.refreshUsers = function () {
+         console.log("OK");
+         $scope.userResearch = [];
+         AppService.getUsers();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100)
+     }
+         // $scope.patern = '';
+         $scope.search = function () {
+             //  console.log(val);
+             console.log(patern);
+             //  $scope.query = val;
+             $scope.$apply();
+         };
+     })
  .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
      $scope.showSettings = true;
      $scope.showBack = true;
