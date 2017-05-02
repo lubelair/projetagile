@@ -360,6 +360,7 @@ angular.module('directory.controllers', [])
      };
  })
 .controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
+    $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
     $scope.friends = ListFriends;
