@@ -205,6 +205,10 @@ angular.module('directory.controllers', [])
                 AppService.getFriends();
                 AppService.getInvitations();
             }
+            if (data.slider.activeIndex == 2) {
+                AppService.getEventsrecived();
+                AppService.getEventssend();
+            }
         });
 
         $scope.goEvents = function () {
