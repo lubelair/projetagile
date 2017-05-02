@@ -324,21 +324,20 @@ angular.module('directory.controllers', [])
              $scope.$broadcast('scroll.refreshComplete');
          }, 100)
      }
-         // $scope.patern = '';
-         $scope.search = function () {
-             //  console.log(val);
-             console.log(patern);
-             //  $scope.query = val;
-             $scope.$apply();
-         };
-     })
+     // $scope.patern = '';
+     $scope.search = function () {
+         //  console.log(val);
+         console.log(patern);
+         //  $scope.query = val;
+         $scope.$apply();
+     };
+ })
  .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
      $scope.showSettings = true;
      $scope.showBack = true;
-
  })
 
- .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,AppService) {
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
      $scope.Title = "Je serais à";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
@@ -360,11 +359,13 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state,  AppService) {
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
+    $scope.friends = ListFriends;
+   // $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
     $scope.createEvent = function () {
         AppService.CreateEvent(_EventOptions);
     }
+
 })

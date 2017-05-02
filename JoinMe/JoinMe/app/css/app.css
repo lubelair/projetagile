@@ -169,6 +169,7 @@
 
     .calendarWraper .now {
         text-align: center;
+        border-bottom : 1px ridge black;
     }
 
     .calendarWraper .next {
