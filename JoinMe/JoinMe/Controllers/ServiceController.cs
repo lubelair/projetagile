@@ -60,11 +60,14 @@ namespace JoinMe.Controllers
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Events
                               join b in db.EventFriends on a.Id equals b.EventId
+                              join c in db.Users on a.UserId equals c.Id
                               where b.FriendId == id
                               select new
                               {
                                   a.EventDateTime,
-                                  a.Location
+                                  a.Location,
+                                  a.NomEvent,
+                                  c.UserName
                               }).ToListAsync();
             }
             catch (Exception e)
@@ -83,11 +86,13 @@ namespace JoinMe.Controllers
                 var id = int.Parse(userId.ToString());
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Events
+                              join b in db.Users on a.UserId equals b.Id
                               where a.UserId == id
                               select new
                               {
                                   a.EventDateTime,
-                                  a.Location
+                                  a.Location,
+                                  a.NomEvent
                               }).ToListAsync();
             }
             catch (Exception e)
