@@ -103,12 +103,14 @@ angular.module('directory.controllers', [])
         $scope.user = $cookieStore.get('user');
         //  }
 
+        // $scope.$on('$ionicView.loaded', function () {zayd
         $scope.$on('$ionicView.enter', function () {
             //Here your view content is fully loaded !!
             setTimeout(function () {
                 $scope.$apply(function () {
                     $scope.user = $cookieStore.get('user');
                 });
+                // }, 0);zayd
             }, 10);
         });
 
@@ -213,8 +215,7 @@ angular.module('directory.controllers', [])
 
         console.log(Scopes.get('UserSpace'));
     })
-
-    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation) {
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -222,7 +223,6 @@ angular.module('directory.controllers', [])
             timeout: 50000,
             maximumAge: 0
         };
-
         $scope.getCurrentLocation = function () {
             $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                 var lat = position.coords.latitude;
@@ -230,6 +230,7 @@ angular.module('directory.controllers', [])
                 var myLatlng = new google.maps.LatLng(lat, long);
                 $scope.myMap.setCenter(myLatlng);
                 $scope.myPosition = myLatlng;
+                initCurrentPosition(myLatlng);
             }, function (err) {
                 $ionicLoading.hide();
                 alert("pleaz activate your GPS");
@@ -243,15 +244,29 @@ angular.module('directory.controllers', [])
         }
     })
 
- .controller('EventsCtrl', function ($scope, $state, AppService, Scopes) {
-     Scopes.store("'Events", $scope);
+ .controller('EventsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
+     Scopes.store("EventsCtrl", $scope);
      $scope.Title = "Evenements"
-     $scope.events = [
-              { nom: 'tata 1X ' },
-              { nom: 'tata 2X ' },
-              { nom: 'tata 3X ' },
-              { nom: 'tata 4X ' }
-     ];
+     $scope.eventssend = [];
+     $scope.eventsrecived = [];
+
+     $scope.refreshEventsend = function () {
+         $scope.eventssend = [];
+         AppService.getEventssend();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
+     $scope.refreshEventrecived = function () {
+         $scope.eventsrecived = [];
+         AppService.getEventsrecived();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
+
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -264,38 +279,32 @@ angular.module('directory.controllers', [])
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
+     $scope.showAddBtn = false;
      $scope.friends = [];
      $scope.friendsInvitation = [];
+     /*
      $scope.getFriends = function () {
          getListFriends();
      }
      $scope.getWhoInvitedMe = function () {
      }
+     */
      $scope.refreshFriend = function () {
-         alert("toto");
+         $scope.friends = [];
+         AppService.getFriends();
          $timeout(function () {
              //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
-     /*  $scope.doRefresh = function () {
-           console.log('Refreshing!');
-           $scope.myfriends = [];
-           // appelle � la base de donn�es
-           AppService.getFriends();
-
-           $timeout(function () {
-               //Stop the ion-refresher from spinning
-               $scope.$broadcast('scroll.refreshComplete');
-           }, 100);
-       };*/
-     /*  $scope.friends = [
-                { nom: 'tata 1 ', prenom: 'toto 1' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
-       ];
-       */
+     $scope.refreshInvitation = function () {
+         $scope.friendsInvitation = [];
+         AppService.getInvitations();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100);
+     }
      // $scope.patern = '';
      $scope.search = function () {
          //  console.log(val);
@@ -304,23 +313,37 @@ angular.module('directory.controllers', [])
          $scope.$apply();
      };
  })
+ .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
+     $scope.showSettings = true;
+     $scope.showBack = true;
 
-	    .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
-	        $scope.showSettings = true;
-	        $scope.showBack = true;
-	    })
+ })
 
- .controller('MapCtrl', function ($scope, $state, NgMap) {
-     $scope.message = 'You can not hide. :)';
-     var vm = this;
-     vm.message = 'You can not hide. :)';
-     NgMap.getMap("map").then(function (map) {
-         console.log('get map');
-
-         vm.map = map;
-     });
-     $scope.callbackFunc = function (param) {
-         console.log('I know where ' + param + ' are. ' + vm.message);
-         console.log('You are at' + vm.map.getCenter());
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
+     $scope.Title = "Je serais à";
+     $scope.types = "['geocode']";
+     $scope.Initposition = getCurrentPosition();
+     $scope.showBack = true;
+     $scope.eventTime = getTimeFromCalendar();
+     _EventOptions = { eventTime: getTimeFromCalendar(), location: "", friends: [] };
+     $scope.placeChanged = function () {
+         $scope.place = this.getPlace();
+         $scope.map.setCenter($scope.place.geometry.location);
+         _EventOptions.location = $scope.place.geometry;
+         $scope.showMarker = 'true';
+         $scope.map.showInfoWindow('adresse', 'marker');
+     }
+     $scope.selectFriends = function () {
+         $state.go("EventFriends");
+     }
+     $scope.mycallback = function (map) {
+         $scope.showMarker = 'false';
+         $scope.map = map;
      };
  })
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
+    $scope.showAddBtn = true;
+    $scope.Title = "Inviter des amis";
+    $scope.friends = [{ FirstName: "toto", LastName: "tata" }];
+
+})

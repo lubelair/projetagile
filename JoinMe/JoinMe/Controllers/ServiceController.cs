@@ -47,6 +47,55 @@ namespace JoinMe.Controllers
             return Ok(user);
         }
 
+        //##################  Fonctions classe evenements
+
+        // Récupere evenement envoyer
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetEventsrecived(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
+                return await (from a in db.Events
+                              join b in db.EventFriends on a.Id equals b.EventId
+                              where b.FriendId == id
+                              select new
+                              {
+                                  a.EventDateTime,
+                                  a.Location
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        // Récupere evenement reçu
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetEventssend(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
+                return await (from a in db.Events
+                              where a.UserId == id
+                              select new
+                              {
+                                  a.EventDateTime,
+                                  a.Location
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         //##################  Fonctions classe Friends
         // Récupere friends
         [ResponseType(typeof(Object))]

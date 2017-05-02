@@ -30,6 +30,13 @@ var _Scopes = {};
 
 var _ListFriends = [];
 
+// Calendar time
+var _CalendarTime = {};
+// Event infos
+var _EventOptions = {};
+
+var _CurrentPosition = {};
+
 /*** Functions ***/
 
 //************************************************************
@@ -156,38 +163,46 @@ function GetUsersCallBack(data) {
     console.log(data);
 }
 function GetFriendsCallBack(response) {
-    /*var Listfriends = [
-                { LastName: 'Zabi', FirstName: 'Zabi' },
-                { nom: 'tata 2 ', prenom: 'toto 2' },
-                { nom: 'tata 3 ', prenom: 'toto 3' },
-                { nom: 'tata 4 ', prenom: 'toto 4' }
-     ];
-
-           _ListFriends = response.data;
-      getScopes('FriendsCtrl').friends = Listfriends;
-
-      console.log("list friends");
-      console.log("result = " + response.data);
-           console.log(response.data);*/
-    console.log(response.data);
+  
+    var listFriends = [{ FirstName: "toto", LastName: "tata" }
+    ];
+    console.log("GetFriendsCallBack", listFriends);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = response.data;
+            getScopes('FriendsCtrl').friends = listFriends;
         });
     }, 10);
-    // getScopes('FriendsCtrl').$Apply();
-    // console.log(data);
 }
 
 function GetInvitationsCallBack(response) {
-    //response est vide
-    console.log(response.data);
+    console.log("GetInvitationsCallBack", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friendsInvitation = response.data;
         });
     }, 10);
 }
+
+function GetEventssendCallBack(response) {
+    console.log(response.data);
+
+    setTimeout(function () {
+        getScopes('EventsCtrl').$apply(function () {
+            getScopes('EventsCtrl').eventssend = response.data;
+        });
+    }, 10);
+}
+
+function GetEventsrecivedCallBack(response) {
+    console.log(response.data);
+    setTimeout(function () {
+        getScopes('EventsCtrl').$apply(function () {
+            getScopes('EventsCtrl').eventsrecived = response.data;
+        });
+    }, 10);
+}
+
+/***  Fin CallBack functions ***/
 var handleSuccess = function (response) {
     console.log(response.data);
 }
@@ -312,33 +327,23 @@ function goToEvent() {
     getScopes('UserSpace').slider.slideTo(0);
 }
 
-function getListFriends() {
-    var Listfriends = [
-             { nom: 'tata 1 ', prenom: 'toto 1' },
-             { nom: 'tata 2 ', prenom: 'toto 2' },
-             { nom: 'tata 3 ', prenom: 'toto 3' },
-             { nom: 'tata 4 ', prenom: 'toto 4' }
-    ];
-
-    setTimeout(function () {
-        getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').myfriends = Listfriends;
-        });
-    }, 10);
-    // getScopes('FriendsCtrl').$apply();
-    // getScopes('UserSpace').slider.slideTo(0);
+//check if time is am or pm
+function isAm(index) {
+return index ==0 ? true  :false;
 }
 
-function getListInvitaions() {
-    var Listfriends = [
-          { nom: 'tata 1 ', prenom: 'toto 1' },
-          { nom: 'tata 2 ', prenom: 'toto 2' },
-          { nom: 'tata 3 ', prenom: 'toto 3' },
-          { nom: 'tata 4 ', prenom: 'toto 4' }
-    ];
-    setTimeout(function () {
-        getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friendsInvitation = Listfriends;
-        });
-    }, 10);
+// get time from calendar
+function getTimeFromCalendar() {
+   return  _CalendarTime ;
+}
+
+function initTimeFromCalendar(time) {
+    _CalendarTime = time;
+}
+
+function initCurrentPosition(position) {
+    _CurrentPosition = position;
+}
+function getCurrentPosition() {
+    return _CurrentPosition;
 }
