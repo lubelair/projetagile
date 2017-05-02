@@ -98,126 +98,128 @@
     height: 100%;
 }
 /*calendar style*/
-.calendarWraper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    display: block;
-    background-color: #ecf0f1;
-    opacity : 0.9;
-    border-radius : 50%;
-    border : 1px ridge black;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    max-width: 300px;
-    max-height: 300px;
-}
 
-.calendarContainer{
-    overflow: hidden;
-    position: absolute;
-    display: block;
-    width: 80%;
-    height: 60%;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .calendarWraper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        display: block;
+        background-color: #ecf0f1;
+        opacity: 0.9;
+        border-radius: 50%;
+        border: 1px ridge black;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 300px;
+        max-height: 300px;
+    }
 
-/*swiper*/
-.swiper-container.custom {
-    width: 50%;
-    height: 5%;
-}
+    .calendarContainer {
+        overflow: hidden;
+        position: absolute;
+        display: block;
+        width: 80%;
+        height: 60%;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+    }
 
-.swiper-container.global .swiper-slide {
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
+    /*swiper*/
+    .swiper-container.custom {
+        width: 50%;
+        height: 5%;
+    }
 
-.swiper-container.hours, .swiper-container.minutes {
-    /*width:80px;*/
-}
+    .swiper-container.global .swiper-slide {
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
 
-.swiper-container.TodayTomorrow{
-    font-size : 80%;
-}
+    .swiper-container.hours, .swiper-container.minutes {
+        /*width:80px;*/
+    }
 
-.swiper-container.global {
-    float: left;
-    width: 85%;
-}
+    .swiper-container.TodayTomorrow {
+        font-size: 80%;
+    }
 
-.calendarWraper .next {
-    float: left;
-    width: 15%;
-}
+    .swiper-container.global {
+        float: left;
+        width: 85%;
+    }
 
-.calendarWraper .now {
-    text-align: center;
-}
+    .calendarWraper .next {
+        float: left;
+        width: 15%;
+    }
 
-.calendarWraper .next {
-    text-align: center;
-}
+    .calendarWraper .now {
+        text-align: center;
+    }
 
-.calendarWraper .swiper-slide.swiper-slide-active {
-    color: royalblue;
-    border-right : 1px ridge black;
-}
+    .calendarWraper .next {
+        text-align: center;
+    }
 
-.table {
-    display: table;
-}
+    .calendarWraper .swiper-slide.swiper-slide-active {
+        color: royalblue;
+        border-right: 1px ridge black;
+    }
 
-.cell {
-    display: table-cell;
-}
+    .table {
+        display: table;
+    }
 
-.table, .cell {
-    width: 100%;
-    height: 100%;
-}
+    .cell {
+        display: table-cell;
+    }
 
-.calendarWraper .next .cell {
-    vertical-align: middle;
-    text-align: center;
-}
+    .table, .cell {
+        width: 100%;
+        height: 100%;
+    }
 
-.calendarWraper .next {
-    height: 100%;
-}
+    .calendarWraper .next .cell {
+        vertical-align: middle;
+        text-align: center;
+    }
 
-.nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
-    top: 44px;
-}
+    .calendarWraper .next {
+        height: 100%;
+    }
 
-.list {
-    margin-top: 50px;
-}
+    .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
+        top: 44px;
+    }
 
-.disabled, input[disabled] {
-    background-color: #ddd;
-}
-/*position element to right*/
-.right {
-    float:right;
-}
-/*position element to left*/
-.left {
-    float:left;
-}
+    .list {
+        margin-top: 50px;
+    }
+
+    .disabled, input[disabled] {
+        background-color: #ddd;
+    }
+    /*position element to right*/
+    .right {
+        float: right;
+    }
+    /*position element to left*/
+    .left {
+        float: left;
+    }
