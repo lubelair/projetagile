@@ -211,10 +211,14 @@ angular.module('directory.controllers', [])
             }
         });
 
+        $scope.goFriends = function () {
+            $scope.slider.slideTo(0);
+        }
+        $scope.goAccueil = function () {
+            $scope.slider.slideTo(1);
+        }
         $scope.goEvents = function () {
-            // goToEvent();
-            getListFriends();
-            //  $scope.slider.slideTo(0);
+            $scope.slider.slideTo(2);
         }
 
         console.log(Scopes.get('UserSpace'));
