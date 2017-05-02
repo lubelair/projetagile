@@ -30,6 +30,23 @@ namespace JoinMe.Controllers
             }
         }
 
+        //Suppression du user
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteUser(Object userId)
+        {
+            User user = await db.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            db.Users.Remove(user);
+            await db.SaveChangesAsync();
+
+            return Ok(user);
+        }
+
         //##################  Fonctions classe Friends
         // Récupere friends
         [ResponseType(typeof(Object))]
