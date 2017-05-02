@@ -114,7 +114,7 @@
                 direction: 'vertical',
                 centeredSlides: true,
                 slidesPerView: 3,
-                //  spaceBetween: 5,
+                spaceBetween: 1,
                 //   autoHeight: true,
                 calculateHeight: false
             };
