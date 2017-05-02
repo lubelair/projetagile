@@ -362,5 +362,5 @@ angular.module('directory.controllers', [])
 .controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = [];
+    $scope.friends = ListFriends;
 })

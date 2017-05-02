@@ -28,7 +28,7 @@ var _Scopes = {};
 
 //List friends
 
-var _ListFriends = [];
+var ListFriends = [];
 
 // Calendar time
 var _CalendarTime = {};
@@ -173,6 +173,7 @@ function GetFriendsCallBack(response) {
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = response.data;
+            ListFriends = response.data;
         });
     }, 10);
 }
