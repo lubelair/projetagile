@@ -324,22 +324,21 @@ angular.module('directory.controllers', [])
              $scope.$broadcast('scroll.refreshComplete');
          }, 100)
      }
-         // $scope.patern = '';
-         $scope.search = function () {
-             //  console.log(val);
-             console.log(patern);
-             //  $scope.query = val;
-             $scope.$apply();
-         };
-     })
+     // $scope.patern = '';
+     $scope.search = function () {
+         //  console.log(val);
+         console.log(patern);
+         //  $scope.query = val;
+         $scope.$apply();
+     };
+ })
  .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
      $scope.showSettings = true;
      $scope.showBack = true;
-
  })
 
- .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
-     $scope.Title = "Je serais à";
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
+     $scope.Title = "Je serai à";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
@@ -364,5 +363,4 @@ angular.module('directory.controllers', [])
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
     $scope.friends = [];
-
 })
