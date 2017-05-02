@@ -164,12 +164,11 @@ function GetUsersCallBack(data) {
 }
 function GetFriendsCallBack(response) {
   
-    var listFriends = [{ FirstName: "toto", LastName: "tata" }
-    ];
-    console.log("GetFriendsCallBack", listFriends);
+  //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
+    console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = listFriends;
+            getScopes('FriendsCtrl').friends = response.data;
         });
     }, 10);
 }
