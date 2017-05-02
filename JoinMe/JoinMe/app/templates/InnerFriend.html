@@ -10,14 +10,17 @@
         <ion-refresher on-refresh="doRefresh()">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
-        <ion-list id="innerFriends-list4">
-            <ion-item class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in listfriend | filter: query">
+        <ion-list click-for-options-wrapper id="innerFriends-list4">
+            <ion-item click-for-options class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in listfriend | filter: query">
                 <img id="imgAvatar" src="img/icon_friend.png">
-                <div class="item-text-center item-text-wrap"><h2>{{f.FirstName+' '+f.LastName}}</h2></div>
-                <label class="checkbox right" ng-show="showAddBtn">
-                    <input type="checkbox"  ng-click="addFriend(f); $event.stopPropagation();">
+                <div class="item-text-center item-text-wrap">
+                    <h2>{{f.FirstName+' '+f.LastName}}</h2>
+                    <ion-option-button class="button-assertive">supprimer</ion-option-button>
+                </div>
+                <label class="checkbox right" ng-show="showAddBtn, showSwipBtn">
+                    <input type="checkbox" ng-click="addFriend(f); $event.stopPropagation();">
                 </label>
-              </ion-item>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

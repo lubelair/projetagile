@@ -204,6 +204,7 @@ angular.module('directory.controllers', [])
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
                 AppService.getInvitations();
+                AppService.getUsers();
             }
             if (data.slider.activeIndex == 2) {
                 AppService.getEventsrecived();
@@ -223,7 +224,7 @@ angular.module('directory.controllers', [])
 
         console.log(Scopes.get('UserSpace'));
     })
-    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation) {
+    .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading) {
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
         var posOptions = {
@@ -313,14 +314,24 @@ angular.module('directory.controllers', [])
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
-     // $scope.patern = '';
-     $scope.search = function () {
-         //  console.log(val);
-         console.log(patern);
-         //  $scope.query = val;
-         $scope.$apply();
-     };
- })
+
+     $scope.refreshUsers = function () {
+         console.log("OK");
+         $scope.userResearch = [];
+         AppService.getUsers();
+         $timeout(function () {
+             //Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+         }, 100)
+     }
+         // $scope.patern = '';
+         $scope.search = function () {
+             //  console.log(val);
+             console.log(patern);
+             //  $scope.query = val;
+             $scope.$apply();
+         };
+     })
  .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
      $scope.showSettings = true;
      $scope.showBack = true;
@@ -352,6 +363,6 @@ angular.module('directory.controllers', [])
 .controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = [];
+    $scope.friends = ListFriends;
 
 })

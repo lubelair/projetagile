@@ -113,7 +113,7 @@ namespace JoinMe.Controllers
                 // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Friends
                               join b in db.Users on a.FriendId equals b.Id
-                              where a.UserId == id && a.IsApproved
+                              where a.UserId == id && a.IsApproved && !b.IsDeleted && b.IsActive
                               select new
                               {
                                   b.FirstName,
@@ -121,7 +121,7 @@ namespace JoinMe.Controllers
                                   b.Id
                               }).Union(from a in db.Friends
                                        join b in db.Users on a.UserId equals b.Id
-                                       where a.FriendId == id && a.IsApproved
+                                       where a.FriendId == id && a.IsApproved && !b.IsDeleted && b.IsActive
                                        select new
                                        {
                                            b.FirstName,
@@ -176,6 +176,30 @@ namespace JoinMe.Controllers
             }
 
             return user;
+        }
+
+        // Récupération des users
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetUsers(Object userName)
+        {
+            try
+            {
+                var name = userName.ToString();
+                return await (from a in db.Users
+                              where a.UserName.Equals(name) && a.IsActive && !a.IsDeleted
+                              select new
+                              {
+                                  a.Id,
+                                  a.FirstName,
+                                  a.LastName,
+                                  a.UserName
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         [HttpGet, HttpPost]

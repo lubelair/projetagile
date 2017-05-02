@@ -28,7 +28,7 @@ var _Scopes = {};
 
 //List friends
 
-var _ListFriends = [];
+var ListFriends = [];
 
 // Calendar time
 var _CalendarTime = {};
@@ -159,16 +159,21 @@ function isConnected() {
 var indexCallBack = function (data) {
     console.log(data);
 }
-function GetUsersCallBack(data) {
-    console.log(data);
+function GetUsersCallBack(response) {
+    console.log("GetUsersCallBack", response.data);
+    setTimeout(function () {
+        getScopes('FriendsCtrl').$apply(function () {
+            getScopes('FriendsCtrl').userResearch = response.data;
+        });
+    }, 10);
 }
 function GetFriendsCallBack(response) {
-  
-  //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
+    //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
     console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = response.data;
+            ListFriends = response.data;
         });
     }, 10);
 }
@@ -328,12 +333,12 @@ function goToEvent() {
 
 //check if time is am or pm
 function isAm(index) {
-return index ==0 ? true  :false;
+    return index == 0 ? true : false;
 }
 
 // get time from calendar
 function getTimeFromCalendar() {
-   return  _CalendarTime ;
+    return _CalendarTime;
 }
 
 function initTimeFromCalendar(time) {
