@@ -10,10 +10,13 @@
         <ion-refresher on-refresh="doRefresh()">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
-        <ion-list id="innerEvents-list4">
-            <ion-item class="item-avatar" id="innerFriends-list-item2" ng-repeat="e in listevents | filter: query">
+        <ion-list id="innerEvents-list4" click-for-options-wrapper>
+            <ion-item click-for-options class="item-avatar" id="innerFriends-list-item2" ng-repeat="e in listevents | filter: query">
                 <img id="imgAvatar" src="img/9Dlls3CrTLGcBNiQq5XM_facebook-default-no-profile-pic.jpg">
-                <div class="item-text-center item-text-wrap"><h2>{{e.Location+' '+e.EventDateTime}}</h2></div>
+                <div class="item-text-center item-text-wrap">
+                    <h2>{{e.Location+' '+e.EventDateTime}}</h2>
+                    <ion-option-button class="button-assertive">supprimer</ion-option-button>
+                </div>
             </ion-item>
         </ion-list>
     </ion-content>
