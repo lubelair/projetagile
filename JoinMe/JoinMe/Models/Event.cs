@@ -30,6 +30,9 @@ namespace JoinMeServices.Models
         [Required]
         public string Location { get; set; }
 
+        [Required]
+        public string NomEvent { get; set; }
+
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
