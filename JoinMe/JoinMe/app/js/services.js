@@ -68,11 +68,15 @@ angular.module('directory.services', [])
             selectPhoto: function () {
                 showActionSheet();
             },
-            SendPwd: function (mail) {
-                {
+            SendPwd: function (mail)
+            {
                     // Envoi par mail du MDP
-                }
+            },
+            CreateEvent: function (event) {
+                console.log("Create event :",event);
             }
+           
+
         }
     })
 .factory('Scopes', function ($rootScope) {

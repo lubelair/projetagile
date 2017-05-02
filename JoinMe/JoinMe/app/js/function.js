@@ -34,8 +34,10 @@ var _ListFriends = [];
 var _CalendarTime = {};
 // Event infos
 var _EventOptions = {};
-
+// Current Position
 var _CurrentPosition = {};
+// List added friends
+var _ListAddedFriends = [];
 
 /*** Functions ***/
 
@@ -345,4 +347,17 @@ function initCurrentPosition(position) {
 }
 function getCurrentPosition() {
     return _CurrentPosition;
+}
+
+//Find items in array by Id
+function findItemByID(items,id) {
+    var index = items.findIndex(item=>item.id === id);
+    console.log("findAddedFriendByID: item exists at :", index);
+    return index;
+}
+
+// delete item from array by index
+function deleteExistingItem(items, index) {
+    console.log("deleteExistingItem:", items.splice(index, 1));
+    console.log("deleteExistingItem:new value:",items);
 }

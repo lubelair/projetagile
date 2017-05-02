@@ -323,7 +323,7 @@ angular.module('directory.controllers', [])
 
  })
 
- .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,AppService) {
      $scope.Title = "Je serais à";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
@@ -333,7 +333,7 @@ angular.module('directory.controllers', [])
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
-         _EventOptions.location = $scope.place.geometry;
+         _EventOptions.location = $scope.place.formatted_address;
          $scope.showMarker = 'true';
          $scope.map.showInfoWindow('adresse', 'marker');
      }
@@ -345,9 +345,11 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
+.controller('EventFriendsCtrl', function ($scope, $state,  AppService) {
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = [];
-
+    $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
+    $scope.createEvent = function () {
+        AppService.CreateEvent(_EventOptions);
+    }
 })

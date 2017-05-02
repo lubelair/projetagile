@@ -82,10 +82,21 @@
           scope: {
               listfriend: '=',
               doRefresh: '&',
-              showAddBtn:'='
+              showAddBtn: '=',
           },
           templateUrl: 'templates/InnerFriend.html',
-          link: function (scope, element, attrs) { }
+          link: function (scope, element, attrs) {
+              scope.inviteFriend = function (friend) {
+                  // check if a friend is already added 
+                  var index = findItemByID(_EventOptions.friends,friend.id);
+                  if (index > -1) {
+                      // delete added friend  
+                      deleteExistingItem(_EventOptions.friends, index);
+                      return;
+                  }
+                  _EventOptions.friends.push(friend);
+              }
+          }
       }
   }])
 
