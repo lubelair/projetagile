@@ -83,7 +83,8 @@
               listfriend: '=',
               doRefresh: '&',
               showAddBtn: '=',
-              showSwipBtn: '='
+              showSwipBtn: '=',
+              friendView: '='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) { }
@@ -216,14 +217,12 @@
         scope: true,
         templateUrl: 'templates/Calendar.html?' + dtr,
         link: function ($scope, element, attrs, Scopes) {
-           
             var communOptions = {
                 direction: 'vertical',
                 centeredSlides: true,
                 slidesPerView: 3,
                 spaceBetween: 1,
-                //   autoHeight: true,
-                calculateHeight: false
+                calculateHeight: true
             };
 
             $scope.selectedTime = { hours: "", min: "", isAm: "Am", todayTomorrow: "Today" };
