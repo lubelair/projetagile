@@ -255,6 +255,7 @@ angular.module('directory.controllers', [])
 
  .controller('EventsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store("EventsCtrl", $scope);
+     $scope.appService = AppService;
      $scope.Title = "Evenements"
      $scope.eventssend = [];
      $scope.eventsrecived = [];
