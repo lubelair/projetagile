@@ -342,7 +342,7 @@ angular.module('directory.controllers', [])
  })
 
  .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
-     $scope.Title = "Je serai à";
+     $scope.Title = "Paramètres de l'événement";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
