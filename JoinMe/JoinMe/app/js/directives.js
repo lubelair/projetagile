@@ -84,7 +84,9 @@
               doRefresh: '&',
               showAddBtn: '=',
               showSwipBtn: '=',
-              friendView: '='
+              friendView: '=',
+              showSwipBtnAccept: '=',
+              showSwipBtnAdd: '='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) {
