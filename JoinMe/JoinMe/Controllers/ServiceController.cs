@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Net.Mail;
 using System.Net;
+using System.Collections.Generic;
 
 namespace JoinMe.Controllers
 {
@@ -230,6 +231,10 @@ namespace JoinMe.Controllers
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, HttpPost]
         public IHttpActionResult Index()
         {
@@ -242,22 +247,28 @@ namespace JoinMe.Controllers
         /// </summary>
         /// <param name="evenement"></param>
         /// <returns></returns>
-        [ResponseType(typeof(Event))]
-        public async Task<Object> PostEvent(Event evenement)
+        [ResponseType(typeof(Object))]
+        public async Task<Object> PostEvent(Event e)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var _event = new Event { NomEvent = e.NomEvent, EventDateTime = e.EventDateTime, Location = e.Location, UserId = e.UserId, EventCreationTime = e.EventDateTime };
+
             try
             {
-                db.Events.Add(evenement);
+                var Event = db.Events.Add(_event);
+
+                //  int eventId = await db.SaveChangesAsync();
+                List<EventFriend> invitedFriends = new List<EventFriend>(e.InvitedFriends);
+                invitedFriends.All(x => { x.Event = Event; return true; });
+                foreach (var invitedFriend in invitedFriends)
+                {
+                    db.EventFriends.Add(invitedFriend);
+                }
                 await db.SaveChangesAsync();
-                return evenement;
+                return Event;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
             }
         }
 
