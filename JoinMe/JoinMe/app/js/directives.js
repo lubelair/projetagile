@@ -131,9 +131,18 @@
     .directive('clickForOptions', ['$ionicGesture', function ($ionicGesture) {
         return {
             restrict: 'A',
-            scope: false,
+            scope: true,
             require: '^clickForOptionsWrapper',
             link: function (scope, element, attrs, parentController) {
+                scope.clicDeleteEvent = function (id) {
+                    alert("delete clicked");
+                    hideOptions();
+                }
+                scope.clicAddEvent = function (id) {
+                    alert("add clicked");
+                    hideOptions();
+                }
+               
                 // A basic variable that determines wether the element was currently clicked
                 var clicked;
 
@@ -155,6 +164,7 @@
                 scope.$on('closeOptions', function () {
                     if (!clicked) {
                         attrs.$set('optionButtons', 'hidden');
+
                     }
                 });
 
