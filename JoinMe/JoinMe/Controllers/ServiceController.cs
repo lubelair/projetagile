@@ -30,6 +30,23 @@ namespace JoinMe.Controllers
             }
         }
 
+        // Supprime un évènement à partir de son id
+        [ResponseType(typeof(Event))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteEvent(Object id)
+        {
+            Event @event = await db.Events.FindAsync(id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            db.Events.Remove(@event);
+            await db.SaveChangesAsync();
+
+            return Ok(@event);
+        }
+
         //Suppression du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -64,6 +81,7 @@ namespace JoinMe.Controllers
                               where b.FriendId == id
                               select new
                               {
+                                  a.Id,
                                   a.EventDateTime,
                                   a.Location,
                                   a.NomEvent,
@@ -90,6 +108,7 @@ namespace JoinMe.Controllers
                               where a.UserId == id
                               select new
                               {
+                                  a.Id,
                                   a.EventDateTime,
                                   a.Location,
                                   a.NomEvent
