@@ -21,6 +21,10 @@ namespace JoinMe
                 routeTemplate: "JoinMeService/{controller}/{action}/{id}",
                 defaults: new { controller = "Service", action = "index", id = RouteParameter.Optional }
             );
+
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
 
         #endregion Public Methods
