@@ -173,11 +173,21 @@ function GetFriendsCallBack(response) {
     //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
     //console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
-        getScopes('FriendsCtrl').$apply(function () {
+        if (getScopes('FriendsCtrl') != null) { 
+            getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = response.data;
-            getScopes('EventFriendsCtrl').eventfriends = response.data;
             ListFriends = response.data;
         });
+
+        }
+       
+        if (getScopes('EventFriendsCtrl') != null) {
+            getScopes('EventFriendsCtrl').$apply(function () {
+                getScopes('EventFriendsCtrl').eventfriends = response.data;
+                getScopes('EventFriendsCtrl').ionicLoading.hide();
+                getScopes('EventFriendsCtrl').$broadcast('scroll.refreshComplete')
+            });
+        }
     }, 10);
 }
 

@@ -367,20 +367,31 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore) {
+.controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore, $ionicLoading) {
     Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
+    $scope.ionicLoading = $ionicLoading;
+    // Setup the loader
+    $scope.ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
     $scope.eventfriends = [];
-    AppService.getFriends();
+    if (getScopes('FriendsCtrl') != null) {
+        if (getScopes('FriendsCtrl').friends.length > 0) {
+            $scope.eventfriends = getScopes('FriendsCtrl').friends;
+        } else {
+            AppService.getFriends();
+        }
+    }
     $scope.refreshInvitation = function () {
-        $scope.friends = [];
+        $scope.eventfriends = [];
         AppService.getFriends();
-        $timeout(function () {
-            //Stop the ion-refresher from spinning
-            $scope.$broadcast('scroll.refreshComplete');
-        }, 100);
     }
     //$scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
