@@ -232,7 +232,6 @@
                 direction: 'vertical',
                 centeredSlides: true,
                 slidesPerView: 3,
-                spaceBetween: 1,
                 calculateHeight: true
             };
 
