@@ -21,8 +21,11 @@
                     </p>
                     <p>{{e.Location+' '}}</p>
                     <p>{{e.EventDateTime | date : "dd/MM/y à HH:mm"}}</p>
-                    <ion-option-button class="button-assertive">supprimer</ion-option-button>
                 </div>
+
+                <ion-option-button class="button-assertive" ng-click="clicDeleteEvent(1);$event.stopPropagation();">Supprimer</ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="clicAddEvent({{e.Id}});$event.stopPropagation();">Ajouter</ion-option-button>
+
             </ion-item>
         </ion-list>
     </ion-content>
