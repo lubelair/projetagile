@@ -208,6 +208,12 @@ function GetEventsrecivedCallBack(response) {
     }, 10);
 }
 
+function DeleteEventCallBack(response) {
+    //hideOptions();
+    console.log("evènement supprimé");
+    showAlert("Suppression effectuée.");
+}
+
 /***  Fin CallBack functions ***/
 var handleSuccess = function (response) {
     console.log(response.data);

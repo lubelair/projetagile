@@ -134,16 +134,37 @@
             restrict: 'A',
             scope: true,
             require: '^clickForOptionsWrapper',
-            link: function (scope, element, attrs, parentController) {
+            link: function (scope, element, attrs, parentController, Scopes) {
+                scope.EventId = "";
+                //##################################################################
+                //    Fonctions déclenchées au clic sur les les différentes options
                 scope.clicDeleteEvent = function (id) {
+                    scope.EventId = id;
+                    showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteEvent);          
+
+                }
+
+                scope.deleteEvent = function () {
+                    getScopes('EventsCtrl').appService.deleteEvent(scope.EventId);
+                }
+
+                scope.clicDeleteFriend = function (id) {
                     alert("delete clicked");
                     hideOptions();
                 }
-                scope.clicAddEvent = function (id) {
+
+                scope.clicAcceptFriend = function (id) {
+                    alert("accept clicked");
+                    hideOptions();
+                }
+                scope.clicAddFriend = function (id) {
                     alert("add clicked");
                     hideOptions();
                 }
-               
+                //##################################################################
+
+
+
                 // A basic variable that determines wether the element was currently clicked
                 var clicked;
 
@@ -165,7 +186,6 @@
                 scope.$on('closeOptions', function () {
                     if (!clicked) {
                         attrs.$set('optionButtons', 'hidden');
-
                     }
                 });
 
