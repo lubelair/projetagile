@@ -75,7 +75,7 @@
       }
   }])
 
-  .directive('innerFriendsView', [function () {
+  .directive('innerFriendsView', ['AppService', function (AppService) {
       return {
           restrict: 'A',
           replace: true,
@@ -92,13 +92,15 @@
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
                   // check if a friend is already added
-                  var index = findItemByID(_EventOptions.friends, friend.id);
+
+                  console.log("inner friend appService",AppService);
+                  var index = findItemByID(_EventOptions.InvitedFriends, friend.id);
                   if (index > -1) {
                       // delete added friend
-                      deleteExistingItem(_EventOptions.friends, index);
+                      deleteExistingItem(_EventOptions.InvitedFriends, index);
                       return;
                   }
-                  _EventOptions.friends.push(friend);
+                  _EventOptions.InvitedFriends.push({ EventId: "", FriendId: friend.id });
               }
           }
       }
@@ -253,12 +255,11 @@
         replace: true,
         scope: true,
         templateUrl: 'templates/Calendar.html?' + dtr,
-        link: function ($scope, element, attrs, Scopes) {
+        link: function ($scope, element, attrs) {
             var communOptions = {
                 direction: 'vertical',
                 centeredSlides: true,
                 slidesPerView: 3,
-                spaceBetween: 1,
                 calculateHeight: true
             };
 
