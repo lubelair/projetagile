@@ -273,8 +273,6 @@ function createEventCallBack(response) {
             getScopes('EventsCtrl').eventssend = response.data;
         });
     }, 10);
-   
-
     getState().go("userSpace");
 }
 
@@ -391,8 +389,11 @@ function createEventTime() {
     if (calendarTime.todayTomorrow === "Tomorrow") {
         eventDay = eventDay + 1;
     }
-    var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+ //   var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+    var dt = new Date(now.year, now.month, eventDay);
+    dt.setHours(calendarTime.hours - (dt.getTimezoneOffset() / 60));
+    dt.setMinutes(calendarTime.min);
     console.log("current date :", dt);
-    console.log("parse date :", Date.parse(dt));
+  //  console.log("parse date :", Date.parse(dt));
     return dt;
 }
