@@ -11,19 +11,13 @@ namespace JoinMeServices.Models
     /// </summary>
     public class User
     {
-        #region Public Constructors
+        private bool _IsActive = true;
 
         public User()
         {
             CreatedEvents = new List<Event>();
             // Friends = new List<User>();
         }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public virtual ICollection<Event> CreatedEvents { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime CreationTime { get; set; }
@@ -34,15 +28,14 @@ namespace JoinMeServices.Models
         [Required]
         public string FirstName { get; set; }
 
-        // public virtual ICollection<UserFriend> Friends { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
 
+        // public virtual ICollection<UserFriend> Friends { get; set; }
         public virtual ICollection<EventFriend> InvitedEvents { get; set; }
 
-        [DefaultValue("true")]
+        [DefaultValue(true)]
         public bool IsActive { get; set; }
 
         [DefaultValue("false")]
@@ -63,6 +56,6 @@ namespace JoinMeServices.Models
         [Required]
         public string UserName { get; set; }
 
-        #endregion Public Properties
+        public virtual ICollection<Event> CreatedEvents { get; set; }
     }
 }

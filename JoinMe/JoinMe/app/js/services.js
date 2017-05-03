@@ -3,7 +3,10 @@ angular.module('directory.services', [])
     .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state) {
         var postUrl = function (action, params, functionCallBack) {
             //angular.toJson(params)
-            var parameter = JSON.stringify(params);
+            var parameter =JSON.parse( JSON.stringify(params));
+            console.log("postUrl : ", _AjaxUrl + action);
+            console.log("postUrl  param: ", parameter);
+
             $http.post(_AjaxUrl + action, parameter).then(functionCallBack, handleError);
         }
 

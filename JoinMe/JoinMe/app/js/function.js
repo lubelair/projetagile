@@ -273,8 +273,14 @@ function loginCallBack(response) {
 }
 
 function createEventCallBack(response) {
-    console.log("Event created : ");
-    console.log(response.data);
+    console.log("Event created : ", response.data);
+    setTimeout(function () {
+        getScopes('EventsCtrl').$apply(function () {
+            getScopes('EventsCtrl').eventssend = response.data;
+        });
+    }, 10);
+   
+
     getState().go("userSpace");
 }
 
@@ -368,7 +374,7 @@ function getCurrentPosition() {
 
 //Find items in array by Id
 function findItemByID(items, id) {
-    var index = items.findIndex(item=>item.id === id);
+    var index = items.findIndex(item=>item.FriendId === id);
     console.log("findAddedFriendByID: item exists at :", index);
     return index;
 }
@@ -381,7 +387,7 @@ function deleteExistingItem(items, index) {
 // get current date
 function getCurrentDate() {
     var now = new Date();
-    return { year: now.getUTCFullYear(), month: now.getUTCMonth() + 1, day: now.getUTCDate() }
+    return { year: now.getUTCFullYear(), month: now.getUTCMonth(), day: now.getUTCDate() }
 }
 // Create event time
 function createEventTime() {
@@ -393,5 +399,6 @@ function createEventTime() {
     }
     var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
     console.log("current date :", dt);
+    console.log("parse date :", Date.parse(dt));
     return dt;
 }

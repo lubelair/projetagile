@@ -1,6 +1,7 @@
 angular.module('directory.controllers', [])
 
-//AppService => name of service in service.js
+//AppService => nom du service dans service.js
+
       .controller('RootCtrl', function ($scope, $state, $cookieStore) {
           if ($cookieStore.get('user') != null) {
               $state.go('userSpace');
@@ -11,6 +12,8 @@ angular.module('directory.controllers', [])
       })
 
     .controller('SubscribeCtrl', function ($scope, $state, AppService, $cookieStore) {
+        // Définition du titre et des boutons visibles dans le header
+        // Applicable à tout contrôleur lié directement à une vue
         $scope.Title = "Inscription";
         $scope.showSettings = false;
         $scope.showBack = true;
@@ -24,19 +27,17 @@ angular.module('directory.controllers', [])
             else {
                 showAlert('Attention !', 'Un des champs saisis est incorrect.');
             }
-            //  $state.go('accueil')
         }
-        //---------------------checkpwd-----------------------------------------------//
+
         $scope.checkPwd = function (subscribeForm) {
-            //console.log(myForm.$valid);
             subscribeForm.confirmpwd.$valid = false;
+            // Comparaison des deux champs de mot de passe pour un affichage dynamique du CSS
             if (document.getElementById("confirmpwd").value != document.getElementById("password").value) {
                 subscribeForm.confirmpwd.$valid = false;
             }
         }
 
         $scope.authentification = function () {
-            //change state to authentification state
             $state.go('authentification');
         }
     })
@@ -56,12 +57,11 @@ angular.module('directory.controllers', [])
             }
 
             else {
-                showAlert('Attention !', 'Un des champs n\'a pas ou est mal saisi.');
+                showAlert('Attention !', 'Un des champs n\'a pas été ou est mal saisi.');
             }
         }
 
         $scope.inscription = function () {
-            //change state to inscription state
             $state.go('inscription');
         }
 
@@ -97,20 +97,17 @@ angular.module('directory.controllers', [])
         $scope.Title = "Parametres";
         $scope.showSettings = false;
         $scope.showBack = true;
+        //Regex pour vérifier la cohérence du numéro de téléphone
         $scope.regex = '[0-9]{10}';
 
-        // if ($cookieStore.get('user') != null) {
         $scope.user = $cookieStore.get('user');
-        //  }
 
-        // $scope.$on('$ionicView.loaded', function () {zayd
+        // Récupération de la vue et des données de session
         $scope.$on('$ionicView.enter', function () {
-            //Here your view content is fully loaded !!
             setTimeout(function () {
                 $scope.$apply(function () {
                     $scope.user = $cookieStore.get('user');
                 });
-                // }, 0);zayd
             }, 10);
         });
 
@@ -122,6 +119,7 @@ angular.module('directory.controllers', [])
                 AppService.updateUser($scope.user);
             }
         }
+
         //Procédure exécutée si l'utilisateur souhaite désactiver son compte
         $scope.disableAccount = function () {
             AppService.updateUser($scope.user);
@@ -141,7 +139,6 @@ angular.module('directory.controllers', [])
         }
 
         $scope.selectPhoto = function (user) {
-            //AppService.selectPhoto($ionicActionSheet);
             var showActionSheet = $ionicActionSheet.show({
                 buttons: [
                    { text: 'Modifier la photo' }
@@ -171,10 +168,10 @@ angular.module('directory.controllers', [])
 
     .controller('UserSpaceCtrl', function ($scope, $state, Scopes, AppService) {
         Scopes.store('UserSpace', $scope);
-
         $scope.showSettings = true;
         $scope.showBack = false;
 
+        // Configuration des effets de swipe
         $scope.options = {
             loop: false,
             effect: 'slide',
@@ -186,7 +183,7 @@ angular.module('directory.controllers', [])
         $scope.onSlideChanged = function (index) {
         }
         $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
-            // data.slider is the instance of Swiper
+            // data.slider = instance de Swiper
             console.log('Slide init');
             $scope.slider = data.slider;
         });
@@ -196,8 +193,7 @@ angular.module('directory.controllers', [])
         });
 
         $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
-            // note: the indexes are 0-based
-
+            // Configuration des différents sliders : l'index de base est numéroté 0
             console.log('Slide change is end' + data.slider.activeIndex);
             $scope.activeIndex = data.slider.activeIndex;
             $scope.previousIndex = data.slider.previousIndex;
@@ -224,15 +220,21 @@ angular.module('directory.controllers', [])
 
         console.log(Scopes.get('UserSpace'));
     })
+
     .controller('AccueilCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading) {
         $scope.Title = "JoinMe";
         $scope.Initposition = [40.74, -74.18];
+
+        // Initialisation des options map
         var posOptions = {
             enableHighAccuracy: true,
             timeout: 50000,
             maximumAge: 0
         };
+
         $scope.getCurrentLocation = function () {
+            // Récupération de la position courante via cordova
+            // Si la géolocalication n'est pas activée, on le notifie à l'utilisateur
             $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                 var lat = position.coords.latitude;
                 var long = position.coords.longitude;
@@ -242,10 +244,12 @@ angular.module('directory.controllers', [])
                 initCurrentPosition(myLatlng);
             }, function (err) {
                 $ionicLoading.hide();
-                alert("pleaz activate your GPS");
+                alert("Veuillez activer votre GPS");
             });
             $scope.$apply();
         };
+
+        // Appel de la map
         $scope.mycallback = function (map) {
             $scope.myMap = map;
             $scope.$apply();
@@ -264,7 +268,7 @@ angular.module('directory.controllers', [])
          $scope.eventssend = [];
          AppService.getEventssend();
          $timeout(function () {
-             //Stop the ion-refresher from spinning
+             //Stoppe le refresh
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
@@ -272,16 +276,12 @@ angular.module('directory.controllers', [])
          $scope.eventsrecived = [];
          AppService.getEventsrecived();
          $timeout(function () {
-             //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
 
-     // $scope.patern = '';
      $scope.search = function () {
-         //  console.log(val);
          console.log(patern);
-         //  $scope.query = val;
          $scope.$apply();
      };
  })
@@ -347,18 +347,19 @@ angular.module('directory.controllers', [])
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
      $scope.eventTime = getTimeFromCalendar();
-     _EventOptions = { eventTime: createEventTime(), location: "", status: "", friends: [] };
+     _EventOptions = { EventDateTime: createEventTime(), Location: "", NomEvent: "", InvitedFriends: [] };
      $scope.event = _EventOptions;
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
-         $scope.event.location = $scope.place.formatted_address;
+         $scope.event.Location = $scope.place.formatted_address;
          $scope.showMarker = 'true';
          $scope.map.showInfoWindow('adresse', 'marker');
      }
-     $scope.selectFriends = function () {
-         console.log($scope.event.status);
-       //  _EventOptions.status ="toto";
+
+     $scope.selectFriends = function (event) {
+         _EventOptions = event;
+         //  _EventOptions.status ="toto";
          $state.go("EventFriends");
      }
      $scope.mycallback = function (map) {
@@ -366,13 +367,14 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService) {
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService, $cookieStore) {
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
     // $scope.friends = ListFriends;
-    $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
+    $scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
+        _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);
     }
 })
