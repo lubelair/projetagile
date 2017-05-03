@@ -69,15 +69,13 @@ angular.module('directory.services', [])
             selectPhoto: function () {
                 showActionSheet();
             },
-            SendPwd: function (mail)
-            {
-                    // Envoi par mail du MDP
+            SendPwd: function (mail) {
+                // Envoi par mail du MDP
             },
             CreateEvent: function (event) {
-                console.log("Create event :",event);
+                console.log("Create event :", event);
+                postUrl('PostEvent', event, createEventCallBack)
             }
-           
-
         }
     })
 .factory('Scopes', function ($rootScope) {
