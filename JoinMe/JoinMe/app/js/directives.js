@@ -91,10 +91,10 @@
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
-                  // check if a friend is already added 
-                  var index = findItemByID(_EventOptions.friends,friend.id);
+                  // check if a friend is already added
+                  var index = findItemByID(_EventOptions.friends, friend.id);
                   if (index > -1) {
-                      // delete added friend  
+                      // delete added friend
                       deleteExistingItem(_EventOptions.friends, index);
                       return;
                   }
@@ -138,11 +138,26 @@
                     alert("delete clicked");
                     hideOptions();
                 }
+
                 scope.clicAddEvent = function (id) {
                     alert("add clicked");
                     hideOptions();
                 }
-               
+
+                scope.clicDeleteFriend = function (id) {
+                    alert("delete clicked");
+                    hideOptions();
+                }
+
+                scope.clicAcceptFriend = function (id) {
+                    alert("accept clicked");
+                    hideOptions();
+                }
+                scope.clicAddFriend = function (id) {
+                    alert("add clicked");
+                    hideOptions();
+                }
+
                 // A basic variable that determines wether the element was currently clicked
                 var clicked;
 
@@ -164,7 +179,6 @@
                 scope.$on('closeOptions', function () {
                     if (!clicked) {
                         attrs.$set('optionButtons', 'hidden');
-
                     }
                 });
 
