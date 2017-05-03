@@ -4,8 +4,7 @@
         <ion-header-bar class="bar item-input-inset has-subheader">
            
                     <label class="item-input-wrapper" style="width:80%">
-                      
-                        <input  type="text"  placeholder="Status" ng-model="status">
+                        <input  type="text"  placeholder="Status" ng-model="event.status">
                     </label>
                     <label>
                         <div>
@@ -32,7 +31,7 @@
                       <input type="text"   placeholder="Search" places-auto-complete
                                            ng-model="address"
                                            on-place-changed="placeChanged()"
-                                           types=['geocode']       style="width: 100%;background-color: transparent;" placeholder="Status" />
+                                           types=['geocode']       style="width: 100%;background-color: transparent;" />
                   </label>
               </div>
           </div>

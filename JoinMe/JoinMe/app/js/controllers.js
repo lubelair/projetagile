@@ -289,6 +289,9 @@ angular.module('directory.controllers', [])
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
      $scope.showAddBtn = false;
+     $scope.showSwipBtn = true;
+     $scope.showSwipBtnAccept = true;
+     $scope.showSwipBtnAdd = true;
      $scope.friends = [];
      $scope.friendsInvitation = [];
      /*
@@ -343,17 +346,18 @@ angular.module('directory.controllers', [])
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
      $scope.eventTime = getTimeFromCalendar();
-     $scope.status = "";
      _EventOptions = { eventTime: createEventTime(), location: "", status: "", friends: [] };
+     $scope.event = _EventOptions;
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
-         _EventOptions.location = $scope.place.formatted_address;
+         $scope.event.location = $scope.place.formatted_address;
          $scope.showMarker = 'true';
          $scope.map.showInfoWindow('adresse', 'marker');
      }
      $scope.selectFriends = function () {
-         _EventOptions.status = $scope.status;
+         console.log($scope.event.status);
+       //  _EventOptions.status ="toto";
          $state.go("EventFriends");
      }
      $scope.mycallback = function (map) {

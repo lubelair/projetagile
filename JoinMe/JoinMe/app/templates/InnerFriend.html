@@ -3,10 +3,10 @@
         <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>
             <input id="searchKey" type="text" placeholder="Search" ng-model="query">
+          <!--  <input id="searchFriend" type="text" placeholder="Search" ng-model="query">-->
         </label>
     </ion-header-bar>
     <ion-content padding="false">
-
         <ion-refresher on-refresh="doRefresh()">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
@@ -16,6 +16,8 @@
                 <div class="item-text-center item-text-wrap">
                     <h2>{{f.FirstName+' '+f.LastName}}</h2>
                     <ion-option-button class="button-assertive" ng-show="showSwipBtn">supprimer</ion-option-button>
+                    <ion-option-button class="button-balanced" ng-show="showSwipBtnAccept">accepter</ion-option-button>
+                    <ion-option-button class="button-calm" ng-show="showSwipBtnAdd">ajouter</ion-option-button>
                 </div>
                 <label class="checkbox right" ng-show="showAddBtn">
                     <input type="checkbox" ng-click="inviteFriend(f); $event.stopPropagation();">
