@@ -289,6 +289,9 @@ angular.module('directory.controllers', [])
      Scopes.store('FriendsCtrl', $scope);
      $scope.Title = "Amis";
      $scope.showAddBtn = false;
+     $scope.showSwipBtn = true;
+     $scope.showSwipBtnAccept = true;
+     $scope.showSwipBtnAdd = true;
      $scope.friends = [];
      $scope.friendsInvitation = [];
      /*

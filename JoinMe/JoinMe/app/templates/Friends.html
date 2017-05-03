@@ -4,19 +4,19 @@
         <ion-tabs>
             <ion-tab title="Amis">
                 <ion-content>
-                    <div inner-friends-view listfriend="friends" do-refresh="refreshFriend()"></div>
+                    <div inner-friends-view listfriend="friends" show-swip-btn="showSwipBtn" do-refresh="refreshFriend()"></div>
                 </ion-content>
             </ion-tab>
 
             <ion-tab title="Invitations d'amis">
                 <ion-content>
-                    <div inner-friends-view listfriend="friendsInvitation" do-refresh="refreshInvitation()"></div>
+                    <div inner-friends-view listfriend="friendsInvitation" show-swip-btn-accept="showSwipBtnAccept" show-swip-btn="showSwipBtn" do-refresh="refreshInvitation()"></div>
                 </ion-content>
             </ion-tab>
 
             <ion-tab title="Ajout d'amis">
                 <ion-content>
-                    <div inner-friends-view listfriend="userResearch" do-refresh="refreshUsers()"></div>
+                    <div inner-friends-view listfriend="userResearch" show-swip-btn-add="showSwipBtnAdd" do-refresh="refreshUsers()"></div>
                 </ion-content>
             </ion-tab>
         </ion-tabs>
