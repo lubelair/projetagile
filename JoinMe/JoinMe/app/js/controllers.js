@@ -337,8 +337,8 @@ angular.module('directory.controllers', [])
      $scope.showBack = true;
  })
 
- .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
-     $scope.Title = "Je serais à";
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
+     $scope.Title = "Je serai à";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
@@ -362,12 +362,12 @@ angular.module('directory.controllers', [])
      };
  })
 .controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService) {
+    $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-   // $scope.friends = ListFriends;
+    // $scope.friends = ListFriends;
     $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
     $scope.createEvent = function () {
         AppService.CreateEvent(_EventOptions);
     }
-
 })

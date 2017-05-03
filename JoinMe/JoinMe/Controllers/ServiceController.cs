@@ -208,7 +208,25 @@ namespace JoinMe.Controllers
             return Ok("joinMe web api");
         }
 
-        //##################  Fonctions classe User
+        [ResponseType(typeof(Event))]
+        public async Task<Object> PostEvent(Event evenement)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                db.Events.Add(evenement);
+                await db.SaveChangesAsync();
+                return evenement;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         // Ajout du user
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
@@ -267,7 +285,6 @@ namespace JoinMe.Controllers
                     throw;
                 }
             }
-
             return user;
         }
 

@@ -266,6 +266,12 @@ function loginCallBack(response) {
     }
 }
 
+function createEventCallBack(response) {
+    console.log("Event created : ");
+    console.log(response.data);
+    getState().go("userSpace");
+}
+
 function deleteUserCallBack(response) {
     console.log(response.data);
     getScopes('Settings').disconnect();
@@ -355,7 +361,7 @@ function getCurrentPosition() {
 }
 
 //Find items in array by Id
-function findItemByID(items,id) {
+function findItemByID(items, id) {
     var index = items.findIndex(item=>item.id === id);
     console.log("findAddedFriendByID: item exists at :", index);
     return index;
@@ -364,7 +370,7 @@ function findItemByID(items,id) {
 // delete item from array by index
 function deleteExistingItem(items, index) {
     console.log("deleteExistingItem:", items.splice(index, 1));
-    console.log("deleteExistingItem:new value:",items);
+    console.log("deleteExistingItem:new value:", items);
 }
 // get current date
 function getCurrentDate() {
