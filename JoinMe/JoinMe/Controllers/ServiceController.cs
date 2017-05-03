@@ -16,6 +16,11 @@ namespace JoinMe.Controllers
     {
         private JoinMeServicesContext db = new JoinMeServicesContext();
 
+        /// <summary>
+        /// Comparaison des données utilisateurs saisies avec la BDD lors du login (Email/MDP)
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
         public async Task<Object> Authenticate(Credentials credentials)
@@ -31,7 +36,11 @@ namespace JoinMe.Controllers
             }
         }
 
-        //Suppression du user
+        /// <summary>
+        /// Suppression de l'utilisateur s'il est trouvé en BDD
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
         public async Task<IHttpActionResult> DeleteUser(Object userId)
@@ -48,9 +57,11 @@ namespace JoinMe.Controllers
             return Ok(user);
         }
 
-        //##################  Fonctions classe evenements
-
-        // Récupere evenement envoyer
+        /// <summary>
+        /// Récupération des données des événements reçus par l'utilisateur connecté
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
         public async Task<Object> GetEventsrecived(Object userId)
@@ -58,7 +69,6 @@ namespace JoinMe.Controllers
             try
             {
                 var id = int.Parse(userId.ToString());
-                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Events
                               join b in db.EventFriends on a.Id equals b.EventId
                               join c in db.Users on a.UserId equals c.Id
@@ -77,7 +87,11 @@ namespace JoinMe.Controllers
             }
         }
 
-        // Récupere evenement reçu
+        /// <summary>
+        /// Récupération des données des événements créés et envoyés par l'utilisateur connecté
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
         public async Task<Object> GetEventssend(Object userId)
@@ -102,8 +116,12 @@ namespace JoinMe.Controllers
             }
         }
 
-        //##################  Fonctions classe Friends
-        // Récupere friends
+        /// <summary>
+        /// Récupération des amis de l'utilisateur connecté On ne retourne que les amis acceptés par
+        /// l'utilisateur et dont le compte est actif
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
         public async Task<Object> GetFriends(Object userId)
@@ -111,7 +129,6 @@ namespace JoinMe.Controllers
             try
             {
                 var id = int.Parse(userId.ToString());
-                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Friends
                               join b in db.Users on a.FriendId equals b.Id
                               where a.UserId == id && a.IsApproved && !b.IsDeleted && b.IsActive
@@ -136,7 +153,11 @@ namespace JoinMe.Controllers
             }
         }
 
-        // Récupere invitation
+        /// <summary>
+        /// Récupération des amis pas encore approuvés
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
         public async Task<Object> GetInvitations(Object userId)
@@ -144,7 +165,6 @@ namespace JoinMe.Controllers
             try
             {
                 var id = int.Parse(userId.ToString());
-                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
                 return await (from a in db.Friends
                               join b in db.Users on a.FriendId equals b.Id
                               where a.UserId == id && !a.IsApproved
@@ -165,7 +185,11 @@ namespace JoinMe.Controllers
             }
         }
 
-        //##################
+        /// <summary>
+        /// Récupération des données utilisateur
+        /// </summary>
+        /// <param name="usr"></param>
+        /// <returns></returns>
         [ResponseType(typeof(object))]
         [HttpGet, HttpPost]
         public async Task<object> GetUser(User usr)
@@ -180,7 +204,7 @@ namespace JoinMe.Controllers
         }
 
         /// <summary>
-        ///
+        /// Récupération des données d'un utilisateur à partir de son pseudonyme
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
@@ -214,11 +238,12 @@ namespace JoinMe.Controllers
         [HttpGet, HttpPost]
         public IHttpActionResult Index()
         {
+            // Point d'entrée de l'API
             return Ok("joinMe web api");
         }
 
         /// <summary>
-        /// Add event to database
+        /// Ajout d'un événement en BDD lors de la création d'événement
         /// </summary>
         /// <param name="evenement"></param>
         /// <returns></returns>
@@ -247,7 +272,12 @@ namespace JoinMe.Controllers
             }
         }
 
-        // Ajout du user
+        /// <summary>
+        /// Ajout d'un utilisateur en BDD lors de l'inscription. L'utilisateur créé ne doit pas avoir
+        /// un Email, un Login, ou un Numéro déjà existant en base
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
         public async Task<Object> PostUser(User user)
@@ -277,8 +307,11 @@ namespace JoinMe.Controllers
             }
         }
 
-        //##################  Fonctions classe User
-        //Modification du user
+        /// <summary>
+        /// Modification des données de l'utilsateur dans la BDD
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [ResponseType(typeof(User))]
         [HttpGet, HttpPost]
         public async Task<Object> PutUser(User user)
@@ -312,11 +345,21 @@ namespace JoinMe.Controllers
         {
         }*/
 
+        /// <summary>
+        /// Vérification de l'existence du mail en BDD
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         private bool ChkExistEmail(string email)
         {
             return db.Users.Count(e => e.Email == email) > 0;
         }
 
+        /// <summary>
+        /// Vérification de l'existence de l'utilisateur en BDD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
