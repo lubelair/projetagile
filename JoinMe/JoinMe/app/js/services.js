@@ -1,6 +1,6 @@
 angular.module('directory.services', [])
 
-    .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state) {
+    .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state, $ionicLoading) {
         var postUrl = function (action, params, functionCallBack) {
             //angular.toJson(params)
             var parameter =JSON.parse( JSON.stringify(params));
@@ -13,6 +13,7 @@ angular.module('directory.services', [])
         initState($state);
         initIoniPopup($ionicPopup);
         initCookies($cookieStore);
+        initIonicLoading($ionicLoading);
 
         return {
             getUser: function () {
@@ -27,10 +28,19 @@ angular.module('directory.services', [])
             },
             getFriends: function () {
                 // test if friends is not empty
-                if (getScopes('FriendsCtrl').friends.length > 0 && getScopes('EventFriendsCtrl').eventfriends.length > 0) {
+                if (getScopes('FriendsCtrl')!=null) {
+                    if (getScopes('FriendsCtrl').friends.length > 0) {
                     console.log("friends already exists");
                     return;
                 }
+                }
+                if (getScopes('EventFriendsCtrl')!=null) {
+                    if (getScopes('EventFriendsCtrl').eventfriends.length > 0) {
+                        return;
+                    } 
+                }
+                showLoading();
+
                 // if friends is empty we call database server
                 postUrl('GetFriends', $cookieStore.get('user').Id, GetFriendsCallBack);
             },
@@ -39,6 +49,7 @@ angular.module('directory.services', [])
                     console.log("friends invite already exists");
                     return;
                 }
+                showLoading();
                 postUrl('GetInvitations', $cookieStore.get('user').Id, GetInvitationsCallBack);
             },
 
@@ -47,6 +58,7 @@ angular.module('directory.services', [])
                     console.log("events send invite already exists");
                     return;
                 }
+                showLoading();
                 postUrl('GetEventssend', $cookieStore.get('user').Id, GetEventssendCallBack);
             },
             getEventsrecived: function () {
@@ -58,14 +70,16 @@ angular.module('directory.services', [])
             },
             deleteEvent: function (EventId) {
                 console.log("appservice.deleteEvent")
-
+                showLoading();
                 postUrl('DeleteEvent', EventId, DeleteEventCallBack);
             },
 
             login: function (credentials) {
+                showLoading();
                 postUrl('Authenticate', credentials, loginCallBack);
             },
             createUser: function (user) {
+                showLoading();
                 user.CreationTime = new Date();
                 user.ModificationTime = user.CreationTime;
                 postUrl('PostUser', user, createUserCallBack);
@@ -80,6 +94,7 @@ angular.module('directory.services', [])
                 // Envoi par mail du MDP
             },
             CreateEvent: function (event) {
+                showLoading();
                 console.log("Create event :", event);
                 postUrl('PostEvent', event, createEventCallBack)
             }

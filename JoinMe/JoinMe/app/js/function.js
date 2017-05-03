@@ -18,6 +18,8 @@ var __User = {
 var _State;
 var _IonicPopup;
 var _Cookies;
+var _IonicLoading;
+
 // associative array for time
 var _TimeObject = {};
 
@@ -156,6 +158,23 @@ function isConnected() {
     return false;
 }
 
+function initIonicLoading($ionicLoading) {
+    _IonicLoading = $ionicLoading;
+}
+function showLoading() {
+    _IonicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+}
+
+function hideLoading() {
+    _IonicLoading.hide();
+}
+
 /***  CallBack functions ***/
 
 var indexCallBack = function (data) {
@@ -184,10 +203,11 @@ function GetFriendsCallBack(response) {
         if (getScopes('EventFriendsCtrl') != null) {
             getScopes('EventFriendsCtrl').$apply(function () {
                 getScopes('EventFriendsCtrl').eventfriends = response.data;
-                getScopes('EventFriendsCtrl').ionicLoading.hide();
                 getScopes('EventFriendsCtrl').$broadcast('scroll.refreshComplete')
             });
         }
+
+        hideLoading();
     }, 10);
 }
 
@@ -197,6 +217,7 @@ function GetInvitationsCallBack(response) {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friendsInvitation = response.data;
         });
+        hideLoading();
     }, 10);
 }
 
@@ -207,6 +228,7 @@ function GetEventssendCallBack(response) {
         getScopes('EventsCtrl').$apply(function () {
             getScopes('EventsCtrl').eventssend = response.data;
         });
+        hideLoading();
     }, 10);
 }
 
@@ -224,6 +246,9 @@ function GetEventsrecivedCallBack(response) {
 function DeleteEventCallBack(response) {
     //hideOptions();
     console.log("evènement supprimé");
+    setTimeout(function () {
+        hideLoading();
+    }, 10);
     showAlert("Suppression effectuée.");
 }
 
@@ -236,7 +261,7 @@ var handleError = function (response) {
         !angular.isObject(response.data) ||
         !response.data.message
         ) {
-        console.log(("An unknown error occurred."));
+        showAlert("An unknown error occurred.");
     }
     console.log(response);
 }
@@ -244,6 +269,7 @@ var handleError = function (response) {
 var deleteUser = function (_User) { }
 
 function createUserCallBack(response) {
+    hideLoading();
     if (response.data === null) {
         showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
     } else {
@@ -270,6 +296,7 @@ function deleteUserCallBack(response) {
 
 function loginCallBack(response) {
     console.log(response.data);
+    hideLoading();
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
@@ -289,6 +316,7 @@ function createEventCallBack(response) {
     console.log("Event created : ", response.data);
     setTimeout(function () {
         getScopes('EventsCtrl').$apply(function () {
+            hideLoading();
             getScopes('EventsCtrl').eventfriends = response.data;
         });
     }, 10);
