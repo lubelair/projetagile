@@ -343,18 +343,18 @@ angular.module('directory.controllers', [])
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
      $scope.eventTime = getTimeFromCalendar();
-     _EventOptions = { eventTime: createEventTime(), location: "", status: "", friends: [] };
+     _EventOptions = { EventDateTime: createEventTime(), Location: "", NomEvent: "", InvitedFriends: [] };
      $scope.event = _EventOptions;
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
-         $scope.event.location = $scope.place.formatted_address;
+         $scope.event.Location = $scope.place.formatted_address;
          $scope.showMarker = 'true';
          $scope.map.showInfoWindow('adresse', 'marker');
      }
-     $scope.selectFriends = function () {
-         console.log($scope.event.status);
-       //  _EventOptions.status ="toto";
+     $scope.selectFriends = function (event) {
+         _EventOptions = event;
+         //  _EventOptions.status ="toto";
          $state.go("EventFriends");
      }
      $scope.mycallback = function (map) {
@@ -362,13 +362,14 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService) {
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService, $cookieStore) {
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
     // $scope.friends = ListFriends;
-    $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
+    $scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
+        _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);
     }
 })

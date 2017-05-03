@@ -4,7 +4,7 @@
         <ion-header-bar class="bar item-input-inset has-subheader">
            
                     <label class="item-input-wrapper" style="width:80%">
-                        <input  type="text"  placeholder="Status" ng-model="event.status">
+                        <input  type="text"  placeholder="Status" ng-model="event.NomEvent">
                     </label>
                     <label>
                         <div>
@@ -47,7 +47,7 @@
     </ion-content>
     <ion-footer-bar  class="bar-positive">
         <div class="button-bar">
-            <a class="button icon-right ion-ios-redo-outline" ng-click="selectFriends()">Inviter des amis</a>
+            <a class="button icon-right ion-ios-redo-outline" ng-click="selectFriends(event)">Inviter des amis</a>
         </div>
     </ion-footer-bar>
 </ion-view>
