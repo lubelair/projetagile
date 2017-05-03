@@ -367,12 +367,22 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService, $cookieStore) {
+.controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore) {
+    Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    // $scope.friends = ListFriends;
-    $scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
+    $scope.eventfriends = [];
+    AppService.getFriends();
+    $scope.refreshInvitation = function () {
+        $scope.friends = [];
+        AppService.getFriends();
+        $timeout(function () {
+            //Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        }, 100);
+    }
+    //$scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
         _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);

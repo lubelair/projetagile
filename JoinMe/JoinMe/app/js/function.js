@@ -171,10 +171,11 @@ function GetUsersCallBack(response) {
 }
 function GetFriendsCallBack(response) {
     //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
-    console.log("GetFriendsCallBack", response.data);
+    //console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = response.data;
+            getScopes('EventFriendsCtrl').eventfriends = response.data;
             ListFriends = response.data;
         });
     }, 10);
@@ -204,6 +205,8 @@ function GetEventsrecivedCallBack(response) {
     setTimeout(function () {
         getScopes('EventsCtrl').$apply(function () {
             getScopes('EventsCtrl').eventsrecived = response.data;
+
+            ListFriends = response.data;
         });
     }, 10);
 }
@@ -276,7 +279,7 @@ function createEventCallBack(response) {
     console.log("Event created : ", response.data);
     setTimeout(function () {
         getScopes('EventsCtrl').$apply(function () {
-            getScopes('EventsCtrl').eventssend = response.data;
+            getScopes('EventsCtrl').eventfriends = response.data;
         });
     }, 10);
     getState().go("userSpace");
