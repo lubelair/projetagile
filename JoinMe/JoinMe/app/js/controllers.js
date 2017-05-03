@@ -337,21 +337,23 @@ angular.module('directory.controllers', [])
      $scope.showBack = true;
  })
 
- .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
-     $scope.Title = "Je serai à";
+ .controller('LocalizeAtCtrl', function ($scope, $state, NgMap,Scopes) {
+     $scope.Title = "Je serais à";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
      $scope.eventTime = getTimeFromCalendar();
-     _EventOptions = { eventTime: getTimeFromCalendar(), location: "", friends: [] };
+     $scope.status = "";
+     _EventOptions = { eventTime: createEventTime(), location: "", status: "", friends: [] };
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
-         _EventOptions.location = $scope.place.geometry;
+         _EventOptions.location = $scope.place.formatted_address;
          $scope.showMarker = 'true';
          $scope.map.showInfoWindow('adresse', 'marker');
      }
      $scope.selectFriends = function () {
+         _EventOptions.status = $scope.status;
          $state.go("EventFriends");
      }
      $scope.mycallback = function (map) {
@@ -359,9 +361,13 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes) {
-    $scope.showBack = true;
+.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService) {
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = ListFriends;
+   // $scope.friends = ListFriends;
+    $scope.friends = [{ id: 1, FirstName: "toto", LastName: "tata" }, { id: 2, FirstName: "titi", LastName: "toto" }];
+    $scope.createEvent = function () {
+        AppService.CreateEvent(_EventOptions);
+    }
+
 })

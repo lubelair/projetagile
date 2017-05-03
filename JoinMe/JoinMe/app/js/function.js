@@ -34,8 +34,10 @@ var ListFriends = [];
 var _CalendarTime = {};
 // Event infos
 var _EventOptions = {};
-
+// Current Position
 var _CurrentPosition = {};
+// List added friends
+var _ListAddedFriends = [];
 
 /*** Functions ***/
 
@@ -350,4 +352,34 @@ function initCurrentPosition(position) {
 }
 function getCurrentPosition() {
     return _CurrentPosition;
+}
+
+//Find items in array by Id
+function findItemByID(items,id) {
+    var index = items.findIndex(item=>item.id === id);
+    console.log("findAddedFriendByID: item exists at :", index);
+    return index;
+}
+
+// delete item from array by index
+function deleteExistingItem(items, index) {
+    console.log("deleteExistingItem:", items.splice(index, 1));
+    console.log("deleteExistingItem:new value:",items);
+}
+// get current date
+function getCurrentDate() {
+    var now = new Date();
+    return { year: now.getUTCFullYear(), month: now.getUTCMonth() + 1, day: now.getUTCDate() }
+}
+// Create event time
+function createEventTime() {
+    var now = getCurrentDate();
+    var calendarTime = getTimeFromCalendar();
+    var eventDay = now.day;
+    if (calendarTime.todayTomorrow === "Tomorrow") {
+        eventDay = eventDay + 1;
+    }
+    var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+    console.log("current date :", dt);
+    return dt;
 }
