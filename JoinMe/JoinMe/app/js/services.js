@@ -27,12 +27,11 @@ angular.module('directory.services', [])
             },
             getFriends: function () {
                 // test if friends is not empty
-                if (getScopes('FriendsCtrl').friends.length > 0) {
+                if (getScopes('FriendsCtrl').friends.length > 0 && getScopes('EventFriendsCtrl').eventfriends.length > 0) {
                     console.log("friends already exists");
                     return;
                 }
                 // if friends is empty we call database server
-
                 postUrl('GetFriends', $cookieStore.get('user').Id, GetFriendsCallBack);
             },
             getInvitations: function () {
