@@ -36,6 +36,23 @@ namespace JoinMe.Controllers
             }
         }
 
+        // Supprime un évènement à partir de son id
+        [ResponseType(typeof(Event))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteEvent(Object id)
+        {
+            Event @event = await db.Events.FindAsync(id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            db.Events.Remove(@event);
+            await db.SaveChangesAsync();
+
+            return Ok(@event);
+        }
+
         /// <summary>
         /// Suppression de l'utilisateur s'il est trouvé en BDD
         /// </summary>
@@ -75,6 +92,7 @@ namespace JoinMe.Controllers
                               where b.FriendId == id
                               select new
                               {
+                                  a.Id,
                                   a.EventDateTime,
                                   a.Location,
                                   a.NomEvent,
@@ -105,6 +123,7 @@ namespace JoinMe.Controllers
                               where a.UserId == id
                               select new
                               {
+                                  a.Id,
                                   a.EventDateTime,
                                   a.Location,
                                   a.NomEvent
@@ -232,7 +251,6 @@ namespace JoinMe.Controllers
         }
 
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         [HttpGet, HttpPost]
@@ -256,7 +274,7 @@ namespace JoinMe.Controllers
             {
                 var Event = db.Events.Add(_event);
 
-                //  int eventId = await db.SaveChangesAsync();
+                // int eventId = await db.SaveChangesAsync();
                 List<EventFriend> invitedFriends = new List<EventFriend>(e.InvitedFriends);
                 invitedFriends.All(x => { x.Event = Event; return true; });
                 foreach (var invitedFriend in invitedFriends)

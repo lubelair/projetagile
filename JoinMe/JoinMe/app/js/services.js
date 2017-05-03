@@ -56,6 +56,11 @@ angular.module('directory.services', [])
                 }
                 postUrl('GetEventsrecived', $cookieStore.get('user').Id, GetEventsrecivedCallBack);
             },
+            deleteEvent: function (EventId) {
+                console.log("appservice.deleteEvent")
+
+                postUrl('DeleteEvent', EventId, DeleteEventCallBack);
+            },
 
             login: function (credentials) {
                 postUrl('Authenticate', credentials, loginCallBack);

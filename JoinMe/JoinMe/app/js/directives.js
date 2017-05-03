@@ -92,7 +92,6 @@
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
                   // check if a friend is already added
-
                   console.log("inner friend appService",AppService);
                   var index = findItemByID(_EventOptions.InvitedFriends, friend.id);
                   if (index > -1) {
@@ -135,15 +134,18 @@
             restrict: 'A',
             scope: true,
             require: '^clickForOptionsWrapper',
-            link: function (scope, element, attrs, parentController) {
+            link: function (scope, element, attrs, parentController, Scopes) {
+                scope.EventId = "";
+                //##################################################################
+                //    Fonctions déclenchées au clic sur les les différentes options
                 scope.clicDeleteEvent = function (id) {
-                    alert("delete clicked");
-                    hideOptions();
+                    scope.EventId = id;
+                    showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteEvent);          
+
                 }
 
-                scope.clicAddEvent = function (id) {
-                    alert("add clicked");
-                    hideOptions();
+                scope.deleteEvent = function () {
+                    getScopes('EventsCtrl').appService.deleteEvent(scope.EventId);
                 }
 
                 scope.clicDeleteFriend = function (id) {
@@ -159,6 +161,9 @@
                     alert("add clicked");
                     hideOptions();
                 }
+                //##################################################################
+
+
 
                 // A basic variable that determines wether the element was currently clicked
                 var clicked;
