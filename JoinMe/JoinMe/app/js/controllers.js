@@ -372,7 +372,6 @@ angular.module('directory.controllers', [])
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.ionicLoading = $ionicLoading;
     $scope.eventfriends = [];
     if (getScopes('FriendsCtrl') != null) {
         if (getScopes('FriendsCtrl').friends.length > 0) {
