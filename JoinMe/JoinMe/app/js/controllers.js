@@ -291,6 +291,7 @@ angular.module('directory.controllers', [])
 
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
+     $scope.appService = AppService;
      $scope.Title = "Amis";
      $scope.showAddBtn = false;
      $scope.showSwipBtn = true;
