@@ -11,19 +11,18 @@
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
         <ion-list click-for-options-wrapper id="innerFriends-list4">
-            <ion-item  click-for-options class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in listfriend | filter: query">
-
-                    <img id="imgAvatar" src="img/icon_friend.png">
-                    <div class="item-text-center item-text-wrap">
-                        <h2>{{f.FirstName+' '+f.LastName}}</h2>
-                        <ion-option-button class="button-assertive" ng-show="showSwipBtn" ng-click="clicDeleteFriend({{f.Id}});$event.stopPropagation();">supprimer</ion-option-button>
-                        <ion-option-button class="button-balanced" ng-show="showSwipBtnAccept" ng-click="clicAcceptFriend({{f.Id}});$event.stopPropagation();">accepter</ion-option-button>
-                        <ion-option-button class="button-calm" ng-show="showSwipBtnAdd" ng-click="clicAddFriend({{f.Id}});$event.stopPropagation();">ajouter</ion-option-button>
-                    </div>
-                    <label class="checkbox right" ng-show="showAddBtn">
-                        <input type="checkbox" ng-click="inviteFriend(f); $event.stopPropagation();">
-                    </label>
-                </ion-item>
+            <ion-item click-for-options class="item-avatar" id="innerFriends-list-item2" ng-repeat="f in listfriend | filter: query">
+                <img id="imgAvatar" src="img/icon_friend.png">
+                <div class="item-text-center item-text-wrap">
+                    <h2>{{f.FirstName+' '+f.LastName}}</h2>
+                    <ion-option-button class="button-assertive" ng-show="showSwipBtn" ng-click="clicDeleteFriend({{f.friendId}});$event.stopPropagation();">Supprimer</ion-option-button>
+                    <ion-option-button class="button-balanced" ng-show="showSwipBtnAccept" ng-click="clicAcceptFriend({{f}});$event.stopPropagation();">Accepter</ion-option-button>
+                    <ion-option-button class="button-calm" ng-show="showSwipBtnAdd" ng-click="clicAddFriend({{f.Id}});$event.stopPropagation();">Ajouter</ion-option-button>
+                </div>
+                <label class="checkbox right" ng-show="showAddBtn">
+                    <input type="checkbox" ng-click="inviteFriend(f); $event.stopPropagation();">
+                </label>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

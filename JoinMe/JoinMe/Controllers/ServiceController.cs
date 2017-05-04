@@ -36,10 +36,39 @@ namespace JoinMe.Controllers
             }
         }
 
+        /// <summary>
+        /// Supprime la participation du user à un événement reçu
+        /// </summary>
+        /// <param name="id">id du User connecté</param>
+        /// <returns></returns>
+        [ResponseType(typeof(EventFriend))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteEventReceived(EventFriend myEventFriends)
+        {
+            try
+            {
+                EventFriend eventFriend = db.EventFriends.First(x => x.FriendId == myEventFriends.FriendId && x.EventId == myEventFriends.EventId);
+
+                if (eventFriend == null)
+                {
+                    return NotFound();
+                }
+
+                db.EventFriends.Remove(eventFriend);
+                await db.SaveChangesAsync();
+
+                return Ok(eventFriend);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         // Supprime un évènement à partir de son id
         [ResponseType(typeof(Event))]
         [HttpGet, HttpPost]
-        public async Task<IHttpActionResult> DeleteEvent(Object id)
+        public async Task<IHttpActionResult> DeleteEventSend(Object id)
         {
             Event @event = await db.Events.FindAsync(id);
             if (@event == null)
@@ -51,6 +80,27 @@ namespace JoinMe.Controllers
             await db.SaveChangesAsync();
 
             return Ok(@event);
+        }
+
+        /// <summary>
+        /// Suppression d'un lien d'amité s'il est trouvé en BDD
+        /// </summary>
+        /// <param name="id">id du lien d'amitié</param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteFriends(Object id)
+        {
+            Friends friends = await db.Friends.FindAsync(id);
+            if (friends == null)
+            {
+                return NotFound();
+            }
+
+            db.Friends.Remove(friends);
+            await db.SaveChangesAsync();
+
+            return Ok(friends);
         }
 
         /// <summary>
@@ -153,6 +203,9 @@ namespace JoinMe.Controllers
                               where a.UserId == id && a.IsApproved && !b.IsDeleted && b.IsActive
                               select new
                               {
+                                  friendId = a.Id,
+                                  a.CreationDate,
+                                  a.IsApproved,
                                   b.FirstName,
                                   b.LastName,
                                   b.Id
@@ -161,6 +214,9 @@ namespace JoinMe.Controllers
                                        where a.FriendId == id && a.IsApproved && !b.IsDeleted && b.IsActive
                                        select new
                                        {
+                                           friendId = a.Id,
+                                           a.CreationDate,
+                                           a.IsApproved,
                                            b.FirstName,
                                            b.LastName,
                                            b.Id
@@ -189,9 +245,12 @@ namespace JoinMe.Controllers
                               where a.UserId == id && !a.IsApproved
                               select new
                               {
-                                  b.Id,
+                                  friendId = a.Id,
+                                  a.CreationDate,
+                                  a.IsApproved,
                                   b.FirstName,
-                                  b.LastName
+                                  b.LastName,
+                                  b.Id
                               }).ToListAsync();
             }
             catch (ArgumentNullException)
@@ -295,6 +354,26 @@ namespace JoinMe.Controllers
         }
 
         /// <summary>
+        /// Crée une relation d'amitié
+        /// </summary>
+        /// <param name="friends"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> PostFriends(Friends friends)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Friends.Add(friends);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = friends.Id }, friends);
+        }
+
+        /// <summary>
         /// Ajout d'un utilisateur en BDD lors de l'inscription. L'utilisateur créé ne doit pas avoir
         /// un Email, un Login, ou un Numéro déjà existant en base
         /// </summary>
@@ -327,6 +406,42 @@ namespace JoinMe.Controllers
             {
                 throw e;
             }
+        }
+
+        /// <summary>
+        /// Modifie la relation d'amitié
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="friends"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PutFriends(Friends friends)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(friends).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FriendsExists(friends.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -375,6 +490,16 @@ namespace JoinMe.Controllers
         private bool ChkExistEmail(string email)
         {
             return db.Users.Count(e => e.Email == email) > 0;
+        }
+
+        /// <summary>
+        /// Vérification de l'exisitence de l'amitié en BDD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool FriendsExists(int id)
+        {
+            return db.Friends.Count(e => e.Id == id) > 0;
         }
 
         /// <summary>
