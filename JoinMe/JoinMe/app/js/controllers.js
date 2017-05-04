@@ -342,7 +342,7 @@ angular.module('directory.controllers', [])
  })
 
  .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
-     $scope.Title = "Je serai à";
+     $scope.Title = "Paramètres de l'événement";
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
      $scope.showBack = true;
@@ -367,11 +367,26 @@ angular.module('directory.controllers', [])
          $scope.map = map;
      };
  })
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService, $cookieStore) {
+.controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore, $ionicLoading) {
+    Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
     $scope.friends = [];
+    $scope.ionicLoading = $ionicLoading;
+    $scope.eventfriends = [];
+    if (getScopes('FriendsCtrl') != null) {
+        if (getScopes('FriendsCtrl').friends.length > 0) {
+            $scope.eventfriends = getScopes('FriendsCtrl').friends;
+        } else {
+            AppService.getFriends();
+        }
+    }
+    $scope.refreshInvitation = function () {
+        $scope.eventfriends = [];
+        AppService.getFriends();
+    }
+
     //$scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
         _EventOptions.userId = $cookieStore.get('user').Id;

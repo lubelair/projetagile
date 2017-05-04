@@ -18,6 +18,8 @@ var __User = {
 var _State;
 var _IonicPopup;
 var _Cookies;
+var _IonicLoading;
+
 // associative array for time
 var _TimeObject = {};
 
@@ -156,6 +158,23 @@ function isConnected() {
     return false;
 }
 
+function initIonicLoading($ionicLoading) {
+    _IonicLoading = $ionicLoading;
+}
+function showLoading() {
+    _IonicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+}
+
+function hideLoading() {
+    _IonicLoading.hide();
+}
+
 /***  CallBack functions ***/
 
 var indexCallBack = function (data) {
@@ -171,12 +190,24 @@ function GetUsersCallBack(response) {
 }
 function GetFriendsCallBack(response) {
     //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
-    console.log("GetFriendsCallBack", response.data);
+    //console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
-        getScopes('FriendsCtrl').$apply(function () {
+        if (getScopes('FriendsCtrl') != null) { 
+            getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friends = response.data;
             ListFriends = response.data;
         });
+
+        }
+       
+        if (getScopes('EventFriendsCtrl') != null) {
+            getScopes('EventFriendsCtrl').$apply(function () {
+                getScopes('EventFriendsCtrl').eventfriends = response.data;
+                getScopes('EventFriendsCtrl').$broadcast('scroll.refreshComplete')
+            });
+        }
+
+        hideLoading();
     }, 10);
 }
 
@@ -186,6 +217,7 @@ function GetInvitationsCallBack(response) {
         getScopes('FriendsCtrl').$apply(function () {
             getScopes('FriendsCtrl').friendsInvitation = response.data;
         });
+        hideLoading();
     }, 10);
 }
 
@@ -196,6 +228,7 @@ function GetEventssendCallBack(response) {
         getScopes('EventsCtrl').$apply(function () {
             getScopes('EventsCtrl').eventssend = response.data;
         });
+        hideLoading();
     }, 10);
 }
 
@@ -204,6 +237,8 @@ function GetEventsrecivedCallBack(response) {
     setTimeout(function () {
         getScopes('EventsCtrl').$apply(function () {
             getScopes('EventsCtrl').eventsrecived = response.data;
+
+            ListFriends = response.data;
         });
     }, 10);
 }
@@ -211,6 +246,9 @@ function GetEventsrecivedCallBack(response) {
 function DeleteEventCallBack(response) {
     //hideOptions();
     console.log("evènement supprimé");
+    setTimeout(function () {
+        hideLoading();
+    }, 10);
     showAlert("Suppression effectuée.");
 }
 
@@ -223,7 +261,7 @@ var handleError = function (response) {
         !angular.isObject(response.data) ||
         !response.data.message
         ) {
-        console.log(("An unknown error occurred."));
+        showAlert("An unknown error occurred.");
     }
     console.log(response);
 }
@@ -231,6 +269,7 @@ var handleError = function (response) {
 var deleteUser = function (_User) { }
 
 function createUserCallBack(response) {
+    hideLoading();
     if (response.data === null) {
         showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
     } else {
@@ -257,6 +296,7 @@ function deleteUserCallBack(response) {
 
 function loginCallBack(response) {
     console.log(response.data);
+    hideLoading();
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
     } else {
@@ -276,11 +316,10 @@ function createEventCallBack(response) {
     console.log("Event created : ", response.data);
     setTimeout(function () {
         getScopes('EventsCtrl').$apply(function () {
-            getScopes('EventsCtrl').eventssend = response.data;
+            hideLoading();
+            getScopes('EventsCtrl').eventfriends = response.data;
         });
     }, 10);
-   
-
     getState().go("userSpace");
 }
 
@@ -397,8 +436,11 @@ function createEventTime() {
     if (calendarTime.todayTomorrow === "Tomorrow") {
         eventDay = eventDay + 1;
     }
-    var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+ //   var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+    var dt = new Date(now.year, now.month, eventDay);
+    dt.setHours(calendarTime.hours - (dt.getTimezoneOffset() / 60));
+    dt.setMinutes(calendarTime.min);
     console.log("current date :", dt);
-    console.log("parse date :", Date.parse(dt));
+  //  console.log("parse date :", Date.parse(dt));
     return dt;
 }
