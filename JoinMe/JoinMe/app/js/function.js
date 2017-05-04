@@ -41,6 +41,9 @@ var _CurrentPosition = {};
 // List added friends
 var _ListAddedFriends = [];
 
+var _ListEventReceived = [];
+var _ListEventSend = [];
+
 /*** Functions ***/
 
 //************************************************************
@@ -189,8 +192,7 @@ function GetUsersCallBack(response) {
     }, 10);
 }
 function GetFriendsCallBack(response) {
-    //  var listFriends = [{ FirstName: "toto", LastName: "tata" }];
-    //console.log("GetFriendsCallBack", response.data);
+    console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
         if (getScopes('FriendsCtrl') != null) { 
             getScopes('FriendsCtrl').$apply(function () {
@@ -209,6 +211,18 @@ function GetFriendsCallBack(response) {
 
         hideLoading();
     }, 10);
+}
+
+function DeleteFriendsCallBack(response) {
+    console.log("amitié supprimée");
+    getScopes('FriendsCtrl').refreshFriend();
+}
+
+function UpdateFriendsCallBack(response) {
+    console.log("amitié modifiée");
+    console.log(response.data);
+    getScopes('FriendsCtrl').refreshInvitation();
+    getScopes('FriendsCtrl').refreshFriend();
 }
 
 function GetInvitationsCallBack(response) {
@@ -243,13 +257,14 @@ function GetEventsrecivedCallBack(response) {
     }, 10);
 }
 
-function DeleteEventCallBack(response) {
-    //hideOptions();
-    console.log("evènement supprimé");
-    setTimeout(function () {
-        hideLoading();
-    }, 10);
-    showAlert("Suppression effectuée.");
+function DeleteEventReceivedCallBack(response) {
+    console.log("evénement supprimé");
+    getScopes('EventsCtrl').refreshEventrecived();
+}
+
+function DeleteEventSendCallBack(response) {
+    console.log("evénement supprimé");
+    getScopes('EventsCtrl').refreshEventsend();
 }
 
 /***  Fin CallBack functions ***/
@@ -413,6 +428,11 @@ function getCurrentPosition() {
 
 //Find items in array by Id
 function findItemByID(items, id) {
+    var index = items.findIndex(item=>item.FriendId === id);
+    console.log("findAddedFriendByID: item exists at :", index);
+    return index;
+}
+function findItemByIDEventSend(items, id) {
     var index = items.findIndex(item=>item.FriendId === id);
     console.log("findAddedFriendByID: item exists at :", index);
     return index;

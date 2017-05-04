@@ -203,7 +203,6 @@ angular.module('directory.controllers', [])
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
                 AppService.getInvitations();
-                AppService.getUsers();
             }
             if (data.slider.activeIndex == 2) {
                 AppService.getEventsrecived();
@@ -291,6 +290,7 @@ angular.module('directory.controllers', [])
 
  .controller('FriendsCtrl', function ($scope, $state, AppService, $timeout, Scopes) {
      Scopes.store('FriendsCtrl', $scope);
+     $scope.appService = AppService;
      $scope.Title = "Amis";
      $scope.showAddBtn = false;
      $scope.showSwipBtn = true;
