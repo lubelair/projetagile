@@ -83,6 +83,10 @@ angular.module('directory.services', [])
                 postUrl('DeleteEventSend', EventId, DeleteEventSendCallBack);
             },
 
+            Addfriend: function (friend){
+                postUrl('PostFriends', friend, AddFriendCallBack);
+            },
+
             login: function (credentials) {
                 showLoading();
                 postUrl('Authenticate', credentials, loginCallBack);

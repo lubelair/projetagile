@@ -213,6 +213,12 @@ function GetFriendsCallBack(response) {
     }, 10);
 }
 
+function AddFriendCallBack(response) {
+    console.log("PostFriends");
+    console.log(response.data);
+    getScopes('FriendsCtrl').userResearch = [];
+}
+
 function DeleteFriendsCallBack(response) {
     console.log("amitié supprimée");
     getScopes('FriendsCtrl').refreshFriend();
