@@ -3,7 +3,8 @@ angular.module('directory.services', [])
     .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state, $ionicLoading) {
         var postUrl = function (action, params, functionCallBack) {
             //angular.toJson(params)
-            var parameter =JSON.parse( JSON.stringify(params));
+             var parameter =JSON.parse(JSON.stringify(params));
+          //  var parameter = JSON.parse(angular.toJson(params));
             console.log("postUrl : ", _AjaxUrl + action);
             console.log("postUrl  param: ", parameter);
 
@@ -19,9 +20,10 @@ angular.module('directory.services', [])
             getUser: function () {
                 return __User;
             },
-            getUsers: function () {
+            getUsers: function (name) {
                 console.log('OK');
-                postUrl('GetUsers', $cookieStore.get('user').UserName, GetUsersCallBack);
+                var param = "'"+name+"'";
+                postUrl('GetUsers', param, GetUsersCallBack);
             },
             deleteUser: function () {
                 postUrl('DeleteUser', $cookieStore.get('user').Id, deleteUserCallBack);

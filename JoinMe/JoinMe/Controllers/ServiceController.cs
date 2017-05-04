@@ -28,7 +28,7 @@ namespace JoinMe.Controllers
             try
             {
                 return await db.Users.Where(e => e.Email.Equals(credentials.Email, StringComparison.CurrentCultureIgnoreCase) &&
-                                e.Password.Equals(credentials.Password)).SingleAsync();
+                                e.Password.Equals(credentials.Password)).Select(e => new { e.Id, e.Email, e.FirstName, e.LastName, e.UserName, e.Password, e.PhoneNumber, e.CreationTime, e.IsActive, e.IsDeleted }).SingleAsync();
             }
             catch (Exception e)
             {
@@ -234,14 +234,18 @@ namespace JoinMe.Controllers
             try
             {
                 var name = userName.ToString();
-                return await (from a in db.Users
-                              where a.UserName.Equals(name) && a.IsActive && !a.IsDeleted
+                //   var id = int.Parse(userId.ToString());
+                var id = 1;
+                return await (from b in db.Users
+                              where b.UserName.ToUpper().Contains(name.ToUpper())
+                              && b.IsActive && !b.IsDeleted && b.Id != id
+                              && !db.Friends.Any(x => (x.UserId == id && x.FriendId == b.Id))
+                              || !db.Friends.Any(x => (x.UserId == b.Id && x.FriendId == id))
                               select new
                               {
-                                  a.Id,
-                                  a.FirstName,
-                                  a.LastName,
-                                  a.UserName
+                                  b.FirstName,
+                                  b.LastName,
+                                  b.Id
                               }).ToListAsync();
             }
             catch (Exception e)
@@ -263,7 +267,7 @@ namespace JoinMe.Controllers
         /// <summary>
         /// Ajout d'un événement en BDD lors de la création d'événement
         /// </summary>
-        /// <param name="evenement"></param>
+        /// <param name="e">Event</param>
         /// <returns></returns>
         [ResponseType(typeof(Object))]
         public async Task<Object> PostEvent(Event e)

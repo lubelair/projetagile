@@ -86,19 +86,25 @@
               showSwipBtn: '=',
               friendView: '=',
               showSwipBtnAccept: '=',
-              showSwipBtnAdd: '='
+              showSwipBtnAdd: '=',
+              showFilter: '=',
+              showSearch:'='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
                   // check if a friend is already added
                   var index = findItemByID(_EventOptions.InvitedFriends, friend.Id);
-                  if (index > -1) {
+                  if (index > -1) {""
                       // delete added friend
                       deleteExistingItem(_EventOptions.InvitedFriends, index);
                       return;
                   }
                   _EventOptions.InvitedFriends.push({ EventId: "", FriendId: friend.Id });
+              }
+              scope.findFriend = function (pattern) {
+                  AppService.getUsers(pattern);
+                  console.log("findFriend:", pattern);
               }
           }
       }
@@ -269,6 +275,7 @@
             // init swiper hours options
             var slideOptionsH = angular.copy(communOptions);
             slideOptionsH.loop = false;
+           
             slideOptionsH.initialSlide = (((_TimeObject["hours"] - 1) % 12) + 12);
             slideOptionsH.onSlideChangeEnd = function (swiper) {
                 console.log("Console hours");
@@ -321,6 +328,16 @@
             var swiperM = new Swiper('.swiper-container.minutes', slideOptionsM);
             var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
             var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
+
+
+            $scope.initCalendar = function () {
+                timeNow();
+                console.log("init calendar:", _TimeObject["min"]);
+                var min = Math.trunc(_TimeObject["min"] / 5) + 12;
+                console.log(_TimeObject["min"] + " index min :" + min);
+                slideOptionsM.initialSlide = min;
+            }
+            setInterval($scope.initCalendar(), 60000);
 
             $scope.createEvent = function () {
                 var hours = (swiperH.activeIndex + 1) % 12;
