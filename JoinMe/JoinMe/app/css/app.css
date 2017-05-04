@@ -170,6 +170,7 @@
     .calendarWraper .now {
         text-align: center;
         border-bottom : 1px ridge black;
+        font-size: 180%;
     }
 
     .calendarWraper .next {

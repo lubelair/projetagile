@@ -364,11 +364,26 @@ angular.module('directory.controllers', [])
      };
  })
 
-.controller('EventFriendsCtrl', function ($scope, $state, Scopes, AppService, $cookieStore) {
+.controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore, $ionicLoading) {
+    Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    $scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
+    $scope.friends = [];
+    $scope.ionicLoading = $ionicLoading;
+    $scope.eventfriends = [];
+    if (getScopes('FriendsCtrl') != null) {
+        if (getScopes('FriendsCtrl').friends.length > 0) {
+            $scope.eventfriends = getScopes('FriendsCtrl').friends;
+        } else {
+            AppService.getFriends();
+        }
+    }
+    $scope.refreshInvitation = function () {
+        $scope.eventfriends = [];
+        AppService.getFriends();
+    }
+
     $scope.createEvent = function () {
         _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);
