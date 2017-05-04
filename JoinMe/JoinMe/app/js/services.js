@@ -21,24 +21,25 @@ angular.module('directory.services', [])
             },
             getUsers: function (name) {
                 console.log('OK');
-                var param = "'"+name+"'";
-                postUrl('GetUsers', param, GetUsersCallBack);
+              //  var params= "'"+name+"'";
+                var params = { name: name, userId: $cookieStore.get('user').Id };
+                postUrl('GetUsers', params, GetUsersCallBack);
             },
             deleteUser: function () {
                 postUrl('DeleteUser', $cookieStore.get('user').Id, deleteUserCallBack);
             },
             getFriends: function () {
                 // test if friends is not empty
-                if (getScopes('FriendsCtrl')!=null) {
+                if (getScopes('FriendsCtrl') != null) {
                     if (getScopes('FriendsCtrl').friends.length > 0) {
-                    console.log("friends already exists");
-                    return;
+                        console.log("friends already exists");
+                        return;
+                    }
                 }
-                }
-                if (getScopes('EventFriendsCtrl')!=null) {
+                if (getScopes('EventFriendsCtrl') != null) {
                     if (getScopes('EventFriendsCtrl').eventfriends.length > 0) {
                         return;
-                    } 
+                    }
                 }
                 showLoading();
 
@@ -84,7 +85,8 @@ angular.module('directory.services', [])
                 postUrl('DeleteEventSend', EventId, DeleteEventSendCallBack);
             },
 
-            Addfriend: function (friend){
+            Addfriend: function (friend) {
+                showLoading();
                 postUrl('PostFriends', friend, AddFriendCallBack);
             },
 

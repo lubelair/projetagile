@@ -15,8 +15,8 @@ namespace JoinMe
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "JoinMe",
-                routeTemplate: "JoinMeService/{controller}/{action}/{id}",
-                defaults: new { controller = "Service", action = "index", id = RouteParameter.Optional }
+            routeTemplate: "JoinMeService/{controller}/{action}/{id}",
+              defaults: new { controller = "Service", action = "index", id = RouteParameter.Optional }
             );
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;

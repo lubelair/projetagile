@@ -214,9 +214,16 @@ function GetFriendsCallBack(response) {
 }
 
 function AddFriendCallBack(response) {
-    console.log("PostFriends");
-    console.log(response.data);
-    getScopes('FriendsCtrl').userResearch = [];
+    console.log("AddFriendCallBack:", response.data);
+    if (getScopes('FriendsCtrl') != null) {
+        setTimeout(function () {
+            getScopes('FriendsCtrl').$apply(function () {
+                getScopes('FriendsCtrl').findedFriends = [];
+                getScopes('FriendsCtrl').$broadcast('scroll.refreshComplete');
+                hideLoading();
+            });
+        }, 10);
+    }
 }
 
 function DeleteFriendsCallBack(response) {
@@ -278,6 +285,7 @@ var handleSuccess = function (response) {
     console.log(response.data);
 }
 var handleError = function (response) {
+    hideLoading();
     if (
         !angular.isObject(response.data) ||
         !response.data.message

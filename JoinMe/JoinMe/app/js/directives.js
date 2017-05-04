@@ -136,7 +136,7 @@
     };
 }])
 
-    .directive('clickForOptions', ['$ionicGesture', function ($ionicGesture) {
+    .directive('clickForOptions', ['$ionicGesture', 'AppService', function ($ionicGesture, AppService) {
         return {
             restrict: 'A',
             scope: true,
@@ -159,11 +159,11 @@
                 scope.deleteEventReceived = function () {
                     console.log("Received")
                     eventFriends = { EventId: scope.EventId, FriendId: getCookie('user').Id };
-                    getScopes('EventsCtrl').appService.deleteEventReceived(eventFriends);
+                    AppService.deleteEventReceived(eventFriends);
                 }
                 scope.deleteEventSend = function () {
                     console.log("Send");
-                    getScopes('EventsCtrl').appService.deleteEventSend(scope.EventId);
+                    AppService.deleteEventSend(scope.EventId);
                 }
 
                 // --------------- SUR LES AMIS -------------------------------------
@@ -172,15 +172,16 @@
                     showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteFriends);
                 }
                 scope.deleteFriends = function () {
-                    getScopes('FriendsCtrl').appService.deleteFriends(scope.FriendId);
+                    AppService.deleteFriends(scope.FriendId);
                 }
 
                 scope.clicAcceptFriend = function (friends) {
                     scope.friends = { Id: friends.friendId, CreationDate: friends.CreationDate, FriendId: friends.Id, IsApproved: true, UserId: getCookie('user').Id };
-                    getScopes('FriendsCtrl').appService.updateFriends(scope.friends);
+                    AppService.updateFriends(scope.friends);
                 }
                 scope.clicAddFriend = function (id) {
-                    alert("add clicked");
+                    var friend = { CreationDate:new Date(), FriendId: id, IsApproved: false, UserId: getCookie('user').Id };
+                    AppService.Addfriend(friend);
                     hideOptions();
                 }
                 //##################################################################

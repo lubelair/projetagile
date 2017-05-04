@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Net.Mail;
 using System.Net;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace JoinMe.Controllers
 {
@@ -241,8 +242,8 @@ namespace JoinMe.Controllers
             {
                 var id = int.Parse(userId.ToString());
                 return await (from a in db.Friends
-                              join b in db.Users on a.FriendId equals b.Id
-                              where a.UserId == id && !a.IsApproved
+                              join b in db.Users on a.UserId equals b.Id
+                              where a.FriendId == id && !a.IsApproved
                               select new
                               {
                                   friendId = a.Id,
@@ -288,18 +289,21 @@ namespace JoinMe.Controllers
         /// <returns></returns>
         [ResponseType(typeof(Object))]
         [HttpGet, HttpPost]
-        public async Task<Object> GetUsers(Object userName)
+        public async Task<Object> GetUsers(Object pattern)
         {
             try
             {
-                var name = userName.ToString();
-                //   var id = int.Parse(userId.ToString());
-                var id = 1;
+                var patternValue = pattern.ToString();
+                // Type typeB = userName.GetType();
+                var value = JObject.Parse(patternValue);
+
+                var name = value["name"].ToString();
+                int id = int.Parse(value["userId"].ToString());
                 return await (from b in db.Users
                               where b.UserName.ToUpper().Contains(name.ToUpper())
                               && b.IsActive && !b.IsDeleted && b.Id != id
                               && !db.Friends.Any(x => (x.UserId == id && x.FriendId == b.Id))
-                              || !db.Friends.Any(x => (x.UserId == b.Id && x.FriendId == id))
+                              && !db.Friends.Any(x => (x.UserId == b.Id && x.FriendId == id))
                               select new
                               {
                                   b.FirstName,
@@ -360,17 +364,19 @@ namespace JoinMe.Controllers
         /// <returns></returns>
         [ResponseType(typeof(Friends))]
         [HttpGet, HttpPost]
-        public async Task<IHttpActionResult> PostFriends(Friends friends)
+        public async Task<Object> PostFriends(Friends friend)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Friends.Add(friends);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = friends.Id }, friends);
+            try
+            {
+                db.Friends.Add(friend);
+                await db.SaveChangesAsync();
+                return friend;
+            }
+            catch (Exception e) { throw e; }
         }
 
         /// <summary>
