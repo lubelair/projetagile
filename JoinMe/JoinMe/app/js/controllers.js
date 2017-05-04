@@ -2,6 +2,8 @@ angular.module('directory.controllers', [])
 
 //AppService => nom du service dans service.js
 
+        // root : redirection automatique en fonction des cookies récupérés
+        // Si aucun cookie n'est récupéré, on envoie sur la page d'authentification
       .controller('RootCtrl', function ($scope, $state, $cookieStore) {
           if ($cookieStore.get('user') != null) {
               $state.go('userSpace');
@@ -138,6 +140,7 @@ angular.module('directory.controllers', [])
             $state.go('authentification');
         }
 
+        // #TODO : Gestion de la photo de profil
         $scope.selectPhoto = function (user) {
             var showActionSheet = $ionicActionSheet.show({
                 buttons: [
@@ -295,26 +298,19 @@ angular.module('directory.controllers', [])
      $scope.showSwipBtnAdd = true;
      $scope.friends = [];
      $scope.friendsInvitation = [];
-     /*
-     $scope.getFriends = function () {
-         getListFriends();
-     }
-     $scope.getWhoInvitedMe = function () {
-     }
-     */
+
      $scope.refreshFriend = function () {
          $scope.friends = [];
          AppService.getFriends();
          $timeout(function () {
-             //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
+
      $scope.refreshInvitation = function () {
          $scope.friendsInvitation = [];
          AppService.getInvitations();
          $timeout(function () {
-             //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100);
      }
@@ -324,18 +320,16 @@ angular.module('directory.controllers', [])
          $scope.userResearch = [];
          AppService.getUsers();
          $timeout(function () {
-             //Stop the ion-refresher from spinning
              $scope.$broadcast('scroll.refreshComplete');
          }, 100)
      }
-     // $scope.patern = '';
+
      $scope.search = function () {
-         //  console.log(val);
          console.log(patern);
-         //  $scope.query = val;
          $scope.$apply();
      };
  })
+
  .controller('InnerFriends', function ($scope, $state, AppService, $timeout) {
      $scope.showSettings = true;
      $scope.showBack = true;
@@ -343,12 +337,14 @@ angular.module('directory.controllers', [])
 
  .controller('LocalizeAtCtrl', function ($scope, $state, NgMap, Scopes) {
      $scope.Title = "Paramètres de l'événement";
+     $scope.showBack = true;
      $scope.types = "['geocode']";
      $scope.Initposition = getCurrentPosition();
-     $scope.showBack = true;
      $scope.eventTime = getTimeFromCalendar();
      _EventOptions = { EventDateTime: createEventTime(), Location: "", NomEvent: "", InvitedFriends: [] };
      $scope.event = _EventOptions;
+
+     // Récupération de l'emplacement de l'événement
      $scope.placeChanged = function () {
          $scope.place = this.getPlace();
          $scope.map.setCenter($scope.place.geometry.location);
@@ -359,14 +355,15 @@ angular.module('directory.controllers', [])
 
      $scope.selectFriends = function (event) {
          _EventOptions = event;
-         //  _EventOptions.status ="toto";
          $state.go("EventFriends");
      }
+
      $scope.mycallback = function (map) {
          $scope.showMarker = 'false';
          $scope.map = map;
      };
  })
+
 .controller('EventFriendsCtrl', function ($scope, $state, $timeout, Scopes, AppService, $cookieStore, $ionicLoading) {
     Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
@@ -384,7 +381,7 @@ angular.module('directory.controllers', [])
         $scope.eventfriends = [];
         AppService.getFriends();
     }
-    //$scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
+
     $scope.createEvent = function () {
         _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);

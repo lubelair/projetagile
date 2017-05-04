@@ -2,7 +2,6 @@ angular.element(document).ready(function () {
     window.ionic.Platform.ready(function () {
         console.log("ionic is ready");
         if (window.cordova) {
-            // alert("Running in Cordova, will bootstrap AngularJS once 'deviceready' event fires.");
             document.addEventListener('deviceready', function () {
                 console.log("Deviceready event has fired, bootstrapping AngularJS.");
                 angular.bootstrap(document.body, ['app']);
@@ -14,6 +13,8 @@ angular.element(document).ready(function () {
     })
 });
 
+// Ajout des modules nécessaires au fonctionnement de l'application
+// Déclaration des différents états et des appels dans le contrôleur
 var app = angular.module('app', ['ionic', 'ngTouch', 'ngCordova', 'ngMap', 'ngCookies', 'directory.services', 'directory.directives', 'directory.controllers']);
 app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('top');
