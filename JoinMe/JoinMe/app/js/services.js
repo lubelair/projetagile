@@ -19,9 +19,10 @@ angular.module('directory.services', [])
             getUser: function () {
                 return __User;
             },
-            getUsers: function () {
+            getUsers: function (name) {
                 console.log('OK');
-                postUrl('GetUsers', $cookieStore.get('user').UserName, GetUsersCallBack);
+                var param = "'"+name+"'";
+                postUrl('GetUsers', param, GetUsersCallBack);
             },
             deleteUser: function () {
                 postUrl('DeleteUser', $cookieStore.get('user').Id, deleteUserCallBack);
@@ -81,6 +82,10 @@ angular.module('directory.services', [])
             deleteEventSend: function (EventId) {
                 console.log("appservice.deleteEventSend")
                 postUrl('DeleteEventSend', EventId, DeleteEventSendCallBack);
+            },
+
+            Addfriend: function (friend){
+                postUrl('PostFriends', friend, AddFriendCallBack);
             },
 
             login: function (credentials) {

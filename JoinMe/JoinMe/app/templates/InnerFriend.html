@@ -2,8 +2,8 @@
     <ion-header-bar class="bar item-input-inset has-subheader">
         <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>
-            <input id="searchKey" type="text" placeholder="Search" ng-model="query">
-            <!--  <input id="searchFriend" type="text" placeholder="Search" ng-model="query">-->
+            <input id="searchKey" type="text" placeholder="Filtrer" ng-model="query" ng-show="showFilter">
+            <input id="searchFriend" type="text" placeholder="Rechercher" ng-keyup="findFriend(pattern)" ng-model="pattern" ng-show="showSearch" >
         </label>
     </ion-header-bar>
     <ion-content padding="false">

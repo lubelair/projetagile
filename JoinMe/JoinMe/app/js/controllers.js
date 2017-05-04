@@ -203,6 +203,7 @@ angular.module('directory.controllers', [])
             if (data.slider.activeIndex == 0) {
                 AppService.getFriends();
                 AppService.getInvitations();
+              
             }
             if (data.slider.activeIndex == 2) {
                 AppService.getEventsrecived();
@@ -296,8 +297,12 @@ angular.module('directory.controllers', [])
      $scope.showSwipBtn = true;
      $scope.showSwipBtnAccept = true;
      $scope.showSwipBtnAdd = true;
+     $scope.showFilter = true;
+     $scope.showSearch = true;
+
      $scope.friends = [];
      $scope.friendsInvitation = [];
+     $scope.findedFriends = [];
 
      $scope.refreshFriend = function () {
          $scope.friends = [];
@@ -368,6 +373,7 @@ angular.module('directory.controllers', [])
     Scopes.store('EventFriendsCtrl', $scope);
     $scope.showBack = true;
     $scope.showAddBtn = true;
+    $scope.showFilter = false;
     $scope.Title = "Inviter des amis";
     $scope.eventfriends = [];
     if (getScopes('FriendsCtrl') != null) {

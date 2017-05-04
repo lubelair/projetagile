@@ -184,10 +184,10 @@ var indexCallBack = function (data) {
     console.log(data);
 }
 function GetUsersCallBack(response) {
-    console.log("GetUsersCallBack", response.data);
+    console.log("GetUsersCallBack:", response.data);
     setTimeout(function () {
         getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').userResearch = response.data;
+            getScopes('FriendsCtrl').findedFriends = response.data;
         });
     }, 10);
 }
@@ -211,6 +211,12 @@ function GetFriendsCallBack(response) {
 
         hideLoading();
     }, 10);
+}
+
+function AddFriendCallBack(response) {
+    console.log("PostFriends");
+    console.log(response.data);
+    getScopes('FriendsCtrl').userResearch = [];
 }
 
 function DeleteFriendsCallBack(response) {
@@ -310,7 +316,7 @@ function deleteUserCallBack(response) {
 }
 
 function loginCallBack(response) {
-    console.log(response.data);
+    console.log("loginCallBack",response.data);
     hideLoading();
     if (response.data === null) {
         showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
@@ -352,6 +358,9 @@ function deleteUserCallBack(response) {
 //*********************************************************
 
 function saveCookies(key, value) {
+    console.log("saveCookies:", key);
+    console.log("value:", value);
+
     var now = new Date(),
     // this will set the expiration to 12 months
     exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
@@ -362,6 +371,8 @@ function saveCookies(key, value) {
 }
 
 function getCookie(key) {
+    console.log("getCookie:", key);
+    console.log("value:", getCookieStore().get(key));
     return getCookieStore().get(key);
 }
 /* init ajax Url*/

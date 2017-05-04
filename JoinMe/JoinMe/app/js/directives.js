@@ -86,7 +86,9 @@
               showSwipBtn: '=',
               friendView: '=',
               showSwipBtnAccept: '=',
-              showSwipBtnAdd: '='
+              showSwipBtnAdd: '=',
+              showFilter: '=',
+              showSearch: '='
           },
           templateUrl: 'templates/InnerFriend.html',
           link: function (scope, element, attrs) {
@@ -95,11 +97,16 @@
                   console.log("inner friend appService", AppService);
                   var index = findItemByID(_EventOptions.InvitedFriends, friend.id);
                   if (index > -1) {
+                      ""
                       // delete added friend
                       deleteExistingItem(_EventOptions.InvitedFriends, index);
                       return;
                   }
                   _EventOptions.InvitedFriends.push({ EventId: "", FriendId: friend.Id });
+              }
+              scope.findFriend = function (pattern) {
+                  AppService.getUsers(pattern);
+                  console.log("findFriend:", pattern);
               }
           }
       }
@@ -285,6 +292,7 @@
             // init swiper hours options
             var slideOptionsH = angular.copy(communOptions);
             slideOptionsH.loop = false;
+
             slideOptionsH.initialSlide = (((_TimeObject["hours"] - 1) % 12) + 12);
             slideOptionsH.onSlideChangeEnd = function (swiper) {
                 console.log("Console hours");
