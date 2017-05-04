@@ -322,6 +322,16 @@
             var swiperAmPm = new Swiper('.swiper-container.AmPm', slideOptionsAmPm);
             var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
+            $scope.initCalendar = function () {
+
+                timeNow();
+                console.log("init calendar:", _TimeObject["min"]);
+                var min = Math.trunc(_TimeObject["min"] / 5) + 12;
+                console.log(_TimeObject["min"] + " index min :" + min);
+                slideOptionsM.initialSlide = min;
+            }
+            setInterval($scope.initCalendar(), 60000);
+
             $scope.createEvent = function () {
                 var hours = (swiperH.activeIndex + 1) % 12;
 
