@@ -169,7 +169,7 @@
                 }
 
                 scope.clicAcceptFriend = function (friends) {
-                    scope.friends = { Id:friends.friendId, CreationDate: friends.CreationDate, FriendId: friends.Id, IsApproved: true, UserId: getCookie('user').Id };
+                    scope.friends = { Id: friends.friendId, CreationDate: friends.CreationDate, FriendId: friends.Id, IsApproved: true, UserId: getCookie('user').Id };
                     getScopes('FriendsCtrl').appService.updateFriends(scope.friends);
                 }
                 scope.clicAddFriend = function (id) {
@@ -339,14 +339,14 @@
             var swiperTodTom = new Swiper('.swiper-container.TodayTomorrow', swiperTodTom);
 
             $scope.initCalendar = function () {
-
                 timeNow();
                 console.log("init calendar:", _TimeObject["min"]);
                 var min = Math.trunc(_TimeObject["min"] / 5) + 12;
                 console.log(_TimeObject["min"] + " index min :" + min);
                 slideOptionsM.initialSlide = min;
+                console.log("init calendar2:", _TimeObject["min"]);
             }
-            setInterval($scope.initCalendar(), 60000);
+            setInterval($scope.initCalendar(), 1);
 
             $scope.createEvent = function () {
                 var hours = (swiperH.activeIndex + 1) % 12;
