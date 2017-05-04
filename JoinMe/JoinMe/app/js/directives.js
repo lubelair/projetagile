@@ -92,7 +92,7 @@
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
                   // check if a friend is already added
-                  console.log("inner friend appService",AppService);
+                  console.log("inner friend appService", AppService);
                   var index = findItemByID(_EventOptions.InvitedFriends, friend.id);
                   if (index > -1) {
                       // delete added friend
@@ -136,34 +136,47 @@
             require: '^clickForOptionsWrapper',
             link: function (scope, element, attrs, parentController, Scopes) {
                 scope.EventId = "";
+                scope.FriendsId = "";
                 //##################################################################
                 //    Fonctions déclenchées au clic sur les les différentes options
-                scope.clicDeleteEvent = function (id) {
-                    scope.EventId = id;
-                    showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteEvent);          
-
+                // --------------- SUR LES EVENEMENTS -------------------------------
+                scope.clicDeleteEvent = function (event) {
+                    scope.EventId = event.Id;
+                    scope.isCreateur = event.UserName ? false : true;
+                    if (scope.isCreateur) { //Evénement créé par le user
+                        showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteEventSend);
+                    } else { //Evénement créé par un ami
+                        showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteEventReceived);
+                    }
+                }
+                scope.deleteEventReceived = function () {
+                    console.log("Received")
+                    eventFriends = { EventId: scope.EventId, FriendId: getCookie('user').Id };
+                    getScopes('EventsCtrl').appService.deleteEventReceived(eventFriends);
+                }
+                scope.deleteEventSend = function () {
+                    console.log("Send");
+                    getScopes('EventsCtrl').appService.deleteEventSend(scope.EventId);
                 }
 
-                scope.deleteEvent = function () {
-                    getScopes('EventsCtrl').appService.deleteEvent(scope.EventId);
-                }
-
+                // --------------- SUR LES AMIS -------------------------------------
                 scope.clicDeleteFriend = function (id) {
-                    alert("delete clicked");
-                    hideOptions();
+                    scope.FriendId = id;
+                    showConfirm("Attention !", "Vous êtes sur le point de supprimer cet événement, voulez-vous continuer ?", "Oui", "Non", scope.deleteFriends);
+                }
+                scope.deleteFriends = function () {
+                    getScopes('FriendsCtrl').appService.deleteFriends(scope.FriendId);
                 }
 
-                scope.clicAcceptFriend = function (id) {
-                    alert("accept clicked");
-                    hideOptions();
+                scope.clicAcceptFriend = function (friends) {
+                    scope.friends = { Id:friends.friendId, CreationDate: friends.CreationDate, FriendId: friends.Id, IsApproved: true, UserId: getCookie('user').Id };
+                    getScopes('FriendsCtrl').appService.updateFriends(scope.friends);
                 }
                 scope.clicAddFriend = function (id) {
                     alert("add clicked");
                     hideOptions();
                 }
                 //##################################################################
-
-
 
                 // A basic variable that determines wether the element was currently clicked
                 var clicked;

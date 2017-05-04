@@ -3,7 +3,7 @@ angular.module('directory.services', [])
     .factory('AppService', function ($q, $http, $ionicPopup, $cookieStore, $state) {
         var postUrl = function (action, params, functionCallBack) {
             //angular.toJson(params)
-            var parameter =JSON.parse( JSON.stringify(params));
+            var parameter = JSON.parse(JSON.stringify(params));
             console.log("postUrl : ", _AjaxUrl + action);
             console.log("postUrl  param: ", parameter);
 
@@ -42,6 +42,12 @@ angular.module('directory.services', [])
                 }
                 postUrl('GetInvitations', $cookieStore.get('user').Id, GetInvitationsCallBack);
             },
+            deleteFriends: function (FriendsId) {
+                postUrl('DeleteFriends', FriendsId, DeleteFriendsCallBack);
+            },
+            updateFriends: function (friends) {
+                postUrl('PutFriends', friends, UpdateFriendsCallBack)
+            },
 
             getEventssend: function () {
                 if (getScopes('EventsCtrl').eventssend.length > 0) {
@@ -57,10 +63,13 @@ angular.module('directory.services', [])
                 }
                 postUrl('GetEventsrecived', $cookieStore.get('user').Id, GetEventsrecivedCallBack);
             },
-            deleteEvent: function (EventId) {
-                console.log("appservice.deleteEvent")
-
-                postUrl('DeleteEvent', EventId, DeleteEventCallBack);
+            deleteEventReceived: function (eventFriends) {
+                console.log("appservice.deleteEventReceived")
+                postUrl('DeleteEventReceived', eventFriends, DeleteEventReceivedCallBack);
+            },
+            deleteEventSend: function (EventId) {
+                console.log("appservice.deleteEventSend")
+                postUrl('DeleteEventSend', EventId, DeleteEventSendCallBack);
             },
 
             login: function (credentials) {
