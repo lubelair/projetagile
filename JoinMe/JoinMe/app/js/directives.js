@@ -92,14 +92,18 @@
           link: function (scope, element, attrs) {
               scope.inviteFriend = function (friend) {
                   // check if a friend is already added
+<<<<<<< HEAD
                   console.log("inner friend appService", AppService);
                   var index = findItemByID(_EventOptions.InvitedFriends, friend.id);
+=======
+                  var index = findItemByID(_EventOptions.InvitedFriends, friend.Id);
+>>>>>>> 785461297d37c75736e21c80542bbc0e6a1eeca1
                   if (index > -1) {
                       // delete added friend
                       deleteExistingItem(_EventOptions.InvitedFriends, index);
                       return;
                   }
-                  _EventOptions.InvitedFriends.push({ EventId: "", FriendId: friend.id });
+                  _EventOptions.InvitedFriends.push({ EventId: "", FriendId: friend.Id });
               }
           }
       }
