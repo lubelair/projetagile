@@ -371,8 +371,8 @@ angular.module('directory.controllers', [])
     $scope.showBack = true;
     $scope.showAddBtn = true;
     $scope.Title = "Inviter des amis";
-    // $scope.friends = ListFriends;
-    $scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
+    $scope.friends = [];
+    //$scope.friends = [{ id: 3, FirstName: "toto", LastName: "tata" }];
     $scope.createEvent = function () {
         _EventOptions.userId = $cookieStore.get('user').Id;
         AppService.CreateEvent(_EventOptions);
