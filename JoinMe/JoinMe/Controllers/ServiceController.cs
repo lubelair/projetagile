@@ -207,6 +207,7 @@ namespace JoinMe.Controllers
                                   friendId = a.Id,
                                   a.CreationDate,
                                   a.IsApproved,
+                                  b.UserName,
                                   b.FirstName,
                                   b.LastName,
                                   b.Id
@@ -218,6 +219,7 @@ namespace JoinMe.Controllers
                                            friendId = a.Id,
                                            a.CreationDate,
                                            a.IsApproved,
+                                           b.UserName,
                                            b.FirstName,
                                            b.LastName,
                                            b.Id
@@ -249,6 +251,7 @@ namespace JoinMe.Controllers
                                   friendId = a.Id,
                                   a.CreationDate,
                                   a.IsApproved,
+                                  b.UserName,
                                   b.FirstName,
                                   b.LastName,
                                   b.Id
