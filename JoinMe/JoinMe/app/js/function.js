@@ -74,6 +74,9 @@ function checkPhone() {
     return false;
 }
 
+//************************************************************
+// Function permettant l'affichage d'un menu contextuel      *
+//************************************************************
 function showActionSheet($ionicActionSheet) {
     var showActionSheet = $ionicActionSheet.show({
         buttons: [
@@ -101,6 +104,9 @@ function showActionSheet($ionicActionSheet) {
     });
 }
 
+//************************************************************
+// Fonction de gestion des états                             *
+//************************************************************
 function getState() {
     return _State;
 }
@@ -109,20 +115,15 @@ function initState($state) {
     _State = $state;
 }
 
+//************************************************************
+// Affichage de popup personnalisées                         *
+//************************************************************
 function initIoniPopup($ionicPopup) {
     _IonicPopup = $ionicPopup;
 }
 
 function getIonicPopup() {
     return _IonicPopup;
-}
-
-function initCookies($cookieStore) {
-    _Cookies = $cookieStore;
-}
-
-function getCookieStore() {
-    return _Cookies;
 }
 
 function showAlert(titre, message) {
@@ -149,18 +150,9 @@ function showConfirm(titre, message, btnLeft, btnRight, procBtnLeft, procBtnRigh
     });
 }
 
-function activeAccount() {
-    var user = __User;
-    user.IsActive = true;
-    getScopes('Authentification').appService.updateUser(user);
-}
-
-function isConnected() {
-    if (getCookie('user') != null)
-        return true;
-    return false;
-}
-
+//********************************************************************
+// Fonctions de gestion de l'affichage d'un icône lors du chargement *
+//********************************************************************
 function initIonicLoading($ionicLoading) {
     _IonicLoading = $ionicLoading;
 }
@@ -178,11 +170,180 @@ function hideLoading() {
     _IonicLoading.hide();
 }
 
-/***  CallBack functions ***/
+//*********************************************************
+// Fonctions de gestion des cookies                       *
+//*********************************************************
+// Fonction générique de sauvegarde des cookies           *
+// La key représente l'identifiant du cookie, et la value *
+// l'élément auquel il est lié                            *
+//*********************************************************
+function initCookies($cookieStore) {
+    _Cookies = $cookieStore;
+}
+
+function getCookieStore() {
+    return _Cookies;
+}
+
+function saveCookies(key, value) {
+    console.log("saveCookies:", key);
+    console.log("value:", value);
+
+    var now = new Date(),
+    // this will set the expiration to 12 months
+    exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+    getCookieStore().put(key, value, {
+        expires: exp
+    });
+}
+
+function getCookie(key) {
+    console.log("getCookie:", key);
+    console.log("value:", getCookieStore().get(key));
+    return getCookieStore().get(key);
+}
+
+//************************************************************
+// Fonctions permettant de partager le scope d'un controller *
+//************************************************************
+
+//init scopes
+function initScopes(scopes) {
+    _Scopes = scopes;
+}
+// get current scopes
+function getScopes(key) {
+    return _Scopes[key];
+}
+
+//********************************************************************
+// Fonction permettant de lier l'appli (en prod) au serveur en ligne *
+//********************************************************************
+function initAjax(isProd) {
+    if (isProd) {
+        _AjaxUrl = "http://lubelair-001-site1.gtempurl.com/JoinMeService/service/";
+    }
+}
+
+//********************************************************************
+// Fonctions annexes à la gestion du calendier                       *
+//********************************************************************
+
+// Récupère la date et l'heure actuels
+function timeNow() {
+    var now = new Date(),
+    ampm = 'am',
+    h = now.getHours(),
+    m = now.getMinutes(),
+    s = now.getSeconds();
+    if (h >= 12) {
+        if (h > 12) h -= 12;
+        ampm = 'pm';
+    }
+
+    if (m < 10) m = '0' + m;
+    if (s < 10) s = '0' + s;
+    _TimeObject["hours"] = h;
+    _TimeObject["min"] = m;
+    _TimeObject["seconds"] = s;
+    _TimeObject["ampm"] = ampm;
+    console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
+    return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
+}
+
+//check if time is am or pm
+function isAm(index) {
+    return index == 0 ? true : false;
+}
+
+// get time from calendar
+function getTimeFromCalendar() {
+    return _CalendarTime;
+}
+
+function initTimeFromCalendar(time) {
+    _CalendarTime = time;
+}
+
+function initCurrentPosition(position) {
+    _CurrentPosition = position;
+}
+function getCurrentPosition() {
+    return _CurrentPosition;
+}
+// get current date
+function getCurrentDate() {
+    var now = new Date();
+    return { year: now.getUTCFullYear(), month: now.getUTCMonth(), day: now.getUTCDate() }
+}
+// Create event time
+function createEventTime() {
+    var now = getCurrentDate();
+    var calendarTime = getTimeFromCalendar();
+    var eventDay = now.day;
+    if (calendarTime.todayTomorrow === "Tomorrow") {
+        eventDay = eventDay + 1;
+    }
+    //   var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
+    var dt = new Date(now.year, now.month, eventDay);
+    dt.setHours(calendarTime.hours - (dt.getTimezoneOffset() / 60));
+    dt.setMinutes(calendarTime.min);
+    console.log("current date :", dt);
+    //  console.log("parse date :", Date.parse(dt));
+    return dt;
+}
+
+//********************************************************************
+// Fonctions annexes à la gestion des listes d'une page html         *
+//********************************************************************
+
+//Find items in array by Id
+function findItemByID(items, id) {
+    var index = items.findIndex(item=>item.FriendId === id);
+    console.log("findAddedFriendByID: item exists at :", index);
+    return index;
+}
+
+// delete item from array by index
+function deleteExistingItem(items, index) {
+    console.log("deleteExistingItem:", items.splice(index, 1));
+    console.log("deleteExistingItem:new value:", items);
+}
+
+//************************************************************
+// Fonctions callback (exécutées après appel au serveur      *
+//************************************************************
 
 var indexCallBack = function (data) {
     console.log(data);
 }
+
+// liées au user    ******************************************
+function loginCallBack(response) {
+    console.log("loginCallBack", response.data);
+    hideLoading();
+    if (response.data === null) {
+        showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
+    } else {
+        //Le user existe, on teste maintenant si le compte est actif
+        __User = response.data;
+        if (__User.IsActive) {
+            console.log("loggedUser");
+            saveCookies('user', response.data);
+            getState().go("userSpace");
+        } else {
+            showConfirm("Attention !", "Votre compte est désactivé, voulez-le réactiver ?", "Oui", "Non", activeAccount);
+        }
+    }
+}
+
+function activeAccount() {
+    var user = __User;
+    user.IsActive = true;
+    getScopes('Authentification').appService.updateUser(user);
+}
+
 function GetUsersCallBack(response) {
     console.log("GetUsersCallBack:", response.data);
     setTimeout(function () {
@@ -191,17 +352,43 @@ function GetUsersCallBack(response) {
         });
     }, 10);
 }
+function createUserCallBack(response) {
+    hideLoading();
+    if (response.data === null) {
+        showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
+    } else {
+        saveCookies('user', response.data);
+        console.log(getCookie('user'));
+        getState().go("userSpace");
+    }
+}
+
+function updateUserCallBack(response) {
+    console.log(response.data);
+    if (response.data.IsActive) {
+        saveCookies('user', response.data);
+        getState().go("userSpace");
+    }
+    else {
+        getScopes('Settings').disconnect();
+    }
+}
+
+function deleteUserCallBack(response) {
+    getScopes('Settings').disconnect();
+}
+
+// liées aux friends (relation d'amitié) *********************
 function GetFriendsCallBack(response) {
     console.log("GetFriendsCallBack", response.data);
     setTimeout(function () {
-        if (getScopes('FriendsCtrl') != null) { 
+        if (getScopes('FriendsCtrl') != null) {
             getScopes('FriendsCtrl').$apply(function () {
-            getScopes('FriendsCtrl').friends = response.data;
-            ListFriends = response.data;
-        });
-
+                getScopes('FriendsCtrl').friends = response.data;
+                ListFriends = response.data;
+            });
         }
-       
+
         if (getScopes('EventFriendsCtrl') != null) {
             getScopes('EventFriendsCtrl').$apply(function () {
                 getScopes('EventFriendsCtrl').eventfriends = response.data;
@@ -248,6 +435,7 @@ function GetInvitationsCallBack(response) {
     }, 10);
 }
 
+// liées aux événements **************************************
 function GetEventssendCallBack(response) {
     console.log(response.data);
 
@@ -279,8 +467,17 @@ function DeleteEventSendCallBack(response) {
     console.log("evénement supprimé");
     getScopes('EventsCtrl').refreshEventsend();
 }
+function createEventCallBack(response) {
+    console.log("Event created : ", response.data);
+    setTimeout(function () {
+        getScopes('EventsCtrl').$apply(function () {
+            hideLoading();
+            getScopes('EventsCtrl').eventfriends = response.data;
+        });
+    }, 10);
+    getState().go("userSpace");
+}
 
-/***  Fin CallBack functions ***/
 var handleSuccess = function (response) {
     console.log(response.data);
 }
@@ -293,193 +490,4 @@ var handleError = function (response) {
         showAlert("An unknown error occurred.");
     }
     console.log(response);
-}
-
-var deleteUser = function (_User) { }
-
-function createUserCallBack(response) {
-    hideLoading();
-    if (response.data === null) {
-        showAlert("Attention !", "Ce pseudonyme est deja pris, ou un compte existe deja a votre numero et/ou adresse.");
-    } else {
-        saveCookies('user', response.data);
-        console.log(getCookie('user'));
-        getState().go("userSpace");
-    }
-}
-
-function updateUserCallBack(response) {
-    console.log(response.data);
-    if (response.data.IsActive) {
-        saveCookies('user', response.data);
-        getState().go("userSpace");
-    }
-    else {
-        getScopes('Settings').disconnect();
-    }
-}
-
-function deleteUserCallBack(response) {
-    getScopes('Settings').disconnect();
-}
-
-function loginCallBack(response) {
-    console.log("loginCallBack",response.data);
-    hideLoading();
-    if (response.data === null) {
-        showAlert("Attention !", "Saisie du mail ou du mot de passe incorrecte.");
-    } else {
-        //Le user existe, on teste maintenant si le compte est actif
-        __User = response.data;
-        if (__User.IsActive) {
-            console.log("loggedUser");
-            saveCookies('user', response.data);
-            getState().go("userSpace");
-        } else {
-            showConfirm("Attention !", "Votre compte est désactivé, voulez-le réactiver ?", "Oui", "Non", activeAccount);
-        }
-    }
-}
-
-function createEventCallBack(response) {
-    console.log("Event created : ", response.data);
-    setTimeout(function () {
-        getScopes('EventsCtrl').$apply(function () {
-            hideLoading();
-            getScopes('EventsCtrl').eventfriends = response.data;
-        });
-    }, 10);
-    getState().go("userSpace");
-}
-
-function deleteUserCallBack(response) {
-    console.log(response.data);
-    getScopes('Settings').disconnect();
-}
-
-/***  Cookies functions ***/
-
-//*********************************************************
-// Fonction générique de sauvegarde des cookies           *
-// La key représente l'identifiant du cookie, et la value *
-// l'élément auquel il est lié                            *
-//*********************************************************
-
-function saveCookies(key, value) {
-    console.log("saveCookies:", key);
-    console.log("value:", value);
-
-    var now = new Date(),
-    // this will set the expiration to 12 months
-    exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
-
-    getCookieStore().put(key, value, {
-        expires: exp
-    });
-}
-
-function getCookie(key) {
-    console.log("getCookie:", key);
-    console.log("value:", getCookieStore().get(key));
-    return getCookieStore().get(key);
-}
-/* init ajax Url*/
-function initAjax(isProd) {
-    if (isProd) {
-        _AjaxUrl = "http://lubelair-001-site1.gtempurl.com/JoinMeService/service/";
-    }
-}
-/*Get time now*/
-function timeNow() {
-    var now = new Date(),
-    ampm = 'am',
-    h = now.getHours(),
-    m = now.getMinutes(),
-    s = now.getSeconds();
-    if (h >= 12) {
-        if (h > 12) h -= 12;
-        ampm = 'pm';
-    }
-
-    if (m < 10) m = '0' + m;
-    if (s < 10) s = '0' + s;
-    _TimeObject["hours"] = h;
-    _TimeObject["min"] = m;
-    _TimeObject["seconds"] = s;
-    _TimeObject["ampm"] = ampm;
-    console.log(now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm);
-    return now.toLocaleDateString() + ' ' + h + ':' + m + ':' + s + ' ' + ampm;
-}
-
-//init scopes
-function initScopes(scopes) {
-    _Scopes = scopes;
-}
-// get current scopes
-function getScopes(key) {
-    return _Scopes[key];
-}
-
-function goToEvent() {
-    getScopes('UserSpace').slider.slideTo(0);
-}
-
-//check if time is am or pm
-function isAm(index) {
-    return index == 0 ? true : false;
-}
-
-// get time from calendar
-function getTimeFromCalendar() {
-    return _CalendarTime;
-}
-
-function initTimeFromCalendar(time) {
-    _CalendarTime = time;
-}
-
-function initCurrentPosition(position) {
-    _CurrentPosition = position;
-}
-function getCurrentPosition() {
-    return _CurrentPosition;
-}
-
-//Find items in array by Id
-function findItemByID(items, id) {
-    var index = items.findIndex(item=>item.FriendId === id);
-    console.log("findAddedFriendByID: item exists at :", index);
-    return index;
-}
-function findItemByIDEventSend(items, id) {
-    var index = items.findIndex(item=>item.FriendId === id);
-    console.log("findAddedFriendByID: item exists at :", index);
-    return index;
-}
-
-// delete item from array by index
-function deleteExistingItem(items, index) {
-    console.log("deleteExistingItem:", items.splice(index, 1));
-    console.log("deleteExistingItem:new value:", items);
-}
-// get current date
-function getCurrentDate() {
-    var now = new Date();
-    return { year: now.getUTCFullYear(), month: now.getUTCMonth(), day: now.getUTCDate() }
-}
-// Create event time
-function createEventTime() {
-    var now = getCurrentDate();
-    var calendarTime = getTimeFromCalendar();
-    var eventDay = now.day;
-    if (calendarTime.todayTomorrow === "Tomorrow") {
-        eventDay = eventDay + 1;
-    }
- //   var dt = new Date(now.year, now.month, eventDay, calendarTime.hours, calendarTime.min);
-    var dt = new Date(now.year, now.month, eventDay);
-    dt.setHours(calendarTime.hours - (dt.getTimezoneOffset() / 60));
-    dt.setMinutes(calendarTime.min);
-    console.log("current date :", dt);
-  //  console.log("parse date :", Date.parse(dt));
-    return dt;
 }
