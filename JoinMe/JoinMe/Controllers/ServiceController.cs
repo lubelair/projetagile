@@ -306,6 +306,7 @@ namespace JoinMe.Controllers
                               && !db.Friends.Any(x => (x.UserId == b.Id && x.FriendId == id))
                               select new
                               {
+                                  b.UserName,
                                   b.FirstName,
                                   b.LastName,
                                   b.Id
