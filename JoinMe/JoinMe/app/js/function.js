@@ -416,6 +416,7 @@ function AddFriendCallBack(response) {
 function DeleteFriendsCallBack(response) {
     console.log("amitié supprimée");
     getScopes('FriendsCtrl').refreshFriend();
+    getScopes('FriendsCtrl').refreshInvitation();
 }
 
 function UpdateFriendsCallBack(response) {
