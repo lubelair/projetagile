@@ -1,0 +1,44 @@
+﻿<ion-view>
+    <div header-view></div>
+    <ion-content padding="true" overflow-scroll="true">
+        <form id="settings-form2" class="list" name="settingsForm">
+            <!--div class="image-thumbnail">
+                <img id="photoUser" src="https://3.bp.blogspot.com/-W__wiaHUjwI/Vt3Grd8df0I/AAAAAAAAA78/7xqUNj8ujtY/s1600/image02.png" ng-click="selectPhoto(user)" ng-model="user.Photo" />
+                <i class="icon ion-camera"></i>
+            </div>-->
+            <label class="item item-input" id="settings-input9">
+                <input type="text" name="nom" placeholder="Nom" ng-model="user.LastName" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.nom.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.nom.$valid"></i>
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="settings-input12">
+                <input type="text" name="prenom" placeholder="Prénom" ng-model="user.FirstName" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.prenom.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.prenom.$valid"></i>
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input disabled" id="settings-input6">
+                <input type="email" name="mail" placeholder="E-mail" ng-model="user.Email" disabled="disabled">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input disabled" id="settings-input4">
+                <input type="tel" name="numeroTel" id="phoneNumber" placeholder="Numéro" ng-model="user.PhoneNumber" disabled="disabled">
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="settings-input7">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" ng-model="user.Password" required ng-minlength="6">
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="settingsForm.password.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="settingsForm.password.$valid"></i>
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <ion-toggle toggle-class="toggle-positive" id="settings-toggle1" ng-model="user.IsActive">Compte actif</ion-toggle>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <!--<ion-toggle toggle-class="toggle-positive" id="settings-toggle2">Désactiver les notifications</ion-toggle>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>-->
+            <button id="settings-button4" class="button button-calm  button-block" ng-click="clicDeleteAccount()">Supprimer compte</button>
+            <button id="settings-button2" style="font-weight:500;" class="button button-calm  button-block" ng-click="disconnect()">Déconnexion </button>
+        </form>
+        <button id="settings-button3" class="button button-positive  button-block btnDefault" ng-click="saveSettings(user, settingsForm)">Enregistrer</button>
+    </ion-content>
+</ion-view>

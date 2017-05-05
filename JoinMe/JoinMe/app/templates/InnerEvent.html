@@ -1,0 +1,30 @@
+﻿<ion-view title="innerEvents" id="page3">
+    <ion-header-bar class="bar item-input-inset has-subheader">
+        <label class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="searchKey" type="text" placeholder="Search" ng-model="query">
+        </label>
+    </ion-header-bar>
+    <ion-content padding="false">
+
+        <ion-refresher on-refresh="doRefresh()">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <ion-list id="innerEvents-list4" click-for-options-wrapper>
+            <ion-item click-for-options class="item-avatar" id="innerFriends-list-item2" ng-repeat="e in listevents | filter: query">
+                <img id="imgAvatar" src="img/icon_event.png">
+                <div>
+                    <!--<h2>{{e.Location+' '+e.EventDateTime}}</h2>-->
+                    <p>
+                        <strong>{{e.NomEvent+' '}}</strong>
+                        {{e.UserName ? '- de '+e.UserName : ''}}
+                    </p>
+                    <p>{{e.Location+' '}}</p>
+                    <p>{{e.EventDateTime | date : "dd/MM/y à HH:mm"}}</p>
+                </div>
+
+                <ion-option-button class="button-assertive" ng-click="clicDeleteEvent(e);$event.stopPropagation();">Supprimer</ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

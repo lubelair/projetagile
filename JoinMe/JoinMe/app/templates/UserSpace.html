@@ -1,0 +1,16 @@
+<ion-view hide-nav-bar="true">
+    <ion-content scroll="false">
+        <ion-slides options="options" show-pager="false" slider="data.slider" id="slidBox">
+            <ion-slide-page>
+                <div friends-view data-ng-controller="FriendsCtrl"></div>
+            </ion-slide-page>
+            <ion-slide-page>
+                <div accueil-view data-ng-controller="AccueilCtrl"></div>
+            </ion-slide-page>
+            <ion-slide-page>
+                <div events-view data-ng-controller="EventsCtrl"></div>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+    <div footer-view></div>
+</ion-view>

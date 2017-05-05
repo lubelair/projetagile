@@ -1,0 +1,24 @@
+<ion-view>
+    <div header-view></div>
+    <ion-content padding="true" scroll="false">
+        <form id="authentificationForm" class="list" name="authentificationForm">
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input myclass" id="connexion-input3">
+                <input type="email" name="login" placeholder="Email" ng-model="credentials.Email" required>
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="authentificationForm.login.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="authentificationForm.login.$valid"></i>
+            </label>
+            <div class="spacer" style="width: 300px; height: 12px;"></div>
+            <label class="item item-input" id="connexion-input6">
+                <input type="password" placeholder="Mot de passe" ng-model="credentials.Password" name="password" required="required" ng-minlength="6">
+                <i class="icon ion-checkmark placeholder-icon balanced" ng-show="authentificationForm.password.$valid"></i>
+                <i class="icon ion-close placeholder-icon assertive" ng-hide="authentificationForm.password.$valid"></i>
+            </label>
+        </form>
+
+        <button id="connexion-button2" class="button button-positive  button-block btnDefault" ng-click="connect(credentials, authentificationForm)">S'identifier</button>
+        <div style="text-align: center">
+            <a class="fake_link" ng-click="forgetPassword()">Mot de passe oublié</a> / <a class="fake_link" ng-click="inscription()">S'inscrire</a>
+        </div>
+    </ion-content>
+</ion-view>

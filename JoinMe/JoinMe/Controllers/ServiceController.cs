@@ -1,0 +1,525 @@
+﻿using JoinMeServices.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Net.Mail;
+using System.Net;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+
+namespace JoinMe.Controllers
+{
+    public class ServiceController : ApiController
+    {
+        private JoinMeServicesContext db = new JoinMeServicesContext();
+
+        /// <summary>
+        /// Comparaison des données utilisateurs saisies avec la BDD lors du login (Email/MDP)
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> Authenticate(Credentials credentials)
+        {
+            try
+            {
+                return await db.Users.Where(e => e.Email.Equals(credentials.Email, StringComparison.CurrentCultureIgnoreCase) &&
+                                e.Password.Equals(credentials.Password)).Select(e => new { e.Id, e.Email, e.FirstName, e.LastName, e.UserName, e.Password, e.PhoneNumber, e.CreationTime, e.IsActive, e.IsDeleted }).SingleAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Supprime la participation du user à un événement reçu
+        /// </summary>
+        /// <param name="id">id du User connecté</param>
+        /// <returns></returns>
+        [ResponseType(typeof(EventFriend))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteEventReceived(EventFriend myEventFriends)
+        {
+            try
+            {
+                EventFriend eventFriend = db.EventFriends.First(x => x.FriendId == myEventFriends.FriendId && x.EventId == myEventFriends.EventId);
+
+                if (eventFriend == null)
+                {
+                    return NotFound();
+                }
+
+                db.EventFriends.Remove(eventFriend);
+                await db.SaveChangesAsync();
+
+                return Ok(eventFriend);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        // Supprime un évènement à partir de son id
+        [ResponseType(typeof(Event))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteEventSend(Object id)
+        {
+            Event @event = await db.Events.FindAsync(id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            db.Events.Remove(@event);
+            await db.SaveChangesAsync();
+
+            return Ok(@event);
+        }
+
+        /// <summary>
+        /// Suppression d'un lien d'amité s'il est trouvé en BDD
+        /// </summary>
+        /// <param name="id">id du lien d'amitié</param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteFriends(Object id)
+        {
+            Friends friends = await db.Friends.FindAsync(id);
+            if (friends == null)
+            {
+                return NotFound();
+            }
+
+            db.Friends.Remove(friends);
+            await db.SaveChangesAsync();
+
+            return Ok(friends);
+        }
+
+        /// <summary>
+        /// Suppression de l'utilisateur s'il est trouvé en BDD
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        public async Task<IHttpActionResult> DeleteUser(Object userId)
+        {
+            User user = await db.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            db.Users.Remove(user);
+            await db.SaveChangesAsync();
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Récupération des données des événements reçus par l'utilisateur connecté
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetEventsrecived(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                return await (from a in db.Events
+                              join b in db.EventFriends on a.Id equals b.EventId
+                              join c in db.Users on a.UserId equals c.Id
+                              where b.FriendId == id
+                              select new
+                              {
+                                  a.Id,
+                                  a.EventDateTime,
+                                  a.Location,
+                                  a.NomEvent,
+                                  c.UserName
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Récupération des données des événements créés et envoyés par l'utilisateur connecté
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetEventssend(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                // return await db.Friends.Where(a => a.UserId == 1 && !a.IsApproved).ToListAsync();
+                return await (from a in db.Events
+                              join b in db.Users on a.UserId equals b.Id
+                              where a.UserId == id
+                              select new
+                              {
+                                  a.Id,
+                                  a.EventDateTime,
+                                  a.Location,
+                                  a.NomEvent
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Récupération des amis de l'utilisateur connecté On ne retourne que les amis acceptés par
+        /// l'utilisateur et dont le compte est actif
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetFriends(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                return await (from a in db.Friends
+                              join b in db.Users on a.FriendId equals b.Id
+                              where a.UserId == id && a.IsApproved && !b.IsDeleted && b.IsActive
+                              select new
+                              {
+                                  friendId = a.Id,
+                                  a.CreationDate,
+                                  a.IsApproved,
+                                  b.UserName,
+                                  b.FirstName,
+                                  b.LastName,
+                                  b.Id
+                              }).Union(from a in db.Friends
+                                       join b in db.Users on a.UserId equals b.Id
+                                       where a.FriendId == id && a.IsApproved && !b.IsDeleted && b.IsActive
+                                       select new
+                                       {
+                                           friendId = a.Id,
+                                           a.CreationDate,
+                                           a.IsApproved,
+                                           b.UserName,
+                                           b.FirstName,
+                                           b.LastName,
+                                           b.Id
+                                       }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Récupération des amis pas encore approuvés
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetInvitations(Object userId)
+        {
+            try
+            {
+                var id = int.Parse(userId.ToString());
+                return await (from a in db.Friends
+                              join b in db.Users on a.UserId equals b.Id
+                              where a.FriendId == id && !a.IsApproved
+                              select new
+                              {
+                                  friendId = a.Id,
+                                  a.CreationDate,
+                                  a.IsApproved,
+                                  b.UserName,
+                                  b.FirstName,
+                                  b.LastName,
+                                  b.Id
+                              }).ToListAsync();
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Récupération des données utilisateur
+        /// </summary>
+        /// <param name="usr"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(object))]
+        [HttpGet, HttpPost]
+        public async Task<object> GetUser(User usr)
+        {
+            User user = await db.Users.FindAsync(3);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Récupération des données d'un utilisateur à partir de son pseudonyme
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        [HttpGet, HttpPost]
+        public async Task<Object> GetUsers(Object pattern)
+        {
+            try
+            {
+                var patternValue = pattern.ToString();
+                // Type typeB = userName.GetType();
+                var value = JObject.Parse(patternValue);
+
+                var name = value["name"].ToString();
+                int id = int.Parse(value["userId"].ToString());
+                return await (from b in db.Users
+                              where b.UserName.ToUpper().Contains(name.ToUpper())
+                              && b.IsActive && !b.IsDeleted && b.Id != id
+                              && !db.Friends.Any(x => (x.UserId == id && x.FriendId == b.Id))
+                              && !db.Friends.Any(x => (x.UserId == b.Id && x.FriendId == id))
+                              select new
+                              {
+                                  b.UserName,
+                                  b.FirstName,
+                                  b.LastName,
+                                  b.Id
+                              }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, HttpPost]
+        public IHttpActionResult Index()
+        {
+            // Point d'entrée de l'API
+            return Ok("joinMe web api");
+        }
+
+        /// <summary>
+        /// Ajout d'un événement en BDD lors de la création d'événement
+        /// </summary>
+        /// <param name="e">Event</param>
+        /// <returns></returns>
+        [ResponseType(typeof(Object))]
+        public async Task<Object> PostEvent(Event e)
+        {
+            var _event = new Event { NomEvent = e.NomEvent, EventDateTime = e.EventDateTime, Location = e.Location, UserId = e.UserId, EventCreationTime = e.EventDateTime };
+
+            try
+            {
+                var Event = db.Events.Add(_event);
+
+                // int eventId = await db.SaveChangesAsync();
+                List<EventFriend> invitedFriends = new List<EventFriend>(e.InvitedFriends);
+                invitedFriends.All(x => { x.Event = Event; return true; });
+                foreach (var invitedFriend in invitedFriends)
+                {
+                    db.EventFriends.Add(invitedFriend);
+                }
+                await db.SaveChangesAsync();
+                return Event;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Crée une relation d'amitié
+        /// </summary>
+        /// <param name="friends"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PostFriends(Friends friend)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                db.Friends.Add(friend);
+                await db.SaveChangesAsync();
+                return friend;
+            }
+            catch (Exception e) { throw e; }
+        }
+
+        /// <summary>
+        /// Ajout d'un utilisateur en BDD lors de l'inscription. L'utilisateur créé ne doit pas avoir
+        /// un Email, un Login, ou un Numéro déjà existant en base
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PostUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                if (db.Users.Count(e => e.Email.Equals(user.Email, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
+                db.Users.Count(e => e.UserName.Equals(user.UserName, StringComparison.CurrentCultureIgnoreCase)) == 0 &&
+                db.Users.Count(e => e.PhoneNumber.Equals(user.PhoneNumber)) == 0)
+                {
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Modifie la relation d'amitié
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="friends"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(Friends))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PutFriends(Friends friends)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(friends).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FriendsExists(friends.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
+        /// Modification des données de l'utilsateur dans la BDD
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(User))]
+        [HttpGet, HttpPost]
+        public async Task<Object> PutUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return user;
+        }
+
+        /*public Object SendPwd(string mail)
+        {
+        }*/
+
+        /// <summary>
+        /// Vérification de l'existence du mail en BDD
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        private bool ChkExistEmail(string email)
+        {
+            return db.Users.Count(e => e.Email == email) > 0;
+        }
+
+        /// <summary>
+        /// Vérification de l'exisitence de l'amitié en BDD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool FriendsExists(int id)
+        {
+            return db.Friends.Count(e => e.Id == id) > 0;
+        }
+
+        /// <summary>
+        /// Vérification de l'existence de l'utilisateur en BDD
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool UserExists(int id)
+        {
+            return db.Users.Count(e => e.Id == id) > 0;
+        }
+    }
+}

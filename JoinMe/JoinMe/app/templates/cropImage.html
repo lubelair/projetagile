@@ -1,0 +1,18 @@
+﻿<view title="'Accueil'">
+    <content padding="true" class="has-header">
+            <image-cropper id="photoUser"
+                           image-url="img/DSC_0009.JPG"
+                           width="100"
+                           height="100"
+                           show-controls="true"
+                           fit-on-init="true"
+                           center-on-init="true"
+                           api="getApiFunction"
+                           crop-callback="vm.updateResultImage"
+                           check-cross-origin="false"
+                           zoom-step="0.1"
+                           action-labels="vm.myButtonLabels">
+            </image-cropper>
+        <button  ng-click="clicCrop()">Valider</button>
+    </content>
+</view>

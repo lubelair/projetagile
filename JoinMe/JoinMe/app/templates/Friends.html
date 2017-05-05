@@ -1,0 +1,24 @@
+<ion-view>
+    <div header-view></div>
+    <div id="ctn1" class="has-header">
+        <ion-tabs>
+            <ion-tab title="Amis">
+                <ion-content>
+                    <div inner-friends-view listfriend="friends" show-filter="showFilter" show-swip-btn="showSwipBtn" do-refresh="refreshFriend()"></div>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Invitations d'amis">
+                <ion-content>
+                    <div inner-friends-view show-filter="showFilter" listfriend="friendsInvitation" show-swip-btn-accept="showSwipBtnAccept" show-swip-btn="showSwipBtn" do-refresh="refreshInvitation()"></div>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Ajout d'amis">
+                <ion-content>
+                    <div inner-friends-view show-filter="!showFilter" show-search="showFilter" listfriend="findedFriends" show-swip-btn-add="showSwipBtnAdd" do-refresh="refreshUsers()"></div>
+                </ion-content>
+            </ion-tab>
+        </ion-tabs>
+    </div>
+</ion-view>

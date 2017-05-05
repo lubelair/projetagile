@@ -1,0 +1,19 @@
+<ion-view>
+    <div header-view></div>
+    <ion-content class="has-header" scroll="false">
+        <div style="height:100%;display:block">
+            <ng-map map-initialized="mycallback(map)" scrollwheel="false" center="{{Initposition}}" default-style="false" style="height:100%;width:100%;display:block"
+                    disable-default-u-i="true"
+                    disable-double-click-zoom="true"
+                    draggable="false"
+                    draggable-cursor="help"
+                    dragging-cursor="move"
+                    keyboard-shortcuts="false"
+                    zoom="14"
+                    tilt="45">
+                <marker position="{{myPosition}}" optimized="true"></marker>
+            </ng-map>
+        </div>
+        <div calendar-view></div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,53 @@
+﻿<ion-view>
+    <div header-view></div>
+    <ion-content class="has-header" scroll="false">
+        <ion-header-bar class="bar item-input-inset has-subheader">
+           
+                    <label class="item-input-wrapper" style="width:80%">
+                        <input  type="text"  placeholder="Nom de l'événement" ng-model="event.NomEvent">
+                    </label>
+                    <label>
+                        <div>
+                            {{eventTime.todayTomorrow}} at
+                        </div>
+                        <div>
+                            {{eventTime.hours}} : {{eventTime.min}}
+                        </div>
+                    </label>
+        </ion-header-bar>
+      <ng-map id="map" map-initialized="mycallback(map)" scrollwheel="false" center="{{Initposition}}" default-style="false" style="height:100%;width:100%;display:block"
+                    disable-default-u-i="true"
+                    disable-double-click-zoom="true"
+                    draggable="false"
+                    draggable-cursor="help"
+                    dragging-cursor="move"
+                    keyboard-shortcuts="false"
+                    zoom="14"
+                    tilt="45">
+          <div class="row">
+              <div class="col">
+                  <label class="item-input-wrapper">
+                      <i class="icon ion-search placeholder-icon"></i>
+                      <input type="text"   placeholder="Search" places-auto-complete
+                                           ng-model="address"
+                                           on-place-changed="placeChanged()"
+                                           types=['geocode']       style="width: 100%;background-color: transparent;" />
+                  </label>
+              </div>
+          </div>
+                <marker id="marker" ng-show="showMarker" position="{{map.getCenter()}}" optimized="true"></marker>
+          <info-window  id="adresse"  visible-on-marker="marker">
+              <div ng-non-bindable>
+                    <div id="bodyContent">
+                        {{place.formatted_address}}
+                    </div>                  
+              </div>
+          </info-window>
+            </ng-map>
+    </ion-content>
+    <ion-footer-bar  class="bar-positive">
+        <div class="button-bar">
+            <a class="button icon-right ion-ios-redo-outline" ng-click="selectFriends(event)">Inviter des amis</a>
+        </div>
+    </ion-footer-bar>
+</ion-view>
